@@ -13,16 +13,6 @@
     
     
     <item>
-      <title>Test</title>
-      <link>/post/test/</link>
-      <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
-      <author>avazquez#@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/post/test/</guid>
-      <description>PLOT HERE:
-plot(mtcars) </description>
-    </item>
-    
-    <item>
       <title>Visualizando con R el historial de ubicaciones de Google (parte I)</title>
       <link>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</link>
       <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
