@@ -8,3 +8,9 @@ tags: []
 subtitle: ''
 ---
 
+PLOT HERE:
+
+```{r}
+plot(mtcars)
+```
+

@@ -3,67 +3,67 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/test/</loc>
+    <loc>https://bitsandbricks.github.io/post/test/</loc>
     <lastmod>2017-06-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</loc>
+    <loc>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</loc>
     <lastmod>2017-06-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/page/about/</loc>
+    <loc>https://bitsandbricks.github.io/page/about/</loc>
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2017-06-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/ggplot/</loc>
+    <loc>https://bitsandbricks.github.io/</loc>
     <lastmod>2017-06-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/maps/</loc>
+    <loc>https://bitsandbricks.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bitsandbricks.github.io/tags/ggplot/</loc>
     <lastmod>2017-06-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/page/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
+    <loc>https://bitsandbricks.github.io/tags/maps/</loc>
     <lastmod>2017-06-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/r/</loc>
+    <loc>https://bitsandbricks.github.io/page/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bitsandbricks.github.io/post/</loc>
     <lastmod>2017-06-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>https://bitsandbricks.github.io/tags/r/</loc>
     <lastmod>2017-06-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/visualizaci%C3%B3n/</loc>
+    <loc>https://bitsandbricks.github.io/tags/</loc>
+    <lastmod>2017-06-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bitsandbricks.github.io/categories/visualizaci%C3%B3n/</loc>
     <lastmod>2017-06-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
