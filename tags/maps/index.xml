@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Maps on Bits &amp; Bricks</title>
-    <link>https://bitsandbricks.github.io/tags/maps/</link>
+    <link>/tags/maps/</link>
     <description>Recent content in Maps on Bits &amp; Bricks</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>avazquez#@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez#@gmail.com (H. Antonio Vazquez Brust)</webMaster>
     <lastBuildDate>Wed, 07 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://bitsandbricks.github.io/tags/maps/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/maps/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Visualizando con R el historial de ubicaciones de Google (parte I)</title>
-      <link>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</link>
+      <link>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</link>
       <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez#@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</guid>
-      <description></description>
+      <guid>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</guid>
+      <description>La irrupción de computadoras llenas de sensores que viajan el bolsillo de cada ciudadano -nuestros celulares- ha sido de sobra aprovechada por Google. Si no nos tomamos la molestia de inhabilitar funciones de localización activas de fábrica, todos los usaros de celulares Android estamos reportando a Google nuestra posición a cada instante. Y los usuarios de iPhones también, cuando usan servicios de la compañía en sus teléfonos. Lo que Google hace con la cuantiosa información que acumula de sus miles de millones de usuarios es un misterio, al menos en cuanto a los detalles y al alcance de sus análisis.</description>
     </item>
     
   </channel>

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Bits &amp; Bricks</title>
-    <link>https://bitsandbricks.github.io/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on Bits &amp; Bricks</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>avazquez#@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez#@gmail.com (H. Antonio Vazquez Brust)</webMaster>
     
-	<atom:link href="https://bitsandbricks.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Visualización</title>
-      <link>https://bitsandbricks.github.io/categories/visualizaci%C3%B3n/</link>
+      <link>/categories/visualizaci%C3%B3n/</link>
       <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez#@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>https://bitsandbricks.github.io/categories/visualizaci%C3%B3n/</guid>
+      <guid>/categories/visualizaci%C3%B3n/</guid>
       <description></description>
     </item>
     

@@ -8,28 +8,31 @@
   <title>Visualizando con R el historial de ubicaciones de Google (parte I)</title>
   <meta property="og:title" content="Visualizando con R el historial de ubicaciones de Google (parte I)" />
   <meta name="twitter:title" content="Visualizando con R el historial de ubicaciones de Google (parte I)" />
+  <meta name="description" content="La irrupción de computadoras llenas de sensores que viajan el bolsillo de cada ciudadano -nuestros celulares- ha sido de sobra aprovechada por Google. Si no nos tomamos la molestia de inhabilitar funciones de localización activas de fábrica, todos los usaros de celulares Android estamos reportando a Google nuestra posición a cada instante. Y los usuarios de iPhones también, cuando usan servicios de la compañía en sus teléfonos. Lo que Google hace con la cuantiosa información que acumula de sus miles de millones de usuarios es un misterio, al menos en cuanto a los detalles y al alcance de sus análisis.">
+  <meta property="og:description" content="La irrupción de computadoras llenas de sensores que viajan el bolsillo de cada ciudadano -nuestros celulares- ha sido de sobra aprovechada por Google. Si no nos tomamos la molestia de inhabilitar funciones de localización activas de fábrica, todos los usaros de celulares Android estamos reportando a Google nuestra posición a cada instante. Y los usuarios de iPhones también, cuando usan servicios de la compañía en sus teléfonos. Lo que Google hace con la cuantiosa información que acumula de sus miles de millones de usuarios es un misterio, al menos en cuanto a los detalles y al alcance de sus análisis.">
+  <meta name="twitter:description" content="La irrupción de computadoras llenas de sensores que viajan el bolsillo de cada ciudadano -nuestros celulares- ha sido de sobra aprovechada por Google. Si no nos tomamos la molestia de inhabilitar …">
   <meta name="author" content="H. Antonio Vazquez Brust"/>
-  <link href='https://bitsandbricks.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta property="og:image" content="https://bitsandbricks.github.io/img/avatar-icon.png" />
-  <meta name="twitter:image" content="https://bitsandbricks.github.io/img/avatar-icon.png" />
+  <link href='/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@vazquezbrust" />
   <meta name="twitter:creator" content="@vazquezbrust" />
-  <meta property="og:url" content="https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/" />
+  <meta property="og:url" content="/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Bits &amp; Bricks" />
 
   <meta name="generator" content="Hugo 0.21" />
-  <link rel="canonical" href="https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/" />
-  <link rel="alternate" href="https://bitsandbricks.github.io/index.xml" type="application/rss+xml" title="Bits &amp; Bricks">
+  <link rel="canonical" href="/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Bits &amp; Bricks">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://bitsandbricks.github.io/css/main.css" />
+  <link rel="stylesheet" href="/css/main.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://bitsandbricks.github.io/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://bitsandbricks.github.io/css/highlight.min.css" />
+  <link rel="stylesheet" href="/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="/css/highlight.min.css" />
 
 
 
@@ -95,7 +98,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://bitsandbricks.github.io">Bits &amp; Bricks</a>
+      <a class="navbar-brand" href="/">Bits &amp; Bricks</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -129,8 +132,8 @@
     <div class="avatar-container">
       <div class="avatar-img-border">
         
-          <a title="Bits &amp; Bricks" href="https://bitsandbricks.github.io">
-            <img class="avatar-img" src="https://bitsandbricks.github.io/img/avatar-icon.png" alt="Bits &amp; Bricks" />
+          <a title="Bits &amp; Bricks" href="/">
+            <img class="avatar-img" src="/img/avatar-icon.png" alt="Bits &amp; Bricks" />
           </a>
         
       </div>
@@ -183,14 +186,302 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        
+        <p>La irrupción de computadoras llenas de sensores que viajan el bolsillo de cada ciudadano -nuestros celulares- ha sido de sobra aprovechada por Google. Si no nos tomamos la molestia de inhabilitar funciones de localización activas de fábrica, todos los usaros de celulares Android estamos reportando a Google nuestra posición a cada instante. Y los usuarios de iPhones también, cuando usan servicios de la compañía en sus teléfonos. Lo que Google hace con la cuantiosa información que acumula de sus miles de millones de usuarios es un misterio, al menos en cuanto a los detalles y al alcance de sus análisis.</p>
+<p>A esta altura, ya todos sabemos que Google es una compañía bastante <em>creepy</em>. A cambio de unos cuantos servicios que hemos pasado a considerar imprescindibles, “sólo” quieren conocimiento completo de quiénes somos, qué hacemos, qué deseamos, y dónde estamos. Por eso es interesante hacer algunos ejercicios por nuestra cuenta, visualizando los datos de localización que Google ha recopilado sobre nosotros. Interroguemos a la data con una pregunta general en mente: ¿Qué puede inferir Google acerca de mi si sabe donde estoy?</p>
+<div id="descargando-nuestra-informacion-de-ubicacion" class="section level2">
+<h2>Descargando nuestra información de ubicación</h2>
+<p>El primer paso es acceder a la información que Google dispone de nosotros. Entrando en <a href="https://takeout.google.com/settings/takeout" class="uri">https://takeout.google.com/settings/takeout</a> podemos descargar archivos comprimidos con la información personal que Google mantiene en sus distintos servicios. Para nuestros fines, solo necesitamos los datos de ubicación. De-seleccionamos todas las opciones, y activamos sólo “Location History” / “Historial de Ubicaciones”, en formato JSON:</p>
+<div class="figure">
+<img src="/post/img/G_location_history.png" alt="Google takeout" />
+<p class="caption">Google takeout</p>
+</div>
+<p>Cliqueando en “Siguiente” podemos iniciar la descarga.</p>
+</div>
+<div id="preparacion-de-los-datos" class="section level2">
+<h2>Preparación de los datos</h2>
+<p>Una amable persona me ha donado su set de datos de ubicación para que juegue con ellos. Con el archivo de ubicaciones en nuestro poder, el impulso es generar visualizaciones de inmediato… pero como de costumbre, hay que masajear los datos para que queden utilizables.</p>
+<p>Primero convertimos el archivo JSON a un dataframe. Lo leemos como objeto de R usando la función <code>fromJSON</code>, disponible en el paquete <code>jsonlite</code>:</p>
+<pre class="r"><code>library(jsonlite)
+raw &lt;- fromJSON(&#39;../../../../data/Google/Location History/Location History.json&#39;)</code></pre>
+<p>Generamos un dataframe con pares latitud/longitud más la fecha. Y de paso algunos datos extra, como velocidad, precisión del registro, dirección, altitud, y la actividad que Google supone que estábamos realizando (estar quietos, viajar a pie, en bici, otro vehículo, etc):</p>
+<pre class="r"><code>library(tidyverse)
+library(lubridate)
+
+locs &lt;- raw$locations
+locationdf &lt;- data.frame(t=rep(0,nrow(locs)))
+
+# convertimos lat y long a variables numéricas
+locationdf$lat &lt;- as.numeric(locs$latitudeE7/1E7)
+locationdf$lon &lt;- as.numeric(locs$longitudeE7/1E7)
+
+# Nos llevamos los datos de precisión
+locationdf$accuracy &lt;- locs$accuracy
+
+# Y la actividad más probable para cada lectura de posición
+act &lt;- map_df(locs$activity, 
+              function(f) {
+                if(is.null(f[[1]])) 
+                  data.frame(activity=NA,confidence=NA,stringsAsFactors=F) 
+                else 
+                  data.frame(activity=f[[2]][[1]][[1]][1],
+                             confidence=f[[2]][[1]][[2]][1],stringsAsFactors=F)
+                })
+
+# Agregar los datos de actividad a nuestro dataframe principal
+locationdf$activity &lt;- act$activity
+locationdf$confidence &lt;- act$confidence
+
+# Velocity, altitude y heading también
+locationdf$velocity &lt;- locs$velocity
+locationdf$altitude &lt;- locs$altitude
+locationdf$heading &lt;- locs$heading
+
+# Agregar un campo con fecha en calendario gregoriano, 
+# y campos para día de la semana, mes y año
+# El formato de la fecha es POSIX * 1000 (milliseconds) lo pasamos a una escala más útil...
+locationdf$date &lt;- as.numeric(locs$timestampMs)/1000
+class(locationdf$date) &lt;- &#39;POSIXct&#39;
+locationdf$weekday &lt;- weekdays(as.Date(locationdf$date))
+locationdf$month &lt;- months(as.Date(locationdf$date))
+locationdf$year &lt;- year(as.Date(locationdf$date))
+
+# En el campo &quot;activity&quot; convertimos valores NA en &quot;UNKNOWN&quot;
+locationdf$activity = ifelse(is.na(locationdf$activity), &quot;UNKNOWN&quot;, locationdf$activity)
+
+
+# Agregar un indice y ordenarlo en reversa (el registro más reciente al final)
+locationdf &lt;- locationdf[rev(rownames(locationdf)),]</code></pre>
+</div>
+<div id="primera-aproximacion-a-los-datos" class="section level2">
+<h2>Primera aproximación a los datos</h2>
+<p>Para ir conociendo los datos, vamos a empezar con algo básico: Determinar que lapso de tiempo abarcan, y que tipo de “actividades” han sido registradas.</p>
+<p>Para que los <em>plots</em> nos queden bonitos, usaremos los <em>themes</em> credos por Bob Rudis, <a href="https://hrbrmstr.github.io/hrbrthemes/">“hrbrthemes”</a>.</p>
+<pre class="r"><code>#devtools::install_github(&quot;hrbrmstr/hrbrthemes&quot;)
+library(hrbrthemes)</code></pre>
+<p>Y ahora, un <a href="http://www.datavizcatalogue.com/methods/stacked_area_graph.html">“stacked area chart”</a>, para mostrar la evolución de la cantidad de registros capturados diariamente. Este tipo de visualización funciona bien cuando se quiere mostrar a lo largo del tiempo la contribución que distintas categorías hacen a un total.</p>
+<pre class="r"><code># Renombrar activity como actividad, crear campo con mes y año, agrupar por actividad + fecha
+locationdf %&gt;% 
+  mutate(fecha = ymd(date(date))) %&gt;% 
+  group_by(activity, fecha) %&gt;% 
+  summarise(total = n()) %&gt;% 
+  arrange(fecha, activity, desc(total)) %&gt;% 
+  ggplot(aes(x=fecha, y=total)) + 
+  geom_area(aes(fill=activity), position=&quot;stack&quot;) +
+  scale_x_date() +
+  ylim(c(0, 1750)) +
+  labs(y=&quot;registros&quot;,
+       title=&quot;Historial de ubicaciones de Google&quot;,
+       subtitle=&quot;Cantidad de registros por dia y por actividad&quot;) +
+  scale_fill_brewer(palette = &quot;Set3&quot;) +
+  theme_ipsum()</code></pre>
+<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>El gráfico indica que tenemos registros desde el 2011 hasta mediados del 2017. Durante los dos primeros años, los registros de ubicación fueron escasos. A fines del 2012 explota la frecuencia diaria de notificaciones a Google de la posición del usuario. Hay valles donde la frecuencia de registros baja notablemente, en 2013, 2014 y 2015. El del 2013 (la pendiente prolija) sin dudas parece resultado de un error u omisiones en la data… quizás Google también pierde datos cada tanto! Desde su apogeo en 2014 y 2015, con unos 1500 registros por día, parece ser que se han apiadado de la batería de nuestros celulares y los envíos de coordenadas a la madre nodriza no son tan constantes como antaño.</p>
+<p>En cuanto a las actividades registradas, “unknown” -desconocido- es la categoría más común. Le siguen “still” (o quieto), y mucho más lejos “tilting” (realizando un giro) y “on foot” (caminando). Es decir que para la gran mayoría de las veces que lee nuestra ubicación, Google sabe donde estamos pero no puede determinar de que modo nos movemos. Diría que en la práctica esto es compensado analizando registros de posición en conjunto: si un registro dado es identificado como “on foot” (por ejemplo) por el algoritmo que categoriza la actividad, otros registros donde la dirección y velocidad son más o menos constantes pueden considerarse parte de la misma secuencia de movimiento.</p>
+<p>Para visualizar cuantos registros aporta cada categoría en la suma total, intentemos con un “waffle chart”. Los gráficos de waffle son una alternativa a los gráficos de torta, que además de continuar con la nomenclatura gastronómica resultan, al menos en teoría, más fáciles de interpretar que sus primos circulares.</p>
+<pre class="r"><code>library(waffle)
+
+top5 &lt;- locationdf %&gt;% 
+  filter(activity != &quot;UNKNOWN&quot;) %&gt;% 
+  group_by(activity) %&gt;% 
+  tally() %&gt;% 
+  arrange(desc(n)) %&gt;% 
+  slice(1:5)
+
+# 1 cuadradito del waflle = 10000 registros
+# De paso, conertimso el dataframe en un vector nombrado como quiere la funcion waffle()
+top5 &lt;- structure(top5[[2]] / 10000, names = top5[[1]])
+
+waffle(top5,
+       rows = 4,
+       legend_pos = &quot;bottom&quot;,
+       xlab = &quot;1 cuadradito == 10.000 registros&quot;,
+       title = &quot;Top 5 actividades indentificadas&quot;)</code></pre>
+<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Vemos que, al menos en cuanto a lo que ha podido establecer Google, el usuario es encontrado caminando en forma tres veces más habitual que a bordo de un vehículo. Por otro lado, “still” le gana por goleada a “on foot”, así que esa propensión a caminar es balanceada por cierto sedentarismo. Todo un mal de nuestros días, je. En todo caso las conclusiones deben ser tomadas con pinzas; estamos asumiendo que las actividades no identificadas (“unknown”) se reparten en la misma proporción que las etiquetadas.</p>
+</div>
+<div id="prestando-atencion-a-un-categoria-en-particular" class="section level2">
+<h2>Prestando atención a un categoría en particular</h2>
+<p>Concentrémonos en los registros que encuentran al usuario caminando. Cuál es su día de mayor movimiento a pie?</p>
+<pre class="r"><code>locationdf %&gt;% 
+  mutate(weekday = ordered(weekday, 
+                           levels = c(&quot;lunes&quot;, &quot;martes&quot;, &quot;miércoles&quot;, &quot;jueves&quot;, 
+                                      &quot;viernes&quot;, &quot;sábado&quot;, &quot;domingo&quot;))) %&gt;% 
+  filter(activity == &quot;ON_FOOT&quot;) %&gt;% 
+  count(weekday) %&gt;% 
+  mutate(pct=n/sum(n)) %&gt;% 
+  ggplot(aes(weekday, pct)) +
+  geom_col() +
+  scale_y_percent() +
+  labs(x=&quot;&quot;, 
+       y=&quot;Porporción de los registros capturados por Google (%)&quot;,
+       title=&quot;Movimiento a pie registrado&quot;,
+       subtitle=&quot;según el día de la semana&quot;) + 
+  theme_ipsum(grid=&quot;Y&quot;)</code></pre>
+<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Para nuestro usuario donante, el viernes es el gran día para pasear (quizás de noche?), al igual que el fin de semana. El lunes, en cambio, registra los valores más bajos. Lunes de ánimo caído? Quizás no! Cada vez que visualizamos resúmenes de datos acumulados durante un período largo, es importante verificar que no se no esté escapando algo relacionado con el paso del tiempo. En este caso, la suma total por día de la semana podría estar ocultando diferencias claras entre distintos años. Peguemos una mirada, separando los registros por año:</p>
+<pre class="r"><code>locationdf %&gt;% 
+  mutate(weekday = ordered(weekday, 
+                           levels = c(&quot;lunes&quot;, &quot;martes&quot;, &quot;miércoles&quot;, &quot;jueves&quot;, 
+                                      &quot;viernes&quot;, &quot;sábado&quot;, &quot;domingo&quot;))) %&gt;% 
+  filter(activity == &quot;ON_FOOT&quot;) %&gt;% 
+  count(weekday, year) %&gt;% 
+  mutate(pct=n/sum(n)) %&gt;% 
+  ggplot(aes(weekday, pct)) +
+  geom_col() +
+  facet_wrap(~year, scales = &quot;free&quot;) +
+  labs(x=&quot;&quot;, 
+       y=&quot;Porporción anual de los registros capturados por Google&quot;,
+       title=&quot;Movimiento a pie registrado&quot;,
+       subtitle=&quot;según el día de la semana&quot;) + 
+  theme_ipsum(grid=&quot;Y&quot;) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.text.y=element_blank())</code></pre>
+<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Queda claro que el gráfico anterior resultaba engañoso. Si los datos de Google son confiables, nuestro usuario ha ido variando sus ritmos diarios con los años. En 2012 (y en el 2016 también) su día de paseo era el domingo. En lo que va del 2017, la mayor actividad de caminata se registra los miércoles.</p>
+</div>
+<div id="identificando-lugares" class="section level2">
+<h2>Identificando lugares</h2>
+<p>Vamos ahora al grano. Al visualizar datos de ubicación, sin duda queremos ver lugares en el mapa! Para empezar, agreguemos un campo a nuestro dataset con la ciudad en la que fue efectuado cada registro. Esto es más complejo de lo que podría pensarse de inmediato, ya que la definición de “qué es” una ciudad varía entre regiones. También es difícil encontrar consenso acerca de las fronteras exactas de muchas de las miles de ciudades que en este mundo hay. Decidir a que ciudad corresponde un set de coordenadas puntual no debería ser muy complicado; pero escribir un algoritmo que lo haga en gran escala para coordenadas en cualquier lugar del globo es un desafío considerable.</p>
+<p>En este caso, estoy interesado en seguir los movimientos de un usuario mientras visita por trabajo o turismo distintas ciudades. Por eso no me preocupa saber el nombre de la localidad en la que se encuentre en cada momento, si no el de la ciudad principal de la región. La solución para el problema así definido:</p>
+<ol style="list-style-type: decimal">
+<li>Tomar una lista con la posición y la población de las ciudades del mundo</li>
+<li>Seleccionar aquellas que cuentan con una población considerable, digamos 100.000 habitantes</li>
+<li>Para cada ubicación registrada por Google, encontrar la ciudad más cercana de nuestra lista</li>
+</ol>
+<p>Es una de esas tareas que serían desesperantes para un ser humano, pero triviales par una computadora. Excelente.</p>
+<p>En <a href="https://opendata.arcgis.com/datasets/6996f03a1b364dbab4008d99380370ed_0.csv" class="uri">https://opendata.arcgis.com/datasets/6996f03a1b364dbab4008d99380370ed_0.csv</a> se puede descargar una base de datos de acceso libre y gratuito, que incluye (entre otros campos) nombre, código de país, latitud, longitud y población de las principales ciudades del mundo. Justo lo que necesitamos.</p>
+<pre class="r"><code>cities &lt;- read.csv(&#39;/home/havb/data/World_Cities.csv&#39;, stringsAsFactors = F) %&gt;% 
+  filter(POP &gt; 100000)</code></pre>
+<p>Algo a tener en cuenta aquí es la performance del algoritmo que vamos a usar para encontrar la ciudad más cercana. Tenemos más de 1200 ciudades:</p>
+<pre class="r"><code>nrow(cities)</code></pre>
+<pre><code>## [1] 1231</code></pre>
+<p>Y más de 1.300.000 registros de ubicación:</p>
+<pre class="r"><code>nrow(locationdf)</code></pre>
+<pre><code>## [1] 1312415</code></pre>
+<p>Usar un <em>loop</em> “inocente” que compare cada registros contra todas las ciudades para encontrar la más cercana requeriría más de 1600 millones de operaciones. Está bien que la computadora no se cansa, pero el que se cansa es uno de esperar a que termine. Pero no hay nada que temer! Echaremos mano de un algoritmo muy eficiente para éste tipo de búsquedas, <a href="https://es.wikipedia.org/wiki/K-vecinos_m%C3%A1s_cercanos">K-nearest neighbors</a> o Knn. En el mundo <code>R</code> hay varias implementaciones de knn listas para usar. Vamos a usar la del paquete <code>SearchTrees</code>.</p>
+<pre class="r"><code>library(SearchTrees)
+
+# Creamos un árbol de búsqueda con las posiciones definidas por las columnas de latitud y longitud 
+tree &lt;- createTree(cities, columns=c(2,1)) 
+
+# Funcion para encontrar la ciudad mas cercanas a un punto dado
+
+findMetro &lt;- function(lat, lon, tree, cities) {
+  return(cities[knnLookup(tree, lat, lon, k=1), c(&quot;CITY_NAME&quot;, &quot;CNTRY_NAME&quot;)])
+}
+
+
+# Encontrar el area metropolitana para cada registro
+
+locationdf &lt;- cbind(locationdf,
+                    map2_df(locationdf$lat, locationdf$lon, 
+                            findMetro, tree = tree, cities = cities))</code></pre>
+<p>Habiendo identificado cada ciudad, vale la pena agregar dos campos más que van a ser útiles para visualizar la data: país, y tiempo de estadía. Para calcular el tiempo de estadía, asignemos un identificador a cada secuencia de registros consecutivos efectuados en la misma ciudad usando <a href="https://es.wikipedia.org/wiki/Run-length_encoding">“run-lengh encoding”</a> para luego extraer fecha de inicio y final de cada una. Agregar el país es fácil; sólo necesitamos hacer un <em>join</em> contra una tabla de ciudades y naciones.</p>
+<pre class="r"><code>runs &lt;- rle(locationdf$CITY_NAME)
+estadias &lt;- locationdf %&gt;% 
+  mutate(run_id = rep(seq_along(runs$lengths), runs$lengths)) %&gt;% 
+  group_by(CITY_NAME, CNTRY_NAME, run_id) %&gt;% 
+  summarise(date_in = min(date),
+            date_out = max(date)) %&gt;% 
+  arrange(date_in) %&gt;% 
+  select(-run_id) 
+
+estadias</code></pre>
+<pre><code>## Source: local data frame [171 x 4]
+## Groups: CITY_NAME, CNTRY_NAME [28]
+## 
+##                CITY_NAME CNTRY_NAME             date_in
+##                    &lt;chr&gt;      &lt;chr&gt;       &lt;S3: POSIXct&gt;
+## 1           Buenos Aires  Argentina 2011-04-04 20:31:28
+## 2               La Plata  Argentina 2011-05-23 11:04:39
+## 3           Buenos Aires  Argentina 2011-05-23 20:34:25
+## 4               La Plata  Argentina 2011-06-10 12:27:03
+## 5           Buenos Aires  Argentina 2011-06-11 01:14:17
+## 6                  Salta  Argentina 2011-08-08 15:38:56
+## 7  San Miguel De Tucuman  Argentina 2011-08-10 14:24:08
+## 8           Buenos Aires  Argentina 2011-08-11 22:50:24
+## 9               La Plata  Argentina 2011-10-05 12:06:48
+## 10          Buenos Aires  Argentina 2011-10-05 13:21:20
+## # ... with 161 more rows, and 1 more variables: date_out &lt;S3: POSIXct&gt;</code></pre>
+<p>Con la data prolija, es fácil hacer un ranking de tiempo pasado en cada ciudad…:</p>
+<pre class="r"><code>ranking &lt;- estadias %&gt;% 
+  mutate(semanas = difftime(date_out,
+                         date_in,
+                         units = &quot;weeks&quot;)) %&gt;% 
+  group_by(CITY_NAME, CNTRY_NAME) %&gt;% 
+  summarise(total_semanas = round(sum(semanas), 1)) %&gt;% 
+  arrange(desc(total_semanas))
+ranking</code></pre>
+<pre><code>## Source: local data frame [28 x 3]
+## Groups: CITY_NAME [28]
+## 
+##          CITY_NAME     CNTRY_NAME total_semanas
+##              &lt;chr&gt;          &lt;chr&gt;        &lt;time&gt;
+## 1     Buenos Aires      Argentina   185.5 weeks
+## 2           Boston  United States    83.3 weeks
+## 3         New York  United States     4.0 weeks
+## 4          Cordoba      Argentina     0.9 weeks
+## 5         La Plata      Argentina     0.9 weeks
+## 6        Frankfurt        Germany     0.7 weeks
+## 7          Rosario      Argentina     0.7 weeks
+## 8        Reykjavik        Iceland     0.6 weeks
+## 9       Birmingham United Kingdom     0.5 weeks
+## 10 Washington D.C.  United States     0.5 weeks
+## # ... with 18 more rows</code></pre>
+<p>… y un mapa de países visitados y duración total de estadías:</p>
+<pre class="r"><code>library(rworldmap)
+# Preparar la data
+
+toMap &lt;- joinCountryData2Map(ungroup(ranking),
+                             joinCode = &quot;NAME&quot;,
+                             nameJoinColumn = &quot;CNTRY_NAME&quot;)</code></pre>
+<pre><code>## 28 codes from your data successfully matched countries in the map
+## 0 codes from your data failed to match with a country code in the map
+## 233 codes from the map weren&#39;t represented in your data</code></pre>
+<pre class="r"><code># A mapear!
+library(RColorBrewer)
+
+mapCountryData(toMap, 
+               nameColumnToPlot = &quot;total_semanas&quot;,
+               catMethod = &quot;pretty&quot;,
+               colourPalette = brewer.pal(5, &quot;YlGn&quot;), 
+               oceanCol= &quot;lightblue&quot;, 
+               missingCountryCol= &quot;grey40&quot;,
+               mapTitle= &quot;Estadía total (semanas)&quot;)</code></pre>
+<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Por último, tracemos una línea de tiempo que siga el derrotero de nuestro usuario. Es fácil detectar cuando se muda:</p>
+<pre class="r"><code>library(timeline)
+
+estadias &lt;- estadias %&gt;% 
+  mutate(tipo = ifelse(difftime(date_out, date_in, units = &quot;weeks&quot;) &gt;= 3,
+                       &quot;residencia&quot;,
+                       &quot;visita&quot;)) %&gt;% 
+  as.data.frame
+
+timeline(filter(estadias, tipo == &quot;residencia&quot;),
+         filter(estadias, tipo == &quot;visita&quot; )[c(1,3)],
+         text.size = 0, group.col = &quot;tipo&quot;, 
+         event.label.method = 2, event.text.size = 2) + 
+  theme_ipsum() + 
+  scale_fill_ipsum(name = &quot;Residencia&quot;) + 
+  labs(x=&quot;año&quot;, 
+       y=&quot;&quot;,
+       title=&quot;Ciudad de residencia y ciudades visitadas&quot;,
+       subtitle = &quot;Inferencia según registros de ubicación de Google&quot;,
+       caption = &quot;cada punto representa una visita&quot;) +
+  theme(axis.text.y=element_blank())</code></pre>
+<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Hay algunos problemas con esta visualización: La nube de puntos que representa ciudades visitadas es difícil de leer, e incluye en algunos casos la ciudad donde se supone que el usuario reside. Esto último se debe a que definimos una “visita” como cualquier estadía menor a un mes. Cuando el usuario pasa unas pocas semanas en su casa debido a viajes frecuentes, ese periodo aparece como si hubiera estado de visita en nuestro gráfico. De todas formas, para un puñado de líneas de código los resultados son interesantes, y de hecho permiten hacerse una buena idea de los desplazamientos del usuario. Y si lo vemos nosotros con tanta facilidad, desde ya que Google lo sabe desde hace tiempo.</p>
+<p>En la parte II, vamos a hacer zoom a nivel ciudad para perseguir más a nuestro pobre usuario, tratando de identificar donde vive, donde trabaja y como cambia su conducta según el día de la semana. Pero todo con benévolas intenciones, por supuesto.</p>
+</div>
+
       </article>
 
       <ul class="pager blog-pager">
         
         
           <li class="next">
-            <a href="https://bitsandbricks.github.io/post/test/" data-toggle="tooltip" data-placement="top" title="Test">Next Post &rarr;</a>
+            <a href="/post/test/" data-toggle="tooltip" data-placement="top" title="Test">Next Post &rarr;</a>
           </li>
         
       </ul>
@@ -243,7 +534,7 @@
               </li>
           
           <li>
-            <a href="https://bitsandbricks.github.io/index.xml" title="RSS">
+            <a href="/index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -259,7 +550,7 @@
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://bitsandbricks.github.io">Bits &amp; Bricks</a>
+            <a href="/">Bits &amp; Bricks</a>
           
         </p>
         
@@ -276,8 +567,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://bitsandbricks.github.io/js/main.js"></script>
-<script src="https://bitsandbricks.github.io/js/highlight.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/highlight.min.js"></script>
 <script> hljs.initHighlightingOnLoad(); </script>
 <script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
