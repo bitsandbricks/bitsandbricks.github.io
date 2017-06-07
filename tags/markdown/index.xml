@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Markdown on Bits &amp; Bricks</title>
-    <link>https://bitsandbricks.github.io/tags/markdown/</link>
+    <link>/tags/markdown/</link>
     <description>Recent content in Markdown on Bits &amp; Bricks</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>avazquez#@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez#@gmail.com (H. Antonio Vazquez Brust)</webMaster>
     <lastBuildDate>Fri, 20 Feb 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://bitsandbricks.github.io/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Test markdown</title>
-      <link>https://bitsandbricks.github.io/post/2015-02-20-test-markdown/</link>
+      <link>/post/2015-02-20-test-markdown/</link>
       <pubDate>Fri, 20 Feb 2015 00:00:00 +0000</pubDate>
       <author>avazquez#@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>https://bitsandbricks.github.io/post/2015-02-20-test-markdown/</guid>
+      <guid>/post/2015-02-20-test-markdown/</guid>
       <description>You can write regular markdown here and Jekyll will automatically convert it to a nice webpage. I strongly encourage you to take 5 minutes to learn how to write in markdown - it&amp;rsquo;ll teach you how to transform regular text into bold/italics/headings/tables/etc.
 Here is some bold text
 Here is a secondary heading Here&amp;rsquo;s a useless table:
