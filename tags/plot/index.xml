@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Plot on Beautiful Hugo</title>
+    <title>Plot on Bits &amp; Bricks</title>
     <link>https://bitsandbricks.github.io/tags/plot/</link>
-    <description>Recent content in Plot on Beautiful Hugo</description>
+    <description>Recent content in Plot on Bits &amp; Bricks</description>
     <generator>Hugo -- gohugo.io</generator>
-    <managingEditor>youremail@domain.com (Some Person)</managingEditor>
-    <webMaster>youremail@domain.com (Some Person)</webMaster>
+    <managingEditor>avazquez#@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
+    <webMaster>avazquez#@gmail.com (H. Antonio Vazquez Brust)</webMaster>
     <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
     
 	<atom:link href="https://bitsandbricks.github.io/tags/plot/index.xml" rel="self" type="application/rss+xml" />
@@ -16,7 +16,7 @@
       <title>Hello R Markdown</title>
       <link>https://bitsandbricks.github.io/post/2015-07-23-r-rmarkdown/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      <author>youremail@domain.com (Some Person)</author>
+      <author>avazquez#@gmail.com (H. Antonio Vazquez Brust)</author>
       <guid>https://bitsandbricks.github.io/post/2015-07-23-r-rmarkdown/</guid>
       <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
 You can embed an R code chunk like this:

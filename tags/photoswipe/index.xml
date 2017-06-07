@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Photoswipe on Beautiful Hugo</title>
+    <title>Photoswipe on Bits &amp; Bricks</title>
     <link>https://bitsandbricks.github.io/tags/photoswipe/</link>
-    <description>Recent content in Photoswipe on Beautiful Hugo</description>
+    <description>Recent content in Photoswipe on Bits &amp; Bricks</description>
     <generator>Hugo -- gohugo.io</generator>
-    <managingEditor>youremail@domain.com (Some Person)</managingEditor>
-    <webMaster>youremail@domain.com (Some Person)</webMaster>
+    <managingEditor>avazquez#@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
+    <webMaster>avazquez#@gmail.com (H. Antonio Vazquez Brust)</webMaster>
     <lastBuildDate>Mon, 20 Mar 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://bitsandbricks.github.io/tags/photoswipe/index.xml" rel="self" type="application/rss+xml" />
@@ -16,7 +16,7 @@
       <title>Photoswipe Gallery Sample</title>
       <link>https://bitsandbricks.github.io/post/2017-03-20-photoswipe-gallery-sample/</link>
       <pubDate>Mon, 20 Mar 2017 00:00:00 +0000</pubDate>
-      <author>youremail@domain.com (Some Person)</author>
+      <author>avazquez#@gmail.com (H. Antonio Vazquez Brust)</author>
       <guid>https://bitsandbricks.github.io/post/2017-03-20-photoswipe-gallery-sample/</guid>
       <description>&lt;p&gt;Beautiful Hugo adds a few custom shortcodes created by &lt;a href=&#34;https://www.liwen.id.au/heg/&#34;&gt;Li-Wen Yip&lt;/a&gt; and &lt;a href=&#34;https://github.com/GjjvdBurg/HugoPhotoSwipe&#34;&gt;Gert-Jan van den Berg&lt;/a&gt; for making galleries with &lt;a href=&#34;http://photoswipe.com&#34;&gt;PhotoSwipe&lt;/a&gt; .&lt;/p&gt;
 
