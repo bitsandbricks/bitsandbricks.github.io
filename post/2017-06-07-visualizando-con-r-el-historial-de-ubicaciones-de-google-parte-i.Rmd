@@ -1,0 +1,14 @@
+---
+title: Visualizando con R el historial de ubicaciones de Google (parte I)
+author: H. Antonio Vazquez Brust
+date: '2017-06-07'
+slug: visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i
+categories:
+  - Visualización
+tags:
+  - R
+  - ggplot
+  - maps
+subtitle: ''
+---
+
