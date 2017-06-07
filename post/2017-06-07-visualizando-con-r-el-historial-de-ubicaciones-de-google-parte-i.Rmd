@@ -17,9 +17,10 @@ knitr::opts_chunk$set(tidy = FALSE, warning=FALSE, message=FALSE)
 options(scipen = 15)
 ```
 
-La irrupción de computadoras llenas de sensores que viajan el bolsillo de cada ciudadano -nuestros celulares- ha sido de sobra aprovechada por Google. Si no nos tomamos la molestia de inhabilitar  funciones de localización activas de fábrica, todos los usaros de celulares Android estamos reportando a Google nuestra posición a cada instante. Y los usuarios de iPhones también, cuando usan servicios de la compañía en sus teléfonos. Lo que Google hace con la cuantiosa información que acumula de sus miles de millones de usuarios es un misterio, al menos en cuanto a los detalles y al alcance de sus análisis. 
+La irrupción de computadoras llenas de sensores que viajan el bolsillo de cada ciudadano -nuestros celulares- ha sido de sobra aprovechada por Google. Si no nos tomamos la molestia de inhabilitar  funciones de localización activas de fábrica, todos los usuarios de celulares Android reportamos a Google nuestra posición, en forma constante. Y los usuarios de iPhones también, cuando usan servicios de la compañía en sus teléfonos. 
 
-A esta altura, ya todos sabemos que Google es una compañía bastante _creepy_. A cambio de unos cuantos servicios que hemos pasado a considerar imprescindibles, "sólo" quieren conocimiento completo de quiénes somos, qué hacemos, qué deseamos, y dónde estamos.
+A esta altura, ya todos sabemos que Google es una compañía bastante _creepy_. A cambio de unos cuantos servicios que hemos pasado a considerar imprescindibles, "sólo" quieren conocimiento completo de quiénes somos, qué hacemos, qué deseamos, y dónde estamos. Lo que Google hace con la cuantiosa información que acumula de sus miles de millones de usuarios es un misterio, al menos en cuanto a los detalles y al alcance de sus análisis. 
+
 Por eso es interesante hacer algunos ejercicios por nuestra cuenta, visualizando los datos de localización que Google ha recopilado sobre nosotros. Interroguemos a la data con una pregunta general en mente: ¿Qué puede inferir Google acerca de mi si sabe donde estoy?
 
 ## Descargando nuestra información de ubicación 
@@ -100,6 +101,7 @@ library(tidyverse)
 library(lubridate)
 locationdf <- read.csv('/home/havb/data/Google/Location History/location.csv', stringsAsFactors = F)
 class(locationdf$date) <- 'POSIXct'
+
 ```
 
 ## Primera aproximación a los datos
