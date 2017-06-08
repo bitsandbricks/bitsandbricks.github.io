@@ -18,11 +18,8 @@
       <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
       <guid>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</guid>
-      <description>--- title: Visualizando con R el historial de ubicaciones de Google (parte I) author: H. Antonio Vazquez Brust date: &#39;2017-06-07&#39; slug: visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i bigimg: [{src: &#34;/post/img/here.jpg&#34;, desc: &#34;Mira hija, como toco a la Argentina en sus partes sensibles&#34;}] categories: - Visualización tags: - R - ggplot - maps subtitle: &#39;&#39; --- La irrupción de computadoras llenas de sensores que viajan el bolsillo de cada ciudadano -nuestros celulares- ha sido de sobra aprovechada por Google.</description>
-    </item>
-    
-  </channel>
-</rss>a ciudadano -nuestros celulares- ha sido de sobra aprovechada por Google.</description>
+      <description>La irrupción de computadoras llenas de sensores que viajan el bolsillo de cada ciudadano -nuestros celulares- ha sido de sobra aprovechada por Google. Si no nos tomamos la molestia de inhabilitar funciones de localización activas de fábrica, todos los usuarios de celulares Android reportamos a Google nuestra posición, en forma constante. Y los usuarios de iPhones también, cuando usan servicios de la compañía en sus teléfonos.
+A esta altura, ya todos sabemos que Google es una compañía bastante creepy.</description>
     </item>
     
   </channel>
