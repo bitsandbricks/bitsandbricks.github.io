@@ -3,6 +3,7 @@ title: Visualizando con R el historial de ubicaciones de Google (parte I)
 author: H. Antonio Vazquez Brust
 date: '2017-06-07'
 slug: visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i
+bigimg: [{src: "/post/img/here.jpg", desc: "Mira hija, como toco a la Argentina en sus partes sensibles"}]
 categories:
   - Visualización
 tags:
