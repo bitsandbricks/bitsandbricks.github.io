@@ -309,7 +309,7 @@ locationdf %&gt;%
        subtitle=&quot;Cantidad de registros por dia y por actividad&quot;) +
   scale_fill_brewer(palette = &quot;Set3&quot;) +
   theme_ipsum()</code></pre>
-<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-6-1.png" width="720" /></p>
 <p>El gráfico indica que tenemos registros desde el 2011 hasta mediados del 2017. Durante los dos primeros años, los registros de ubicación fueron escasos. A fines del 2012 explota la frecuencia diaria de notificaciones a Google de la posición del usuario. Hay valles donde la frecuencia de registros baja notablemente, en 2013, 2014 y 2015. El del 2013 (la pendiente prolija) sin dudas parece resultado de un error u omisiones en la data… quizás Google también pierde datos cada tanto! Desde su apogeo en 2014 y 2015, con unos 1500 registros por día, parece ser que se han apiadado de la batería de nuestros celulares y los envíos de coordenadas a la madre nodriza no son tan constantes como antaño.</p>
 <p>En cuanto a las actividades registradas, “unknown” -desconocido- es la categoría más común. Le siguen “still” (o quieto), y mucho más lejos “tilting” (realizando un giro) y “on foot” (caminando). Es decir que para la gran mayoría de las veces que lee nuestra ubicación, Google sabe donde estamos pero no puede determinar de que modo nos movemos. Diría que en la práctica esto es compensado analizando registros de posición en conjunto: si un registro dado es identificado como “on foot” (por ejemplo) por el algoritmo que categoriza la actividad, otros registros donde la dirección y velocidad son más o menos constantes pueden considerarse parte de la misma secuencia de movimiento.</p>
 <p>Para visualizar cuantos registros aporta cada categoría en la suma total, intentemos con un “waffle chart”. Los gráficos de waffle son una alternativa a los gráficos de torta, que además de continuar con la nomenclatura gastronómica resultan, al menos en teoría, más fáciles de interpretar que sus primos circulares.</p>
@@ -331,7 +331,7 @@ waffle(top5,
        legend_pos = &quot;bottom&quot;,
        xlab = &quot;1 cuadradito == 10.000 registros&quot;,
        title = &quot;Top 5 actividades identificadas&quot;)</code></pre>
-<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-7-1.png" width="720" /></p>
 <p>Vemos que, al menos en cuanto a lo que ha podido establecer Google, el usuario es encontrado caminando en forma tres veces más habitual que a bordo de un vehículo. Por otro lado, “still” le gana por goleada a “on foot”, así que esa propensión a caminar es balanceada por cierto sedentarismo. Todo un mal de nuestros días, je. En todo caso las conclusiones deben ser tomadas con pinzas; estamos asumiendo que las actividades no identificadas (“unknown”) se reparten en la misma proporción que las etiquetadas.</p>
 </div>
 <div id="prestando-atencion-a-un-categoria-en-particular" class="section level2">
@@ -352,7 +352,7 @@ waffle(top5,
        title=&quot;Movimiento a pie registrado&quot;,
        subtitle=&quot;según el día de la semana&quot;) + 
   theme_ipsum(grid=&quot;Y&quot;)</code></pre>
-<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-8-1.png" width="720" /></p>
 <p>Para nuestro usuario donante, el viernes es el gran día para pasear (quizás de noche?), al igual que el fin de semana. El lunes, en cambio, registra los valores más bajos. Lunes de ánimo caído? Quizás no! Cada vez que visualizamos resúmenes de datos acumulados durante un período largo, es importante verificar que no se no esté escapando algo relacionado con el paso del tiempo. En este caso, la suma total por día de la semana podría estar ocultando diferencias claras entre distintos años. Peguemos una mirada, separando los registros por año:</p>
 <pre class="r"><code>locationdf %&gt;% 
   mutate(weekday = ordered(weekday, 
@@ -371,7 +371,7 @@ waffle(top5,
   theme_ipsum(grid=&quot;Y&quot;) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         axis.text.y=element_blank())</code></pre>
-<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-9-1.png" width="720" /></p>
 <p>Queda claro que el gráfico anterior resultaba engañoso. Si los datos de Google son confiables, nuestro usuario ha ido variando sus ritmos diarios con los años. En 2012 (y en el 2016 también) su día de paseo era el domingo. En lo que va del 2017, la mayor actividad de caminata se registra los miércoles.</p>
 </div>
 <div id="identificando-lugares" class="section level2">
@@ -483,7 +483,7 @@ mapCountryData(toMap,
                oceanCol= &quot;lightblue&quot;, 
                missingCountryCol= &quot;grey40&quot;,
                mapTitle= &quot;Estadía total (semanas)&quot;)</code></pre>
-<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-16-1.png" width="720" /></p>
 <p>Por último, tracemos una línea de tiempo que siga el derrotero de nuestro usuario. Es fácil detectar cuando se muda:</p>
 <pre class="r"><code>library(timeline)
 
@@ -505,7 +505,7 @@ timeline(filter(estadias, tipo == &quot;residencia&quot;),
        subtitle = &quot;Inferencia según registros de ubicación de Google&quot;,
        caption = &quot;cada punto representa una visita&quot;) +
   theme(axis.text.y=element_blank())</code></pre>
-<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-17-1.png" width="720" /></p>
 <p>Hay algunos problemas con esta visualización: La nube de puntos que representa ciudades visitadas es difícil de leer, e incluye en algunos casos la ciudad donde se supone que el usuario reside. Esto último se debe a que definimos una “visita” como cualquier estadía menor a un mes. Cuando el usuario pasa unas pocas semanas en su casa debido a viajes frecuentes, ese periodo aparece como si hubiera estado de visita en nuestro gráfico. De todas formas, para un puñado de líneas de código los resultados son interesantes, y de hecho permiten hacerse una buena idea de los desplazamientos del usuario. Y si lo vemos nosotros con tanta facilidad, desde ya que Google lo sabe desde hace tiempo.</p>
 <p>En la parte II, vamos a hacer zoom a nivel ciudad para perseguir más a nuestro pobre usuario, tratando de identificar donde vive, donde trabaja y como cambia su conducta según el día de la semana. Pero todo con benévolas intenciones, por supuesto.</p>
 </div>
