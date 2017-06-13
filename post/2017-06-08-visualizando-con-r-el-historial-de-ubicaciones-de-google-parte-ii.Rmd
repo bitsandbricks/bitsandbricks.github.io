@@ -91,7 +91,7 @@ ggmap(MoMA, extent = "panel") +
 
 Bastante fácil de leer. En enero del 2016, y otra vez en enero año siguiente, se registran visitas al museo. De hecho, sabiendo las fechas y el ala del edificio visitada, hasta podríamos saber que obras fueron apreciadas. Según el calendario del MoMA, en enero del 2017 se exhibió ["A Revolutionary Impulse: The Rise of the Russian Avant-Garde"](https://www.moma.org/calendar/exhibitions/1668). Hasta podemos ver como lucían las obras:
 
-![Exhibición en el MoMA, enero 2017](/img/MoMA.jpg)
+![Exhibición en el MoMA, enero 2017](img/MoMA.jpg)
 
 Podríamos verificar si el usuario pasó por cualquier otra atracción. O restaurantes en particular. Iglesias, supermercados, monumentos. Si visitó una zona roja o cualquier otra área con fama cuestionable, y cuanto tiempo pasó allí. Todo eso y mucho más está guardado en los servers de Google, y nosotros lo entregamos voluntariamente!
 

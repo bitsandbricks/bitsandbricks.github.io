@@ -164,7 +164,7 @@ waffle(top5,
        rows = 4,
        legend_pos = "bottom",
        xlab = "1 cuadradito == 10.000 registros",
-       title = "Top 5 actividades indentificadas")
+       title = "Top 5 actividades identificadas")
 ```
 
 Vemos que, al menos en cuanto a lo que ha podido establecer Google, el usuario es encontrado caminando en forma tres veces más habitual que a bordo de un vehículo. Por otro lado, "still" le gana por goleada a "on foot", así que esa propensión a caminar es balanceada por cierto sedentarismo. Todo un mal de nuestros días, je. En todo caso las conclusiones deben ser tomadas con pinzas; estamos asumiendo que las actividades no identificadas ("unknown") se reparten en la misma proporción que las etiquetadas. 
