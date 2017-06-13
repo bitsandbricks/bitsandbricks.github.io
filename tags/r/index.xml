@@ -2,34 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R on Bits &amp; Bricks</title>
-    <link>https://bitsandbricks.github.io/tags/r/</link>
+    <link>/tags/r/</link>
     <description>Recent content in R on Bits &amp; Bricks</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
-    <lastBuildDate>Sat, 10 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 08 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://bitsandbricks.github.io/tags/r/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Visualizando con R el historial de ubicaciones de Google (parte III)</title>
-      <link>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii/</link>
-      <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
-      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii/</guid>
-      <description>En la parte I, vimos cómo descargar, limpiar y comenzar a visualizar los datos de nuestra ubicación que Google guarda cuando usamos servicios de la compañía.
-En la [parteII], XXX.
-En esta entrega final, vamos a visualizar los vuelos con los que el usuario conectó las ciudades por dode estuvo.
-Para reproducir los resultados ,recomiendo correr antes el código de la parte I, que deja preparados los sets de datos que vamos a utilizar aquí.</description>
-    </item>
     
     <item>
       <title>Visualizando con R el historial de ubicaciones de Google (parte II)</title>
-      <link>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</link>
+      <link>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</link>
       <pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</guid>
+      <guid>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</guid>
       <description>En la parte I, vimos cómo descargar, limpiar y comenzar a visualizar los datos de nuestra ubicación que Google guarda cuando usamos servicios de la compañía. Hasta aquí nos habíamos concentrado en clasificar los datos según el tiempo y según los países visitados.
 Ahora vamos a poner nuestra atención en el interior de las ciudades, para seguir los rastros que dejamos al recorrer las calles.
 Para reproducir los resultados, recomiendo correr antes el código de la parte I, que deja preparados los sets de datos que vamos a utilizar aquí.</description>
@@ -37,10 +25,10 @@ Para reproducir los resultados, recomiendo correr antes el código de la parte I
     
     <item>
       <title>Visualizando con R el historial de ubicaciones de Google (parte I)</title>
-      <link>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</link>
+      <link>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</link>
       <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</guid>
+      <guid>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</guid>
       <description>La irrupción de computadoras llenas de sensores que viajan el bolsillo de cada ciudadano -nuestros celulares- ha sido de sobra aprovechada por Google. Si no nos tomamos la molestia de inhabilitar funciones de localización activas de fábrica, todos los usuarios de celulares Android reportamos a Google nuestra posición, en forma constante. Y los usuarios de iPhones también, cuando usan servicios de la compañía en sus teléfonos.
 A esta altura, ya todos sabemos que Google es una compañía bastante creepy.</description>
     </item>
