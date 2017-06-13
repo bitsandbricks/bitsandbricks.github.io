@@ -17,7 +17,7 @@ subtitle: ''
 
 ```{r include = FALSE}
 knitr::opts_chunk$set(tidy = FALSE, warning=FALSE, message=FALSE,
-                      fig.width = 8, fig.height = 4)
+                      fig.width = 12, fig.height = 6)
 options(scipen = 15)
 ```
 
