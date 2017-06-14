@@ -184,7 +184,7 @@ ggmap(BA, extent = "panel") +
         axis.ticks = element_blank()) +
   # y eliminamos la leyenda
   guides(fill = FALSE) +
-  facet_wrap(~year, ncol = 2)  
+  facet_wrap(~year)  
 ```
 
 Los resultados muestran una diferencia clara entre su actividad en los años 2011 y 2012, con una variedad de sitios visitados más reducida, en comparación con 2014 y 2015 cuando su rutina diaria parece haber sido mucho más variada. Su actividad está claramente concentrada en el área que corresponde al centro económico de la ciudad. Hace incursiones al exterior de la ciudad, hacia el norte, pero rara vez en otra dirección. En lo que va del 2017, sus radio de acción es notablemente más acotado: Su tiempo se reparte en dos regiones nítidamente demarcadas, sin presencia observable en otros sectores. En todo el año 2016 su celular no se reportó ni una sola vez desde los confines de la ciudad. Como ya habíamos notado en la [parte I](https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/) de ésta serie, estaba viviendo en otro país. 
