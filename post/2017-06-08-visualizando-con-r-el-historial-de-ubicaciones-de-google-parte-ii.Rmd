@@ -17,7 +17,7 @@ subtitle: ''
 
 ```{r include = FALSE}
 knitr::opts_chunk$set(tidy = FALSE, warning=FALSE, message=FALSE,
-                      fig.width = 12, fig.height = 6, out.width=720)
+                      fig.width = 8, fig.height = 8, out.width=720)
 options(scipen = 15)
 ```
 
@@ -37,7 +37,7 @@ Por el análisis que realizamos en la entrega anterior, sabemos que el usuario h
 
 Vamos a responder esa pregunta aprovechando las funciones de `ggmap`, que hacen muy pero muy fácil poner en pantalla un mapa de calles de cualquier lugar del mundo.
 
-```{r}
+```{r }
 library(tidyverse)
 library(ggmap)
 library(forcats)
