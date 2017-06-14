@@ -54,7 +54,7 @@ class(locationdf$date) <- 'POSIXct'
 NY  <- get_map("Central Park, NY", source = "stamen", maptype = "toner-lite", zoom = 12)
 
 # Proyectamos el mapa
-ggmap(NY, extent = "panel") +
+ggmap(NY) +
   # y trazamos por encima las coordenadas de cada ubicación del usuario registrada en el área
   geom_point(data = filter(locationdf, CITY_NAME == "New York"),
              aes(x = lon, y = lat, color = fct_inorder(paste(month, year))), 
@@ -74,7 +74,7 @@ Lo interesante de un dataset con tanta resolución temporal y espacial es que po
 
 MoMA <- get_map("MOMA, NY", zoom = 18)
 
-ggmap(MoMA, extent = "panel") + 
+ggmap(MoMA) + 
   geom_point(data = filter(locationdf, CITY_NAME == "New York"),
              aes(x = lon, y = lat, color = fct_inorder(paste(month, year))), 
              alpha = .7, size = 3)  +
@@ -109,7 +109,7 @@ Bueno, primero veamos como lucen todos los registros de ubicación en la ciudad 
 ```{r}
 BA  <- get_map("Buenos Aires, Argentina", source = "stamen", maptype = "toner-lite", zoom = 11)
 
-ggmap(BA, extent = "panel") + 
+ggmap(BA) + 
   geom_point(data = filter(locationdf, CITY_NAME == "Buenos Aires"),
              aes(x = lon, y = lat), 
              alpha = .1, color = "orange") +
@@ -135,7 +135,7 @@ library(hexbin)
 
 myPalette <- colorRampPalette(brewer.pal(7,'Oranges'))
 
-ggmap(BA, extent = "panel") + 
+ggmap(BA) + 
   coord_equal() +
   stat_binhex(aes(x = lon, y = lat), 
               binwidth = c(0.0075,0.0075), 
@@ -163,7 +163,7 @@ Podemos continuar usando la técnica de los hexágonos para buscar patrones. Por
 ```{r}
 library(lubridate)
 
-ggmap(BA, extent = "panel") + 
+ggmap(BA) + 
   coord_equal() +
   stat_binhex(data = filter(locationdf, 
                            CITY_NAME == "Buenos Aires", 

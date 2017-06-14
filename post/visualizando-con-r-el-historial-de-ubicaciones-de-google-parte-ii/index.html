@@ -246,7 +246,7 @@ class(locationdf$date) &lt;- &#39;POSIXct&#39;
 NY  &lt;- get_map(&quot;Central Park, NY&quot;, source = &quot;stamen&quot;, maptype = &quot;toner-lite&quot;, zoom = 12)
 
 # Proyectamos el mapa
-ggmap(NY, extent = &quot;panel&quot;) +
+ggmap(NY) +
   # y trazamos por encima las coordenadas de cada ubicación del usuario registrada en el área
   geom_point(data = filter(locationdf, CITY_NAME == &quot;New York&quot;),
              aes(x = lon, y = lat, color = fct_inorder(paste(month, year))), 
@@ -260,7 +260,7 @@ ggmap(NY, extent = &quot;panel&quot;) +
 <p>Lo interesante de un dataset con tanta resolución temporal y espacial es que podemos seguir al usuario cuando se mete dentro de los edificios. Por ejemplo, podemos saber si, y cuando, visita cualquiera de los destinos famosos en la ciudad. Por ejemplo, ¿alguna vez visito el Museo de Arte Moderno de Nueva York? Hagamos zoom en el MoMA, esta vez descartando los datos de latitud y longitud, que no hacen falta:</p>
 <pre class="r"><code>MoMA &lt;- get_map(&quot;MOMA, NY&quot;, zoom = 18)
 
-ggmap(MoMA, extent = &quot;panel&quot;) + 
+ggmap(MoMA) + 
   geom_point(data = filter(locationdf, CITY_NAME == &quot;New York&quot;),
              aes(x = lon, y = lat, color = fct_inorder(paste(month, year))), 
              alpha = .7, size = 3)  +
@@ -288,7 +288,7 @@ ggmap(MoMA, extent = &quot;panel&quot;) +
 <p>Bueno, primero veamos como lucen todos los registros de ubicación en la ciudad donde vive el usuario, Buenos Aires:</p>
 <pre class="r"><code>BA  &lt;- get_map(&quot;Buenos Aires, Argentina&quot;, source = &quot;stamen&quot;, maptype = &quot;toner-lite&quot;, zoom = 11)
 
-ggmap(BA, extent = &quot;panel&quot;) + 
+ggmap(BA) + 
   geom_point(data = filter(locationdf, CITY_NAME == &quot;Buenos Aires&quot;),
              aes(x = lon, y = lat), 
              alpha = .1, color = &quot;orange&quot;) +
@@ -308,7 +308,7 @@ ggmap(BA, extent = &quot;panel&quot;) +
 
 myPalette &lt;- colorRampPalette(brewer.pal(7,&#39;Oranges&#39;))
 
-ggmap(BA, extent = &quot;panel&quot;) + 
+ggmap(BA) + 
   coord_equal() +
   stat_binhex(aes(x = lon, y = lat), 
               binwidth = c(0.0075,0.0075), 
@@ -332,7 +332,7 @@ ggmap(BA, extent = &quot;panel&quot;) +
 <p>Podemos continuar usando la técnica de los hexágonos para buscar patrones. Por ejemplo, identificar los lugares donde el usuario es registrado con frecuencia, develando los centro de su actividad cotidiana. Haciendo un facetado por año, podemos incluso visualizar como “la vida cotidiana” cambia a lo largo del tiempo. Vamos a filtrar el dataset para considerar sólo registros de ubicación capturados durante el trajín de la semana: de 9 a 18, de lunes a viernes. Como notamos en la visualización anterior, los alrededores de la casa del usuario dominan el mapa. Para evitarlo en este mapa, vamos a aplicar un transformación logarítmica al conteo de ubicaciones, que tiene como efecto reducir la diferencia entre valores máximos y mínimos.</p>
 <pre class="r"><code>library(lubridate)
 
-ggmap(BA, extent = &quot;panel&quot;) + 
+ggmap(BA) + 
   coord_equal() +
   stat_binhex(data = filter(locationdf, 
                            CITY_NAME == &quot;Buenos Aires&quot;, 
