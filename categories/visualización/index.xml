@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Visualización on Bits &amp; Bricks</title>
-    <link>/categories/visualizaci%C3%B3n/</link>
+    <link>https://bitsandbricks.github.io/categories/visualizaci%C3%B3n/</link>
     <description>Recent content in Visualización on Bits &amp; Bricks</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
     <lastBuildDate>Thu, 08 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/visualizaci%C3%B3n/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://bitsandbricks.github.io/categories/visualizaci%C3%B3n/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Visualizando con R el historial de ubicaciones de Google (parte II)</title>
-      <link>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</link>
+      <link>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</link>
       <pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</guid>
+      <guid>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</guid>
       <description>En la parte I, vimos cómo descargar, limpiar y comenzar a visualizar los datos de nuestra ubicación que Google guarda cuando usamos servicios de la compañía. Hasta aquí nos habíamos concentrado en clasificar los datos según el tiempo y según los países visitados.
 Ahora vamos a poner nuestra atención en el interior de las ciudades, para seguir los rastros que dejamos al recorrer las calles.
 Para reproducir los resultados, recomiendo correr antes el código de la parte I, que deja preparados los sets de datos que vamos a utilizar aquí.</description>
@@ -25,10 +25,10 @@ Para reproducir los resultados, recomiendo correr antes el código de la parte I
     
     <item>
       <title>Visualizando con R el historial de ubicaciones de Google (parte I)</title>
-      <link>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</link>
+      <link>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</link>
       <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</guid>
+      <guid>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</guid>
       <description>La irrupción de computadoras llenas de sensores que viajan el bolsillo de cada ciudadano -nuestros celulares- ha sido de sobra aprovechada por Google. Si no nos tomamos la molestia de inhabilitar funciones de localización activas de fábrica, todos los usuarios de celulares Android reportamos a Google nuestra posición, en forma constante. Y los usuarios de iPhones también, cuando usan servicios de la compañía en sus teléfonos.
 A esta altura, ya todos sabemos que Google es una compañía bastante creepy.</description>
     </item>
