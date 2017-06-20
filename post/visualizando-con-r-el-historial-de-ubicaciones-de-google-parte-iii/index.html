@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Visualizando con R el historial de ubicaciones de Google (parte III)</title>
+  <meta property="og:title" content="Visualizando con R el historial de ubicaciones de Google (parte III)" />
+  <meta name="twitter:title" content="Visualizando con R el historial de ubicaciones de Google (parte III)" />
+  <meta name="description" content="En la entrega anterior, seguimos el rastro del usuario a través de las calles, y descubrimos donde vive.
+Como cierre, vamos a visualizar los vuelos con los que el usuario conectó las ciudades por donde estuvo.
+Para reproducir los resultados, recomiendo correr antes el código de la parte I, que deja preparados los sets de datos que vamos a utilizar aquí.
+Identificando vuelos Durante los ejercicios anteriores, notamos que los datos contienen ubicaciones registradas a ambos lados del Atlántico.">
+  <meta property="og:description" content="En la entrega anterior, seguimos el rastro del usuario a través de las calles, y descubrimos donde vive.
+Como cierre, vamos a visualizar los vuelos con los que el usuario conectó las ciudades por donde estuvo.
+Para reproducir los resultados, recomiendo correr antes el código de la parte I, que deja preparados los sets de datos que vamos a utilizar aquí.
+Identificando vuelos Durante los ejercicios anteriores, notamos que los datos contienen ubicaciones registradas a ambos lados del Atlántico.">
+  <meta name="twitter:description" content="En la entrega anterior, seguimos el rastro del usuario a través de las calles, y descubrimos donde vive.
+Como cierre, vamos a visualizar los vuelos con los que el usuario conectó las ciudades por …">
+  <meta name="author" content="H. Antonio Vazquez Brust"/>
+  <link href='/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@vazquezbrust" />
+  <meta name="twitter:creator" content="@vazquezbrust" />
+  <meta property="og:url" content="/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Bits &amp; Bricks" />
+
+  <meta name="generator" content="Hugo 0.21" />
+  <link rel="canonical" href="/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Bits &amp; Bricks">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="/css/highlight.min.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-100821706-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Bits &amp; Bricks</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Fotos viejas" href="http://cargocollective.com/metrosis">Fotos viejas</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Acerca de" href="/page/about/">Acerca de</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Bits &amp; Bricks" href="/">
+            <img class="avatar-img" src="/img/avatar-icon.png" alt="Bits &amp; Bricks" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="/post/img/indiana-jones-and-the-fate-of-atlantis.png" data-img-desc-1="Por un puñado de orichalcum"></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>Visualizando con R el historial de ubicaciones de Google (parte III)</h1>
+                  
+                  
+                    <span class="post-meta">
+  Posted on June 10, 2017
+  
+</span>
+
+
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Visualizando con R el historial de ubicaciones de Google (parte III)</h1>
+                
+                
+                  <span class="post-meta">
+  Posted on June 10, 2017
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>En la <a href="https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iI/">entrega anterior</a>, seguimos el rastro del usuario a través de las calles, y descubrimos donde vive.</p>
+<p>Como cierre, vamos a visualizar los vuelos con los que el usuario conectó las ciudades por donde estuvo.</p>
+<p>Para reproducir los resultados, recomiendo correr antes el código de la <a href="https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/">parte I</a>, que deja preparados los sets de datos que vamos a utilizar aquí.</p>
+<div id="identificando-vuelos" class="section level2">
+<h2>Identificando vuelos</h2>
+<p>Durante los ejercicios anteriores, notamos que los datos contienen ubicaciones registradas a ambos lados del Atlántico. A no ser que nuestro viajero haya optado por largos viajes en barco, podemos estar seguros de que ha tomado varios aviones. ¿Cómo podemos detectar los destinos unidos mediante vuelos?</p>
+<p>Tras experimentar con varios métodos, me encontré con que la forma más simple es buscar registros de ubicación consecutivos separados por más de 250 Km. Tomando ventaja de la prohibición de usar las antenas del celular durante el vuelo, asumimos que si alguien recorrió un largo trecho desde su última conexión a GPS ha estado a bordo de una aeronave. Hay que aclarar que este criterio podría producir falsos positivos en caso de que el usuario haya viajado en auto por larguísimos trechos con su celular apagado (y falsos negativos en el caso de tramos en avión muy breves).</p>
+<p>A continuación necesitamos traducir a metros la distancias entre geo-coordenadas. Podríamos escribir una función que aplique la <a href="https://es.wikipedia.org/wiki/F%C3%B3rmula_del_haversine">fórmula del haversine</a>, o haciendo gala de una saludable pereza, usar la que viene incluida en el paquete <code>geosphere</code>:</p>
+<pre class="r"><code>library(tidyverse)
+library(geosphere)
+
+# Cargamos el dataset con el historial de ubicaciones, obtenido en  # https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/
+
+locationdf &lt;- read.csv(&#39;/home/havb/data/Google/Location History/locationdf.csv&#39;, 
+                       stringsAsFactors = F)
+class(locationdf$date) &lt;- &#39;POSIXct&#39;
+
+# La funcion distGeo toma dos listas con sets de coordenadas, 
+# y devuelve la distancia en m
+distance &lt;- distGeo(locationdf[-nrow(locationdf), c(&quot;lat&quot;, &quot;lon&quot;)], 
+                      locationdf[-1, c(&quot;lat&quot;, &quot;lon&quot;)])
+
+# Unimos los datos de distancia con el dataset de ubicaciones
+# Descartamos la primera fila del dataset de ubicaciones, ya que al no registrarse 
+# una posición previa, no permite calcular distancia recorrida
+
+locationdf &lt;- cbind(locationdf[-1,], distance)
+
+# Agregamos un indice al dataframe, que nos va a servir luego 
+# para encontrar el origen de los viajes
+
+locationdf &lt;- cbind(index = 1:nrow(locationdf), locationdf)
+
+# Extraemos los destinos de los vuelos (arrivos a más de 250 KM del último registro)
+flights &lt;- locationdf %&gt;% 
+  select(index, lat, lon, date, year, CITY_NAME, CNTRY_NAME, distance) %&gt;% 
+  filter(distance &gt; 250000) 
+
+# Agregamos el lugar de salida de los vuelos
+
+findOrigin &lt;- function(index) {
+  return(data.frame(prev_lat = locationdf[locationdf$index == index-1, &quot;lat&quot;],
+                    prev_lon = locationdf[locationdf$index == index-1, &quot;lon&quot;],
+                    prev_city = locationdf[locationdf$index == index-1, &quot;CITY_NAME&quot;])
+         )
+}
+
+# Finalmente, nuestra lista de vuelos
+flights &lt;- cbind(flights, map_df(flights$index, findOrigin))</code></pre>
+<p>La lista de vuelos encontrados luce así (versión abreviada):</p>
+<pre class="r"><code>head(flights[c(&quot;CITY_NAME&quot;, &quot;prev_city&quot;, &quot;distance&quot;, &quot;year&quot;)])</code></pre>
+<pre><code>##      CITY_NAME             prev_city  distance year
+## 1        Salta          Buenos Aires  934818.1 2011
+## 2 Buenos Aires San Miguel De Tucuman  850142.9 2011
+## 3  Resistencia          Buenos Aires  416533.2 2011
+## 4 Buenos Aires           Resistencia  416909.9 2011
+## 5       Madrid          Buenos Aires 8786212.0 2011
+## 6    Amsterdam                Madrid 1632970.9 2012</code></pre>
+<p>Transformar la lista en una visualización es simple; sólo trazamos sobre un mapamundi las lineas que conectan orígenes y destinos:</p>
+<pre class="r"><code>library(mapdata)
+
+maps::map(&quot;world&quot;, col=&quot;#f2f2f2&quot;, fill=TRUE, bg=&quot;white&quot;, lwd=0.15)#, xlim=xlim, ylim=ylim)
+
+points(bind_rows(flights[, c(&quot;lon&quot;, &quot;lat&quot;)], 
+             flights[, c(&quot;prev_lon&quot;, &quot;lat&quot;)]), 
+       col = &quot;red&quot;)
+
+lines(bind_rows(flights[, c(&quot;lon&quot;, &quot;lat&quot;)], 
+             flights[, c(&quot;prev_lon&quot;, &quot;lat&quot;)]), 
+      col = &quot;orange&quot;, lwd=2)
+title( main = &quot;:/&quot;)</code></pre>
+<p><img src="/post/2017-06-10-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii_files/figure-html/unnamed-chunk-4-1.png" width="720" /></p>
+<p>Simple si, pero esas líneas rectas quedan bastante raras. Dado que nuestro planeta es un esferoide, si proyectamos sobre un plano la distancia más corta entre dos puntos, la línea resultante no es una recta. Por ejemplo, así es como Delta Airlines muestra los vuelos que brinda en sociedad con Aerolíneas Argentinas:</p>
+<div class="figure">
+<img src="/post/img/D_AA_destinos.jpg" alt="Vuelos de Delta y Aerolíneas" />
+<p class="caption">Vuelos de Delta y Aerolíneas</p>
+</div>
+<p>Para reproducir esas curvas sobre el globo terráqueo, que llevan el simpático nombre de <a href="https://es.wikipedia.org/wiki/Ortodr%C3%B3mica">ortodrómicas</a>, volvemos a recurrir al paquete <code>geosphere</code>:</p>
+<pre class="r"><code>curvas &lt;- gcIntermediate(flights[c(&quot;lon&quot;, &quot;lat&quot;)], 
+                         flights[c(&quot;prev_lon&quot;, &quot;prev_lat&quot;)])
+
+maps::map(&quot;world&quot;, col=&quot;#f2f2f2&quot;, fill=TRUE, bg=&quot;white&quot;, lwd=0.15)#, xlim=xlim, ylim=ylim)
+
+points(bind_rows(flights[, c(&quot;lon&quot;, &quot;lat&quot;)], 
+             flights[, c(&quot;prev_lon&quot;, &quot;lat&quot;)]), 
+       col = &quot;red&quot;)
+
+for(i in 1:length(curvas)){
+  lines(curvas[[i]], col = &quot;orange&quot;, lwd=2)
+}
+
+title( main = &quot;:)&quot;)</code></pre>
+<p><img src="/post/2017-06-10-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii_files/figure-html/unnamed-chunk-5-1.png" width="720" /></p>
+</div>
+<div id="inflando-el-globo" class="section level1">
+<h1>Inflando el globo</h1>
+<p>Por último, hagamos una proyección esférica. De paso podemos mostrar más información, como el año en que se efectuó cada vuelo, o la cantidad de veces que se pasó por un destino. Para ello, necesitamos (como siempre!) preparar nuestros datos.</p>
+<pre class="r"><code># Generamos las coordenadas de las curvas/trayectos
+
+curvas &lt;- gcIntermediate(flights[,c(&#39;prev_lon&#39;, &#39;prev_lat&#39;)], 
+                           flights[,c(&#39;lon&#39;, &#39;lat&#39;)], 
+                           100, addStartEnd=TRUE, sp=TRUE)
+
+# Convertimos las curvas (que son un &quot;spatial object&quot;) en una lista de dataframes que vamos a poder plotear
+
+curvas &lt;- map_df(curvas@lines, fortify)
+
+# Agregamos la data de los vuelos
+
+flights$index &lt;- 1:nrow(flights)
+
+curvas &lt;- merge(curvas, flights, by.x = &quot;id&quot;, by.y = &quot;index&quot;, all.x = T)
+
+# Acomodamos los datos de las ciudades para agregarlas a la visuaizacion
+# Unimos las ciudades, sean origen o destino, en una sola lista
+
+ciudades &lt;- bind_rows(flights[c(&quot;lat&quot;, &quot;lon&quot;, &quot;CITY_NAME&quot;)] %&gt;% 
+                        setNames(c(&quot;lat&quot;, &quot;lon&quot;, &quot;ciudad&quot;)),
+                      flights[c(&quot;prev_lat&quot;, &quot;prev_lon&quot;, &quot;prev_city&quot;)] %&gt;% 
+                        setNames(c(&quot;lat&quot;, &quot;lon&quot;, &quot;ciudad&quot;)))
+
+
+ciudades &lt;- ciudades %&gt;%
+  # Las coordenadas de las ciudades difieren enre registros, debido a difrentes 
+  # posiciones exactas del usuario. Lo arreglamos...
+  aggregate(data = ., cbind(lon, lat) ~ ciudad, FUN = function(x) mean(range(x))) %&gt;% 
+  # Agregamos frecuencia de visitas
+  left_join(count(ciudades, ciudad)) </code></pre>
+<p>Ahora si, generemos la visualización. Indicamos el año del vuelo mediante su color, y la cantidad de veces que el usuario pasó por una ciudad mediante el tamaño del punto que la representa.</p>
+<pre class="r"><code>## Un globo terráqueo
+library(hrbrthemes)
+library(ggrepel)
+ggplot() +
+  borders(&quot;world&quot;, colour=&quot;gray80&quot;, fill=&quot;gray95&quot;) +
+  # Graficamos los trayectos, diferenciando por año 
+  geom_path(data = curvas, 
+            aes(long, lat.x , 
+                group = group, 
+                color = as.factor(year)),
+            size = 1.6,
+            alpha = .85) +
+  scale_color_brewer(palette = &quot;YlGn&quot;) +
+  # Agregamos las ciudades
+  geom_point(data=ciudades, aes(x = lon, y = lat, size = n), 
+             shape = 16, alpha = .5) +
+  # y etiquetas con los nombres
+  geom_label_repel(data = ciudades, 
+            aes(lon, lat, label = ciudad, angle = 10, 
+                group = NULL), 
+            size = 3) +
+  # Centramos la proyección en el Océano Atlántico
+  coord_map(&quot;ortho&quot;, orientation = c(10, -40, 0)) +
+  labs(y = &quot;&quot;, x = &quot;&quot;,
+       title=&quot;Historial de ubicaciones de Google&quot;,
+       subtitle=&quot;vuelos detectados&quot;,
+       color = &quot;Año&quot;,
+       size = &quot;Frecuencia&quot;) +
+  theme_ipsum() </code></pre>
+<p><img src="/post/2017-06-10-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii_files/figure-html/unnamed-chunk-7-1.png" width="720" /></p>
+<p>No luce nada mal.</p>
+<p>Para terminar, una simple conclusión: Google sabe demasiado sobre sus usuarios. Sería bueno pensar en como podemos remediarlo. No me refiero a “volver atrás” y dejar de usar tecnologías como el GPS y los registros de ubicación, sino a encontrar la forma de tomar control de nuestros datos, y tener el derecho a saber que se hace con ellos, limitando los usos que no nos convenzan.</p>
+</div>
+
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/" data-toggle="tooltip" data-placement="top" title="Visualizando con R el historial de ubicaciones de Google (parte II)">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'bits-bricks';
+    var disqus_identifier = '\/post\/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii\/';
+    var disqus_title = 'Visualizando con R el historial de ubicaciones de Google (parte III)';
+    var disqus_url = '\/post\/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:avazquez@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/vazquezbrust" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/avazquez" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/3527951/havb" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          H. Antonio Vazquez Brust
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/">Bits &amp; Bricks</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.21</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+  </body>
+</html>
+

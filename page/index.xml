@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pages on Bits &amp; Bricks</title>
-    <link>https://bitsandbricks.github.io/page/</link>
+    <link>/page/</link>
     <description>Recent content in Pages on Bits &amp; Bricks</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
     
-	<atom:link href="https://bitsandbricks.github.io/page/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/page/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>https://bitsandbricks.github.io/page/about/</link>
+      <link>/page/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>https://bitsandbricks.github.io/page/about/</guid>
+      <guid>/page/about/</guid>
       <description>Antonio Vazquez Brust Buenas! Soy Planificador Urbano/Regional y Científico de Datos.
 Mi campo de interés actual es la aplicación práctica de las ciencias de datos y el análisis computacional como herramientas de gobernanza en las ciudades latinoamericanas.
 Me pueden encontrar en Twitter como @vazquezbrust</description>
