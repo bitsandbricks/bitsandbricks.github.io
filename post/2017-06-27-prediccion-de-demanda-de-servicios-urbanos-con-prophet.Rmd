@@ -351,7 +351,7 @@ plot(modelo, forecast) + theme_ipsum() +
 ```
 
 
-Yo diría que, a no ser que ese operando con capacidad de sobra, Saneamiento Urbano va a necesitar más recursos!
+Yo diría que, a no ser que esté operando con capacidad de sobra, Saneamiento Urbano va a necesitar más recursos!
 
 Para la próxima: hacer análisis espacial además del temporal.
 
