@@ -261,7 +261,7 @@ scrape_feriados_del_anio <- function(year) {
   
 
 # Descargamos los feriados de 2011 a 2016,  
-feriados_2011_2016 <- map(2013:2016, scrape_feriados_del_anio) %>% 
+feriados_2013_2016 <- map(2013:2016, scrape_feriados_del_anio) %>% 
   #los unimos en un unico vector
   unlist %>% 
   # los definimos como fecha
@@ -275,7 +275,7 @@ feriados_2011_2016 <- map(2013:2016, scrape_feriados_del_anio) %>%
 Tenemos nuestra lista de feriados?
 
 ```{r}
-feriados_2011_2016
+feriados_2013_2016
 ```
 
 
@@ -295,7 +295,7 @@ library(prophet)
 modelo <- solicitudes_saneamiento %>% 
   filter(year(as.Date(dia)) > 2012) %>% 
   transmute(ds = as.Date(dia), y = total) %>%  
-  prophet(holidays = data.frame(holiday = "feriado", ds = feriados_2011_2016))
+  prophet(holidays = data.frame(holiday = "feriado", ds = feriados_2013_2016))
 
 
 ```
@@ -309,7 +309,7 @@ forecast <- predict(modelo, make_future_dataframe(modelo, periods = 365))
 
 De paso, hacemos dos preguntas rápidas. Cuantas solicitudes diarias recibe la ciudad, y que efecto tiene un día feriado en el nivel de demanda?
 
-Durante el período 2012-2016, el área de saneamiento urbano de la ciudad recibió un promedio de 394 reclamos diarios, con un máximo 1075. El día en el que menos reclamos se registraron sólo hubo 3.
+Durante el período 2013-2016, el área de saneamiento urbano de la ciudad recibió un promedio de 394 reclamos diarios, con un máximo 1075. El día en el que menos reclamos se registraron sólo hubo 3.
 
 ```{r}
 modelo$history$y %>% summary
@@ -347,7 +347,7 @@ Y por último, trazamos la predicción de nivel de demanda para lo que queda del
 plot(modelo, forecast) + theme_ipsum() +
   labs(y = "solicitudes", x = "fecha",
        title="Pronóstico: demanda diaria de servicios de saneamiento urbano",
-       subtitle = "Ciudad de Buenos Aires: 2011 - 2016, extendido a final del 2017")
+       subtitle = "Ciudad de Buenos Aires: 2013 - 2016, extendido a final del 2017")
 ```
 
 

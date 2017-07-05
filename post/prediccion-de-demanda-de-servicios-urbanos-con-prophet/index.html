@@ -448,7 +448,7 @@ scrape_feriados_del_anio &lt;- function(year) {
   
 
 # Descargamos los feriados de 2011 a 2016,  
-feriados_2011_2016 &lt;- map(2013:2016, scrape_feriados_del_anio) %&gt;% 
+feriados_2013_2016 &lt;- map(2013:2016, scrape_feriados_del_anio) %&gt;% 
   #los unimos en un unico vector
   unlist %&gt;% 
   # los definimos como fecha
@@ -457,7 +457,7 @@ feriados_2011_2016 &lt;- map(2013:2016, scrape_feriados_del_anio) %&gt;%
   # en orden alfabetico)
   sort</code></pre>
 <p>Tenemos nuestra lista de feriados?</p>
-<pre class="r"><code>feriados_2011_2016</code></pre>
+<pre class="r"><code>feriados_2013_2016</code></pre>
 <pre><code>##  [1] &quot;2013-01-01&quot; &quot;2013-01-31&quot; &quot;2013-02-11&quot; &quot;2013-02-12&quot; &quot;2013-02-20&quot;
 ##  [6] &quot;2013-03-24&quot; &quot;2013-03-29&quot; &quot;2013-04-01&quot; &quot;2013-04-02&quot; &quot;2013-05-01&quot;
 ## [11] &quot;2013-05-25&quot; &quot;2013-06-20&quot; &quot;2013-06-21&quot; &quot;2013-07-09&quot; &quot;2013-08-19&quot;
@@ -484,14 +484,14 @@ feriados_2011_2016 &lt;- map(2013:2016, scrape_feriados_del_anio) %&gt;%
 modelo &lt;- solicitudes_saneamiento %&gt;% 
   filter(year(as.Date(dia)) &gt; 2012) %&gt;% 
   transmute(ds = as.Date(dia), y = total) %&gt;%  
-  prophet(holidays = data.frame(holiday = &quot;feriado&quot;, ds = feriados_2011_2016))</code></pre>
+  prophet(holidays = data.frame(holiday = &quot;feriado&quot;, ds = feriados_2013_2016))</code></pre>
 <pre><code>## Initial log joint probability = -116.628
 ## Optimization terminated normally: 
 ##   Convergence detected: relative gradient magnitude is below tolerance</code></pre>
 <p>Y predecimos la demanda para el año siguiente (todo el 2017):</p>
 <pre class="r"><code>forecast &lt;- predict(modelo, make_future_dataframe(modelo, periods = 365))</code></pre>
 <p>De paso, hacemos dos preguntas rápidas. Cuantas solicitudes diarias recibe la ciudad, y que efecto tiene un día feriado en el nivel de demanda?</p>
-<p>Durante el período 2012-2016, el área de saneamiento urbano de la ciudad recibió un promedio de 394 reclamos diarios, con un máximo 1075. El día en el que menos reclamos se registraron sólo hubo 3.</p>
+<p>Durante el período 2013-2016, el área de saneamiento urbano de la ciudad recibió un promedio de 394 reclamos diarios, con un máximo 1075. El día en el que menos reclamos se registraron sólo hubo 3.</p>
 <pre class="r"><code>modelo$history$y %&gt;% summary</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##     3.0   121.0   392.0   394.2   603.5  1075.0</code></pre>
@@ -520,7 +520,7 @@ modelo &lt;- solicitudes_saneamiento %&gt;%
 <pre class="r"><code>plot(modelo, forecast) + theme_ipsum() +
   labs(y = &quot;solicitudes&quot;, x = &quot;fecha&quot;,
        title=&quot;Pronóstico: demanda diaria de servicios de saneamiento urbano&quot;,
-       subtitle = &quot;Ciudad de Buenos Aires: 2011 - 2016, extendido a final del 2017&quot;)</code></pre>
+       subtitle = &quot;Ciudad de Buenos Aires: 2013 - 2016, extendido a final del 2017&quot;)</code></pre>
 <p><img src="/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-18-1.png" width="720" /></p>
 <p>Yo diría que, a no ser que esté operando con capacidad de sobra, Saneamiento Urbano va a necesitar más recursos!</p>
 <p>Para la próxima: hacer análisis espacial además del temporal.</p>
