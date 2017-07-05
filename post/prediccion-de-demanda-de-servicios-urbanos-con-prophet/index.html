@@ -284,6 +284,49 @@ Hola <a href="https://twitter.com/vazquezbrust"><span class="citation">@vazquezb
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <p>Desde entonces, empezaron a modificar éstos datasets en el portal de open data, unificando los nombres de los campos. Al día de hoy todavía hay discrepancias, que se resuelven con el código mostrado a continuación. Si alguien reproduce estos resultados en el futuro, es probable que todos los datasets ya hayan sido unificados en el origen, y no necesite hacer la consolidación de datos.</p>
 <p>Por ahora, el método más sencillo para consolidar todos los archivos en un sólo dataset es concatenar los del 2011 y 2012 tomando sólo las columnas que nos interesan, y luego agregar la data de los archivos 2013 a 2016, re-ordenada para que encaje con el resto. Ah! Y el formato de la fecha en los archivos más recientes es distinta respecto a los de años anteriores, así que tendremos que acomodar eso.</p>
+<pre class="r"><code>library(lubridate)
+
+# Obtener la lista de archivos .csv que descargamos 
+
+archivos &lt;- list.files(path = destino, pattern = &quot;\\.csv&quot;, full.names = TRUE)
+
+# A procesar!
+# primero los datos de 2011  2014
+
+suaci_11_12 &lt;-  archivos %&gt;% 
+  # elegir los .csv que no sean del 2015 o 2016
+  .[grepl(&quot;2011|2012&quot;, .)] %&gt;% 
+  # leerlos como dataframe, tomando recaudos para que interprete &quot;altura&quot; como entero
+  # y &quot;fecha&quot; / &quot;fecha_ingreso&quot; como texto 
+  # (de lo contrario, read_delim hace lío: toma altura como texto y fecha como entero)
+  # O_o
+  map(read_delim, 
+      delim = &quot;;&quot;, 
+      col_types = cols(altura = &quot;i&quot;, fecha = &quot;c&quot;)) %&gt;% 
+  # tomar solo las 10 primeras columnas de cada uno
+  map(`[`, 1:10) %&gt;% 
+  # unificar nombres de columnas, y colapsar todos los dataframes en uno solo 
+  map_df(set_names, names(.[[1]])) %&gt;%  
+  # determinar la fecha a partir de texto en formato &quot;año-mes-dia hora:min:sec&quot; 
+  mutate(fecha = ymd_hms(fecha, tz = &quot;America/Argentina/Buenos_Aires&quot;))
+
+# Luego agregamos los datos de 2015 y 2016
+
+suaci &lt;-  archivos %&gt;% 
+  # elegir los .csv de 2015 y 2016
+  .[!grepl(&quot;2011|2012&quot;, .)] %&gt;% 
+  # leerlos como dataframe, tomando recaudos para que interprete &quot;altura&quot; como número
+  map(read_delim, 
+      delim = &quot;;&quot;, 
+      col_types = cols(DOMICILIO_ALTURA = &quot;i&quot;)) %&gt;% 
+  # reordenar y seleccionar las columnas que coinciden con la data de años anteriores
+  map(`[`, c(13,12,2:5,8:11)) %&gt;% 
+  # asignar nombres de columna identicos a la del resto de los datos 
+  map_df(set_names, names(suaci_11_12)) %&gt;% 
+  # determinar la fecha a partir de texto en formato &quot;dia-mes-año&quot;  
+  mutate(fecha = dmy(fecha, tz = &quot;America/Argentina/Buenos_Aires&quot;)) %&gt;% 
+  # unir con el resto de la data
+  rbind(suaci_11_12, .)</code></pre>
 <p>Ahora, exploremos los datos unificados. Rapidito, un top ten de los reclamos más frecuentes:</p>
 <pre class="r"><code>suaci %&gt;% 
   group_by(concepto, rubro) %&gt;% 
@@ -351,7 +394,7 @@ ggplot(solicitudes_saneamiento, aes(as.Date(dia), total)) +
        subtitle = &quot;Ciudad de Buenos Aires: 2011 - 2016&quot;,
        caption = &quot;Fuente: https://data.buenosaires.gob.ar/&quot;)</code></pre>
 <p><img src="/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-10-1.png" width="720" /></p>
-<p>A primera vista, es obvio que los datos están sesgados, ya que la explosión en el número de solicitudes a partir de mediados del 2012 es atribuible a la forma en que la ciudad empezó a tomar nota de los reclamos, más que a un furor ciudadano por solicitar limpieza. Cuando hagamos nuestro modelo, vamos a descartar los registros de 2001 y 2012 porque tenemos claro que no son representativos.</p>
+<p>A primera vista, es obvio que los datos están sesgados, ya que la explosión en el número de solicitudes a partir de mediados del 2012 es atribuible a la forma en que la ciudad empezó a tomar nota de los reclamos, más que a un furor ciudadano por solicitar limpieza. Cuando hagamos nuestro modelo, vamos a descartar los registros de 2011 y 2012 porque tenemos claro que no son representativos.</p>
 <p>El siguiente ingrediente que necesitamos es una lista de los feriados públicos en la Argentina durante el período analizado.</p>
 </div>
 <div id="cuando-los-datos-estan-dispersos-la-hora-del-scraping" class="section level2">

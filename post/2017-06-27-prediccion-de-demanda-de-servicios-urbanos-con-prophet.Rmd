@@ -102,7 +102,7 @@ Desde entonces, empezaron a modificar éstos datasets en el portal de open data,
 
 Por ahora, el método más sencillo para consolidar todos los archivos en un sólo dataset es concatenar los del 2011 y 2012 tomando sólo las columnas que nos interesan, y luego agregar la data de los archivos 2013 a 2016, re-ordenada para que encaje con el resto. Ah! Y el formato de la fecha en los archivos más recientes es distinta respecto a los de años anteriores, así que tendremos que acomodar eso. 
 
-```{r echo=FALSE}
+```{r}
 library(lubridate)
 
 # Obtener la lista de archivos .csv que descargamos 
@@ -204,7 +204,7 @@ ggplot(solicitudes_saneamiento, aes(as.Date(dia), total)) +
 ```
 
 
-A primera vista, es obvio que los datos están sesgados, ya que la explosión en el número de solicitudes a partir de mediados del 2012 es atribuible a la forma en que la ciudad empezó a tomar nota de los reclamos, más que a un furor ciudadano por solicitar limpieza. Cuando hagamos nuestro modelo, vamos a descartar los registros de 2001 y 2012 porque tenemos claro que no son representativos. 
+A primera vista, es obvio que los datos están sesgados, ya que la explosión en el número de solicitudes a partir de mediados del 2012 es atribuible a la forma en que la ciudad empezó a tomar nota de los reclamos, más que a un furor ciudadano por solicitar limpieza. Cuando hagamos nuestro modelo, vamos a descartar los registros de 2011 y 2012 porque tenemos claro que no son representativos. 
 
 El siguiente ingrediente que necesitamos es una lista de los feriados públicos en la Argentina durante el período analizado. 
 
