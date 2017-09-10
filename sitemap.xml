@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/analizando-data-de-airbnb-en-buenos-aires/</loc>
+    <lastmod>2017-09-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/prediccion-de-demanda-de-servicios-urbanos-con-prophet/</loc>
     <lastmod>2017-06-27T00:00:00+00:00</lastmod>
   </url>
@@ -28,7 +33,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2017-06-27T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -74,7 +79,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2017-06-27T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -98,7 +103,7 @@
   
   <url>
     <loc>/categories/scraping/</loc>
-    <lastmod>2017-06-27T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
