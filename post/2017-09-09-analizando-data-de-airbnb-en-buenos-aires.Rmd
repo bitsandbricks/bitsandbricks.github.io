@@ -209,7 +209,7 @@ round(reparto / sum(reparto), 2)
 
 ```
 
-El top 1% de los anfitriones con mayores ingresos se lleva más de un tercio de la torta (quiero decir, del waffle). El 10% con mayores ingresos factura un 80% del total. 
+El top 1% de los anfitriones con mayores ingresos se lleva más de un tercio de la torta (quiero decir, del waffle). El 10% con mayores ingresos factura un 80% del total. __Es un mercado muy, muy concentrado.__
 
 
 ## Distribución geográfica
@@ -218,7 +218,7 @@ El top 1% de los anfitriones con mayores ingresos se lleva más de un tercio de 
 
 A mapear!
 
-```{r}
+```{r fig.width = 8, fig.height = 8}
 library(ggmap)
 map.ba <- qmap("Caballito, Buenos Aires", zoom = 12, source="stamen", 
                 maptype="toner-hybrid")     
