@@ -168,7 +168,7 @@ usuarios %>%
        x = "ingresos (ARS)")
 ```
 
-OK. Lo que ocurre aquí es que hay un puñado pequeño de usuarios que (según nuestros cálculos) han recaudado de forma cuantiosa, estirando la escala al punto que no podemos diferenciar al pelotón de los no tan afortunados. En otras palabras, una [distribución de pareto](https://es.wikipedia.org/wiki/Distribuci%C3%B3n_de_Pareto) peliaguda. Acudimos al viejo aliado de la visualización de ingresos, la escala logarítmica.
+OK. Lo que ocurre aquí es que hay un puñado de usuarios que han recaudado de forma cuantiosa de acuerdo a nuestros supuestos, estirando la escala al punto que no podemos diferenciar al pelotón de los no tan afortunados. En otras palabras, una [distribución de pareto](https://es.wikipedia.org/wiki/Distribuci%C3%B3n_de_Pareto) peliaguda. Acudimos al viejo aliado de la visualización de ingresos, la escala logarítmica.
 
 ```{r}
 usuarios %>% 
