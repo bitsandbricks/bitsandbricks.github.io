@@ -325,7 +325,7 @@ airba_df %&gt;%
 <p>Existen cuentas que administran 73, 77… ¡87! alojamientos distintos, ofrecidos a la vez. No es una operación menor la de mantener semejante número de propiedades en rotación, por lo cual podemos asumir que se trata de empresas (formalizadas como tales, o no) dedicadas a alojar turistas via Airbnb. Lo cual nos lleva a…</p>
 </div>
 <div id="distribucion-de-ingresos" class="section level2">
-<h2>Distribución de ingresos</h2>
+<h2>3. Distribución de ingresos</h2>
 <p>Aquí hay que aclarar una vez más que nos basamos en estimados. De todas formas, aún si no sabemos en qué grado nuestra suposición se aproxima a los números reales, aplicar la misma medición a todos los usuarios nos permite comparar que tan bien les está yendo con el negocio. Allá vamos:</p>
 <pre class="r"><code>usuarios %&gt;% 
   ggplot(aes(ingresos_estimados)) +
@@ -376,7 +376,7 @@ round(reparto / sum(reparto), 2)</code></pre>
 <p>El top 1% de los anfitriones con mayores ingresos se lleva más de un tercio de la torta (quiero decir, del waffle). El 10% con mayores ingresos factura un 80% del total. <strong>Es un mercado muy, muy concentrado.</strong></p>
 </div>
 <div id="distribucion-geografica" class="section level2">
-<h2>Distribución geográfica</h2>
+<h2>4. Distribución geográfica</h2>
 <p>¿Dónde se conentran los alojamientos ofrecidos? Y en particular, ¿dónde están los alojamientos que más recaudan?</p>
 <p>A mapear!</p>
 <pre class="r"><code>library(ggmap)

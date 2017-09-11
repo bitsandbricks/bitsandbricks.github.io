@@ -152,7 +152,7 @@ airba_df %>%
 
 Existen cuentas que administran 73, 77... ¡87! alojamientos distintos, ofrecidos a la vez. No es una operación menor la de mantener semejante número de propiedades en rotación, por lo cual podemos asumir que se trata de empresas (formalizadas como tales, o no) dedicadas a alojar turistas via Airbnb. Lo cual nos lleva a...
 
-## Distribución de ingresos
+## 3. Distribución de ingresos
 
 Aquí hay que aclarar una vez más que nos basamos en estimados. De todas formas, aún si no sabemos en qué grado nuestra suposición se aproxima a los números reales, aplicar la misma  medición a todos los usuarios nos permite comparar que tan bien les está yendo con el negocio. Allá vamos:
 
@@ -212,7 +212,7 @@ round(reparto / sum(reparto), 2)
 El top 1% de los anfitriones con mayores ingresos se lleva más de un tercio de la torta (quiero decir, del waffle). El 10% con mayores ingresos factura un 80% del total. __Es un mercado muy, muy concentrado.__
 
 
-## Distribución geográfica
+## 4. Distribución geográfica
 
 ¿Dónde se conentran los alojamientos ofrecidos? Y en particular, ¿dónde están los alojamientos que más recaudan?
 
