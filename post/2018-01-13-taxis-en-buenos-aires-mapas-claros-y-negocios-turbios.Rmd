@@ -146,7 +146,7 @@ size_range = c(0.2, 0.4)
 
 VI. Todo listo para generar el mapa. Allá vamos!
 
-```{r}
+```{r fig.width = 8, fig.height = 12}
 
 ggplot() +
    geom_polygon(data = calles,
@@ -175,7 +175,7 @@ ggplot() +
     coord_map(xlim = range(taxis_origenes$lon), 
               ylim = range(taxis_origenes$lat)) +
     theme(legend.position="none") +
-    labs(title="Taxis en Buenos Aires: origen y destino",
+    labs(title="Taxis en Buenos Aires: origen y destino de viajes",
          subtitle = "Mayo - agosto 2017",
          caption = "fuente: dataset BA Taxi - Datatón Smart City Expo Buenos Aires") 
     
@@ -193,7 +193,7 @@ Podemos hacer de forma muy fácil un "zoom in" para verificarlo, usando el paque
 
 Invoquemos un mapa de "Aeroparque Buenos Aires", con nuestra data superpuesta:
 
-```{r}
+```{r fig.width = 8, fig.height = 8}
 library(ggmap)
 
 qmap("Aeroparque Buenos Aires", zoom = 14, color = "bw", scale = 2) +  
@@ -214,7 +214,7 @@ Confirmado, el "misterioso" aglutinamiento de llegadas sin salidas ocurre en Aer
 
 Ahora pidámosle a Google un mapa de "Estación de buses Retiro":
 
-```{r}
+```{r fig.width = 8, fig.height = 8}
 
 qmap("Estación de buses Retiro, Buenos Aires", zoom = 15, color = "bw", scale = 2) +  
     geom_point(data = taxis_origenes,
