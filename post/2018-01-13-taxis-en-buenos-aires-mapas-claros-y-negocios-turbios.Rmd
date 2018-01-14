@@ -146,7 +146,7 @@ size_range = c(0.2, 0.4)
 
 VI. Todo listo para generar el mapa. Allá vamos!
 
-```{r fig.width = 8, fig.height = 12}
+```{r fig.width = 8, fig.height = 10}
 
 ggplot() +
    geom_polygon(data = calles,
