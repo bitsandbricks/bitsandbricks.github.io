@@ -146,7 +146,7 @@ size_range = c(0.2, 0.4)
 
 VI. Todo listo para generar el mapa. Allá vamos!
 
-```{r fig.width = 8, fig.height = 10}
+```{r fig.width = 8, fig.height = 9}
 
 ggplot() +
    geom_polygon(data = calles,
@@ -395,7 +395,7 @@ tasa_destino_origen %>%
 ```
 
 
-## Por último: qué pasa con las otras tres zonas donde los taxis llevan pasajeros pero rara vez los levantan?
+## Por último: qué pasa con las otras tres zonas donde los taxis dejan pasajeros pero rara vez los van a buscar?
 
 Se trata de un fenómeno distinto, y que amerita un análisis aparte que por ahora no vamos a desarrollar. Las otras tres zonas donde encontramos una relación desproporcionada de llegadas vs. salidas se encuentran en el sur de la Ciudad. 
 
