@@ -4,7 +4,7 @@ author: H. Antonio Vazquez Brust
 date: '2018-01-13'
 slug: taxis-en-buenos-aires-mapas-claros-y-negocios-turbios
 bigimg: 
-  - {src: "/post/img/taxis-banner.png"}
+  - {src: "/post/img/taxis_banner.png"}
 categories:
   - informática urbana
   - open data
@@ -19,7 +19,7 @@ subtitle: ''
 
 ```{r include = FALSE}
 knitr::opts_chunk$set(tidy = FALSE, warning=FALSE, message=FALSE,
-                      fig.width = 8, fig.height = 8, out.width=720)
+                      fig.width = 12, fig.height = 8, out.width=720)
 options(scipen = 15)
 ```
 
@@ -31,7 +31,7 @@ Con motivo del evento se hicieron públicos varios datasets con información urb
 
 Cuando vi pasar el dataset, lo primero que se me ocurrió fue visualizar todos los viajes a la vez, al estilo del mapa que hizo el MIT Senseable City Lab para [los taxis de Nueva York](http://hubcab.org):
 
-![hubcab.org](/post/img/hbcab.jpg)
+![hubcab.org](/post/img/hubcab.jpg)
 
 En resumidas cuentas, obtuve lo que buscaba, y algo más. En un ejemplo de los patrones que son difíciles de detectar en una lista de números, pero resultan evidentes una vez visualizados, en mi mapa relucen rastros de lo que a los porteños nos gusta llamar "la mafia de los taxis".
 
