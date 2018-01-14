@@ -113,7 +113,8 @@ theme_ipsum_map_dark <- function(base_size = 24, title_size = 60,
     
     theme_ipsum(base_size=base_size) +
         theme(rect=element_rect(fill=color.background, color=color.background)) +
-        theme(plot.background=element_rect(fill=color.background, color=color.background)) +
+        theme(plot.background=element_rect(fill=color.background
+                                           , color=color.background)) +
         theme(panel.border=element_rect(color=color.background, fill = NA)) +
         theme(panel.background = element_rect(fill = color.background)) +
         theme(panel.grid.major=element_blank()) +
@@ -121,8 +122,10 @@ theme_ipsum_map_dark <- function(base_size = 24, title_size = 60,
         theme(axis.ticks=element_blank()) +
         theme(legend.background = element_rect(fill=color.background)) +
         theme(legend.text = element_text(colour=color.axis.title)) +
-        theme(legend.title = element_blank(), legend.position="top", legend.direction="horizontal") +
-        theme(legend.key.width=unit(1, "cm"), legend.key.height=unit(0.25, "cm"), legend.spacing = unit(-0.5,"cm")) +
+        theme(legend.title = element_blank(), legend.position="top",
+              legend.direction="horizontal") +
+        theme(legend.key.width=unit(1, "cm"), legend.key.height=unit(0.25, "cm"),
+              legend.spacing = unit(-0.5,"cm")) +
         theme(plot.title=element_text(colour=color.title, size = title_size)) +
         theme(plot.subtitle=element_text(colour=color.title, size = subtitle_size)) +
         theme(plot.caption=element_text(colour=color.title, size = caption_size)) +
@@ -130,7 +133,8 @@ theme_ipsum_map_dark <- function(base_size = 24, title_size = 60,
         theme(axis.text.y=element_blank()) +
         theme(axis.title.y=element_blank()) +
         theme(axis.title.x=element_blank()) +
-        theme(strip.background = element_rect(fill=color.background, color=color.background),
+        theme(strip.background = element_rect(fill=color.background,
+                                              color=color.background),
               strip.text = element_text(colour=color.axis.title))
     
 }
@@ -292,7 +296,7 @@ geo_data <- geo_data %>%
 plot(geo_data["tipo"], col = c("aquamarine", "indianred1"), 
      key.pos = NULL, main = "salidas en verde, llegadas en rojo")
 ```
-_Voilá!_. Ahora creamos la grilla...
+_Voilà!_. Ahora creamos la grilla...
 
 ```{r}
 grilla <- geo_data %>% 
@@ -312,7 +316,8 @@ tasa_destino_origen <- geo_data %>%
     st_join(grilla) %>% 
     group_by(ID) %>%
     summarise(total = n(), 
-              tasa = sum(tipo == "destino", na.rm = T) / sum(tipo == "origen", na.rm = T))
+              tasa = sum(tipo == "destino", na.rm = T) / 
+                          sum(tipo == "origen", na.rm = T))
 
 ```
 
@@ -340,7 +345,8 @@ tasa_destino_origen <- geo_data %>%
 Antes de hacer cuentas, volvamos a anticipar los resultados con una visualización. Cómo se ve en el mapa la tasa origen/destino de cada zona de la ciudad?
 
 ```{r}
-plot(tasa_destino_origen["tasa"], main = "Viajes de BA Taxi por zona: cantidad de llegadas por cada salida")
+plot(tasa_destino_origen["tasa"], 
+     main = "Viajes de BA Taxi por zona: cantidad de llegadas por cada salida")
 ```
 
 Oh si, esto salió bien. Aeroparque brilla como material radioactivo. Retiro, si bien está lejos en intensidad, también se distingue de sus alrededores.

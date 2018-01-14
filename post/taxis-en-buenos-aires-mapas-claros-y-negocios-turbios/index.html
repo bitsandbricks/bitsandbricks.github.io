@@ -313,7 +313,8 @@ taxis_destinos &lt;- taxis %&gt;%
     
     theme_ipsum(base_size=base_size) +
         theme(rect=element_rect(fill=color.background, color=color.background)) +
-        theme(plot.background=element_rect(fill=color.background, color=color.background)) +
+        theme(plot.background=element_rect(fill=color.background
+                                           , color=color.background)) +
         theme(panel.border=element_rect(color=color.background, fill = NA)) +
         theme(panel.background = element_rect(fill = color.background)) +
         theme(panel.grid.major=element_blank()) +
@@ -321,8 +322,10 @@ taxis_destinos &lt;- taxis %&gt;%
         theme(axis.ticks=element_blank()) +
         theme(legend.background = element_rect(fill=color.background)) +
         theme(legend.text = element_text(colour=color.axis.title)) +
-        theme(legend.title = element_blank(), legend.position=&quot;top&quot;, legend.direction=&quot;horizontal&quot;) +
-        theme(legend.key.width=unit(1, &quot;cm&quot;), legend.key.height=unit(0.25, &quot;cm&quot;), legend.spacing = unit(-0.5,&quot;cm&quot;)) +
+        theme(legend.title = element_blank(), legend.position=&quot;top&quot;,
+              legend.direction=&quot;horizontal&quot;) +
+        theme(legend.key.width=unit(1, &quot;cm&quot;), legend.key.height=unit(0.25, &quot;cm&quot;),
+              legend.spacing = unit(-0.5,&quot;cm&quot;)) +
         theme(plot.title=element_text(colour=color.title, size = title_size)) +
         theme(plot.subtitle=element_text(colour=color.title, size = subtitle_size)) +
         theme(plot.caption=element_text(colour=color.title, size = caption_size)) +
@@ -330,7 +333,8 @@ taxis_destinos &lt;- taxis %&gt;%
         theme(axis.text.y=element_blank()) +
         theme(axis.title.y=element_blank()) +
         theme(axis.title.x=element_blank()) +
-        theme(strip.background = element_rect(fill=color.background, color=color.background),
+        theme(strip.background = element_rect(fill=color.background,
+                                              color=color.background),
               strip.text = element_text(colour=color.axis.title))
     
 }</code></pre>
@@ -456,7 +460,7 @@ plot(geo_data[&quot;tipo&quot;], col = c(&quot;aquamarine&quot;, &quot;indianred
 
 plot(geo_data[&quot;tipo&quot;], col = c(&quot;aquamarine&quot;, &quot;indianred1&quot;), 
      key.pos = NULL, main = &quot;salidas en verde, llegadas en rojo&quot;)</code></pre>
-<p><img src="/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-12-1.png" width="720" /> <em>Voilá!</em>. Ahora creamos la grilla…</p>
+<p><img src="/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-12-1.png" width="720" /> <em>Voilà!</em>. Ahora creamos la grilla…</p>
 <pre class="r"><code>grilla &lt;- geo_data %&gt;% 
     st_make_grid(what = &quot;polygons&quot;, n = c(20, 20)) %&gt;%
     st_sf() %&gt;%
@@ -471,7 +475,8 @@ plot(st_geometry(grilla), add = T)</code></pre>
     st_join(grilla) %&gt;% 
     group_by(ID) %&gt;%
     summarise(total = n(), 
-              tasa = sum(tipo == &quot;destino&quot;, na.rm = T) / sum(tipo == &quot;origen&quot;, na.rm = T))</code></pre>
+              tasa = sum(tipo == &quot;destino&quot;, na.rm = T) / 
+                          sum(tipo == &quot;origen&quot;, na.rm = T))</code></pre>
 </div>
 <div id="en-cada-celda-medimos-la-proporcion-de-viajes-que-llegan-vs.-los-que-se-originan-alli" class="section level3">
 <h3>En cada celda, medimos la proporción de viajes que llegan Vs. los que se originan allí</h3>
@@ -488,7 +493,8 @@ plot(st_geometry(grilla), add = T)</code></pre>
 <div id="tomamos-la-distribucion-de-tasas-origendestino-e-identificamos-los-casos-anomalos" class="section level3">
 <h3>Tomamos la distribución de tasas origen/destino e identificamos los casos anómalos</h3>
 <p>Antes de hacer cuentas, volvamos a anticipar los resultados con una visualización. Cómo se ve en el mapa la tasa origen/destino de cada zona de la ciudad?</p>
-<pre class="r"><code>plot(tasa_destino_origen[&quot;tasa&quot;], main = &quot;Viajes de BA Taxi por zona: cantidad de llegadas por cada salida&quot;)</code></pre>
+<pre class="r"><code>plot(tasa_destino_origen[&quot;tasa&quot;], 
+     main = &quot;Viajes de BA Taxi por zona: cantidad de llegadas por cada salida&quot;)</code></pre>
 <p><img src="/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-16-1.png" width="720" /></p>
 <p>Oh si, esto salió bien. Aeroparque brilla como material radioactivo. Retiro, si bien está lejos en intensidad, también se distingue de sus alrededores.</p>
 <p>Ahora si, los números. Filtremos la data para extraer las celdas donde la tasa es desproporcionada, eligiendo un piso (arbitrario) de 10 salidas por cada llegada.</p>
