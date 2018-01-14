@@ -20,7 +20,7 @@ subtitle: ''
 ```{r include = FALSE}
 knitr::opts_chunk$set(tidy = FALSE, warning=FALSE, message=FALSE,
                       fig.width = 12, fig.height = 8, out.width=720)
-options(scipen = 15)
+options(scipen = 15) 
 ```
 
 Hace unos meses, durante la [Smart City Expo en Buenos Aires](http://smartcityexpobuenosaires.com/) se organizó un [__Datatón__](https://www.eventbrite.com.ar/e/dataton-un-dia-en-las-ciudades-a-traves-de-sus-datos-tickets-37843936232#) bajo el título de "Un día en las ciudades a través de sus datos". El evento fue organizado por los equipos de datos abiertos de la Nación, y la Ciudad y Provincia[^1] de Buenos Aires. 
