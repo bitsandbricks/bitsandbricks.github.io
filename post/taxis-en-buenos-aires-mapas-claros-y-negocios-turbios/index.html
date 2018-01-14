@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Taxis en Buenos Aires: mapas claros y negocios turbios</title>
+  <meta property="og:title" content="Taxis en Buenos Aires: mapas claros y negocios turbios" />
+  <meta name="twitter:title" content="Taxis en Buenos Aires: mapas claros y negocios turbios" />
+  <meta name="description" content="Hace unos meses, durante la Smart City Expo en Buenos Aires se organizó un Datatón bajo el título de “Un día en las ciudades a través de sus datos”. El evento fue organizado por los equipos de datos abiertos de la Nación, y la Ciudad y Provincia1 de Buenos Aires.
+Con motivo del evento se hicieron públicos varios datasets con información urbana.">
+  <meta property="og:description" content="Hace unos meses, durante la Smart City Expo en Buenos Aires se organizó un Datatón bajo el título de “Un día en las ciudades a través de sus datos”. El evento fue organizado por los equipos de datos abiertos de la Nación, y la Ciudad y Provincia1 de Buenos Aires.
+Con motivo del evento se hicieron públicos varios datasets con información urbana.">
+  <meta name="twitter:description" content="Hace unos meses, durante la Smart City Expo en Buenos Aires se organizó un Datatón bajo el título de “Un día en las ciudades a través de sus datos”. El evento fue organizado por los equipos de datos …">
+  <meta name="author" content="H. Antonio Vazquez Brust"/>
+  <link href='/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@vazquezbrust" />
+  <meta name="twitter:creator" content="@vazquezbrust" />
+  <meta property="og:url" content="/post/taxis-en-buenos-aires-mapas-claros-y-negocios-turbios/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Bits &amp; Bricks" />
+
+  <meta name="generator" content="Hugo 0.21" />
+  <link rel="canonical" href="/post/taxis-en-buenos-aires-mapas-claros-y-negocios-turbios/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Bits &amp; Bricks">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="/css/highlight.min.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-100821706-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Bits &amp; Bricks</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Fotos viejas" href="http://cargocollective.com/metrosis">Fotos viejas</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Acerca de" href="/page/about/">Acerca de</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Bits &amp; Bricks" href="/">
+            <img class="avatar-img" src="/img/avatar-icon.png" alt="Bits &amp; Bricks" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="/post/img/taxis-banner.png" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>Taxis en Buenos Aires: mapas claros y negocios turbios</h1>
+                  
+                  
+                    <span class="post-meta">
+  Posted on January 13, 2018
+  
+</span>
+
+
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Taxis en Buenos Aires: mapas claros y negocios turbios</h1>
+                
+                
+                  <span class="post-meta">
+  Posted on January 13, 2018
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<link href="/rmarkdown-libs/leaflet/leaflet.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/leaflet/leaflet.js"></script>
+<link href="/rmarkdown-libs/leafletfix/leafletfix.css" rel="stylesheet" />
+<link href="/rmarkdown-libs/leaflet-label/leaflet.label.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/leaflet-label/leaflet.label.js"></script>
+<script src="/rmarkdown-libs/Proj4Leaflet/proj4-compressed.js"></script>
+<script src="/rmarkdown-libs/Proj4Leaflet/proj4leaflet.js"></script>
+<script src="/rmarkdown-libs/leaflet-binding/leaflet.js"></script>
+<script src="/rmarkdown-libs/leaflet-providers/leaflet-providers.js"></script>
+<script src="/rmarkdown-libs/leaflet-providers-plugin/leaflet-providers-plugin.js"></script>
+<link href="/rmarkdown-libs/HomeButton/home-button.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/HomeButton/home-button.js"></script>
+<script src="/rmarkdown-libs/HomeButton/easy-button-src.min.js"></script>
+
+
+<p>Hace unos meses, durante la <a href="http://smartcityexpobuenosaires.com/">Smart City Expo en Buenos Aires</a> se organizó un <a href="https://www.eventbrite.com.ar/e/dataton-un-dia-en-las-ciudades-a-traves-de-sus-datos-tickets-37843936232#"><strong>Datatón</strong></a> bajo el título de “Un día en las ciudades a través de sus datos”. El evento fue organizado por los equipos de datos abiertos de la Nación, y la Ciudad y Provincia<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> de Buenos Aires.</p>
+<p>Con motivo del evento se hicieron públicos varios datasets con información urbana. Entre ellos, una muestra de viajes en taxi solicitados mediante la app <a href="http://www.buenosaires.gob.ar/taxis/ba-taxi-innovacion-para-mejorar-tus-viajes">BA TAXI</a>.</p>
+<div id="information-is-beautiful" class="section level2">
+<h2>Information is beautiful</h2>
+<p>Cuando vi pasar el dataset, lo primero que se me ocurrió fue visualizar todos los viajes a la vez, al estilo del mapa que hizo el MIT Senseable City Lab para <a href="http://hubcab.org">los taxis de Nueva York</a>:</p>
+<div class="figure">
+<img src="/post/img/hbcab.jpg" alt="hubcab.org" />
+<p class="caption">hubcab.org</p>
+</div>
+<p>En resumidas cuentas, obtuve lo que buscaba, y algo más. En un ejemplo de los patrones que son difíciles de detectar en una lista de números, pero resultan evidentes una vez visualizados, en mi mapa relucen rastros de lo que a los porteños nos gusta llamar “la mafia de los taxis”.</p>
+<p>Pero vayamos por partes.</p>
+<div id="haciendo-el-mapa" class="section level3">
+<h3>Haciendo el mapa</h3>
+<p>Los ingredientes necesarios son (además de R u otro entorno de programación analítica),</p>
+<ul>
+<li>El dataset de BA Taxi, disponible <a href="https://data.world/vazquez-brust/viajes-solicitados-por-ba-taxi">aquí</a></li>
+<li>Un archivo georeferenciado con las calles de Buenos Aires, disponible en el portal de datos abiertos de la Ciudad <a href="https://data.buenosaires.gob.ar/dataset/calles">como shapefile</a>, o <a href="https://data.world/vazquez-brust/calles-de-la-ciudad-autonoma-de-buenos-aires">aquí en el mucho más práctico formato geojson</a>. Yo voy a usar éste último.</li>
+</ul>
+<p>Ahora, la receta.</p>
+<p>I. Cargamos la data:</p>
+<pre class="r"><code>library(tidyverse)
+library(rgdal)
+library(hrbrthemes)
+
+
+taxis &lt;- read.csv(&#39;../data/bataxi.csv&#39;, sep = &quot;;&quot;, stringsAsFactors = F)
+calles &lt;- fortify(readOGR(&#39;../data/calles_CABA.geojson&#39;))</code></pre>
+<pre><code>## OGR data source with driver: GeoJSON 
+## Source: &quot;../data/calles_CABA.geojson&quot;, layer: &quot;OGRGeoJSON&quot;
+## with 30037 features
+## It has 1 fields</code></pre>
+<pre class="r"><code># Leve limpieza: pasamos las coordenadas a formato numérico
+
+taxis &lt;- taxis %&gt;% 
+    mutate(origen_viaje_x = as.numeric(gsub(&quot;,&quot;, &quot;.&quot;, origen_viaje_x)),
+           origen_viaje_y = as.numeric(gsub(&quot;,&quot;, &quot;.&quot;, origen_viaje_y)),
+           destino_viaje_x = as.numeric(gsub(&quot;,&quot;, &quot;.&quot;, destino_viaje_x)),
+           destino_viaje_y = as.numeric(gsub(&quot;,&quot;, &quot;.&quot;, destino_viaje_y)))</code></pre>
+<ol start="2" style="list-style-type: upper-roman">
+<li>Echamos un vistazo rápido a las coordenadas de los viajes:</li>
+</ol>
+<pre class="r"><code>ggplot(data = taxis) + 
+    geom_point(aes(x = origen_viaje_x, y = origen_viaje_y), 
+               size = 0.06, 
+               alpha = .5) + 
+  coord_map()</code></pre>
+<p><img src="/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-3-1.png" width="720" /></p>
+<p>La data es lo suficientemente densa como para que se entrevea la estructura vial de la ciudad. Excelente! Ahora vamos a refinar la visualización.</p>
+<ol start="3" style="list-style-type: upper-roman">
+<li>Separamos las coordenadas en “orígenes” (donde el taxi levantó pasajeros) y destinos, los lugares de llegada.</li>
+</ol>
+<pre class="r"><code>taxis_origenes &lt;- taxis %&gt;% 
+    group_by(origen_viaje_x, origen_viaje_y) %&gt;% 
+    summarise(n = n(), 
+              tipo = &quot;origen&quot;) %&gt;% 
+    rename(lon = origen_viaje_x,
+           lat = origen_viaje_y)
+
+taxis_destinos &lt;- taxis %&gt;% 
+    group_by(destino_viaje_x, destino_viaje_y) %&gt;% 
+    summarise(n = n(),
+              tipo = &quot;destino&quot;) %&gt;% 
+    rename(lon = destino_viaje_x,
+           lat = destino_viaje_y)</code></pre>
+<ol start="4" style="list-style-type: upper-roman">
+<li>Creamos un “template” para el mapa que use fondo negro, que siempre queda <em>flashero</em> con info proyectada encima en colores brillantes. También definimos color y tamaño de título y subtítulo, y vamos a por un look mínimo retirando todos los componentes posibles: chau grilla de fondo, chau leyendas en los ejes, etc.</li>
+</ol>
+<pre class="r"><code>theme_ipsum_map_dark &lt;- function(base_size = 24, title_size = 60, 
+                                 subtitle_size = 48, caption_size = 40) {
+    
+    color.background = &quot;black&quot;
+    color.title = &quot;gray80&quot;
+    color.axis.title = &quot;gray80&quot;
+    
+    theme_ipsum(base_size=base_size) +
+        theme(rect=element_rect(fill=color.background, color=color.background)) +
+        theme(plot.background=element_rect(fill=color.background, color=color.background)) +
+        theme(panel.border=element_rect(color=color.background, fill = NA)) +
+        theme(panel.background = element_rect(fill = color.background)) +
+        theme(panel.grid.major=element_blank()) +
+        theme(panel.grid.minor=element_blank()) +
+        theme(axis.ticks=element_blank()) +
+        theme(legend.background = element_rect(fill=color.background)) +
+        theme(legend.text = element_text(colour=color.axis.title)) +
+        theme(legend.title = element_blank(), legend.position=&quot;top&quot;, legend.direction=&quot;horizontal&quot;) +
+        theme(legend.key.width=unit(1, &quot;cm&quot;), legend.key.height=unit(0.25, &quot;cm&quot;), legend.spacing = unit(-0.5,&quot;cm&quot;)) +
+        theme(plot.title=element_text(colour=color.title, size = title_size)) +
+        theme(plot.subtitle=element_text(colour=color.title, size = subtitle_size)) +
+        theme(plot.caption=element_text(colour=color.title, size = caption_size)) +
+        theme(axis.text.x=element_blank()) +
+        theme(axis.text.y=element_blank()) +
+        theme(axis.title.y=element_blank()) +
+        theme(axis.title.x=element_blank()) +
+        theme(strip.background = element_rect(fill=color.background, color=color.background),
+              strip.text = element_text(colour=color.axis.title))
+    
+}</code></pre>
+<p>V. Ya casi estamos. Definimos un rango de transparencia, y de tamaño de los puntos que vamos a mapear. La idea es que en las coordenadas desde donde salen o llegan múltiples viajes sean representadas con puntos más grandes y brillantes. Yo elegí los parámetros en base a prueba y error, ajustando hasta que me gustaron los resultados:</p>
+<pre class="r"><code>alpha_range = c(0.1, 0.8)
+size_range = c(0.2, 0.4)</code></pre>
+<ol start="6" style="list-style-type: upper-roman">
+<li>Todo listo para generar el mapa. Allá vamos!</li>
+</ol>
+<pre class="r"><code>ggplot() +
+   geom_polygon(data = calles,
+               aes(x = long, y = lat, group = group),
+             color = &quot;grey10&quot;, fill = NA) +
+    geom_point(data = taxis_origenes,
+               aes(x = lon, 
+                   y = lat, 
+                   alpha = n, 
+                   size = n),
+               color = &quot;aquamarine&quot;) +
+    geom_point(data = taxis_destinos,
+               aes(x = lon, 
+                   y = lat, 
+                   alpha = n, 
+                   size = n),
+               color = &quot;indianred1&quot;) +
+    scale_alpha_continuous(range = alpha_range, 
+                           trans = &quot;log&quot;, 
+                           limits = range(taxis_origenes$n)) +
+    scale_size_continuous(range = size_range, 
+                          trans = &quot;log&quot;, 
+                          limits = range(taxis_origenes$n)) +
+    theme_ipsum_map_dark(base_size = 12, title_size = 18, 
+                         subtitle_size = 12, caption_size = 10) +
+    coord_map(xlim = range(taxis_origenes$lon), 
+              ylim = range(taxis_origenes$lat)) +
+    theme(legend.position=&quot;none&quot;) +
+    labs(title=&quot;Taxis en Buenos Aires: origen y destino&quot;,
+         subtitle = &quot;Mayo - agosto 2017&quot;,
+         caption = &quot;fuente: dataset BA Taxi - Datatón Smart City Expo Buenos Aires&quot;) </code></pre>
+<p><img src="/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-7-1.png" width="720" /></p>
+</div>
+</div>
+<div id="que-curioso" class="section level2">
+<h2>Qué curioso</h2>
+<p>He aquí la sorpresa. Al norte de la Ciudad, junto al río, aparece una notable aglomeración de taxis bajando pasajeros, pero casi ningún viaje se origina allí. Algo similar, en menor escala, ocurre en la esquina noreste de la Ciudad, cerca del puerto.</p>
+<p>Los que tenemos nuestra obsesión por temas de transporte enseguida reconocemos los lugares. Son el aeropuerto de la Ciudad (Aeroparque) y la principal estación de buses de larga distancia (Retiro).</p>
+<p>Podemos hacer de forma muy fácil un “zoom in” para verificarlo, usando el paquete <em>ggmaps</em>, que permite descargar desde Google Maps un mapa de cualquier lugar nombrado.</p>
+<p>Invoquemos un mapa de “Aeroparque Buenos Aires”, con nuestra data superpuesta:</p>
+<pre class="r"><code>library(ggmap)
+
+qmap(&quot;Aeroparque Buenos Aires&quot;, zoom = 14, color = &quot;bw&quot;, scale = 2) +  
+    geom_point(data = taxis_origenes,
+               aes(x = lon,
+                   y = lat),
+               alpha = 0.5,
+               color = &quot;darkgreen&quot;) +
+    geom_point(data = taxis_destinos,
+               aes(x = lon, 
+                   y = lat),
+               alpha = 0.5,
+               color = &quot;indianred1&quot;)</code></pre>
+<p><img src="/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-8-1.png" width="720" /></p>
+<p>Confirmado, el “misterioso” aglutinamiento de llegadas sin salidas ocurre en Aeroparque.</p>
+<p>Ahora pidámosle a Google un mapa de “Estación de buses Retiro”:</p>
+<pre class="r"><code>qmap(&quot;Estación de buses Retiro, Buenos Aires&quot;, zoom = 15, color = &quot;bw&quot;, scale = 2) +  
+    geom_point(data = taxis_origenes,
+               aes(x = lon,
+                   y = lat),
+               alpha = 0.5,
+               color = &quot;darkgreen&quot;) +
+    geom_point(data = taxis_destinos,
+               aes(x = lon, 
+                   y = lat),
+               alpha = 0.5,
+               color = &quot;indianred1&quot;)</code></pre>
+<p><img src="/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-9-1.png" width="720" /></p>
+<p>Es la estación nomás!</p>
+<p>Vamos a la explicación. Por si alguno no lo sabía, es <em>vox populi</em> que en Aeroparque y Retiro operan <a href="http://www.lanacion.com.ar/2027084-nadie-controla-las-paradas-de-taxis-del-aeroparque-pese-a-las-denuncias-por-irregularidades">grupos de taxistas confabulados</a> que toman control del área para su uso exclusivo. Quienes pagan por el privilegio, pueden trabajar allí. Los taxistas que no forman parte del negocio e intentan llevarse pasajeros son amenazados o sometidos a violencia para dejar claro que la regla es férrea. Debido a la virtual ausencia de viajes vía BA Taxi que parten desde allí, podemos asumir que los taxistas que trabajan con la app ignoran (por su propio bien!) a los pasajeros que los convocan desde los territorios calientes. La abundancia de puntos rojos demuestra que los choferes de BA Taxi visitan seguido los sitios, dejando pasajeros, pero no se atreven a ir a buscarlos allí.</p>
+<p>Dicho esto, algunos puntitos verdes que asoman en ambos sitios demuestran que existen taxistas osados -o muy distraídos- que se han llevado pasajeros en las narices de la mafia.</p>
+</div>
+<div id="cuantificando-el-efecto-de-la-mafia-de-los-taxis" class="section level2">
+<h2>Cuantificando el efecto de la mafia de los taxis</h2>
+<p>Podemos notar a a simple vista la presencia de territorios vedados. Pero cómo podemos encontrarlos analíticamente? Se puede definir un algoritmo que los detecte?</p>
+<p>Claro que sí. Hay muchas maneras de aproximarse a una solución, pero una fácil de explicar es así:</p>
+<ol style="list-style-type: decimal">
+<li>Dividimos la ciudad con una grilla que divida el espacio en áreas (celdas) iguales.</li>
+<li>En cada celda, medimos la proporción de viajes que llegan vs.. los que se originan allí</li>
+<li>Tomamos la distribución de tasas origen/destino e identificamos los casos anómalos, en particular los que ocurren en áreas de actividad intensa.</li>
+</ol>
+<div id="dividimos-la-ciudad-con-una-grilla-que-particione-el-espacio-en-areas-celdas-iguales" class="section level3">
+<h3>Dividimos la ciudad con una grilla que particione el espacio en áreas (celdas) iguales</h3>
+<p>Usamos el excelente paquete <em>sf</em>, que ofrece una función para proyectar una grilla sobre la extensión de un set de datos georeferenciados.</p>
+<p>Para ello juntamos las salidas y llegadas que identificamos antes en un sólo dataset, y lo transformamos en un objeto espacial.</p>
+<pre class="r"><code>library(sf)
+
+geo_data &lt;- taxis_destinos %&gt;% 
+    bind_rows(taxis_origenes) %&gt;% 
+    st_as_sf(coords = c(&quot;lon&quot;, &quot;lat&quot;), crs = 4326)
+
+plot(geo_data[&quot;tipo&quot;], col = c(&quot;aquamarine&quot;, &quot;indianred1&quot;), 
+     key.pos = NULL, main = &quot;salidas en verde, llegadas en rojo&quot;)</code></pre>
+<p><img src="/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-10-1.png" width="720" /></p>
+<p>Se evidencia un pequeño problema: Existen varios viajes que terminan fuera de los límites de la Ciudad. Sólo nos interesan viajes dentro de sus fronteras, ya que fuera de ellas es natural que existan más llegadas que salidas, asumiendo que los pasajeros que hacen el camino inverso tenderán a utilizar servicios de taxi locales que no son registrados en el dataset de BA Taxi.</p>
+<p>No hay problema. Leemos el archivo que contiene los límites de los <a href="https://data.buenosaires.gob.ar/dataset/barrios">barrios de Buenos Aires</a> (también cortesía de Buenos Aires Data) y lo “disolvemos” para que nos quede un sólo polígono que representa la superficie de la ciudad.</p>
+<pre class="r"><code>limites_CABA &lt;- st_read(&#39;../data/barrios/barrios_badata.shp&#39;) %&gt;% 
+    st_transform(4326) %&gt;% 
+    mutate(ciudad = &quot;CABA&quot;) %&gt;% 
+    group_by(ciudad) %&gt;% 
+    summarise()</code></pre>
+<pre><code>## Reading layer `barrios_badata&#39; from data source `/home/havb/Dropbox/blog/content/data/barrios/barrios_badata.shp&#39; using driver `ESRI Shapefile&#39;
+## Simple feature collection with 48 features and 4 fields
+## geometry type:  POLYGON
+## dimension:      XY
+## bbox:           xmin: 93743.42 ymin: 91566.42 xmax: 111752 ymax: 111285.1
+## epsg (SRID):    NA
+## proj4string:    +proj=tmerc +lat_0=-34.6297166 +lon_0=-58.4627 +k=0.9999980000000001 +x_0=100000 +y_0=100000 +ellps=intl +units=m +no_defs</code></pre>
+<pre class="r"><code>plot(limites_CABA)</code></pre>
+<p><img src="/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-11-1.png" width="720" /></p>
+<p>Ahora combinamos nuestra data de taxis con la silueta de la ciudad, y filtramos el resultado para descartar los puntos que cae fuera de los límites.</p>
+<pre class="r"><code>geo_data &lt;- geo_data %&gt;% 
+    st_join(limites_CABA) %&gt;% 
+    filter(ciudad == &quot;CABA&quot;)
+
+plot(geo_data[&quot;tipo&quot;], col = c(&quot;aquamarine&quot;, &quot;indianred1&quot;), 
+     key.pos = NULL, main = &quot;salidas en verde, llegadas en rojo&quot;)</code></pre>
+<p><img src="/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-12-1.png" width="720" /> <em>Voilá!</em>. Ahora creamos la grilla…</p>
+<pre class="r"><code>grilla &lt;- geo_data %&gt;% 
+    st_make_grid(what = &quot;polygons&quot;, n = c(20, 20)) %&gt;%
+    st_sf() %&gt;%
+    mutate(ID = row_number()) 
+
+
+plot(geo_data[&quot;tipo&quot;], col = c(&quot;aquamarine&quot;, &quot;indianred1&quot;), key.pos = NULL, main = NULL) 
+plot(st_geometry(grilla), add = T)</code></pre>
+<p><img src="/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-13-1.png" width="720" /></p>
+<p>… y asociamos a cada par de coordenadas con la celda donde cae:</p>
+<pre class="r"><code>tasa_destino_origen &lt;- geo_data %&gt;% 
+    st_join(grilla) %&gt;% 
+    group_by(ID) %&gt;%
+    summarise(total = n(), 
+              tasa = sum(tipo == &quot;destino&quot;, na.rm = T) / sum(tipo == &quot;origen&quot;, na.rm = T))</code></pre>
+</div>
+<div id="en-cada-celda-medimos-la-proporcion-de-viajes-que-llegan-vs.-los-que-se-originan-alli" class="section level3">
+<h3>En cada celda, medimos la proporción de viajes que llegan Vs. los que se originan allí</h3>
+<p>Esto se puede hacer en una sola cadena de funciones, con un <em>join</em> espacial entre data de taxis y grilla, un agrupado por identificador de celda, y una cálculo a nivel celda de la relación cantidad de llegadas / cantidad de salidas</p>
+<pre class="r"><code>tasa_destino_origen &lt;- geo_data %&gt;% 
+    st_join(grilla) %&gt;% 
+    group_by(ID) %&gt;%
+    summarise(total = n(), 
+              tasa = sum(tipo == &quot;destino&quot;, na.rm = T) / 
+                sum(tipo == &quot;origen&quot;, na.rm = T)) %&gt;% 
+  # la condición &quot;is.finite&quot; elimina los casos donde hubo 0 salidas
+  filter(is.finite(tasa))</code></pre>
+</div>
+<div id="tomamos-la-distribucion-de-tasas-origendestino-e-identificamos-los-casos-anomalos" class="section level3">
+<h3>Tomamos la distribución de tasas origen/destino e identificamos los casos anómalos</h3>
+<p>Antes de hacer cuentas, volvamos a anticipar los resultados con una visualización. Cómo se ve en el mapa la tasa origen/destino de cada zona de la ciudad?</p>
+<pre class="r"><code>plot(tasa_destino_origen[&quot;tasa&quot;], main = &quot;Viajes de BA Taxi por zona: cantidad de llegadas por cada salida&quot;)</code></pre>
+<p><img src="/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-16-1.png" width="720" /></p>
+<p>Oh si, esto salió bien. Aeroparque brilla como material radioactivo. Retiro, si bien está lejos en intensidad, también se distingue de sus alrededores.</p>
+<p>Ahora si, los números. Filtremos la data para extraer las celdas donde la tasa es desproporcionada, eligiendo un piso (arbitrario) de 10 salidas por cada llegada.</p>
+<pre class="r"><code>outliers &lt;- tasa_destino_origen %&gt;% 
+  arrange(desc(tasa)) %&gt;% 
+  filter(tasa &gt; 10) %&gt;% 
+  mutate(ID = as.factor(ID))
+
+outliers</code></pre>
+<pre><code>## Simple feature collection with 5 features and 3 fields
+## geometry type:  MULTIPOINT
+## dimension:      XY
+## bbox:           xmin: -58.49042 ymin: -34.68928 xmax: -58.37098 ymax: -34.55538
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +datum=WGS84 +no_defs
+## # A tibble: 5 x 4
+##       ID total     tasa          geometry
+##   &lt;fctr&gt; &lt;int&gt;    &lt;dbl&gt;  &lt;simple_feature&gt;
+## 1    353   357 88.25000 &lt;MULTIPOINT (...&gt;
+## 2     27    30 29.00000 &lt;MULTIPOINT (...&gt;
+## 3     96    26 25.00000 &lt;MULTIPOINT (...&gt;
+## 4    277   215 22.88889 &lt;MULTIPOINT (...&gt;
+## 5     45    12 11.00000 &lt;MULTIPOINT (...&gt;</code></pre>
+<p>Son sólo cinco áreas, de las cuales dos registran una cantidad de viajes un orden de magnitud mayor a las demás: IDs 353 y 277, que -como podemos comprobar- corresponden en efecto a Aeroparque y Retiro:</p>
+<pre class="r"><code>plot(outliers[&quot;ID&quot;])</code></pre>
+<p><img src="/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-18-1.png" width="720" /></p>
+<p>De éste modo hemos medido el efecto de la mafia en las zonas donde operan, al menos en lo que respecta a los viajes registrados por BA Taxi. En los alrededores de Aeroparque, la tasa es de 88,25: por cada 88 taxistas que terminan un viaje allí, apenas 2 logran llevarse pasajeros. En retiro, la tasa es de casi 23 llegadas por cada salida.</p>
+<p>Para ponerlo en perspectiva, el promedio de la ciudad es de 2,7:</p>
+<pre class="r"><code>mean(tasa_destino_origen$tasa)</code></pre>
+<pre><code>## [1] 2.732686</code></pre>
+<p>En forma gráfica:</p>
+<pre class="r"><code>tasa_destino_origen %&gt;% 
+  mutate(media = mean(tasa)) %&gt;% 
+  ggplot() +
+  geom_histogram(aes(tasa), bins = nrow(tasa_destino_origen)) +
+  geom_vline(aes(xintercept = media), color = &quot;blue&quot;) +
+  geom_vline(aes(xintercept = 88.25), color = &quot;red&quot;) +
+  geom_vline(aes(xintercept = 22.89), color = &quot;red&quot;) +
+  theme_ipsum() +
+  labs(title = &quot;Relación llegadas vs. salidas de taxis&quot;,
+       subtitle = &quot;Sistema BA Taxi&quot;,
+       x = &quot;taxis que llegan por cada uno que sale&quot;) +
+  geom_label(data = data.frame(x = c(mean(tasa_destino_origen$tasa), 22.89, 88.25),
+                               y = rep(40, 3)),
+             aes(x, y, label = c(&quot;Media BA&quot;, &quot;Retiro&quot;, &quot;Aeroparque&quot;)))</code></pre>
+<p><img src="/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-20-1.png" width="720" /></p>
+</div>
+</div>
+<div id="por-ultimo-que-pasa-con-las-otras-tres-zonas-donde-los-taxis-llevan-pasajeros-pero-rara-vez-los-levantan" class="section level2">
+<h2>Por último: qué pasa con las otras tres zonas donde los taxis llevan pasajeros pero rara vez los levantan?</h2>
+<p>Se trata de un fenómeno distinto, y que amerita un análisis aparte que por ahora no vamos a desarrollar. Las otras tres zonas donde encontramos una relación desproporcionada de llegadas vs. salidas se encuentran en el sur de la Ciudad.</p>
+<p>Es fácil superponer nuestra data sobre un mapa satelital, para jugar con el nivel de zoom e inspeccionar los alrededores:</p>
+<pre class="r"><code>library(mapview)
+mapview(st_geometry(outliers), map.types = c(&quot;Esri.WorldImagery&quot;))</code></pre>
+<div id="htmlwidget-1" style="width:720px;height:768px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"options":{"minZoom":1,"maxZoom":100,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["Esri.WorldImagery",1,"Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]},{"method":"addCircleMarkers","args":[[-34.5555475,-34.5556513,-34.5556066,-34.555598,-34.5556049,-34.5555996,-34.5555912,-34.5556238,-34.5556024,-34.55563408,-34.5555924,-34.5555806,-34.5556048,-34.5555942,-34.5556051,-34.55566219,-34.55562662,-34.5555705,-34.5556216,-34.5555833,-34.5555828,-34.5556183,-34.5556209,-34.5556392,-34.55549298,-34.55558,-34.5556133,-34.5555783,-34.5555983,-34.5555748,-34.5556531,-34.5555167,-34.5555323,-34.5556234,-34.5555812,-34.5563458,-34.5556219,-34.5554839,-34.5555886,-34.5555561,-34.5555959,-34.5555905,-34.55550127,-34.5556027,-34.5556547,-34.5554477,-34.5555554,-34.5556363,-34.5554357,-34.5554889,-34.55550482,-34.555447,-34.5555794,-34.5554641,-34.5556164,-34.555593,-34.5557174,-34.5556459,-34.5556787,-34.5556936,-34.5556176,-34.5566079,-34.555725,-34.5553776,-34.5565823,-34.555959,-34.5561382,-34.55568684,-34.5558467,-34.5558053,-34.5557551,-34.5556841,-34.5560667,-34.5566458,-34.556323,-34.5555877,-34.5556568,-34.5558191,-34.5557376,-34.5557698,-34.5557454,-34.5561391,-34.55555625,-34.555902,-34.5557737,-34.5561692,-34.5555315,-34.5558521,-34.5560043,-34.5556103,-34.5557168,-34.5558247,-34.5558904,-34.5558825,-34.5556897,-34.5556229,-34.5560652,-34.5558309,-34.5558624,-34.5558918,-34.5557933,-34.5559643,-34.5561417,-34.55572565,-34.5557719,-34.5558236,-34.5564543,-34.5558101,-34.55584727,-34.5562743,-34.5556861,-34.555955,-34.5559438,-34.5560064,-34.5555897,-34.5559425,-34.556037,-34.5566801,-34.5558637,-34.5559849,-34.5558069,-34.5560295,-34.5561107,-34.5559764,-34.555871,-34.5560683,-34.5564483,-34.5563898,-34.55593193,-34.555985,-34.5558498,-34.556075,-34.5558981,-34.5558489,-34.5560037,-34.5563968,-34.5558727,-34.5558214,-34.5565644,-34.5559096,-34.5556852,-34.5557043,-34.55571,-34.555852,-34.5559803,-34.5560156,-34.5558595,-34.5560121,-34.555939,-34.5559449,-34.5558163,-34.5560734,-34.5561885,-34.55583504,-34.5559195,-34.5559416,-34.5557499,-34.5560066,-34.5558046,-34.5561292,-34.55601,-34.55615686,-34.5557709,-34.5561737,-34.5559219,-34.5558971,-34.55613374,-34.5561915,-34.5561931,-34.5558233,-34.5557539,-34.5557085,-34.556254,-34.5561761,-34.5561714,-34.55603245,-34.5559542,-34.5558065,-34.556171,-34.5559049,-34.5565974,-34.5559106,-34.5561569,-34.5561532,-34.5557145,-34.5560607,-34.5559082,-34.5560453,-34.5563395,-34.5561375,-34.5559085,-34.5564654,-34.556376,-34.5563821,-34.5559067,-34.55611096,-34.556252,-34.5558801,-34.5564474,-34.5558087,-34.5562739,-34.5557388,-34.5558525,-34.5558534,-34.5558863,-34.55607242,-34.556247,-34.5557356,-34.5559624,-34.5560768,-34.5561378,-34.5562456,-34.5561699,-34.55652665,-34.5558479,-34.5558132,-34.5558517,-34.5558723,-34.5558189,-34.5560493,-34.555944,-34.555952,-34.5563848,-34.5561809,-34.5558648,-34.555872,-34.5557482,-34.556335,-34.5559016,-34.5561058,-34.5561144,-34.5561573,-34.556295,-34.5559247,-34.5557422,-34.5562958,-34.5563137,-34.5559114,-34.5562991,-34.5559401,-34.5561611,-34.5558777,-34.5562943,-34.5559717,-34.5560529,-34.5559432,-34.5557983,-34.5558083,-34.5559708,-34.5559811,-34.5563269,-34.5559634,-34.5560089,-34.556685,-34.5560977,-34.5563383,-34.55626652,-34.5561224,-34.5562933,-34.5559862,-34.556056,-34.5562494,-34.5561152,-34.5558163,-34.55607338,-34.5562003,-34.5565354,-34.5568861,-34.5564549,-34.5559602,-34.5571719,-34.5565486,-34.55611632,-34.5560951,-34.5563896,-34.55595283,-34.5564319,-34.5561982,-34.5561202,-34.5559694,-34.5560127,-34.5559605,-34.5560956,-34.5561464,-34.5561743,-34.5563284,-34.5563681,-34.5562567,-34.5563627,-34.5560228,-34.55627787,-34.5559941,-34.5562986,-34.5564782,-34.5564108,-34.5566961,-34.556388,-34.55633854,-34.5563207,-34.5560746,-34.5563781,-34.5564132,-34.55647105,-34.5563038,-34.5567389,-34.5562674,-34.55626,-34.5563157,-34.5562375,-34.5567263,-34.5564618,-34.556755,-34.5565859,-34.55662,-34.5566883,-34.5566562,-34.5568122,-34.5568782,-34.55674,-34.5567416,-34.5565858,-34.5570031,-34.5570059,-34.5570887,-34.5570151,-34.5568038,-34.5570395,-34.5569242,-34.55705,-34.5572235,-34.5572888,-34.557111,-34.5579853,-34.5573457,-34.5574315,-34.5573949,-34.5573386,-34.5573489,-34.55744093,-34.5571748,-34.5572451,-34.5572432,-34.55726777,-34.557349,-34.5571754,-34.5573175,-34.557322,-34.5577869,-34.557364,-34.5574279,-34.5578154,-34.5578687,-34.5579733,-34.55775,-34.5580643,-34.557975,-34.6834352,-34.6892756,-34.684129,-34.68193186,-34.6822261,-34.6827396,-34.6830309,-34.6831133,-34.682975,-34.6832312,-34.6829633,-34.6834643,-34.6831101,-34.6836062,-34.6836674,-34.6836175,-34.6835925,-34.6834122,-34.683647,-34.6836271,-34.68362552,-34.6837449,-34.68380516,-34.6839017,-34.6838396,-34.68361398,-34.6837571,-34.6834695,-34.6835516,-34.6583606,-34.6581029,-34.6581801,-34.656839,-34.6568345,-34.6568126,-34.6569188,-34.6568689,-34.6568681,-34.65690628,-34.6568915,-34.656881,-34.65685268,-34.6568783,-34.656875,-34.6568618,-34.6568791,-34.6568164,-34.6568477,-34.6568706,-34.6568409,-34.6568727,-34.6568212,-34.6568816,-34.6568039,-34.6568325,-34.5903405,-34.5903118,-34.5911414,-34.5852862,-34.5855079,-34.585578,-34.5855456,-34.5852343,-34.585354,-34.5853871,-34.5850712,-34.58575009,-34.5848467,-34.5858446,-34.5858414,-34.5856708,-34.585685,-34.5856864,-34.5857542,-34.5856933,-34.5856283,-34.5858218,-34.5868342,-34.58610164,-34.5861793,-34.5859367,-34.5860089,-34.5860013,-34.591299,-34.5859709,-34.5860179,-34.5859607,-34.585994,-34.5860126,-34.5859952,-34.5860753,-34.5860399,-34.5860829,-34.5860543,-34.58610128,-34.5860724,-34.5860701,-34.5908518,-34.5908324,-34.5860596,-34.586498,-34.5860711,-34.5860629,-34.5861171,-34.58613708,-34.5848934,-34.5908385,-34.5863924,-34.59128686,-34.5861733,-34.586195,-34.5861851,-34.5912012,-34.5911263,-34.5911086,-34.5862857,-34.5863771,-34.5862571,-34.5863559,-34.5864061,-34.5862797,-34.5863075,-34.5863147,-34.5863076,-34.5863223,-34.58629363,-34.5910461,-34.5863346,-34.58630241,-34.5863189,-34.58509096,-34.5863764,-34.5863547,-34.5863406,-34.5862885,-34.5863166,-34.5863,-34.5863833,-34.5863783,-34.5863132,-34.58637284,-34.5863457,-34.5863625,-34.5862887,-34.5863718,-34.5863093,-34.58635,-34.5864005,-34.58636313,-34.5863813,-34.58633843,-34.58636211,-34.5864142,-34.5864008,-34.5864469,-34.5863993,-34.5864228,-34.5865056,-34.58649,-34.5870327,-34.5865039,-34.5865616,-34.5865794,-34.5865617,-34.5866067,-34.5911814,-34.5833219,-34.5865796,-34.58668343,-34.5866575,-34.58662424,-34.5866704,-34.5912002,-34.5866196,-34.5866901,-34.5867196,-34.5866931,-34.5866615,-34.5866646,-34.5866671,-34.5866827,-34.5866379,-34.5867504,-34.5866587,-34.5866684,-34.5867134,-34.5867023,-34.5866688,-34.5867091,-34.5866886,-34.5866795,-34.5867033,-34.58669492,-34.5874492,-34.58670642,-34.5867047,-34.58546566,-34.5867472,-34.5867062,-34.5867493,-34.586661,-34.58667107,-34.58672615,-34.5867771,-34.5867923,-34.586815,-34.5866926,-34.58640635,-34.5868233,-34.5867897,-34.5868296,-34.58691138,-34.5868051,-34.5870347,-34.5905224,-34.5903309,-34.586932,-34.5897741,-34.5869491,-34.5869576,-34.5912329,-34.5869186,-34.5841336,-34.5869118,-34.58696696,-34.5869974,-34.5869714,-34.58701,-34.5870423,-34.5870121,-34.5870043,-34.5870041,-34.5870437,-34.58697686,-34.5869795,-34.5869896,-34.5870596,-34.5869982,-34.5870445,-34.5870038,-34.5870233,-34.5871917,-34.58709376,-34.5902594,-34.5868804,-34.5870756,-34.5876659,-34.5871206,-34.586195,-34.5873972,-34.587007,-34.588584,-34.5890104,-34.5885921,-34.586934,-34.5908334,-34.5908251,-34.5890036,-34.5877091,-34.5884165,-34.59078012,-34.5883204,-34.5871279,-34.5882929,-34.587051,-34.5869373,-34.587108,-34.5855233,-34.5897442,-34.589385,-34.675605,-34.6756594,-34.676055,-34.6763215,-34.6765488,-34.6763661,-34.6766457,-34.6765,-34.6765357,-34.6766432,-34.678144,-34.677302],[-58.4160476,-58.4159834,-58.4159748,-58.4159681,-58.415959,-58.4159218,-58.4159205,-58.4159185,-58.4159147,-58.4159079,-58.415889,-58.4158869,-58.4158714,-58.415867,-58.4158647,-58.41585684,-58.41585664,-58.4158466,-58.415836,-58.4158201,-58.41581777,-58.415815,-58.4158118,-58.415796,-58.41579206,-58.41578,-58.4157767,-58.4157667,-58.4157648,-58.4157563,-58.4157516,-58.4157495,-58.415744,-58.4157327,-58.4157319,-58.4157307,-58.415724,-58.415713,-58.4157078,-58.4156998,-58.4156992,-58.4156828,-58.41566157,-58.4156528,-58.4156508,-58.415643,-58.4156387,-58.415617,-58.4156082,-58.4156078,-58.41558036,-58.4154996,-58.4154459,-58.4154409,-58.4154013,-58.4153874,-58.4153168,-58.4152945,-58.4152919,-58.4152294,-58.4152087,-58.4151511,-58.4151225,-58.4151191,-58.415062,-58.415062,-58.4150519,-58.41503812,-58.4150083,-58.4150049,-58.41499483,-58.4149798,-58.4149783,-58.41497779,-58.4149728,-58.4149686,-58.4149435,-58.4149357,-58.4149258,-58.4149141,-58.4148972,-58.4148962,-58.41488555,-58.4148719,-58.4148603,-58.4148404,-58.4148279,-58.4148126,-58.4148056,-58.4147858,-58.4147778,-58.4147729,-58.4147479,-58.4147374,-58.4147267,-58.4147053,-58.41469,-58.4146893,-58.414683,-58.4146733,-58.4146633,-58.4146547,-58.4146517,-58.41464349,-58.4146325,-58.4146204,-58.4146161,-58.4146118,-58.41460445,-58.4146032,-58.4145934,-58.41459,-58.4145886,-58.4145827,-58.4145827,-58.414576,-58.4145722,-58.4145671,-58.4145604,-58.4145581,-58.4145529,-58.4145506,-58.4145485,-58.4145397,-58.4145334,-58.4145233,-58.4144935,-58.4144935,-58.4144927,-58.4144917,-58.4144853,-58.414485,-58.4144847,-58.4144809,-58.4144789,-58.4144767,-58.4144739,-58.4144669,-58.4144629,-58.4144626,-58.4144601,-58.4144552,-58.4144495,-58.4144468,-58.4144412,-58.414439,-58.4144323,-58.4144322,-58.4144304,-58.4144276,-58.4144229,-58.4144147,-58.4144128,-58.4144123,-58.4144116,-58.4144112,-58.4144112,-58.4144109,-58.4144097,-58.4144088,-58.4144083,-58.41440358,-58.4144027,-58.4143996,-58.4143888,-58.4143774,-58.41437629,-58.4143751,-58.4143723,-58.414365,-58.4143643,-58.4143643,-58.4143598,-58.4143598,-58.414356,-58.41435113,-58.414351,-58.4143482,-58.414348,-58.4143465,-58.4143398,-58.4143398,-58.414333,-58.4143301,-58.4143299,-58.414329,-58.4143282,-58.4143265,-58.414317,-58.4143149,-58.4143046,-58.4142996,-58.4142967,-58.4142935,-58.4142916,-58.41428465,-58.4142699,-58.4142689,-58.4142658,-58.4142652,-58.4142595,-58.4142571,-58.4142543,-58.4142515,-58.4142481,-58.41423336,-58.414233,-58.4142252,-58.4142208,-58.4142194,-58.4142125,-58.4141995,-58.414198,-58.41417859,-58.414178,-58.4141742,-58.4141686,-58.4141561,-58.4141553,-58.4141545,-58.4141481,-58.4141422,-58.4141369,-58.4141327,-58.4141288,-58.4141146,-58.4140867,-58.4140817,-58.4140811,-58.41408,-58.4140787,-58.4140781,-58.4140658,-58.4140649,-58.4140618,-58.4140602,-58.4140588,-58.4140571,-58.4140547,-58.4140451,-58.4140422,-58.4140373,-58.4140254,-58.4140246,-58.4140222,-58.4140188,-58.41401629,-58.4140135,-58.4140045,-58.4140032,-58.4140031,-58.413992,-58.4139862,-58.413976,-58.4139741,-58.4139717,-58.41396779,-58.4139622,-58.4139567,-58.413951,-58.4139192,-58.4139028,-58.4138913,-58.4138876,-58.41386154,-58.4138157,-58.4138136,-58.4137802,-58.413775,-58.4137589,-58.4137579,-58.4137579,-58.41375374,-58.413752,-58.4137315,-58.41372729,-58.4137245,-58.4137245,-58.4137245,-58.4137089,-58.413702,-58.4136932,-58.4136803,-58.4136799,-58.4136735,-58.4136353,-58.4136309,-58.4136291,-58.4136143,-58.4136094,-58.41358887,-58.4135854,-58.4135733,-58.4135367,-58.4135184,-58.4135102,-58.4134939,-58.41349314,-58.4134916,-58.4134748,-58.4134483,-58.413448,-58.41328308,-58.4132786,-58.4132675,-58.4132541,-58.4132183,-58.4132011,-58.4131865,-58.413156,-58.4131278,-58.413115,-58.4130927,-58.4128983,-58.412895,-58.4128045,-58.4127771,-58.4127738,-58.4127733,-58.4127713,-58.4125921,-58.4125592,-58.4125242,-58.4123916,-58.4123215,-58.412297,-58.4122825,-58.4122618,-58.4120817,-58.4120687,-58.4120591,-58.412,-58.4119536,-58.411893,-58.411829,-58.4118086,-58.4117756,-58.4117685,-58.41172989,-58.4117229,-58.4117154,-58.4116387,-58.41161008,-58.4115841,-58.4115798,-58.4115375,-58.4114999,-58.4114616,-58.411382,-58.4112931,-58.4112886,-58.4111657,-58.411,-58.410959,-58.4109199,-58.410799,-58.4703196,-58.4680346,-58.4679344,-58.4665881,-58.4662611,-58.4657583,-58.4657507,-58.4656533,-58.465543,-58.4655086,-58.4654741,-58.4654268,-58.4653997,-58.46536,-58.4653565,-58.4653187,-58.4652946,-58.4652884,-58.4652663,-58.4652492,-58.46524629,-58.4652209,-58.46521817,-58.4652152,-58.4652073,-58.4652064,-58.465144,-58.4650525,-58.4650029,-58.3885823,-58.3885335,-58.3882257,-58.3873157,-58.3872005,-58.387107,-58.3871051,-58.3870925,-58.3870902,-58.38708566,-58.3870836,-58.387083,-58.38707566,-58.3870633,-58.3870533,-58.3870429,-58.3870394,-58.3870339,-58.3870257,-58.3870161,-58.3870121,-58.3869944,-58.3869897,-58.3869778,-58.3869769,-58.386967,-58.3795862,-58.3794252,-58.3780198,-58.3760798,-58.375941,-58.3758173,-58.375791,-58.375666,-58.375655,-58.3756482,-58.3755236,-58.37537606,-58.3753717,-58.3753359,-58.3752841,-58.3752624,-58.3752267,-58.3752126,-58.3751335,-58.3750917,-58.3750739,-58.37494,-58.3749102,-58.37483526,-58.3747987,-58.3747447,-58.3747088,-58.3747083,-58.3746985,-58.3746925,-58.374689,-58.3746851,-58.3746566,-58.3746416,-58.374637,-58.37462,-58.374616,-58.3745822,-58.3745816,-58.37456361,-58.3745428,-58.3745384,-58.3745313,-58.3745313,-58.3745311,-58.374529,-58.37452,-58.3745044,-58.3745008,-58.37447535,-58.3744536,-58.3744307,-58.374367,-58.37433828,-58.374315,-58.37429,-58.3742579,-58.3742514,-58.3742119,-58.374201,-58.3741874,-58.3741819,-58.3741725,-58.3741654,-58.3741645,-58.3741604,-58.3741513,-58.3741463,-58.3741402,-58.3741356,-58.3741344,-58.3741318,-58.3741215,-58.37411616,-58.3741143,-58.37411199,-58.374109,-58.3741009,-58.3740972,-58.3740939,-58.3740906,-58.37409,-58.3740883,-58.3740883,-58.3740876,-58.37408759,-58.3740736,-58.3740594,-58.3740524,-58.3740515,-58.3740472,-58.3740466,-58.3740268,-58.37401605,-58.374009,-58.37400337,-58.37400223,-58.3739515,-58.3739348,-58.3739009,-58.3738936,-58.3738777,-58.3738721,-58.3738067,-58.3737737,-58.3736936,-58.3736927,-58.3736664,-58.373645,-58.3736187,-58.3736114,-58.3735954,-58.3735907,-58.3735882,-58.373567,-58.3735664,-58.3735659,-58.3735623,-58.3735435,-58.3735322,-58.3735269,-58.3735146,-58.3735113,-58.3735078,-58.3735067,-58.3734983,-58.3734958,-58.3734744,-58.3734733,-58.3734719,-58.3734713,-58.3734694,-58.3734647,-58.3734481,-58.3734476,-58.3734397,-58.3734367,-58.37343221,-58.3734283,-58.37340695,-58.3734038,-58.37340195,-58.3733958,-58.3733863,-58.3733785,-58.3733738,-58.37336299,-58.37336223,-58.3733083,-58.373306,-58.3732983,-58.373298,-58.37326904,-58.3732514,-58.3732507,-58.3732326,-58.37322103,-58.3732108,-58.3732054,-58.3731861,-58.3731609,-58.3730707,-58.3730299,-58.3730278,-58.3730158,-58.3730045,-58.3729982,-58.3729928,-58.3729915,-58.37293764,-58.3729308,-58.3729246,-58.3729074,-58.3728987,-58.3728973,-58.3728946,-58.3728875,-58.3728857,-58.37288404,-58.3728839,-58.3728768,-58.3728643,-58.3728596,-58.3728486,-58.3728283,-58.37281,-58.3728043,-58.3727904,-58.3727762,-58.3727709,-58.3727631,-58.3726595,-58.3725857,-58.372495,-58.3724725,-58.372331,-58.3722327,-58.3722249,-58.3721863,-58.3721623,-58.372162,-58.3721149,-58.3721138,-58.3720715,-58.3720477,-58.37201792,-58.3719981,-58.3719592,-58.3719482,-58.3715842,-58.3715415,-58.3712244,-58.3711331,-58.3710997,-58.3709847,-58.490416,-58.4903297,-58.489724,-58.4895413,-58.4894855,-58.4894729,-58.4892852,-58.489255,-58.4892219,-58.489063,-58.4880245,-58.484981],6,null,"st_geometry(outliers)",{"lineCap":null,"lineJoin":null,"clickable":true,"pointerEvents":null,"className":"","stroke":true,"color":"#333333","weight":2,"opacity":0.9,"fill":true,"fillColor":"#6666ff","fillOpacity":0.6,"dashArray":null},null,null,null,{"maxWidth":800,"minWidth":50,"maxHeight":null,"autoPan":true,"keepInView":false,"closeButton":true,"zoomAnimation":true,"closeOnClick":true,"className":""},["1","2","3","4","5"],null,null]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[-58.490416,-34.6892756,-58.3709847,-34.5553776,"Zoom to st_geometry(outliers)","<strong> st_geometry(outliers) <\/strong>","bottomright"]},{"method":"addLayersControl","args":["Esri.WorldImagery","st_geometry(outliers)",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]}],"limits":{"lat":[-34.6892756,-34.5553776],"lng":[-58.490416,-58.3709847]}},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\nfunction(el, x, data) {\n\n  // get the leaflet map\n  var map = this; //HTMLWidgets.find('#' + el.id);\n\n  // we need a new div element because we have to handle\n  // the mouseover output separately\n  // debugger;\n  function addElement () {\n    // generate new div Element\n    var newDiv = $(document.createElement('div'));\n    // append at end of leaflet htmlwidget container\n    $(el).append(newDiv);\n    //provide ID and style\n    newDiv.addClass('lnlt');\n    newDiv.css({\n      'position': 'relative',\n      'bottomleft':  '0px',\n      'background-color': 'rgba(255, 255, 255, 0.7)',\n      'box-shadow': '0 0 2px #bbb',\n      'background-clip': 'padding-box',\n      'margin': '0',\n      'padding-left': '5px',\n      'color': '#333',\n      'font': '9px/1.5 \"Helvetica Neue\", Arial, Helvetica, sans-serif',\n    });\n    return newDiv;\n  }\n\n  // check for already existing lnlt class to not duplicate\n  var lnlt = $(el).find('.lnlt');\n  if(!lnlt.length) {\n    lnlt = addElement();\n\n    // grab the special div we generated in the beginning\n    // and put the mousmove output there\n    map.on('mousemove', function (e) {\n      lnlt.text(\n      ' x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n      ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n      ' | epsg: 3857 ' +\n      ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ' +\n      ' | lon: ' + (e.latlng.lng).toFixed(5) +\n      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n      ' | zoom: ' + map.getZoom() + ' ');\n    })\n  };\n}\n).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+<p>Según mi lectura, una de las celdas coincide con un área industrial. Las dos restantes con complejos habitacionales de vivienda pública.</p>
+<p>Se me ocurre una hipótesis cuya verificación quedará pendiente: ¿Será que los choferes de BA Taxi evitan viajes con origen en éstas zonas por temor, en la práctica discriminando a esos usuarios? En ese caso, la cantidad de viajes que <em>terminan</em> allí se explicaría porque los taxistas inician el viaje en algún otro barrio, sin saber el destino hasta que el usuario está a bordo.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>RIP Dirección Provincial de Innovación Ciudadana: <a href="http://poderciudadano.org/preocupacion-por-cambios-en-la-politica-de-gobierno-abierto-en-la-provincia-de-buenos-aires/" class="uri">http://poderciudadano.org/preocupacion-por-cambios-en-la-politica-de-gobierno-abierto-en-la-provincia-de-buenos-aires/</a><a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="/post/analizando-data-de-airbnb-en-buenos-aires/" data-toggle="tooltip" data-placement="top" title="Analizando data de Airbnb en Buenos Aires">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'bits-bricks';
+    var disqus_identifier = '\/post\/taxis-en-buenos-aires-mapas-claros-y-negocios-turbios\/';
+    var disqus_title = 'Taxis en Buenos Aires: mapas claros y negocios turbios';
+    var disqus_url = '\/post\/taxis-en-buenos-aires-mapas-claros-y-negocios-turbios\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:avazquez@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/vazquezbrust" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/avazquez" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/3527951/havb" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          H. Antonio Vazquez Brust
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/">Bits &amp; Bricks</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.21</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+  </body>
+</html>
+

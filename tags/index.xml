@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
-    <lastBuildDate>Sat, 10 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,9 +15,18 @@
     <item>
       <title>Ggplot</title>
       <link>/tags/ggplot/</link>
-      <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
       <guid>/tags/ggplot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mapas</title>
+      <link>/tags/mapas/</link>
+      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
+      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
+      <guid>/tags/mapas/</guid>
       <description></description>
     </item>
     
@@ -42,7 +51,7 @@
     <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
       <guid>/tags/r/</guid>
       <description></description>

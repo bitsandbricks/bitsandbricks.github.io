@@ -15,6 +15,9 @@ subtitle: ''
 knitr::opts_chunk$set(tidy = FALSE, warning=FALSE, message=FALSE,
                       fig.width = 12, fig.height = 6, out.width=720)
 options(scipen = 15)
+
+# DATA PARA ESTIAR INGRESOS
+# http://www.infobae.com/turismo/2017/07/19/consumo-colaborativo-la-transformacion-del-turismo-en-buenos-aires/
 ```
 
 

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/taxis-en-buenos-aires-mapas-claros-y-negocios-turbios/</loc>
+    <lastmod>2018-01-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/analizando-data-de-airbnb-en-buenos-aires/</loc>
     <lastmod>2017-09-09T00:00:00+00:00</lastmod>
   </url>
@@ -33,7 +38,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2017-09-09T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -44,13 +49,19 @@
   
   <url>
     <loc>/tags/ggplot/</loc>
-    <lastmod>2017-06-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/inform%C3%A1tica-urbana/</loc>
-    <lastmod>2017-06-27T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/mapas/</loc>
+    <lastmod>2018-01-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -68,7 +79,7 @@
   
   <url>
     <loc>/categories/open-data/</loc>
-    <lastmod>2017-06-27T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -79,7 +90,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2017-09-09T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -91,7 +102,7 @@
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2017-06-27T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -115,13 +126,19 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2017-06-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/transporte/</loc>
+    <lastmod>2018-01-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/visualizaci%C3%B3n/</loc>
-    <lastmod>2017-06-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
