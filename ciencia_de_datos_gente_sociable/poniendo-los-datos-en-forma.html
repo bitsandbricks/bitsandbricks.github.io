@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2018-01-24">
+<meta name="date" content="2018-01-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -119,7 +119,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.7" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#el-veredicto-final"><i class="fa fa-check"></i><b>2.7</b> El veredicto final</a></li>
 <li class="chapter" data-level="2.8" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autonoma-de-buenos-aires"><i class="fa fa-check"></i><b>2.8</b> ¿Cuál es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html"><i class="fa fa-check"></i><b>3</b> Poniendo los datos en forma</a></li>
+<li class="chapter" data-level="3" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html"><i class="fa fa-check"></i><b>3</b> Poniendo los datos en forma</a><ul>
+<li class="chapter" data-level="3.1" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo"><i class="fa fa-check"></i><b>3.1</b> Primeros pasos al examinar un conjunto de datos nuevo</a></li>
+<li class="chapter" data-level="3.2" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#transformando-los-datos"><i class="fa fa-check"></i><b>3.2</b> Transformando los datos</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#seleccionar-columnas-con-select"><i class="fa fa-check"></i><b>3.2.1</b> Seleccionar columnas con <code>select()</code></a></li>
+<li class="chapter" data-level="3.2.2" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#filtrar-filas-con-filter"><i class="fa fa-check"></i><b>3.2.2</b> Filtrar filas con <code>filter()</code></a></li>
+<li class="chapter" data-level="3.2.3" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#ordenar-filas-con-arrange"><i class="fa fa-check"></i><b>3.2.3</b> Ordenar filas con <code>arrange()</code></a></li>
+<li class="chapter" data-level="3.2.4" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#agregar-nuevas-variables-con-mutate"><i class="fa fa-check"></i><b>3.2.4</b> Agregar nuevas variables con <code>mutate()</code></a></li>
+<li class="chapter" data-level="3.2.5" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#extraer-sumarios-con-summarise"><i class="fa fa-check"></i><b>3.2.5</b> Extraer sumarios con <code>summarise()</code></a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="visualizacion.html"><a href="visualizacion.html"><i class="fa fa-check"></i><b>4</b> Visualización</a></li>
 <li class="chapter" data-level="5" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html"><i class="fa fa-check"></i><b>5</b> Modelado estadístico</a></li>
 <li class="chapter" data-level="6" data-path="mapas.html"><a href="mapas.html"><i class="fa fa-check"></i><b>6</b> Mapas</a></li>
@@ -145,49 +154,369 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="poniendo-los-datos-en-forma" class="section level1">
 <h1><span class="header-section-number">Capítulo 
 3</span> Poniendo los datos en forma</h1>
-<p>[[ INTRODUCCIÓN PENDIENTE]]</p>
-<p>Vamos a traer datos de mortalidad infantil por comuna de la ciudad y por año entre 2010 y 2016, publicados por la <a href="http://www.estadisticaciudad.gob.ar/eyc/?p=67358">Dirección General de Estadística y Censos</a> de la ciudad.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mortalidad &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://bitsandbricks.github.io/data/mortalidad_infantil_caba.csv&#39;</span>)</code></pre></div>
-<p>Con <code>gather()</code> vamos a cambiar nuestro dataset para volverlo “prolijo”. Más adelante vamos a hablar mal de la dicotomía entre datos prolijos vs. datos desprolijos, o <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html">“tidy vs. messy”</a> en inglés. Por ahora alcanza con decir que los datos prolijos son aquellos en que cada fila representa una y sólo una observación por variable. Así como está, nuestra data de mortalidad tiene en cada fila una variable observada 7 veces; una vez por año del 2010 al 2016:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mortalidad)</code></pre></div>
-<pre><code>##   Comuna X2010 X2011 X2012 X2013 X2014 X2015 X2016
-## 1      1   9.9   9.1  10.7   8.9   4.9   7.6   9.5
-## 2      2   6.7   6.6   5.1   7.5   9.2   4.5   3.6
-## 3      3   4.9  10.8   7.2  11.9   9.4   5.4   8.0
-## 4      4   9.9  11.1  11.8  11.8  12.3   7.2  11.9
-## 5      5   3.6   7.2   5.7   8.7   6.7   6.7   8.5
-## 6      6   3.2   5.2   9.0   6.8   7.5   5.7   2.4</code></pre>
-<p>Para pasar a formato prolijo usamos la función <code>gather()</code> (por “recolectar” en inglés) que justamente recoge las observaciones esparcidas a lo largo de las columnas y las convierte en filas distintas, una por observación. Vamos a pedir a la funcion <code>gather</code> que tome la variable mortalidad (que contiene nuestro dataframe), y que tome las columnas que van de X2010 hasta X2016 para guardar el nombre de la columna en la nueva variable “año”, y el contenido de la susodicha en la nueva variable “mortalida”. ¡Puf! Es más breve el código que la explicación:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mortalidad &lt;-<span class="st"> </span><span class="kw">gather</span>(mortalidad, <span class="dt">key =</span> <span class="st">&quot;año&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;mortalidad&quot;</span>, X2010<span class="op">:</span>X2016)
+<p>Cómo ya hemos mencionado, es normal que la mayor parte del tiempo dedicado a un proyecto de análisis se nos vaya en la limpieza y orden de los datos disponibles. Aún cuando nuestros datos provengan de fuentes oficiales (un gobierno nacional, el Banco Mundial, etc) en muy rara ocasión podremos usarlos para nuestros fines sin antes procesarlos. Y aún si los datos llegaran en perfectas condiciones, no tenemos forma de saberlo hasta haber realizado una exploración para verificarlo.</p>
+<p>Ésta inevitable etapa de preparación es llamada <em>data wrangling</em> en inglés, algo así como elproceso de “domar los datos”. El término hace referencia, en clave de humor, al esfuerzo que la puesta en orden cuando los datos son cuantiosos, de muchas fuentes distintas, o en particular desprolijos. Para que la experiencia sea lo menos tediosa posible, y podamos pasar rápido al momento de extraer conocimiento, vamos a practicar algunas técnicas muy útiles.</p>
+<div id="primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo" class="section level2">
+<h2><span class="header-section-number">3.1</span> Primeros pasos al examinar un conjunto de datos nuevo</h2>
+<p>Vamos a practicar usando los registros del Sistema Único de Atención Ciudadana (SUACI) de la Ciudad Autónoma de Buenos Aires. El SUACI es el repositorio donde se integran las solicitudes y reclamos que los ciudadanos presentan a la ciudad por distintos canales: en persona, por teléfono o usando la aplicación <a href="https://gestioncolaborativa.buenosaires.gob.ar/prestaciones">BA 147</a>. Vamos a trabajar con una versión de los datos que ha sido simplificada para hacer más ameno el trabajo con ella. Quién quiera acceder a los datos en su esplendor de complejidad original, puede encontrarlos en el portal de datos abiertos de la ciudad: <a href="https://data.buenosaires.gob.ar/" class="uri">https://data.buenosaires.gob.ar/</a></p>
+<p>Comenzamos por acceder al archivo con los registros para cargarlo en R como un dataframe. Tendremos que ejercitar un poco la paciencia porque es un archuivo de varios megas, que podría tardar unos minutos en ser descargado.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">atencion_ciudadano &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://bitsandbricks.github.io/data/gcba_suaci_barrios.csv&#39;</span>)</code></pre></div>
+<p>Lo primero que deberíamos hacer con un dataframe que no conocemos es usar la función <code>str()</code>, que nos indica su estructura (por <em>structure</em> en inglés):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(atencion_ciudadano)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    57432 obs. of  5 variables:
+##  $ PERIODO        : int  201301 201301 201301 201301 201301 201301 201301 201301 201301 201301 ...
+##  $ RUBRO          : Factor w/ 347 levels &quot;&quot;,&quot;ACCESOS&quot;,&quot;ACERAS&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ TIPO_PRESTACION: Factor w/ 6 levels &quot;&quot;,&quot;DENUNCIA&quot;,..: 4 4 4 4 4 4 4 4 4 4 ...
+##  $ BARRIO         : Factor w/ 52 levels &quot;&quot;,&quot; &quot;,&quot;AGRONOMIA&quot;,..: 3 4 5 6 7 8 9 10 11 12 ...
+##  $ total          : int  6 172 92 45 79 10 38 109 20 45 ...</code></pre>
+<p>Lo primero que se nos informa es que nuestro objeto de análisis es un dataframe (“data.frame” ). Eso ya lo sabíamos, pero como str() puede usarse con cualquier clase de objeto en R, en un contexto distinto podría ser información nueva. A continuación aparecen las diemnsiones del dataframe: 164.33 observaciones (filas) con 5 variables (columnas). Los nombres de las columnas son PERIODO, RUBRO, TIPO_PRESTACION, BARRIO y total. Con eso ya podemos inferir que cada observación en el dataframe contiene la cantidad total de solicitudes según concepto, rubro y tipo de prestación (aunque no sepamos bien de que se tratan esas variables), en un período dado y en cada barrio.</p>
+<p>Con str() también obtenemos el tipo de datos representados pro cada variable, y un ejemplo de los valores contenidos en las primeras filas. <em>PERIODO</em> y <em>total</em> son variables de tipo “int”, es decir, números enteros o <em>integers</em> en inglés. El resto de las variables son de tipo “Factor”; en R las variables categóricas reciben el nombre de factores. ¿Y cómo sabe R que <em>RUBRO</em> o <em>BARRIO</em> son categorías? La culpable es la función <code>read.csv()</code> que usamos al principio. Si no se le aclara lo contrario, read_csv() interpreta como factores a todas las columnas que contienen texto. Para avisarle que no lo haga, hay que usar el parámetro <code>stringsAsFactors</code>, así: <code>misdatos &lt;- read.csv('archivo_con_mis_datos', stringsAsFactors = FALSE)</code>. En general es buena idea evitar que los campos de texto se asuman como factores, pero en éste caso está bien: todas las columnas de texto, en efecto, contienen variables categóricas. (Ante la duda, una variable es categórica cuando es razonable considerar que se elige entre un conjunto finito de variables posibles; por ejemplo, los barrios de Buenos Aires son un conjunto finito y predeterminado).</p>
+<p>La siguiente función a utilizar cuando estamos conociendo el contenido de un set de datos es <code>summary()</code>, que nos dará un resumen en forma de estadísticas descriptivas para las variables numéricas (cuartiles y mediana) y un vistazo a las categorías más representadas par los factores.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(atencion_ciudadano)</code></pre></div>
+<pre><code>##     PERIODO                         RUBRO        TIPO_PRESTACION 
+##  Min.   :201301   SANEAMIENTO URBANO   : 4589            :    1  
+##  1st Qu.:201309   TRANSPORTE Y TRANSITO: 4580   DENUNCIA :21606  
+##  Median :201404   ARBOLADO             : 3122   QUEJA    : 3914  
+##  Mean   :201401   ALUMBRADO            : 2918   RECLAMO  :21038  
+##  3rd Qu.:201503   PAVIMENTO            : 2411   SOLICITUD: 9662  
+##  Max.   :201512   ESPACIO PUBLICO      : 1918   TRAMITE  : 1211  
+##                   (Other)              :37894                    
+##          BARRIO          total         
+##  PALERMO    : 2154   Min.   :    1.00  
+##  BALVANERA  : 1961   1st Qu.:    1.00  
+##  FLORES     : 1959   Median :    4.00  
+##  CABALLITO  : 1872   Mean   :   34.85  
+##  SAN NICOLAS: 1748   3rd Qu.:   16.00  
+##  RECOLETA   : 1729   Max.   :19221.00  
+##  (Other)    :46009</code></pre>
+<p>Las categorías posibles para un factor son llamadas “niveles” (<em>levels</em>). Para ver todos los niveles del factor BARRIO, es decir todos los barrios representados en la columna con la variable BARRIO, podemos usar la función <code>levels()</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(atencion_ciudadano<span class="op">$</span>BARRIO)</code></pre></div>
+<pre><code>##  [1] &quot;&quot;                     &quot; &quot;                    &quot;AGRONOMIA&quot;           
+##  [4] &quot;ALMAGRO&quot;              &quot;BALVANERA&quot;            &quot;BARRACAS&quot;            
+##  [7] &quot;BELGRANO&quot;             &quot;BOCA&quot;                 &quot;BOEDO&quot;               
+## [10] &quot;CABALLITO&quot;            &quot;CHACARITA&quot;            &quot;COGHLAN&quot;             
+## [13] &quot;COLEGIALES&quot;           &quot;CONSTITUCION&quot;         &quot;ERRORNOHAYRESULTA&quot;   
+## [16] &quot;ERRORNOHAYRESULTADOS&quot; &quot;FLORES&quot;               &quot;FLORESTA&quot;            
+## [19] &quot;LINIERS&quot;              &quot;MATADEROS&quot;            &quot;MONSERRAT&quot;           
+## [22] &quot;MONTE CASTRO&quot;         &quot;NUEVA POMPEYA&quot;        &quot;NUÑEZ&quot;               
+## [25] &quot;PALERMO&quot;              &quot;PARQUE AVELLANEDA&quot;    &quot;PARQUE CHACABUCO&quot;    
+## [28] &quot;PARQUE CHAS&quot;          &quot;PARQUE PATRICIOS&quot;     &quot;PATERNAL&quot;            
+## [31] &quot;PUERTO MADERO&quot;        &quot;RECOLETA&quot;             &quot;RETIRO&quot;              
+## [34] &quot;SAAVEDRA&quot;             &quot;SAN CRISTOBAL&quot;        &quot;SAN NICOLAS&quot;         
+## [37] &quot;SAN TELMO&quot;            &quot;VELEZ SARSFIELD&quot;      &quot;VERSALLES&quot;           
+## [40] &quot;VILLA CRESPO&quot;         &quot;VILLA DEL PARQUE&quot;     &quot;VILLA DEVOTO&quot;        
+## [43] &quot;VILLA GRAL. MITRE&quot;    &quot;VILLA LUGANO&quot;         &quot;VILLA LURO&quot;          
+## [46] &quot;VILLA ORTUZAR&quot;        &quot;VILLA PUEYRREDON&quot;     &quot;VILLA REAL&quot;          
+## [49] &quot;VILLA RIACHUELO&quot;      &quot;VILLA SANTA RITA&quot;     &quot;VILLA SOLDATI&quot;       
+## [52] &quot;VILLA URQUIZA&quot;</code></pre>
+<p>Para acceder en forma rápida al contenido de la columna BARRIO, hemos utilizado por primera vez un “truco” muy práctico. Para obtener el contenido de cualquier columna en particular, basta con el nombre del dataframe seguido del símbolo <code>$</code> y el nombre de la columna a extraer: <code>atencion_ciudadano$BARRIO</code>, o <code>atencion_ciudadano$total</code>, etc.</p>
+</div>
+<div id="transformando-los-datos" class="section level2">
+<h2><span class="header-section-number">3.2</span> Transformando los datos</h2>
+<p>Habiendo revisado el contenido de un dataframe, comenzamos a hacernos idea de los ajustes que necesita para que los datos tomen el formato que necesitamos. Estos ajustes pueden ser correcciones (por ejemplo, de errores de tipeo cuando se cargaron los datos), la creación de nuevas variables derivadas de las existentes, o un reordenamiento de los datos para simplificar nuestro trabajo.</p>
+<p>Para hacer todo esto, y mucho más, vamos a aprender funciones que representan cinco verbos básicos para la transformación de datos:</p>
+<ul>
+<li><code>select()</code>: seleccionar -elegir- columnas por su nombre</li>
+<li><code>filter()</code>: filtrar, es decir quedarse sólo con las filas que cumplan cierta condición</li>
+<li><code>arrange()</code>: ordenar las filas de acuerdo a su contenido o algún otro índice</li>
+<li><code>mutate()</code>: mutar -cambiar- un dataframe, modificando el contenido de sus columnas o creando columnas (es decir, variables) nuevas</li>
+<li><code>summarise()</code>: producir sumarios -un valor extraído de muchos, por ejemplo el promedio- con el contenido de las columnas</li>
+</ul>
+<p>Estas funciones tienen una sintaxis, una forma de escribirse, uniforme. El primer argumento que toman siempre es un dataframe; los siguientes indican qué hacer con los datos. El resultado siempre es un nuevo dataframe.</p>
+<p>Las funciones son parte de (<code>dplyr</code>)[<a href="http://dplyr.tidyverse.org/" class="uri">http://dplyr.tidyverse.org/</a>], uno de los paquetes de funciones de la familia (Tidyverse)[<a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>]. Si no lo hicimos aún en la sesión en la que estamos trabajando, cargamos <code>tidyverse</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+<div id="seleccionar-columnas-con-select" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Seleccionar columnas con <code>select()</code></h3>
+<p>Muchas veces tendremos que lidiar con datasets con decenas de variables. Alguna que otra vez, con centenas. En esos casos el primer problema es librarnos de semejante cantidad de columnas, reteniendo sólo aquellas en las que estamos interesados. Para un dataset como el de reclamos de los ciudadanos, que tiene pocas columnas, select() no es tan importante. Aún así, podemos usar select() con fines demostrativos.</p>
+<p>Sabemos que el dataset tiene 5 columnas:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(atencion_ciudadano)</code></pre></div>
+<pre><code>## [1] &quot;PERIODO&quot;         &quot;RUBRO&quot;           &quot;TIPO_PRESTACION&quot; &quot;BARRIO&quot;         
+## [5] &quot;total&quot;</code></pre>
+<p>Si quisiéramos sólo las que contienen el período y el total, las seleccionamos por nombre, a continuación del nonmbre del dataframe:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">select</span>(atencion_ciudadano, PERIODO, total)
 
-<span class="kw">head</span>(mortalidad)</code></pre></div>
-<pre><code>##   Comuna   año mortalidad
-## 1      1 X2010        9.9
-## 2      2 X2010        6.7
-## 3      3 X2010        4.9
-## 4      4 X2010        9.9
-## 5      5 X2010        3.6
-## 6      6 X2010        3.2</code></pre>
-<p>¡Lo logramos! Obsérvese que espcificamos el nombre de algunos de los parámetros que recibe la función, por ejemplo <em>key == “año”</em>. Esto no es necesario con funciones que toman un sólo parámetro, pero es útil cuando son varios, ya que permite aclarar a la función cual es cual.</p>
-<p>Ahora tenemos un problema de formato. Los años figuran como “X2010”, “X2011”… en lugar de “2010”, “2011”, etc. La función <code>mutate()</code> nos permite cambiar el contenido de las columnas de un dataframe de acuerdo a reglas, o aplicando funciones, según lo que necesitemos. Vamos a pedirle a <code>mutate</code> que tome la columna “año”, y que al contenido le quite la “X”. La función <code>sub()</code> se encargar de sustituir la “X” por un “”, que equivale a decir “retira la X y no la reemplaces por nada”:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mortalidad &lt;-<span class="st"> </span><span class="kw">mutate</span>(mortalidad, añ<span class="dt">o =</span> <span class="kw">sub</span>(<span class="st">&#39;X&#39;</span>, <span class="st">&quot;&quot;</span>, año))
+<span class="kw">head</span>(seleccion)</code></pre></div>
+<pre><code>##   PERIODO total
+## 1  201301     6
+## 2  201301   172
+## 3  201301    92
+## 4  201301    45
+## 5  201301    79
+## 6  201301    10</code></pre>
+<p>También podemos seleccionar por contigüidad, por ejemplo “todas las columnas que van de RUBRO a BARRIO”:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">select</span>(atencion_ciudadano, RUBRO<span class="op">:</span>BARRIO)
 
-<span class="kw">head</span>(mortalidad)</code></pre></div>
-<pre><code>##   Comuna  año mortalidad
-## 1      1 2010        9.9
-## 2      2 2010        6.7
-## 3      3 2010        4.9
-## 4      4 2010        9.9
-## 5      5 2010        3.6
-## 6      6 2010        3.2</code></pre>
-<p>Bien. Y ahora, a graficar. Vamos a llamar a la función <code>ggplot()</code>, una auténtica navaja suiza para la visualización.</p>
-<p>Por ejemplo, tracemos líneas que conecten los valores a lo largo de los años para cada comuna:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mortalidad) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> año, <span class="dt">y =</span> mortalidad, <span class="dt">group =</span> Comuna, <span class="dt">color =</span> <span class="kw">factor</span>(Comuna)))</code></pre></div>
-<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
-<p>El gráfico que hemos creado es un poco confuso. ¡Luce como una colorida maraña de hilos! Un ojo entrenado puede, de todas formas, descubrir varias cosas: hay 15 comunas en la ciudad; la tasa de mortalidad tiene un rango que va de un poco menos de 2,5 a un poco más de 12,5 (esto es, muertes antes del año de vida por cada 10.000 nacimientos); en el año 2015 se observó un notable descenso general, que fue revertido por un ascenso generalizado tan sólo un año después.</p>
-<p>Continuará…</p>
+<span class="kw">head</span>(seleccion)</code></pre></div>
+<pre><code>##    RUBRO TIPO_PRESTACION    BARRIO
+## 1 ACERAS         RECLAMO AGRONOMIA
+## 2 ACERAS         RECLAMO   ALMAGRO
+## 3 ACERAS         RECLAMO BALVANERA
+## 4 ACERAS         RECLAMO  BARRACAS
+## 5 ACERAS         RECLAMO  BELGRANO
+## 6 ACERAS         RECLAMO      BOCA</code></pre>
+<p>Y podemos seleccionar por omisión. Si nos interesara todo el contenido del dataset menos la variable RUBRO, usaríamos</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">select</span>(atencion_ciudadano, <span class="op">-</span>RUBRO)
 
+<span class="kw">head</span>(seleccion)</code></pre></div>
+<pre><code>##   PERIODO TIPO_PRESTACION    BARRIO total
+## 1  201301         RECLAMO AGRONOMIA     6
+## 2  201301         RECLAMO   ALMAGRO   172
+## 3  201301         RECLAMO BALVANERA    92
+## 4  201301         RECLAMO  BARRACAS    45
+## 5  201301         RECLAMO  BELGRANO    79
+## 6  201301         RECLAMO      BOCA    10</code></pre>
+<p>Al igual que con las selección por inclusión, podemos seleccionar por omisión de un rango de columnas contiguas (escritas entre paréntesis), o de varias columnas nombradas:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">select</span>(atencion_ciudadano, <span class="op">-</span>(TIPO_PRESTACION<span class="op">:</span>total))
+
+<span class="kw">head</span>(seleccion)</code></pre></div>
+<pre><code>##   PERIODO  RUBRO
+## 1  201301 ACERAS
+## 2  201301 ACERAS
+## 3  201301 ACERAS
+## 4  201301 ACERAS
+## 5  201301 ACERAS
+## 6  201301 ACERAS</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">select</span>(atencion_ciudadano, <span class="op">-</span>RUBRO, <span class="op">-</span>BARRIO)
+
+<span class="kw">head</span>(seleccion)</code></pre></div>
+<pre><code>##   PERIODO TIPO_PRESTACION total
+## 1  201301         RECLAMO     6
+## 2  201301         RECLAMO   172
+## 3  201301         RECLAMO    92
+## 4  201301         RECLAMO    45
+## 5  201301         RECLAMO    79
+## 6  201301         RECLAMO    10</code></pre>
+</div>
+<div id="filtrar-filas-con-filter" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Filtrar filas con <code>filter()</code></h3>
+<p>Una de las tareas más frecuentes en el análisis de datos es la de identificar observaciones que cumplen con determinada condición. <code>filter()</code> permite extraer subconjuntos del total en base a sus variables.</p>
+<p>Por ejemplo, para seleccionar registros que correspondan a Retiro, ocurridos en el primer mes de 2014 (período 201401):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, BARRIO <span class="op">==</span><span class="st"> &quot;RETIRO&quot;</span>, PERIODO <span class="op">==</span><span class="st"> </span><span class="dv">201401</span>)
+<span class="kw">head</span>(seleccion)</code></pre></div>
+<pre><code>##   PERIODO               RUBRO TIPO_PRESTACION BARRIO total
+## 1  201401              ACERAS         RECLAMO RETIRO    10
+## 2  201401           ALUMBRADO         RECLAMO RETIRO    34
+## 3  201401           ALUMBRADO       SOLICITUD RETIRO     2
+## 4  201401            ARBOLADO         RECLAMO RETIRO    10
+## 5  201401            ARBOLADO       SOLICITUD RETIRO     3
+## 6  201401 ATENCION AL PUBLICO           QUEJA RETIRO     3</code></pre>
+<div id="comparaciones" class="section level4">
+<h4><span class="header-section-number">3.2.2.1</span> Comparaciones</h4>
+<p>Aquí hemos usado un recurso nuevo, la comparación. R provee una serie de símbolos que permite comparar valores entre sí:</p>
+<pre><code>* `==` igual a 
+* `!=` no igual a 
+* `&gt;`  mayor a 
+* `&gt;=` mayor o igual a 
+* `&lt;`  menor a 
+* `&lt;=` menor o igual a </code></pre>
+<p>Atención especial merece el símbolo que compara igualdad, <code>==</code>. Un error muy común es escribir <code>BARRIO = &quot;RETIRO&quot;</code>, (un sólo símbolo <code>=</code>) que le indica a R que guarde el valor “RETIRO” dentro de la variable BARRIO, en lugar de verificar si son iguales. Para ésto último, lo correcto es <code>BARRIO == &quot;RETIRO&quot;</code>, tal como lo usamos en el ejemplo de filter().</p>
+<p>Tabien hay que tener en cuenta el uso de comillas. Para que R no se confunda, cuando queramos usar valores de texto (de tipo <em>character</em>) los rodeamos con comillas para que quede claro que no nos referimos a una variable con ese nombre, si la hubiera, sino en forma literal a esa palabra o secuencia de texto. En el caso de los números, no hace falta el uso de comillas, ya que en R ningun nombre de variable puede comenzar con o estar compuuesta sólo por números.</p>
+<p>Filtrando los registros de períodos para los cuales se registran más de 100 incidentes:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, total <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>)
+<span class="kw">head</span>(seleccion)</code></pre></div>
+<pre><code>##   PERIODO     RUBRO TIPO_PRESTACION    BARRIO total
+## 1  201301    ACERAS         RECLAMO   ALMAGRO   172
+## 2  201301    ACERAS         RECLAMO CABALLITO   109
+## 3  201301    ACERAS         RECLAMO    FLORES   111
+## 4  201301    ACERAS         RECLAMO   PALERMO   113
+## 5  201301 ALUMBRADO         RECLAMO   ALMAGRO   130
+## 6  201301 ALUMBRADO         RECLAMO  BARRACAS   118</code></pre>
+</div>
+<div id="operadores-logicos" class="section level4">
+<h4><span class="header-section-number">3.2.2.2</span> Operadores lógicos</h4>
+<p>Cuando le pasamos múltiples condiciones a filter(), la función devuelve las filas que cumplen con todas.</p>
+<p>Por ejemplo, con</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, PERIODO <span class="op">==</span><span class="st"> </span><span class="dv">201508</span>,  RUBRO <span class="op">==</span><span class="st"> &quot;SALUD&quot;</span>)
+
+<span class="kw">head</span>(seleccion)</code></pre></div>
+<pre><code>##   PERIODO RUBRO TIPO_PRESTACION    BARRIO total
+## 1  201508 SALUD           QUEJA  BARRACAS     1
+## 2  201508 SALUD           QUEJA CABALLITO     1
+## 3  201508 SALUD           QUEJA   COGHLAN     1
+## 4  201508 SALUD           QUEJA  RECOLETA     1</code></pre>
+<p>obtenemos todos los registros cuyo rubro es “SALUD”, y cuyo período es 20108, agosto de 2015.</p>
+<p>Siguiendo el mismo formato, si intentamos</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, BARRIO <span class="op">==</span><span class="st"> &quot;RETIRO&quot;</span>, BARRIO <span class="op">==</span><span class="st"> &quot;PALERMO&quot;</span>)
+
+<span class="kw">head</span>(seleccion)</code></pre></div>
+<pre><code>## [1] PERIODO         RUBRO           TIPO_PRESTACION BARRIO         
+## [5] total          
+## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<p>obtenemos un conjunto vacío. ¿Por qué? Es debido a que ninguna observación cumple con todas las condiciones; el ningún registro el barrio es Retiro y es Palermo. ¡Suena razonable!. Para obtener registros ocurrido en Retiro <strong>ó</strong> en Palermo, usamos el operador lógico <code>|</code> que significa… “ó”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, BARRIO <span class="op">==</span><span class="st"> &quot;RETIRO&quot;</span> <span class="op">|</span><span class="st"> </span>BARRIO <span class="op">==</span><span class="st"> &quot;PALERMO&quot;</span>)
+
+<span class="kw">head</span>(seleccion)</code></pre></div>
+<pre><code>##   PERIODO               RUBRO TIPO_PRESTACION  BARRIO total
+## 1  201301              ACERAS         RECLAMO PALERMO   113
+## 2  201301              ACERAS         RECLAMO  RETIRO    15
+## 3  201301              ACERAS       SOLICITUD PALERMO     2
+## 4  201301 ACTOS DE CORRUPCION        DENUNCIA PALERMO     4
+## 5  201301           ALUMBRADO         RECLAMO PALERMO    74
+## 6  201301           ALUMBRADO         RECLAMO  RETIRO    15</code></pre>
+<p>Se trata de la lógica de conjuntos, o lógica booleana, que con un poco de suerte recordamos de nuestra época de escolares. Los símbolos importantes son <code>&amp;</code>, <code>|</code>, y <code>!</code>: “y”, “’ó”, y la negación que invierte preposiciones:</p>
+<pre><code>* `a &amp; b`     a y b
+* `a | b`     a ó b
+* `a &amp; !b`    a, y no b
+* `!a &amp; b`    no a, y b
+* `!(a &amp; b)`  no (a y b) </code></pre>
+<p>Hemos visto ejemplos de <code>a &amp; b</code> (<code>PERIODO == 201508,  RUBRO == &quot;SALUD&quot;</code>, que filter toma como un <code>&amp;</code>) y de <code>a | b</code> (<code>BARRIO == &quot;RETIRO&quot; | BARRIO == &quot;PALERMO&quot;</code>)</p>
+<p>Un ejemplo de <code>a &amp; !b</code>, filas en las que el tipo de prestación sea “TRAMITE”, y en las que el rubro no sea “REGISTRO CIVIL”:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(atencion_ciudadano, TIPO_PRESTACION <span class="op">==</span><span class="st"> &quot;TRAMITE&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>(RUBRO <span class="op">==</span><span class="st"> &quot;REGISTRO CIVIL&quot;</span>))</code></pre></div>
+<p>Y como ejemplo de <code>!(a &amp; b)</code>, todas las filas excepto las de tipo “DENUNCIA”, y rubro “SEGURIDAD E HIGIENE”:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, <span class="op">!</span>(TIPO_PRESTACION <span class="op">==</span><span class="st"> &quot;DENUNCIA&quot;</span> <span class="op">&amp;</span><span class="st"> </span>RUBRO <span class="op">==</span><span class="st"> &quot;SEGURIDAD E HIGIENE&quot;</span>))
+
+<span class="kw">head</span>(seleccion)</code></pre></div>
+<pre><code>##   PERIODO  RUBRO TIPO_PRESTACION    BARRIO total
+## 1  201301 ACERAS         RECLAMO AGRONOMIA     6
+## 2  201301 ACERAS         RECLAMO   ALMAGRO   172
+## 3  201301 ACERAS         RECLAMO BALVANERA    92
+## 4  201301 ACERAS         RECLAMO  BARRACAS    45
+## 5  201301 ACERAS         RECLAMO  BELGRANO    79
+## 6  201301 ACERAS         RECLAMO      BOCA    10</code></pre>
+</div>
+</div>
+<div id="ordenar-filas-con-arrange" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Ordenar filas con <code>arrange()</code></h3>
+<p>La funcion <code>arrange()</code> cambia el orden en el que aparecen las filas de un dataframe. Como primer parámetro toma un dataframe, al igual que el resto de los verbos de transformación que estamos aprendiendo. A continación, espera un set de columnas para definir el orden.</p>
+<p>Por ejemplo, para ordenar por total de registros:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ordenado &lt;-<span class="st"> </span><span class="kw">arrange</span>(atencion_ciudadano, total)
+
+<span class="kw">head</span>(ordenado)</code></pre></div>
+<pre><code>##   PERIODO  RUBRO TIPO_PRESTACION        BARRIO total
+## 1  201301 ACERAS         RECLAMO PUERTO MADERO     1
+## 2  201301 ACERAS       SOLICITUD      BARRACAS     1
+## 3  201301 ACERAS       SOLICITUD          BOCA     1
+## 4  201301 ACERAS       SOLICITUD         BOEDO     1
+## 5  201301 ACERAS       SOLICITUD       COGHLAN     1
+## 6  201301 ACERAS       SOLICITUD  CONSTITUCION     1</code></pre>
+<p>Si agregamos más columnas, se usan en orden para “desempatar”. Por ejemplo, si queremos que las filas con el mismo valor en <em>total</em> aparezcan en el orden alfabético del barrio que les corresponde, sólo necesitamos agregar esa columna:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ordenado &lt;-<span class="st"> </span><span class="kw">arrange</span>(atencion_ciudadano, total, BARRIO)
+
+<span class="kw">head</span>(ordenado)</code></pre></div>
+<pre><code>##   PERIODO           RUBRO TIPO_PRESTACION    BARRIO total
+## 1  201409                                               1
+## 2  201301       ALUMBRADO       SOLICITUD AGRONOMIA     1
+## 3  201301 ATENCION SOCIAL         RECLAMO AGRONOMIA     1
+## 4  201301 ESPACIO PUBLICO         RECLAMO AGRONOMIA     1
+## 5  201301           QUEJA           QUEJA AGRONOMIA     1
+## 6  201301   RECUPERADORES         RECLAMO AGRONOMIA     1</code></pre>
+<p>Si no se aclara lo contario, el orden siempre es ascendente (de menor a mayor). Si quisieramos orden de mayor a menor, usamos <code>desc()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ordenado &lt;-<span class="st"> </span><span class="kw">arrange</span>(atencion_ciudadano, <span class="kw">desc</span>(total))
+
+<span class="kw">head</span>(ordenado)</code></pre></div>
+<pre><code>##   PERIODO          RUBRO TIPO_PRESTACION      BARRIO total
+## 1  201502 REGISTRO CIVIL         TRAMITE   MONSERRAT 19221
+## 2  201403 REGISTRO CIVIL         TRAMITE SAN NICOLAS 19209
+## 3  201402 REGISTRO CIVIL         TRAMITE SAN NICOLAS 17032
+## 4  201504 REGISTRO CIVIL         TRAMITE   MONSERRAT 16746
+## 5  201503 REGISTRO CIVIL         TRAMITE   MONSERRAT 16730
+## 6  201506 REGISTRO CIVIL         TRAMITE   MONSERRAT 14674</code></pre>
+<div id="valores-faltantes" class="section level4">
+<h4><span class="header-section-number">3.2.3.1</span> Valores faltantes</h4>
+<p>En el último ejemplo, aparecen varias filas cuyo valor para la columna BARRIO es <code>NA</code>. R representa los valores ausentes, desconocidos, con <code>NA</code> (“no disponible”, del inglés <em>Not Available</em>). Hay que tener cuidado con los valores <code>NA</code>, porque la mayoría de las comparaciones y operaciones lógicas que los involucran resultan indefinidas. En la práctica:</p>
+<p>¿Es 10 mayor a un valor desconocido?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">10</span> <span class="op">&gt;</span><span class="st"> </span><span class="ot">NA</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>R no sabe. (Nadie lo sabe, para ser justos)</p>
+<p>¿A cuanto asciende la suma de 10 más un valor desconocido?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="ot">NA</span> <span class="op">+</span><span class="st"> </span><span class="dv">10</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>Y en particular… ¿es un valor desconocido igual a otro valor desconocido?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="ot">NA</span> <span class="op">==</span><span class="st"> </span><span class="ot">NA</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>Por supuesto, la respuesta es desconocida también. La insistencia de R en no definir operaciones que involucran NA’s podría parecer irritante a primera vista, pero en realidad nos hace un favor. Al evitar extraer conclusiones cuando trata con datos faltantes, nos evita caer en errores garrafales en los casos en que analizamos y comparamos datos incompletos. Además, podemos preguntar a R si un valor es desconocido, y allí si contesta con seguridad. La función requerida es <code>is.na()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">desconocido &lt;-<span class="st"> </span><span class="ot">NA</span>
+
+<span class="kw">is.na</span>(desconocido)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Algo más a tener en cuenta con los valores desconocidos es cómo son intepretados cuando usamos funciones de transformación de datos. Por ejemplo, <code>filter()</code> ignora las filas que contienen NA’s en la variable que usa para filtrar. <code>arrange()</code> muestra las filas con NA’s en el campo por el que ordena, pero todas al final.</p>
+</div>
+</div>
+<div id="agregar-nuevas-variables-con-mutate" class="section level3">
+<h3><span class="header-section-number">3.2.4</span> Agregar nuevas variables con <code>mutate()</code></h3>
+<p>Recurrimos a la función <code>mutate()</code> cuando queremos agregarle columnas adicionales a nuestro dataframe, en general en base a los valores de las columnas ya existentes. Vamos a ilustrarlo con un ejemplo sencillo. Imaginemos que tenemos el siguiente dataset:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">circulos &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">nombre =</span> <span class="kw">c</span>(<span class="st">&quot;Círculo 1&quot;</span>, <span class="st">&quot;Círculo 2&quot;</span>, <span class="st">&quot;Círculo 3&quot;</span>),
+                       tamañ<span class="dt">o =</span> <span class="kw">c</span>(<span class="st">&quot;Pequeño&quot;</span>, <span class="st">&quot;Mediano&quot;</span>, <span class="st">&quot;Grande&quot;</span>),
+                       <span class="dt">radio  =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>))
+
+circulos</code></pre></div>
+<pre><code>##      nombre  tamaño radio
+## 1 Círculo 1 Pequeño     1
+## 2 Círculo 2 Mediano     3
+## 3 Círculo 3  Grande     5</code></pre>
+<p>Podemos agregar una columna con el área de cada círculo con mutate():</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mutate</span>(circulos, <span class="dt">area =</span> <span class="fl">3.1416</span> <span class="op">*</span><span class="st"> </span>radio<span class="op">^</span><span class="dv">2</span>)</code></pre></div>
+<pre><code>##      nombre  tamaño radio    area
+## 1 Círculo 1 Pequeño     1  3.1416
+## 2 Círculo 2 Mediano     3 28.2744
+## 3 Círculo 3  Grande     5 78.5400</code></pre>
+<p>Usando mutate(), definimos la columna “area”, indicando que su contenido será el valor de la columna “radio” en cada registro puesto en la fórmula del área de un círculo. Los operadores aritméticos (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>) son con frecuencia útiles para usar en conjunto con mutate().</p>
+<p>Volvamos ahora a nuestro dataframe con datos de reclamos. Supongamos que nos interesa agregrar columnas con el mes y el año de cada registro. La columna período, con valores del tipo “201301”, contiene la información necesaria para derivar estas dos nuevas variables. Para separar la parte del año de la parte del mes, la función <code>substr()</code>, que extrae porciones de una variable de texto, nos va a dar una mano. La usamos así: el primer parámetro es una secuencia de caracteres, y los dos siguientes indican donde queremos que empiece y termine la porción a extraer.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">atencion_ciudadano &lt;-<span class="st"> </span><span class="kw">mutate</span>(atencion_ciudadano,
+                             AÑ<span class="dt">O =</span> <span class="kw">substr</span>(PERIODO, <span class="dv">1</span>, <span class="dv">4</span>),
+                             <span class="dt">MES =</span> <span class="kw">substr</span>(PERIODO, <span class="dv">5</span>, <span class="dv">6</span>))
+                                
+<span class="kw">head</span>(atencion_ciudadano) </code></pre></div>
+<pre><code>##   PERIODO  RUBRO TIPO_PRESTACION    BARRIO total  AÑO MES
+## 1  201301 ACERAS         RECLAMO AGRONOMIA     6 2013  01
+## 2  201301 ACERAS         RECLAMO   ALMAGRO   172 2013  01
+## 3  201301 ACERAS         RECLAMO BALVANERA    92 2013  01
+## 4  201301 ACERAS         RECLAMO  BARRACAS    45 2013  01
+## 5  201301 ACERAS         RECLAMO  BELGRANO    79 2013  01
+## 6  201301 ACERAS         RECLAMO      BOCA    10 2013  01</code></pre>
+</div>
+<div id="extraer-sumarios-con-summarise" class="section level3">
+<h3><span class="header-section-number">3.2.5</span> Extraer sumarios con <code>summarise()</code></h3>
+<p>Llegamos al último de los verbos fundamentales para transformar datos. <code>summarise()</code> (por “resumir” en inglés) toma un dataframe completo y lo resume un una sola fila, de acuerdo a la operación que indiquemos. Por ejemplo, el promedio de la columna “total”:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summarise</span>(atencion_ciudadano, <span class="dt">promedio =</span> <span class="kw">mean</span>(total))</code></pre></div>
+<pre><code>##   promedio
+## 1 34.84721</code></pre>
+<p>Por si sola, <code>summarise()</code> no es de mucha ayuda. La gracia está en combinarla con <code>group_by()</code>, que cambia la unidad de análisis del dataframe completo a grupos individuales. Usar <code>summarise()</code> sobre un dataframe al que antes agrupamos con <code>group_by</code> resulta en resúmenes “por grupo”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">agrupado &lt;-<span class="st"> </span><span class="kw">group_by</span>(atencion_ciudadano, AÑO)
+
+<span class="kw">summarise</span>(agrupado, <span class="dt">promedio_totales =</span> <span class="kw">mean</span>(total))</code></pre></div>
+<pre><code>## # A tibble: 3 x 2
+##   AÑO   promedio_totales
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 2013              29.5
+## 2 2014              30.2
+## 3 2015              45.4</code></pre>
+<p>Podemos agrupar por múltiples columnas, generando más subgrupos; por ejemplo, promedios por por año y mes…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">agrupado &lt;-<span class="st"> </span><span class="kw">group_by</span>(atencion_ciudadano, AÑO, MES)
+
+sumario &lt;-<span class="st"> </span><span class="kw">summarise</span>(agrupado, <span class="dt">promedio =</span> <span class="kw">mean</span>(total))
+
+<span class="kw">head</span>(sumario)</code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+## # Groups:   AÑO [1]
+##   AÑO   MES   promedio
+##   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;
+## 1 2013  01        25.1
+## 2 2013  02        26.1
+## 3 2013  03        26.9
+## 4 2013  04        29.5
+## 5 2013  05        28.0
+## 6 2013  06        28.9</code></pre>
+<p>… o por año, mes y barrio:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">agrupado &lt;-<span class="st"> </span><span class="kw">group_by</span>(atencion_ciudadano, AÑO, MES, BARRIO)
+
+sumario &lt;-<span class="st"> </span><span class="kw">summarise</span>(agrupado, <span class="dt">promedio =</span> <span class="kw">mean</span>(total))
+
+<span class="kw">head</span>(sumario)</code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+## # Groups:   AÑO, MES [1]
+##   AÑO   MES   BARRIO    promedio
+##   &lt;chr&gt; &lt;chr&gt; &lt;fct&gt;        &lt;dbl&gt;
+## 1 2013  01    AGRONOMIA    14.6 
+## 2 2013  01    ALMAGRO      29.5 
+## 3 2013  01    BALVANERA    23.6 
+## 4 2013  01    BARRACAS     19.4 
+## 5 2013  01    BELGRANO     24.4 
+## 6 2013  01    BOCA          9.97</code></pre>
+<p>Con esto cerramos la sección de verbos de transformación de datos. Los cinco verbos aprendidos, usados en conjunto, brindan una enorme capacidad de medida que vayamos progresando en nuestra familiaridad con las funciones -y agregando técnicas nuevas- vamos a ser capaces de procesar grandes cantidades de datos con soltura. Y obtener en pocos minutos lo que de otra forma, sin herramientas computacionales, tardaría días o sería inviable por lo tedioso.</p>
+
+</div>
+</div>
 </div>
             </section>
 
