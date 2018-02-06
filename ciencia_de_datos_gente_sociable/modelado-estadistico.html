@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2018-02-03">
+<meta name="date" content="2018-02-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -141,7 +141,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.6" data-path="visualizacion.html"><a href="visualizacion.html#preparando-una-visualizacion-para-compartir"><i class="fa fa-check"></i><b>4.6</b> Preparando una visualización para compartir</a></li>
 <li class="chapter" data-level="4.7" data-path="visualizacion.html"><a href="visualizacion.html#otras-visualizaciones"><i class="fa fa-check"></i><b>4.7</b> Otras visualizaciones</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html"><i class="fa fa-check"></i><b>5</b> Modelado estadístico</a></li>
+<li class="chapter" data-level="5" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html"><i class="fa fa-check"></i><b>5</b> Modelado estadístico</a><ul>
+<li class="chapter" data-level="5.1" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#regresion-lineal-simple"><i class="fa fa-check"></i><b>5.1</b> Regresión lineal simple</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#revolviendo-los-residuos"><i class="fa fa-check"></i><b>5.1.1</b> Revolviendo los residuos</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="mapas.html"><a href="mapas.html"><i class="fa fa-check"></i><b>6</b> Mapas</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -165,7 +169,161 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="modelado-estadistico" class="section level1">
 <h1><span class="header-section-number">Capítulo 
 5</span> Modelado estadístico</h1>
+<p>Llegamos a un tema de gran interés para quienes realizan investigaciones formales. La posición central que tiene el modelado en la investigación científica se debe a que cuantifica relaciones: permite pasar de decir “La luz solar abundante mejora el crecimiento de las plantas” a “por cada hora adicional de exposión mensual a la luz solar, los cultivos aumentaron su rinde en un 1%”. La cuantificación permite realizar comparaciones, algo clave para enteder un fenómeno estudiado: antes y después, con o sin tratamiento, en un lugar o en otro.</p>
+<p>Este capítulo le debe mucho a <em>ModernDive: An Introduction to Statistical and Data Sciences via R</em> por Chester Ismay y Albert Y. Kim, disponible en forma gratuita <a href="http://http://moderndive.com/" class="uri">http://http://moderndive.com/</a>. ModernDive es un recurso muy recomendable para quienes quieran continuar profundizando su conocimiento más allá de los temas que veremos a continuación.</p>
+<p>En términos matemáticos, se habla de “modelar” debido a que estamos creando un modelo, una reconstrucción simplificada (¡simplificada en extremo!) de cómo funciona un proceso observado en el mundo real. En un modelo de datos, siempre tenemos al menos</p>
+<ul>
+<li>Una variable resultante, siempre una sola, también llamada variable “dependiente”,</li>
+<li>Una o más variables predictoras, también llamadas “explicativas”</li>
+</ul>
+<p>El modelado de datos puede ser utilizado para dos própositos:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Predecir</strong> el valor de una variable resultante en base a valores conocidos de las variables predictoras. Aquí no interesa tanto entender cómo es que las variables interactúan entre sí, o por qué lo hacen. Mientras las predicciones sean acertadas, o se acerquen lo suficiente, el modelo cumple su cometido. Los modelos predictivos se emplean en una enorme variedad de aplicaciones: inversión en bolsa, prevención de fraude, publicidad online, fijación de primas en seguros de riesgo, etc.</p></li>
+<li><p><strong>Explicar</strong> la relación entre una variable dependiente y todas las demás (las expicativas), buscando determinar si la relación es significativa. Los modelos explicativos son los que se favorecen en investigación académica, ya que ayudan a entender el fenómeno modelado.</p></li>
+</ol>
+<p>Existen muchísimas técnicas para modelar datos, algunas de ellas simples como la regresión lineal, y otras mucho más complejas, como las redes neuronales. Por supuesto, vamos a practicar con las primeras.</p>
+<p>La humilde regresión lineal, fácil de explicar y muy fácil de resolver con la ayuda de una computadora, es el caballito de batalla del modelado estadístico. A pesar de que no es adecuada para ciertos tipo de datos, y de que existen métodos más modernos que explotan mucha más el potencial de las computadoras, la regresión lineal sigue siendo la herramienta más común. Un poco por costumbre, y otro porque es el método más fácil de interpretar, lo que favorece entender y comunicar sus resultados.</p>
+<div id="regresion-lineal-simple" class="section level2">
+<h2><span class="header-section-number">5.1</span> Regresión lineal simple</h2>
+<p>La encarnación más sencilla de la regresión lineal es la simple o univariada. Tenemos nuestra variable <span class="math inline">\(y\)</span>, numérica, y una sola variable predictora <span class="math inline">\(x\)</span>, que puede ser numérica o categórica.</p>
+<p>Para poner en práctica los conceptos repasados en este capítulo, vamos a tomarnos un recreo de los datos de Buenos Aires, haciendo un <em>zoom out</em> hacia las escalas de país, continente y el planeta entero. Contamos con un dataset muy prolijo e interesante recopilado por Gapminder (www.gapminder.org), una organización que busca “hacer comprensible al mundo en base a estadísticas confiables”.</p>
+<p>Descarguemos el dataset y echémosle un vistazo como ya sabemos hacer:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exp_vida &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://bitsandbricks.github.io/data/gapminder.csv&quot;</span>)
 
+<span class="kw">summary</span>(exp_vida)</code></pre></div>
+<pre><code>##           pais         continente       año          expVida     
+##  Afghanistan:  12   Africa  :624   Min.   :1952   Min.   :23.60  
+##  Albania    :  12   Americas:300   1st Qu.:1966   1st Qu.:48.20  
+##  Algeria    :  12   Asia    :396   Median :1980   Median :60.71  
+##  Angola     :  12   Europe  :360   Mean   :1980   Mean   :59.47  
+##  Argentina  :  12   Oceania : 24   3rd Qu.:1993   3rd Qu.:70.85  
+##  Australia  :  12                  Max.   :2007   Max.   :82.60  
+##  (Other)    :1632                                                
+##       pobl                PBI_PC        
+##  Min.   :     60011   Min.   :   241.2  
+##  1st Qu.:   2793664   1st Qu.:  1202.1  
+##  Median :   7023596   Median :  3531.8  
+##  Mean   :  29601212   Mean   :  7215.3  
+##  3rd Qu.:  19585222   3rd Qu.:  9325.5  
+##  Max.   :1318683096   Max.   :113523.1  
+## </code></pre>
+<p>Con el poder de <code>summary()</code>, podemos decir unas cuantas cosas acerca de nuestros dataset. Las observaciones son de un pais, su continente, un año determinado y su expectativa de vida, población y… ¿PBI_PC?. Esa última es PBI per cápita. Que, según parece, hay 12 obervaciones por país. Que el rango de años es de 1952 a 2007. Que a lo largo de esos años, la menor expectativa registrada ha sido de 23 años (¡uf!) y la mayor de 82. Que el país menos poblado en el dataset ha tenido apenas más de 60.000 habitates, mientras que el más populoso ha alcanzado los 1300 millones.</p>
+<p>Hagamos nuestra pregunta: ¿Cómo ha se relaciona el paso del tiempo (variable explicativa) con la expectativa de vida en la Argentina?</p>
+<p>Para contestar, primero filtremos los datos que nos interesan:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exp_arg &lt;-<span class="st"> </span>exp_vida <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">filter</span>(pais <span class="op">==</span><span class="st"> &quot;Argentina&quot;</span>)
+
+exp_arg</code></pre></div>
+<pre><code>##         pais continente  año expVida     pobl    PBI_PC
+## 1  Argentina   Americas 1952  62.485 17876956  5911.315
+## 2  Argentina   Americas 1957  64.399 19610538  6856.856
+## 3  Argentina   Americas 1962  65.142 21283783  7133.166
+## 4  Argentina   Americas 1967  65.634 22934225  8052.953
+## 5  Argentina   Americas 1972  67.065 24779799  9443.039
+## 6  Argentina   Americas 1977  68.481 26983828 10079.027
+## 7  Argentina   Americas 1982  69.942 29341374  8997.897
+## 8  Argentina   Americas 1987  70.774 31620918  9139.671
+## 9  Argentina   Americas 1992  71.868 33958947  9308.419
+## 10 Argentina   Americas 1997  73.275 36203463 10967.282
+## 11 Argentina   Americas 2002  74.340 38331121  8797.641
+## 12 Argentina   Americas 2007  75.320 40301927 12779.380</code></pre>
+<p>Como dijimos en el capítulo de visualización, los scatterplots son útiles para mostrar la relación entre dos variables. Usemos uno para visualizar la relación entre año y expectativa de vida en Argentina, para intentar anticipar los resultados de la regresión lineal.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> exp_arg) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> año, <span class="dt">y =</span> expVida)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Correlación entre tiempo y expectativa de vida&quot;</span>,
+         <span class="dt">subtitle =</span> <span class="st">&quot;Argentina&quot;</span>,
+         <span class="dt">y =</span> <span class="st">&quot;expectativa de vida&quot;</span>)</code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-112-1.png" width="1050" /></p>
+<p>Bien, no necesitamos recurrir a la matemática para saber que tiempo y expectativa de vida están correlacionadas en forma positiva. Esto es, el incremento de una unidad de tiempo en general (o siempre, en este caso) resulta en el incremento de la expectativa de vida. Una correlación <em>negativa</em> sería lo opuesto: que el incremento de la variable explicativva estuviera asociado a un decremento de la variable explicada. Además del <em>signo</em> de una correlación, otra medida importante es su intensidad. La intensidad de una correlación va de -1 (correlación negativa total) a 1 (correlación positiva total). Una correlación de cero significa que las dos variables son por completo independientes, en otras palabras que saber cuánto vale una no nos ayuda en nada a estimar el valor de la otra.</p>
+<p>Obtener la correlación entre dos variables es fácil. La función <code>cor()</code> toma dos vectores dos secuencias de valores, y los compara para determinar su grado de correlación. Recurriendo al truco que ya usamos alguna vez, usamos el formato “dataframe$columna” para extraer las columnas de nuestro dataframe que necesitamos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(exp_arg<span class="op">$</span>año, exp_arg<span class="op">$</span>expVida)</code></pre></div>
+<pre><code>## [1] 0.9977816</code></pre>
+<p>El valor resultante se acerca mucho a 1, la correlación total. OK, el paso de los años y la expectativa de vida en la Argentina están correlaciondos de forma muy fuerte, pero aún desconocemos algo quizás más importante: un valor preciso del “efecto” que el paso de cada año tiene sobre la expectativa de vida. Eso es lo que vamos a determinar con la regresión lineal. Usamos la palabra “efecto” entre comillas para aclarar una de las limitaciones del modelado estadístico: podemos probar correlación, pero no causalidad. Es decir, no podemos probar que una variable causa a la otra; en todo caso, probamos que se mueven juntas y en base a ello podríamos diseñar un experimento que permita comprobar causalidad.</p>
+<p>Vamos a la regresión lineal entonces, para medir de una buena vez la correlación entre tiempo y expectativa de vida. Usamos la función <code>lm()</code> (por “linear model”), así:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modelo_exp &lt;-<span class="st"> </span><span class="kw">lm</span>(expVida <span class="op">~</span><span class="st"> </span>año, <span class="dt">data =</span> exp_arg)</code></pre></div>
+<p>¡Eso es todo! Hemos construido un modelo estadístico; ahora tenemos que aprender a usarlo. Obsérvese que volvió aparecer el simbolillo que denota una fórmula, <code>~</code>. Usado como primer argumento de <code>lm()</code>, signifca “<em>expVida</em> vs <em>año</em>”, es decir “estimar el efecto en la variable <em>expVida</em> cuando incrementa el valor de <em>año</em>”, usando los datos contenidos en el dataframe <em>exp_arg</em>.</p>
+<p>El resultado de <code>lm()</code>, que hemos guardado dentro de la variable <code>modelo_exp</code> es un tipo de objecto con el que no hemos trabajado hasta ahora. No es un dataframe, sino una lista que contiene distintos atributos del modelo estadístico. No hace falta preocuparnos por eso ahora.</p>
+<p>Retomando nuestra pregunta… ¿cuál es el efecto? Nos lo dice el modelo cuando lo escribimos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modelo_exp</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = expVida ~ año, data = exp_arg)
+## 
+## Coefficients:
+## (Intercept)          año  
+##   -389.6063       0.2317</code></pre>
+<p>Ahí está. En nuestro modelo, el <em>coeficiente</em> de la variable “año” es 0.2317. Significado: incrementando en una unidad la variable año, la variable expectativa de vida se incrementa en 0.2317. Dicho de otra manera, por cada año que pasa la expectativa de vida en la Argentina aumenta casi 3 meses.</p>
+<p>El otro coeficiente que aparece, “(Intercept)” es la intersección. En términos de interpretado del modelo, la intersección rara vez tiene utilidad. Para lo que sí sirve es para trazar la línea que permite “predecir” valores para años en los que no tenemos observaciónes. Recordemos la fórmula que define una línea recta:</p>
+<p><span class="math display">\[ y = a + b \times x \]</span></p>
+<p>A cada punto en <span class="math inline">\(x\)</span> le corresponde un valor en <span class="math inline">\(y\)</span> que se obtiene multiplicando a <span class="math inline">\(x\)</span> por la <em>pendiente</em>, <span class="math inline">\(b\)</span>, y sumando la intersección, <span class="math inline">\(a\)</span>. Se le llama “intersección” u “ordenada al origen” porque es el valor donde la recta intersecta con el eje de las <code>y</code>: cuando <span class="math inline">\(x\)</span> vale <span class="math inline">\(0\)</span>, la fórmula nos da <span class="math inline">\(y = b\)</span>.</p>
+<p>En una regresión lineal, el “modelo” que creamos es precisamente eso: una línea. Tan simple como eso. Lo que hace a esta linea tan potente, es que la podemos usar bola de cristal: para saber cuanto valdría la variable dependiente ante un valor determinado de la variable predictora, revisamos por donde pasa la línea.</p>
+<p>Lo podemos visualizar con ayuda de <code>ggplot()</code>, que por supuesto incluye una función para trazar líneas. Parámetros necesarios: <em>intercept</em> (interseción) y <em>slope</em> (pendiente). Usamos los respectivos valores que nos indica el modelo, <code>-389.6063</code> y <code>o.2317</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> exp_arg) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> año, <span class="dt">y =</span> expVida)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Correlación entre tiempo y expectativa de vida&quot;</span>,
+         <span class="dt">subtitle =</span> <span class="st">&quot;Argentina&quot;</span>,
+         <span class="dt">y =</span> <span class="st">&quot;expectativa de vida&quot;</span>,
+         <span class="dt">caption =</span> <span class="st">&quot;con línea de regresión&quot;) +</span>
+<span class="st">    geom_abline(aes(intercept = -389.6063, slope = 0.2317), color = &quot;</span>blue<span class="st">&quot;)</span></code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-116-1.png" width="1050" /></p>
+<p>Aquí no vemos más que los datos que ya teníamos. Pero proyectemos la línea hacia el futuro. Con <code>xlim()</code> e <code>ylim()</code> podemos definir a mano los límites de nuestro gráfico, haciéndolo ir más allá del rango de los datos que tenemos. La línea sigue siendo la misma, sólo que ahora podemos ver hacia donde va.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> exp_arg) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> año, <span class="dt">y =</span> expVida)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Correlación entre tiempo y expectativa de vida&quot;</span>,
+         <span class="dt">subtitle =</span> <span class="st">&quot;Argentina&quot;</span>,
+         <span class="dt">y =</span> <span class="st">&quot;expectativa de vida&quot;</span>,
+         <span class="dt">caption =</span> <span class="st">&quot;con línea de regresión&quot;) +</span>
+<span class="st">    geom_abline(aes(intercept = -389.6063, slope = 0.2317), color = &quot;</span>blue<span class="st">&quot;) +</span>
+<span class="st">    xlim(c(1950, 2030)) +</span>
+<span class="st">    ylim(c(60, 85))</span></code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-117-1.png" width="1050" /></p>
+<p>Ahí está la predicción. Según nuestro modelo, para el año 2030 la expectativa de vida en la Argentina habrá superado los 80 años.</p>
+<p>Es hora de dar una definición oficial para una regresión lineal, y es esta: es la línea que describe la ecuación:</p>
+<p><span class="math display">\[ \hat{y} = b_0 + b_1 \times x \]</span> Obsérvese que se trata de la ecuación de una recta, <span class="math inline">\(y = a + b \times x\)</span>, con otros nombres. En voz alta, se leería así “Cada predicción del valor de y, llamada <span class="math inline">\(\hat{y}\)</span>, se obtiene multiplicando a la variable predictora <span class="math inline">\(x\)</span> por su coeficiente <span class="math inline">\(b_1\)</span> y sumándole el valor de la intersección <span class="math inline">\(b_0\)</span>”. Cuando tengo que pronunciar</p>
+<p>Ya que estamos, aprendamos otro truco. <code>ggplot()</code> puede agregar a nuestros scatterplots una capa con la línea de la regresión lineal, en forma automática. La función <code>geom_smooth()</code> se usar para explicitar patrones en los datos. Tal como otras de la familia ggplot, espera que se le diga que variables asignar a <code>x</code> e <code>y</code>, más un parámetro <code>method</code> con el método solicitado para traar una línea de tendencia. En nuestro caso, usamos <code>method = &quot;lm&quot;</code> por <em>linear model</em>, el modelo lineal.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> exp_arg) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> año, <span class="dt">y =</span> expVida)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Correlación entre tiempo y expectativa de vida&quot;</span>,
+         <span class="dt">subtitle =</span> <span class="st">&quot;Argentina&quot;</span>,
+         <span class="dt">y =</span> <span class="st">&quot;expectativa de vida&quot;</span>,
+         <span class="dt">caption =</span> <span class="st">&quot;con línea de regresión vía geom_smooth()&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(<span class="dt">x =</span> año, <span class="dt">y =</span> expVida), <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)</code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-118-1.png" width="1050" /></p>
+<p>La distancia entre los puntos (las observaciones) y la línea (el modelo) son muy pequeñas. Eso significa que, en este caso, el modelo describe con gran precisión la dinámica de la relación entre las variables analizadas.</p>
+<p>En general, es inusual encontrar una correlación tan nítida entre variables “en la vida real”, sobre todo cuando estudiamos procesos complejos cuyo comportamiento describe patrones más complejos que una relación lineal pura. No hace falta ir demasiado lejos para encontrar un ejemplo. Usando el mismo dataset, visualicemos un scatterplot de PBI vs año, agregando la línea de regresión para:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> exp_arg) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> año, <span class="dt">y =</span> PBI_PC)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Correlación entre PBI y expectativa de vida&quot;</span>,
+         <span class="dt">subtitle =</span> <span class="st">&quot;Argentina&quot;</span>,
+         <span class="dt">y =</span> <span class="st">&quot;PBI per cápita&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(<span class="dt">x =</span> año, <span class="dt">y =</span> PBI_PC), <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)</code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-119-1.png" width="1050" /></p>
+<p>Sigue siendo evidente una fuerte tendencia lineal, pero las observaciones ya no se ciñen de forma tan estrecha a la línea idealizada de la regresión.</p>
+<p>Obtengamos el modelo del PBI per cápita de la Argentina en relación al paso del tiempo:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modelo_PBI &lt;-<span class="st"> </span><span class="kw">lm</span>(exp_arg<span class="op">$</span>PBI_PC <span class="op">~</span><span class="st"> </span>exp_arg<span class="op">$</span>año)
+
+modelo_PBI</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = exp_arg$PBI_PC ~ exp_arg$año)
+## 
+## Coefficients:
+## (Intercept)  exp_arg$año  
+##  -162888.14        86.81</code></pre>
+<p>Tal como indicaba el scatterplot, obtuvimos un coeficiente positivo. Según el modelo, cada año que pasa resulta en un incremento de 86 dólares en el PBI per cápita del país. Sin embargo, sabemos que no todas las observaciones cumple al pie de la letra con ese incremento. ¿Debería preocuparnos eso? Una parte importante del análisis basado en regresiones es revisar las desviaciones, y decidir si ameritan buscar una explicación. Para ello, lo mejor es empezar por prestar atención a los residuos.</p>
+<div id="revolviendo-los-residuos" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Revolviendo los residuos</h3>
+<p>Los residuos, en la jerga estadística, no son otra cosa que las diferencias encontradas entre el valor que predice un modelo y el valor observado para una variable.</p>
+<p>Es hora de dar una definición oficial para una regresión lineal, y es esta: es la línea que describe la ecuación:</p>
+<p><span class="math display">\[ \hat{y} = b_0 + b_1 \times x \]</span> Obsérvese que no es otra cosa que la ecuación de una línea recta cualquiera, que en general se describe como <span class="math inline">\(y = a + b \times x\)</span>.</p>
+<p>Donde la y con sombrerito, <span class="math inline">\(\hat{y}\)</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(exp_arg) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> año, <span class="dt">y =</span> PBI_PC)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_vline</span>(<span class="kw">aes</span>(<span class="dt">xintercept =</span> <span class="dv">2001</span>), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-121-1.png" width="1050" /></p>
+
+</div>
+</div>
 </div>
             </section>
 
@@ -213,6 +371,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

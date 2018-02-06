@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2018-02-03">
+<meta name="date" content="2018-02-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -141,7 +141,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.6" data-path="visualizacion.html"><a href="visualizacion.html#preparando-una-visualizacion-para-compartir"><i class="fa fa-check"></i><b>4.6</b> Preparando una visualización para compartir</a></li>
 <li class="chapter" data-level="4.7" data-path="visualizacion.html"><a href="visualizacion.html#otras-visualizaciones"><i class="fa fa-check"></i><b>4.7</b> Otras visualizaciones</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html"><i class="fa fa-check"></i><b>5</b> Modelado estadístico</a></li>
+<li class="chapter" data-level="5" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html"><i class="fa fa-check"></i><b>5</b> Modelado estadístico</a><ul>
+<li class="chapter" data-level="5.1" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#regresion-lineal-simple"><i class="fa fa-check"></i><b>5.1</b> Regresión lineal simple</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#revolviendo-los-residuos"><i class="fa fa-check"></i><b>5.1.1</b> Revolviendo los residuos</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="mapas.html"><a href="mapas.html"><i class="fa fa-check"></i><b>6</b> Mapas</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -303,7 +307,7 @@ superficie_habitacion_m2</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sf)</code></pre></div>
 <p>Y cargamos un archivo georeferenciado con las comunas de la Ciudad Autónoma de Buenos Aires, disponible online en formato <a href="https://es.wikipedia.org/wiki/GeoJSON"><em>geojson</em></a>, un estándar de representación de datos geográficos que es fácil de usar:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">comunas &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&#39;https://bitsandbricks.github.io/data/CABA_comunas.geojson&#39;</span>)</code></pre></div>
-<pre><code>## Reading layer `OGRGeoJSON&#39; from data source `https://bitsandbricks.github.io/data/CABA_comunas.geojson&#39; using driver `GeoJSON&#39;
+<pre><code>## Reading layer `CABA_comunas&#39; from data source `https://bitsandbricks.github.io/data/CABA_comunas.geojson&#39; using driver `GeoJSON&#39;
 ## Simple feature collection with 15 features and 4 fields
 ## geometry type:  MULTIPOLYGON
 ## dimension:      XY
@@ -330,12 +334,12 @@ superficie_habitacion_m2</code></pre></div>
 ## 5                                                              ALMAGRO - BOEDO
 ## 6                                                                    CABALLITO
 ##   perimetro     area comunas                       geometry
-## 1  35572.65 17802807       1 MULTIPOLYGON (((-58.3685405...
-## 2  21246.61  6140873       2 MULTIPOLYGON (((-58.3952057...
-## 3  10486.26  6385991       3 MULTIPOLYGON (((-58.4119188...
-## 4  36277.44 21701236       4 MULTIPOLYGON (((-58.3552004...
-## 5  12323.47  6660526       5 MULTIPOLYGON (((-58.4128700...
-## 6  10990.96  6851029       6 MULTIPOLYGON (((-58.4306058...</code></pre>
+## 1  35572.65 17802807       1 MULTIPOLYGON (((-58.36854 -...
+## 2  21246.61  6140873       2 MULTIPOLYGON (((-58.39521 -...
+## 3  10486.26  6385991       3 MULTIPOLYGON (((-58.41192 -...
+## 4  36277.44 21701236       4 MULTIPOLYGON (((-58.3552 -3...
+## 5  12323.47  6660526       5 MULTIPOLYGON (((-58.41287 -...
+## 6  10990.96  6851029       6 MULTIPOLYGON (((-58.43061 -...</code></pre>
 <p>Podemos ver que el dataframe contiene 15 filas y 5 columnas. Una fila por comuna (es razonable!) y 5 columnas: “barrios”, “perímetro”, “area”, “comunas” y “geometry”. Nuestro vistazo mediante head() permite asumir que “barrios” informa los barrios que componen cada comuna, mientras que perímetro y área informan sobre las dimensiones del polígono cubierto por cada comuna. La columna “geometry” aparece en todos los dataframes de tipo espacial, y es la que contiene los datos con sus coordenadas geográficas.</p>
 <p>Y hablando de coordenadas, generar un mapa a partir de un dataframe espacial creado por sf es muy fácil con la ayuda de ggplot<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(comunas) <span class="op">+</span>
@@ -349,7 +353,7 @@ superficie_habitacion_m2</code></pre></div>
 <p>Aprovechando que tenemos un mapa, deberíamos clasificar las comunas entre las que pertenecen al norte y las que pertenecen al sur de la ciudad. No hay una línea divisoria oficial, pero la traza de la Avenida Rivadavia suele ser tomada como frontera: Rivadavia es la <a href="https://www.clarin.com/ediciones-anteriores/avenida-rivadaviaun-largo-recorrido-contrastes_0_B1reo181CYe.html">“divisoria simbólica del Norte y el Sur de la Ciudad, con sus diferencias de desarrollo”</a></p>
 <p>Por esas casualidades de la vida, tengo un archivo geográfico que contiene la línea que dibuja a avenida Rivadavia al atravesar la ciudad. Lo bajamos:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rivadavia &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&#39;https://bitsandbricks.github.io/data/avenida_rivadavia.geojson&#39;</span>)</code></pre></div>
-<pre><code>## Reading layer `OGRGeoJSON&#39; from data source `https://bitsandbricks.github.io/data/avenida_rivadavia.geojson&#39; using driver `GeoJSON&#39;
+<pre><code>## Reading layer `avenida_rivadavia&#39; from data source `https://bitsandbricks.github.io/data/avenida_rivadavia.geojson&#39; using driver `GeoJSON&#39;
 ## Simple feature collection with 1 feature and 1 field
 ## geometry type:  LINESTRING
 ## dimension:      XY
@@ -390,12 +394,12 @@ nueva_columna</code></pre></div>
 ## 5                                                              ALMAGRO - BOEDO
 ## 6                                                                    CABALLITO
 ##   perimetro     area comunas ubicacion                       geometry
-## 1  35572.65 17802807       1       Sur MULTIPOLYGON (((-58.3685405...
-## 2  21246.61  6140873       2     Norte MULTIPOLYGON (((-58.3952057...
-## 3  10486.26  6385991       3       Sur MULTIPOLYGON (((-58.4119188...
-## 4  36277.44 21701236       4       Sur MULTIPOLYGON (((-58.3552004...
-## 5  12323.47  6660526       5       Sur MULTIPOLYGON (((-58.4128700...
-## 6  10990.96  6851029       6     Norte MULTIPOLYGON (((-58.4306058...</code></pre>
+## 1  35572.65 17802807       1       Sur MULTIPOLYGON (((-58.36854 -...
+## 2  21246.61  6140873       2     Norte MULTIPOLYGON (((-58.39521 -...
+## 3  10486.26  6385991       3       Sur MULTIPOLYGON (((-58.41192 -...
+## 4  36277.44 21701236       4       Sur MULTIPOLYGON (((-58.3552 -3...
+## 5  12323.47  6660526       5       Sur MULTIPOLYGON (((-58.41287 -...
+## 6  10990.96  6851029       6     Norte MULTIPOLYGON (((-58.43061 -...</code></pre>
 <p>Y en el mapa:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(comunas) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_sf</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> ubicacion)) <span class="op">+</span>
@@ -502,6 +506,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
