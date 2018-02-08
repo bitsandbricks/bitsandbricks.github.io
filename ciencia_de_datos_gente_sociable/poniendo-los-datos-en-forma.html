@@ -143,9 +143,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html"><i class="fa fa-check"></i><b>5</b> Modelado estadístico</a><ul>
 <li class="chapter" data-level="5.1" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#regresion-lineal-simple"><i class="fa fa-check"></i><b>5.1</b> Regresión lineal simple</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#revolviendo-los-residuos"><i class="fa fa-check"></i><b>5.1.1</b> Revolviendo los residuos</a></li>
-<li class="chapter" data-level="5.1.2" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#regresion-con-una-variable-categorica"><i class="fa fa-check"></i><b>5.1.2</b> Regresión con una variable categórica</a></li>
+<li class="chapter" data-level="5.1.1" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#regresion-con-una-variable-numerica"><i class="fa fa-check"></i><b>5.1.1</b> Regresión con una variable numérica</a></li>
+<li class="chapter" data-level="5.1.2" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#revolviendo-los-residuos"><i class="fa fa-check"></i><b>5.1.2</b> Revolviendo los residuos</a></li>
+<li class="chapter" data-level="5.1.3" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#regresion-con-una-variable-categorica"><i class="fa fa-check"></i><b>5.1.3</b> Regresión con una variable categórica</a></li>
 </ul></li>
+<li class="chapter" data-level="5.2" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#regresion-con-multiples-variables"><i class="fa fa-check"></i><b>5.2</b> Regresión con múltiples variables</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mapas.html"><a href="mapas.html"><i class="fa fa-check"></i><b>6</b> Mapas</a></li>
 <li class="divider"></li>
@@ -604,6 +606,11 @@ sumario &lt;-<span class="st"> </span><span class="kw">summarise</span>(agrupado
 ## 4 2013  01    BARRACAS     19.4 
 ## 5 2013  01    BELGRANO     24.4 
 ## 6 2013  01    BOCA          9.97</code></pre>
+<p>Con <code>summarise()</code> podemos usar cualquier función que tome una lista de valores y devuelva un sólo resutado. Para empezar, algunas de las que más podrian ayudarnos son:</p>
+<pre><code>* `mean()`: Obtiene el promedio de los valores
+* `sum()`: Obtiene la suma
+* `min()`: Obtiene el valor más bajo
+* `max()`: Obtiene el valor más alto</code></pre>
 </div>
 <div id="bonus-el-operador-pipe" class="section level3">
 <h3><span class="header-section-number">3.3.6</span> ¡BONUS! El operador “pipe”: <code>%&gt;%</code></h3>
