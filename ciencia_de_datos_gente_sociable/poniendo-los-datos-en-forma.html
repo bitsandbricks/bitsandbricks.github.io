@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2018-02-08">
+<meta name="date" content="2018-02-11">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -103,7 +103,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">Ciencia de Datos para gente sociable</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Antes de empezar</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>¿Para quién es esto?</a></li>
+<li class="chapter" data-level="" data-path="antes-de-empezar.html"><a href="antes-de-empezar.html"><i class="fa fa-check"></i>Antes de empezar</a></li>
 <li class="chapter" data-level="1" data-path="que-es-la-ciencia-de-datos.html"><a href="que-es-la-ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> ¿Qué es la ciencia de datos?</a></li>
 <li class="chapter" data-level="2" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html"><i class="fa fa-check"></i><b>2</b> Una presentación a toda marcha de R</a><ul>
 <li class="chapter" data-level="2.1" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#nuestro-primer-proyecto-en-r"><i class="fa fa-check"></i><b>2.1</b> Nuestro primer proyecto en R</a><ul>
@@ -149,7 +150,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#regresion-con-multiples-variables"><i class="fa fa-check"></i><b>5.2</b> Regresión con múltiples variables</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="mapas.html"><a href="mapas.html"><i class="fa fa-check"></i><b>6</b> Mapas</a></li>
+<li class="chapter" data-level="6" data-path="informacion-geografica-y-mapas.html"><a href="informacion-geografica-y-mapas.html"><i class="fa fa-check"></i><b>6</b> Información geográfica y mapas</a><ul>
+<li class="chapter" data-level="6.1" data-path="informacion-geografica-y-mapas.html"><a href="informacion-geografica-y-mapas.html#los-datos-georreferenciados"><i class="fa fa-check"></i><b>6.1</b> Los datos georreferenciados</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
 </ul>
@@ -303,6 +306,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Podemos seguir siempre ese formato para guardar nuestros datos. El primer parámetro es el dataframe que vamos a guardar, el segundo -siempre entre comillas- es el nombre de archivo, y la opcion final, <code>row.names = FALSE</code> sirve para evitar que R le agregue una columna al principio con numeros consecutivos (1, 2, 3, y así), cosa que quizás fue útil alguna vez pero en general no necesitamos.</p>
 <p>Para volver a leer los datos en otra ocasión, usamos <code>read.csv()</code> tal como ya hemos hecho.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">atencion_ciudadano &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;atencion_ciudadano.csv&quot;</span>)</code></pre></div>
+<p>Y si queremos saber exactamente dónde ha guardado R nuestros datos, por ejemplo para abrirlos con otro programa, usamos la función <code>getwd</code> (por <em>get working directory</em> )</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getwd</span>()</code></pre></div>
+<pre><code>## [1] &quot;/home/havb/Dropbox/Books/Mios/Ciencia de datos para gente sociable&quot;</code></pre>
+<p>El resultado será la dirección, la carpeta, donde estamos rabajando y hemos guardado los datos; por ejemplo <code>/home/antonio/Practicando R/</code>.</p>
 </div>
 <div id="transformando-los-datos" class="section level2">
 <h2><span class="header-section-number">3.3</span> Transformando los datos</h2>
@@ -316,7 +323,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>summarise()</code>: producir sumarios -un valor extraído de muchos, por ejemplo el promedio- con el contenido de las columnas</li>
 </ul>
 <p>Estas funciones tienen una sintaxis, una forma de escribirse, uniforme. El primer argumento que toman siempre es un dataframe; los siguientes indican qué hacer con los datos. El resultado siempre es un nuevo dataframe.</p>
-<p>Las funciones son parte de (<code>dplyr</code>)[<a href="http://dplyr.tidyverse.org/" class="uri">http://dplyr.tidyverse.org/</a>], uno de los paquetes de funciones de la familia (Tidyverse)[<a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>]. Si no lo hicimos aún en la sesión en la que estamos trabajando, cargamos <code>tidyverse</code>.</p>
+<p>Las funciones son parte de <a href="http://dplyr.tidyverse.org/">dplyr</a>, uno de los paquetes de funciones de la familia <a href="https://www.tidyverse.org/">Tidyverse</a>. Si no lo hicimos aún en la sesión en la que estamos trabajando, cargamos <code>tidyverse</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
 <div id="seleccionar-columnas-con-select" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> Seleccionar columnas con <code>select()</code></h3>
