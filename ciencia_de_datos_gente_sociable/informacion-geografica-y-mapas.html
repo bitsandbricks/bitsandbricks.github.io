@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2018-02-11">
+<meta name="date" content="2018-02-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -104,6 +104,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>¿Para quién es esto?</a></li>
+<li class="chapter" data-level="" data-path="antes-de-empezar.html"><a href="antes-de-empezar.html"><i class="fa fa-check"></i>Antes de empezar</a></li>
 <li class="chapter" data-level="1" data-path="que-es-la-ciencia-de-datos.html"><a href="que-es-la-ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> ¿Qué es la ciencia de datos?</a></li>
 <li class="chapter" data-level="2" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html"><i class="fa fa-check"></i><b>2</b> Una presentación a toda marcha de R</a><ul>
 <li class="chapter" data-level="2.1" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#nuestro-primer-proyecto-en-r"><i class="fa fa-check"></i><b>2.1</b> Nuestro primer proyecto en R</a><ul>
@@ -153,6 +154,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.1" data-path="informacion-geografica-y-mapas.html"><a href="informacion-geografica-y-mapas.html#los-datos-georreferenciados"><i class="fa fa-check"></i><b>6.1</b> Los datos georreferenciados</a></li>
 <li class="chapter" data-level="6.2" data-path="informacion-geografica-y-mapas.html"><a href="informacion-geografica-y-mapas.html#formatos-de-archivo"><i class="fa fa-check"></i><b>6.2</b> Formatos de archivo</a></li>
 <li class="chapter" data-level="6.3" data-path="informacion-geografica-y-mapas.html"><a href="informacion-geografica-y-mapas.html#explorando-un-archivo-con-informacion-geografica"><i class="fa fa-check"></i><b>6.3</b> Explorando un archivo con información geográfica</a></li>
+<li class="chapter" data-level="6.4" data-path="informacion-geografica-y-mapas.html"><a href="informacion-geografica-y-mapas.html#visualizando-informacion-geografica"><i class="fa fa-check"></i><b>6.4</b> Visualizando información geográfica</a></li>
+<li class="chapter" data-level="6.5" data-path="informacion-geografica-y-mapas.html"><a href="informacion-geografica-y-mapas.html#volcando-en-el-mapa-informacion-de-multiples-fuentes"><i class="fa fa-check"></i><b>6.5</b> Volcando en el mapa información de múltiples fuentes</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -186,14 +189,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>El atributo que distingue a los datos georreferenciados, lo que los hace merecer ese nombre, es que representan ubicaciones exactas sobre la superficie de la Tierra. Representar en forma precisa una posición sobre la superficie terrestre es un todo un reto. Para empezar, la Tierra tiene una forma irregular. A pesar de cómo solemos imaginarla y dibujarla, no es una esfera perfecta sino que está “achatada” en los polos, dificultando la matemática necesaria para comparar posiciones y medir distancias. Luego, está el problema de cómo mostrar sobre papel impreso, o en una pantalla digital, -superficies planas- rasgos geográficos que pertenecen a una superficie tridimensional esférica. La solución a estos problemas toma la forma de sistemas de coordenadas de referencia (<em>CRS</em> por sus siglas en inglés), y de proyecciones cartográficas.</p>
 <p>Los CRS son un sistema de números que definen ubicaciones sobre la superficie de la Tierra; funcionan como direcciones. El tipo de CRS más conocido es el que usa latitud y longitud, para definir posiciones en los ejes norte-sur y este-oeste.</p>
 <p>Las proyecciones cartográficas son instrucciones para traducir a un plano la disposición de puntos ubicados en la esfera terrestre. Algo así como las instrucciones para dibujar en dos dimensiones las disposición de fronteras, accidentes geográficos, calles o cualquier otro objeto que se extiende sobre la superficie curva del planeta. Como en toda traducción, hay algo que se pierde en el proceso. Todo los mapas “mienten”, en el sentido en que presentan una versión distorsionada de la superficie de terrestre. Esto es inevitable; no existe forma de pasar de la esfera al plano sin distorsionar la forma, la superficie, la distancia o la dirección de los rasgo geográficos. Existen muchísimas proyecciones distintas, cada una pensada para minimizar alguno de los tipos de distorsión, o para encontrar una solución de compromiso que los balancee.</p>
-<div class="figure"><span id="fig:unnamed-chunk-10"></span>
+<div class="figure"><span id="fig:unnamed-chunk-149"></span>
 <img src="imagenes/proyecciones.png" alt="Distintos sistemas de proyección cartográfica (cortesía Daniel R. Strebe 2011)"  />
 <p class="caption">
 Figura 6.1: Distintos sistemas de proyección cartográfica (cortesía Daniel R. Strebe 2011)
 </p>
 </div>
 <p>La proyección más famosa es la Mercator, diseñada para asistir la navegación marítima y en uso desde el siglo XVI. Su fuerte es que no distorsiona las direcciones, por lo que mpermite fijar el rumbo de navegación consultando el mapa. Su principal problema es que produce una distorsión notable en las áreas cercanas a los polos: Groenlandia aparenta el mismo tamaño que toda África, cuando en realidad tiene sólo un quinceavo de su superficie. Por esa razon perdió la proyección popularidad en el siglo XX cuando comenzaron a preferirse proyecciones que respetan las áreas, como las de la Figura 6.1. Sin embargo, en el siglo XXI la proyección Mercator recuperó protagonismo. Google la eligió para sus mapas en línea, y por razones de compatibilidad otros proveedores de mapas digitales la adoptaron también. Así, y para inconsolable irritación de los geógrafos, Mercator se convirtó en el estándar de facto para aplicaciones geográficas en la web.</p>
-<div class="figure"><span id="fig:unnamed-chunk-11"></span>
+<div class="figure"><span id="fig:unnamed-chunk-150"></span>
 <img src="imagenes/Mercator-proj.png" alt="La inescapable proyección Mercator (cortesía Jecowa)"  />
 <p class="caption">
 Figura 6.2: La inescapable proyección Mercator (cortesía Jecowa)
@@ -207,43 +210,123 @@ Figura 6.2: La inescapable proyección Mercator (cortesía Jecowa)
 </div>
 <div id="explorando-un-archivo-con-informacion-geografica" class="section level2">
 <h2><span class="header-section-number">6.3</span> Explorando un archivo con información geográfica</h2>
-<p>Como hemos hecho antes, recurriremos al portal de datos abiertos de la ciudad de Buenos Aires para obtener datos abiertos con los que practicar. En esta ocasión</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(sf)
-
-caba &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&#39;/home/havb/data/gcba/censal/informacion_censal_por_radio_2010.shp&#39;</span>)</code></pre></div>
-<pre><code>## Reading layer `informacion_censal_por_radio_2010&#39; from data source `/home/havb/data/gcba/censal/informacion_censal_por_radio_2010.shp&#39; using driver `ESRI Shapefile&#39;
-## Simple feature collection with 3554 features and 14 fields
+<p>Como hemos hecho antes, practicaremos con datos tomados del portal de datos abiertos de la Ciudad de Buenos Aires. En esta ocasión se trata de los radios censales de la ciudad. Los radios censales son particiones de la superficie de la ciudad que contienen una cantidad similar de hogares. Fueron definidos por el Instituto Nacional de Estadística y Censos (INDEC) para facilitar la labor durante la jornada del Censo Nacional de Población que se realiza cada diez años. La idea es asignar a cada censista un radio censal, estimando que puede recorrer todos los hogares incluidos durante el día. Los radios censales son la unidad de análisis espacial por excelencia, debido a que combinan alta granularidad con abundante información asociada de acceso público, producida como resultado del Censo.</p>
+<p>Carguemos la información. Si no lo hicimos aún, carguemos las librerías <code>sf</code> y <code>tidyverse</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sf)
+<span class="kw">library</span>(tidyverse)</code></pre></div>
+<p>Y leemos los datos directo desde internet:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">radios &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;https://bitsandbricks.github.io/data/CABA_rc.geojson&quot;</span>)</code></pre></div>
+<pre><code>## Reading layer `CABA_rc&#39; from data source `https://bitsandbricks.github.io/data/CABA_rc.geojson&#39; using driver `GeoJSON&#39;
+## Simple feature collection with 3554 features and 8 fields
 ## geometry type:  MULTIPOLYGON
 ## dimension:      XY
-## bbox:           xmin: 93743.42 ymin: 91566.42 xmax: 111752.2 ymax: 111284.4
-## epsg (SRID):    NA
-## proj4string:    +proj=tmerc +lat_0=-34.6297166 +lon_0=-58.4627 +k=0.9999980000000001 +x_0=100000 +y_0=100000 +ellps=intl +units=m +no_defs</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">caba2 &lt;-<span class="st"> </span>caba <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_transform</span>(<span class="dv">4326</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_set_crs</span>(<span class="dv">4326</span>)
-
-barrios &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&#39;https://bitsandbricks.github.io/data/CABA_barrios.geojson&#39;</span>)</code></pre></div>
-<pre><code>## Reading layer `CABA_barrios&#39; from data source `https://bitsandbricks.github.io/data/CABA_barrios.geojson&#39; using driver `GeoJSON&#39;
-## Simple feature collection with 48 features and 4 fields
-## geometry type:  POLYGON
-## dimension:      XY
-## bbox:           xmin: -58.53152 ymin: -34.70529 xmax: -58.33514 ymax: -34.52754
+## bbox:           xmin: -58.53092 ymin: -34.70574 xmax: -58.33455 ymax: -34.528
 ## epsg (SRID):    4326
 ## proj4string:    +proj=longlat +datum=WGS84 +no_defs</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">caba_barrios &lt;-<span class="st"> </span>caba2 <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">st_centroid</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">st_join</span>(barrios, <span class="dt">join =</span> st_within)</code></pre></div>
-<pre><code>## Warning in st_centroid.sfc(st_geometry(x), of_largest_polygon =
-## of_largest_polygon): st_centroid does not give correct centroids for
-## longitude/latitude data</code></pre>
-<pre><code>## although coordinates are longitude/latitude, st_within assumes that they are planar</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> caba_barrios, <span class="kw">aes</span>(<span class="dt">color =</span> BARRIO)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">guides</span>(<span class="dt">fill=</span><span class="ot">FALSE</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> barrios, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">fill=</span><span class="ot">NA</span>)</code></pre></div>
-<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Dediquemos un momento para describir la información que apareció al cargar el archivo.</p>
+<ul>
+<li><code>Simple feature collection with 3554 features and 8 fields</code>: Cargamos una colección de “simple features” (entidades geométricas en la jerga de la cartografía digital), compuesta por 3554 rasgos y 8 campos, que se traduce como 3554 observaciones/filas con 8 variables/columnas.</li>
+<li><code>geometry type:  MULTIPOLYGON</code>: los archivos con información geográfica contienen colecciones de puntos, de líneas, o de polígonos. En éste caso son polígonos; tiene sentido para la información que esperamos, que es la de la superficie de Buenos Aires dividida en sus radios censales</li>
+<li><code>dimension:      XY</code>: la información es “plana”, en dos dimensiones X e Y. No incluye información de alturas, que estaría en la dimensión Z. Es lo típico, rara vez trabajaremos con archivos tridimensionales. -<code>bbox:           xmin: -58.53092 ymin: -34.70574 xmax: -58.33455 ymax: -34.528</code>: nos da cuatro valores que forman una “caja” (<em>bounding box</em>), el rectángulo que contiene todos los datos. Estos valores son la latitud mínima, la longitud mínima, la latitud máxima y la longitud máxima del conjunto de datos. Sólo es útil cuando tenemos mucha práctica y ya reconomos lugares por sus coordenadas.</li>
+<li><code>epsg (SRID):    4326</code> y <code>proj4string:    +proj=longlat +datum=WGS84 +no_defs</code> significan lo mismo, que nuestros datos usan el sistema de coordenadas WGS84, tabién conocido por su código EPSG 4326 . Es el mismo que usan los sistemas GPS, Google Maps, y las aplicaciones de internet en general. Es importante prestar atención al sistemas de coordenadas, o CRS, ya que para comparar datos geográficos de distintas fuentes todas deben usar el mismo.</li>
+</ul>
+<p>Como con cualquir otro dataset, comenzamos nuestra exploración pidiendo su resumen:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(radios)</code></pre></div>
+<pre><code>##     RADIO_ID          BARRIO         COMUNA       POBLACION     
+##  1_1_1  :   1   PALERMO  : 295   1      : 329   Min.   :   0.0  
+##  1_10_1 :   1   CABALLITO: 215   13     : 305   1st Qu.: 646.2  
+##  1_10_10:   1   RECOLETA : 198   14     : 295   Median : 786.0  
+##  1_10_11:   1   BALVANERA: 191   3      : 254   Mean   : 813.2  
+##  1_10_12:   1   FLORES   : 183   4      : 252   3rd Qu.: 928.0  
+##  1_10_13:   1   BELGRANO : 170   7      : 250   Max.   :3945.0  
+##  (Other):3548   (Other)  :2302   (Other):1869                   
+##    VIVIENDAS         HOGARES        HOGARES_NBI        AREA_KM2       
+##  Min.   :   0.0   Min.   :   0.0   Min.   :  0.00   Min.   :0.004468  
+##  1st Qu.: 311.2   1st Qu.: 259.0   1st Qu.:  2.00   1st Qu.:0.018626  
+##  Median : 377.0   Median : 310.0   Median :  6.00   Median :0.035548  
+##  Mean   : 401.4   Mean   : 323.6   Mean   : 19.35   Mean   :0.057350  
+##  3rd Qu.: 462.0   3rd Qu.: 371.0   3rd Qu.: 23.00   3rd Qu.:0.062847  
+##  Max.   :1405.0   Max.   :1093.0   Max.   :403.00   Max.   :3.804422  
+##                                                                       
+##           geometry   
+##  MULTIPOLYGON :3554  
+##  epsg:4326    :   0  
+##  +proj=long...:   0  
+##                      
+##                      
+##                      
+## </code></pre>
+<p>Podemos sacar en limpio varias cosas. RADIO_ID, por su nombre, debe ser el código que identifica cada radio censal. Tenemos columnas representando barrio y comuna de cada radio. Tenemos una columna para la población, y vemos que así como algún radio está deshabitado, el más poblado alcanza los 3945 habitantes. En canidad de viviendas, el máximo es de 1405, y el de hogares 1093: eso significa que existe al menos un radio censal donde hay viviendas desocupadas; tomamos nota para revisarlo luego. “HOGARES_NBI” representa la cantidad de hogares donde se registró que al menos una de las necesidades básicas no estaba satisfecha, con mínimo de 0 por radio, y máximo nada menos que de 403. También tenemos una columna con el área en km^2, que muestra que en general los radios censales abarcan alrededor de medio kilómetro cuadrado, pero existe alguno que es casi 8 veces mayor al promedio. Por último queda la columna <code>geometry</code>, que contiene una serie de puntos que permiten trazar la silueta de cada radio (sus polígonos). Nosotros no vamos a prestale atención, pero para R es fundamental, ya que le permite proyectar mapas y hacer cálculos geométricos cuando se lo pidamos.</p>
+</div>
+<div id="visualizando-informacion-geografica" class="section level2">
+<h2><span class="header-section-number">6.4</span> Visualizando información geográfica</h2>
+<p>La visualización de información geográfica por excelencia es el mapa, ¡por supuesto!</p>
+<p>Nuestro aliado <code>ggplot()</code> se encarga de ello.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> radios)</code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-154-1.png" width="1050" /></p>
+<p>Ademas de encontrarnos con la reconocible silueta de la ciudad, comprobamos lo que el resumen de la data había sugerido: la mayoría de los radios censales tiene un tamaño similar, pero existe un puñado que es considerablemente más extenso que el promedio. Los “megaradios” seguramente corresponden a zonas poco habitadas, por lo que se asume que un censste puede terminar de encuestar a todos los residentes en un día.</p>
+<p>Podemos analizar eso mismo: ¿cuántas viviendas hay por radio?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> radios, <span class="kw">aes</span>(<span class="dt">fill =</span> VIVIENDAS)) </code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-155-1.png" width="1050" /></p>
+<p>EL grosor de la línea que traza las fronteras entre radios hace difícil determinar el color de relleno. Esto suele pasar cuando se grafica información geográfica intrincada como la de los radios censales. Una solución es definir el color de la línea como <code>NA</code>, que para <code>ggplot</code> signifca “ninguno”. Lo hacemos así:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> radios, <span class="kw">aes</span>(<span class="dt">fill =</span> POBLACION), <span class="dt">color =</span> <span class="ot">NA</span>)</code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-156-1.png" width="1050" /></p>
+<p>Así esta mejor. Nótese que definimos el color por fuera de <code>aes()</code>. Cuando queremos asignar un valor fijo a alguno de los atributos estéticos (y no dependiente de una variable) siempre va fuera de la función <code>aes()</code>.</p>
+<p>En cuanto al gráfico, observamos que los radios censales más grandes tienden a ser poco poblados, con algunas excepciones, en particular el gran radio censal al oeste. ¿A qué barrio corresponde?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> radios, <span class="kw">aes</span>(<span class="dt">fill =</span> BARRIO), <span class="dt">color =</span> <span class="ot">NA</span>)</code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-157-1.png" width="1050" /></p>
+<p>Hemos logrado otro de nuestros gráficos ilegibles, intentando mostrar demasiadas variables categóricas a la vez. Una forma de resolver el dilema es filtrando los datos para aislar los casos de interés. Del menú de visualizaciones que aprendimos en el capítulo 2, podemos elegir el histograma para mostrar la distribución de tamaños de nuestros radios censales.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">data =</span> radios, <span class="kw">aes</span>(<span class="dt">x =</span> AREA_KM2))</code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-158-1.png" width="1050" /></p>
+<p>Cómo había anticipado el resumen vía <code>summary()</code>, la gran mayoría de los radios tiene menos de medio km^2. Unos pocos superan los 2 km^2, así que vamos a aislar esos para saber a que barrio corresponden.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">filtrados &lt;-<span class="st"> </span>radios <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">filter</span>(AREA_KM2 <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>) 
+
+<span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> filtrados, <span class="kw">aes</span>(<span class="dt">fill =</span> BARRIO)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Radios censales de mayo tamaño&quot;</span>)</code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-159-1.png" width="1050" /> Nuestro gran radio censal al este, con poblacion considerable, corresponde a Puerto Madero.</p>
+<p>Llevemos ahora nuestra atención al tema de la cantidad de viviendas superando a la de hogares. Tal situación implica que hay una tasa de vacancia alta en el radio censal. Podemos verla en el mapa graficando la intensidad de la relación entre viviendas y hoagres, expresándola como la división de una por otra.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> radios, <span class="kw">aes</span>(<span class="dt">fill =</span> VIVIENDAS<span class="op">/</span>HOGARES), <span class="dt">color =</span> <span class="ot">NA</span>)</code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-160-1.png" width="1050" /></p>
+<p>Hay un radio censal que parece brillar, destacándose entre los demás. ¿Dónde está? Esta vez lo resolvemos en forma análitica en lugar de visual, usando los verbos de transformación de datos. Vamos a definir una variable nueva, con la tasa entre viviendas y hogares que ya usamos para el gráfico. Luego vamos a ordenar el dataframe por orden descendiente de la tasa, y usando <code>head()</code> nos quedamos sólo con los primeros valores, que corresponden a los más altos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">radios <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">viv_vs_hogares =</span> VIVIENDAS <span class="op">/</span><span class="st"> </span>HOGARES) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">arrange</span>(<span class="kw">desc</span>(viv_vs_hogares)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">head</span>()</code></pre></div>
+<pre><code>## Simple feature collection with 6 features and 9 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -58.38038 ymin: -34.62205 xmax: -58.35869 ymax: -34.60085
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +datum=WGS84 +no_defs
+##   RADIO_ID        BARRIO COMUNA POBLACION VIVIENDAS HOGARES HOGARES_NBI
+## 1  1_13_15 PUERTO MADERO      1         0         6       0           0
+## 2   1_13_3 PUERTO MADERO      1        45       473      20           0
+## 3   1_9_19   SAN NICOLAS      1       119       405      61           6
+## 4  1_12_10   SAN NICOLAS      1       296       629     101           1
+## 5  1_12_12   SAN NICOLAS      1       499       471      90          17
+## 6   1_9_15   SAN NICOLAS      1       238       608     118          13
+##     AREA_KM2 viv_vs_hogares                       geometry
+## 1 0.07899011            Inf MULTIPOLYGON (((-58.36131 -...
+## 2 0.05698617      23.650000 MULTIPOLYGON (((-58.36094 -...
+## 3 0.06236044       6.639344 MULTIPOLYGON (((-58.37606 -...
+## 4 0.04438025       6.227723 MULTIPOLYGON (((-58.37879 -...
+## 5 0.03108456       5.233333 MULTIPOLYGON (((-58.37879 -...
+## 6 0.03287564       5.152542 MULTIPOLYGON (((-58.37473 -...</code></pre>
+<p>Otra vez Puerto Madero, que contiene un radio censal con una vancancia notable, el segundo de la lista: con 473 viviendas disponibles, se asentaron allí sólo 20 hogares. El que se llevó el primer puesto, también en Puerto Madero, obtuvo una tasa de “Inf”, o infinito. Esto ocurre porque allí tenemos 0 hogares, y al dividir por esa cantidad no se obtiene un número. Conociendo al barrio, podemos sospechar que la especulación inmobiliaria es la causa de las viviendas vacías. El resto de los radios censales del ranking corresponde a San Nicolás, el barrio más céntrico de la ciudad, donde la gran cantidad de departamentos dedicados a uso comercial o profesional explicaría la baja cantidad de hogares.</p>
+</div>
+<div id="volcando-en-el-mapa-informacion-de-multiples-fuentes" class="section level2">
+<h2><span class="header-section-number">6.5</span> Volcando en el mapa información de múltiples fuentes</h2>
 
 </div>
 </div>
+
+
+
+
+
+
             </section>
 
           </div>
@@ -290,6 +373,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
