@@ -6,33 +6,33 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Ciencia de Datos para Gente Sociable</title>
-  <meta name="description" content="Breve introducción de conceptos y técnicas para urbanistas, sociólogos, politólogos y otros entusiastas que se acercan al tema desde las Ciencias Sociales">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="description" content="Breve introducción de conceptos y técnicas para urbanistas, <a href="mailto:sociólog@s">sociólog@s</a>, <a href="mailto:politólog@s">politólog@s</a> y entusiastas que se acercan al tema desde las Ciencias Sociales">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Ciencia de Datos para Gente Sociable" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Breve introducción de conceptos y técnicas para urbanistas, sociólogos, politólogos y otros entusiastas que se acercan al tema desde las Ciencias Sociales" />
+  <meta property="og:description" content="Breve introducción de conceptos y técnicas para urbanistas, <a href="mailto:sociólog@s">sociólog@s</a>, <a href="mailto:politólog@s">politólog@s</a> y entusiastas que se acercan al tema desde las Ciencias Sociales" />
   <meta name="github-repo" content="bitsandbricks/datos_sociables" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Ciencia de Datos para Gente Sociable" />
   
-  <meta name="twitter:description" content="Breve introducción de conceptos y técnicas para urbanistas, sociólogos, politólogos y otros entusiastas que se acercan al tema desde las Ciencias Sociales" />
+  <meta name="twitter:description" content="Breve introducción de conceptos y técnicas para urbanistas, <a href="mailto:sociólog@s">sociólog@s</a>, <a href="mailto:politólog@s">politólog@s</a> y entusiastas que se acercan al tema desde las Ciencias Sociales" />
   
 
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2018-02-17">
+<meta name="date" content="2018-04-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
+<link rel="prev" href="antes-de-empezar.html">
 <link rel="next" href="una-presentacion-a-toda-marcha-de-r.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -49,6 +49,43 @@
 
 
 
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -67,6 +104,7 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>¿Para quién es esto?</a></li>
+<li class="chapter" data-level="" data-path="antes-de-empezar.html"><a href="antes-de-empezar.html"><i class="fa fa-check"></i>Antes de empezar</a></li>
 <li class="chapter" data-level="1" data-path="que-es-la-ciencia-de-datos.html"><a href="que-es-la-ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> ¿Qué es la ciencia de datos?</a><ul>
 <li class="chapter" data-level="1.1" data-path="que-es-la-ciencia-de-datos.html"><a href="que-es-la-ciencia-de-datos.html#que-significa-hacer-ciencia-de-datos"><i class="fa fa-check"></i><b>1.1</b> ¿Qué significa hacer ciencia de datos?</a></li>
 </ul></li>
@@ -146,7 +184,7 @@
 1</span> ¿Qué es la ciencia de datos?</h1>
 <p>La <em>Big Data</em> ha llegado para quedarse, y asumimos que su efecto en la sociedad será permanente. Así como pasó con la escritura, los medios de comunicación o tantos otros inventos humanos de inmenso impacto cultural, el incremento en la producción y análisis computacional de grandes volúmenes de datos está transformando cada una de nuestras actividades. Algunas profesiones se ven en crisis, otras se benefician, y también se crean algunas nuevas.</p>
 <p>Big data es un término impreciso, que se usa cuando queremos hablar de los datos que nuestra sociedad crea y procesa en forma digital, con cada vez más creciente velocidad, volumen, y variedad.</p>
-<p>En forma acorde, <em>data scientist</em> o “científico de datos” es también una profesión, o una actividad, que aún no está definida con toda claridad. El término, que abarca a quienes en forma cotidiana aplican técnicas de programación para analizar datos, no existía antes del 2008. Sólo cuatro años después la publicación Harvard Business Review agitó las aguas al declarar que quienes se desempeñan como científicos de datos pueden presumir de la profesión “más sexy del siglo XXI” [^1]. Títulos exagerados aparte, lo que es seguro es que la discipina ofrece un conjunto cada vez más maduro de saberes orientados a explotar datos para extraer conocimiento. Las técnicas y principios que la comunidad de la ciencia de datos ha desarrollado pueden ser aprovechados en muchos ámbitos. Entre ellos, el de las ciencias sociales, que también están en una etapa de transformación e incorporan la programación analítica como un recurso cada vez extendido.</p>
+<p>En forma acorde, <em>data scientist</em> o “científico de datos” es también una profesión, o una actividad, que aún no está definida con toda claridad. El término, que abarca a quienes en forma cotidiana aplican técnicas de programación para analizar datos, no existía antes del 2008. Sólo cuatro años después la publicación Harvard Business Review agitó las aguas al declarar que quienes se desempeñan como científicos de datos pueden presumir de la profesión “más sexy del siglo XXI.”<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> Títulos exagerados aparte, lo que es seguro es que la discipina ofrece un conjunto cada vez más maduro de saberes orientados a explotar datos para extraer conocimiento. Las técnicas y principios que la comunidad de la ciencia de datos ha desarrollado pueden ser aprovechados en muchos ámbitos. Entre ellos, el de las ciencias sociales, que también están en una etapa de transformación e incorporan la programación analítica como un recurso cada vez extendido.</p>
 <p>Avanzar las fronteras de la ciencia de datos, crear los algoritmos y técnicas informáticas que abren nuevas posibilidades de análisis es una tarea compleja, llevada a cabo por especialistas con profundos conocimientos de matemática. Y sin embargo “usar” la ciencia de datos, aplicar sus principios para resolver problemas complejos, es bastante más fácil. Para empezar sólo necesitamos paciencia para aprender algunos conceptos fundamentales de programación y estadística, empleándolos para entender y comunicar con datos. De eso se trata este libro.</p>
 <div id="que-significa-hacer-ciencia-de-datos" class="section level2">
 <h2><span class="header-section-number">1.1</span> ¿Qué significa hacer ciencia de datos?</h2>
@@ -158,7 +196,7 @@
 <li><p><strong>Conocimiento de dominio</strong>. El conocimiento de dominio es la experiencia acumulada en un campo particular de actividad humana: agricultura, relaciones públicas, física cuántica, crianza de niños. Complementa de forma imprescindible a las habilidades analíticas. El conocimiento de dominio no sólo ayuda a discernir si las respuestas obtenidas mediante un sofisticado análisis estadístico tienen sentido. También es necesario para saber cuáles son las preguntas que deberíamos estar haciendo.</p></li>
 </ul>
 <p>Las cuatros habilidades entran en acción en cada proyecto que involucra ciencia de datos, en mayor o menor medida de acuerdo a la etapa de análisis. Hablando de etapas, Hadley Wickham, uno de los referentes actuales en el campo, las define así:</p>
-<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
 <img src="imagenes/proceso_ciencia_datos.jpg" alt="etapas en la aplicación de ciencia de datos"  />
 <p class="caption">
 Figura 1.1: etapas en la aplicación de ciencia de datos
@@ -170,12 +208,18 @@ Figura 1.1: etapas en la aplicación de ciencia de datos
 
 </div>
 </div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Al momento de redactar este capítulo, la función <code>geom_sf</code> esta disponible sólo en la versión de desarrollo de ggplot, que puede ser instalada con <code>install.packages(&quot;devtools&quot;); devtools::install_github(&quot;hadley/ggplot2&quot;)</code><a href="que-es-la-ciencia-de-datos.html#fnref1">↩</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="antes-de-empezar.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="una-presentacion-a-toda-marcha-de-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -194,10 +238,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -216,6 +261,19 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

@@ -6,26 +6,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Ciencia de Datos para Gente Sociable</title>
-  <meta name="description" content="Breve introducción de conceptos y técnicas para urbanistas, sociólogos, politólogos y otros entusiastas que se acercan al tema desde las Ciencias Sociales">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="description" content="Breve introducción de conceptos y técnicas para urbanistas, <a href="mailto:sociólog@s">sociólog@s</a>, <a href="mailto:politólog@s">politólog@s</a> y entusiastas que se acercan al tema desde las Ciencias Sociales">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Ciencia de Datos para Gente Sociable" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Breve introducción de conceptos y técnicas para urbanistas, sociólogos, politólogos y otros entusiastas que se acercan al tema desde las Ciencias Sociales" />
+  <meta property="og:description" content="Breve introducción de conceptos y técnicas para urbanistas, <a href="mailto:sociólog@s">sociólog@s</a>, <a href="mailto:politólog@s">politólog@s</a> y entusiastas que se acercan al tema desde las Ciencias Sociales" />
   <meta name="github-repo" content="bitsandbricks/datos_sociables" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Ciencia de Datos para Gente Sociable" />
   
-  <meta name="twitter:description" content="Breve introducción de conceptos y técnicas para urbanistas, sociólogos, politólogos y otros entusiastas que se acercan al tema desde las Ciencias Sociales" />
+  <meta name="twitter:description" content="Breve introducción de conceptos y técnicas para urbanistas, <a href="mailto:sociólog@s">sociólog@s</a>, <a href="mailto:politólog@s">politólog@s</a> y entusiastas que se acercan al tema desde las Ciencias Sociales" />
   
 
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2018-02-16">
+<meta name="date" content="2018-04-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -105,7 +105,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>¿Para quién es esto?</a></li>
 <li class="chapter" data-level="" data-path="antes-de-empezar.html"><a href="antes-de-empezar.html"><i class="fa fa-check"></i>Antes de empezar</a></li>
-<li class="chapter" data-level="1" data-path="que-es-la-ciencia-de-datos.html"><a href="que-es-la-ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> ¿Qué es la ciencia de datos?</a></li>
+<li class="chapter" data-level="1" data-path="que-es-la-ciencia-de-datos.html"><a href="que-es-la-ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> ¿Qué es la ciencia de datos?</a><ul>
+<li class="chapter" data-level="1.1" data-path="que-es-la-ciencia-de-datos.html"><a href="que-es-la-ciencia-de-datos.html#que-significa-hacer-ciencia-de-datos"><i class="fa fa-check"></i><b>1.1</b> ¿Qué significa hacer ciencia de datos?</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html"><i class="fa fa-check"></i><b>2</b> Una presentación a toda marcha de R</a><ul>
 <li class="chapter" data-level="2.1" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#nuestro-primer-proyecto-en-r"><i class="fa fa-check"></i><b>2.1</b> Nuestro primer proyecto en R</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#a-investigar-cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autonoma-de-buenos-aires"><i class="fa fa-check"></i><b>2.1.1</b> A investigar: ¿Cual es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
@@ -181,7 +183,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1 class="title">Ciencia de Datos para Gente Sociable</h1>
 <h3 class="subtitle"><em>Una introducción a la exploración, análisis y visualización de datos</em></h3>
 <h4 class="author"><em>Antonio Vazquez Brust</em></h4>
-<h4 class="date"><em>2018-02-16</em></h4>
+<h4 class="date"><em>2018-04-18</em></h4>
 </div>
 <div id="para-quien-es-esto" class="section level1 unnumbered">
 <h1>¿Para quién es esto?</h1>
@@ -213,10 +215,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -240,9 +243,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
