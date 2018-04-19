@@ -299,7 +299,7 @@ superficie_habitacion_m2</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)
 
 <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
-devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tidyverse/ggplot2&quot;</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tidyverse/ggplot2&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p>De aquí en más, podremos activar el conjunto de funciones que provee <code>tidyverse</code> cada vez que queramos. Para eso, lo invocamos con la función <code>library()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
 <p>… y listo para usar. La razón por la cual activamos tidyverse es que en este momento nos vienen bien dos de sus funciones: <code>mutate()</code> para modificar valores, y <code>ggplot()</code> para hacer gráficos.</p>
