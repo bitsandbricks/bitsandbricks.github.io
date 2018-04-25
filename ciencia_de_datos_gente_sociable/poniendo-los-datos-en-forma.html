@@ -242,7 +242,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="cruzando-variables-la-operacion-join" class="section level2">
 <h2><span class="header-section-number">3.2</span> Cruzando variables: la operación <code>join</code></h2>
 <p>Al realizar un análisis “en la vida real”, es decir, usando datos salvajes en lugar de los prolijos datasets de práctica, es muy habitual encontrar que nos falta una variable que necesitamos. Si tenemos suerte, la información que necesitamos también está disponible en forma de tabla, con algún campo en común, y podemos llevar el cabo un cruce de datos para traérnosla.</p>
-<p>Para expresarlo con un ejemplo concreto: hemos visto que los registros de atención al ciudadano incluyen una columna con el barrio, que es la única variable relacionada con la geografía. Si nuestra unidad de análisis fuera la columna en lugar del barrio, necesitaríamos agrega la columna correspondiente. En este caso, estamos de suerte porque una tabla con los barrios de la Ciudad de Buenos Aires y la comuna a la que pertenecen es fácil de conseguir. Con esa tabla en nuestro poder, ya tenemos las piezas necesarias para el cruce de datos. En cada registro en el dataframe de atención al ciudadano, tenemos un barrio; podemos buscarlo en la tabla de barrios y comunas, tomar nota de la comuna asociada, y copiarla en nuestro dataset original. Por supuesto, hacerlo a mano para cada uno de las 57.432 filas en nuestro dataframe tardaría una eternidad, amén de que quizás perderíamos la cordura antes de terminar. !Nada de eso! Vamos a resolverlo en meros instantes escriviendo unas pocas líneas de código. Antes de continuar hagamos una pausa para conmiserar a los investigadores de eras pasadas, antes de la popularización de la computadora personal, que realizaban tareas de esta escala con lápiz, papel y paciencia.</p>
+<p>Para expresarlo con un ejemplo concreto: hemos visto que los registros de atención al ciudadano incluyen una columna con el barrio, que es la única variable relacionada con la geografía. Si nuestra unidad de análisis fuera la columna en lugar del barrio, necesitaríamos agrega la columna correspondiente. En este caso, estamos de suerte porque una tabla con los barrios de la Ciudad de Buenos Aires y la comuna a la que pertenecen es fácil de conseguir. Con esa tabla en nuestro poder, ya tenemos las piezas necesarias para el cruce de datos. En cada registro en el dataframe de atención al ciudadano, tenemos un barrio; podemos buscarlo en la tabla de barrios y comunas, tomar nota de la comuna asociada, y copiarla en nuestro dataset original. Por supuesto, hacerlo a mano para cada uno de las 57.432 filas en nuestro dataframe tardaría una eternidad, amén de que quizás perderíamos la cordura antes de terminar. ¡Nada de eso! Vamos a resolverlo en meros instantes escriviendo unas pocas líneas de código. Antes de continuar hagamos una pausa para conmiserar a los investigadores de eras pasadas, antes de la popularización de la computadora personal, que realizaban tareas de esta escala con lápiz, papel y paciencia.</p>
 <p>Existe una gran variedad de funciones que permiten combinar tablas relacionadas entre sí por una o varias variables en común. Para nuestro propósito, alcanza con conocer una: <code>left_join()</code>. La funcion toma como parámetros dos dataframes (que son tablas al fin y al cabo) busca las variables que tengan el mismo nombre y usandolas como referencia completa la primera de ellas, la de la izquierda, con los datos nuevos que aporta la segunda. <code>left_join</code> devuelve un dataframe nuevo con los datos combinados.</p>
 <p>Manos a la obra. Descargamos el dataframe con barrios y comunas,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">barrios_comunas &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://bitsandbricks.github.io/data/barrios_comunas.csv&quot;</span>)</code></pre></div>
@@ -411,12 +411,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="comparaciones" class="section level4">
 <h4><span class="header-section-number">3.3.2.1</span> Comparaciones</h4>
 <p>Aquí hemos usado un recurso nuevo, la comparación. R provee una serie de símbolos que permite comparar valores entre sí:</p>
-<pre><code>* __==__ igual a 
-* __!=__ no igual a 
-* __&gt;__  mayor a 
-* __&gt;=__ mayor o igual a 
-* __&lt;__  menor a 
-* __&lt;=__ menor o igual a </code></pre>
+<pre><code>* == igual a 
+* != no igual a 
+* &gt;  mayor a 
+* &gt;= mayor o igual a 
+* &lt;  menor a 
+* &lt;= menor o igual a </code></pre>
 <p>Atención especial merece el símbolo que compara igualdad, <code>==</code>. Un error muy común es escribir <code>BARRIO = &quot;RETIRO&quot;</code>, (un sólo símbolo <code>=</code>) que le indica a R que guarde el valor “RETIRO” dentro de la variable BARRIO, en lugar de verificar si son iguales. Para ésto último, lo correcto es <code>BARRIO == &quot;RETIRO&quot;</code>, tal como lo usamos en el ejemplo de filter().</p>
 <p>También hay que tener en cuenta el uso de comillas. Para que R no se confunda, cuando queramos usar valores de texto (de tipo <em>character</em>) los rodeamos con comillas para que quede claro que no nos referimos a una variable con ese nombre, si la hubiera, sino en forma literal a esa palabra o secuencia de texto. En el caso de los números, no hace falta el uso de comillas, ya que en R ningún nombre de variable puede comenzar con o estar compuesta sólo por números.</p>
 <p>Filtrando los registros de períodos para los cuales se registran más de 100 incidentes:</p>
@@ -462,11 +462,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 5  201301           ALUMBRADO         RECLAMO PALERMO    74     14
 ## 6  201301           ALUMBRADO         RECLAMO  RETIRO    15      1</code></pre>
 <p>Se trata de la lógica de conjuntos, o lógica booleana, que con un poco de suerte recordamos de nuestra época de escolares. Los símbolos importantes son <code>&amp;</code>, <code>|</code>, y <code>!</code>: “y”, “ó”, y la negación que invierte preposiciones:</p>
-<pre><code>* `a &amp; b`     a y b
-* `a | b`     a ó b
-* `a &amp; !b`    a, y no b
-* `!a &amp; b`    no a, y b
-* `!(a &amp; b)`  no (a y b) </code></pre>
+<pre><code>* a &amp; b     a y b
+* a | b     a ó b
+* a &amp; !b    a, y no b
+* !a &amp; b    no a, y b
+* !(a &amp; b)  no (a y b) </code></pre>
 <p>Hemos visto ejemplos de <code>a &amp; b</code> (<code>PERIODO == 201508,  RUBRO == &quot;SALUD&quot;</code>, que filter toma como un <code>&amp;</code>) y de <code>a | b</code> (<code>BARRIO == &quot;RETIRO&quot; | BARRIO == &quot;PALERMO&quot;</code>)</p>
 <p>Un ejemplo de <code>a &amp; !b</code>, filas en las que el tipo de prestación sea “TRAMITE”, y en las que el rubro no sea “REGISTRO CIVIL”:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(atencion_ciudadano, TIPO_PRESTACION <span class="op">==</span><span class="st"> &quot;TRAMITE&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>(RUBRO <span class="op">==</span><span class="st"> &quot;REGISTRO CIVIL&quot;</span>))</code></pre></div>

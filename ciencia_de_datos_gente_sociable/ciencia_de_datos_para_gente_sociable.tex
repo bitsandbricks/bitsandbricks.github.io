@@ -1317,7 +1317,7 @@ buscarlo en la tabla de barrios y comunas, tomar nota de la comuna
 asociada, y copiarla en nuestro dataset original. Por supuesto, hacerlo
 a mano para cada uno de las 57.432 filas en nuestro dataframe tardaría
 una eternidad, amén de que quizás perderíamos la cordura antes de
-terminar. !Nada de eso! Vamos a resolverlo en meros instantes
+terminar. ¡Nada de eso! Vamos a resolverlo en meros instantes
 escriviendo unas pocas líneas de código. Antes de continuar hagamos una
 pausa para conmiserar a los investigadores de eras pasadas, antes de la
 popularización de la computadora personal, que realizaban tareas de esta
@@ -1688,12 +1688,12 @@ Aquí hemos usado un recurso nuevo, la comparación. R provee una serie de
 símbolos que permite comparar valores entre sí:
 
 \begin{verbatim}
-* __==__ igual a 
-* __!=__ no igual a 
-* __>__  mayor a 
-* __>=__ mayor o igual a 
-* __<__  menor a 
-* __<=__ menor o igual a 
+* == igual a 
+* != no igual a 
+* >  mayor a 
+* >= mayor o igual a 
+* <  menor a 
+* <= menor o igual a 
 \end{verbatim}
 
 Atención especial merece el símbolo que compara igualdad, \texttt{==}.
@@ -1803,11 +1803,11 @@ importantes son \texttt{\&}, \texttt{\textbar{}}, y \texttt{!}: ``y'',
 ``ó'', y la negación que invierte preposiciones:
 
 \begin{verbatim}
-* `a & b`     a y b
-* `a | b`     a ó b
-* `a & !b`    a, y no b
-* `!a & b`    no a, y b
-* `!(a & b)`  no (a y b) 
+* a & b     a y b
+* a | b     a ó b
+* a & !b    a, y no b
+* !a & b    no a, y b
+* !(a & b)  no (a y b) 
 \end{verbatim}
 
 Hemos visto ejemplos de \texttt{a\ \&\ b}
