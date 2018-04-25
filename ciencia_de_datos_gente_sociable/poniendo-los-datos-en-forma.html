@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2018-04-21">
+<meta name="date" content="2018-04-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -317,7 +317,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Y si queremos saber exactamente dónde ha guardado R nuestros datos, por ejemplo para abrirlos con otro programa, usamos la función <code>getwd</code> (por <em>get working directory</em> )</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getwd</span>()</code></pre></div>
 <pre><code>## [1] &quot;/home/havb/Dropbox/Books/Mios/Ciencia de datos para gente sociable&quot;</code></pre>
-<p>El resultado será la dirección, la carpeta, donde estamos rabajando y hemos guardado los datos; por ejemplo <code>/home/antonio/Practicando R/</code>.</p>
+<p>El resultado será la dirección (la ubicacion de la la carpeta), donde estamos trabajando y hemos guardado los datos; por ejemplo <code>/home/antonio/Practicando R/</code>.</p>
 </div>
 <div id="transformando-los-datos" class="section level2">
 <h2><span class="header-section-number">3.3</span> Transformando los datos</h2>
@@ -411,12 +411,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="comparaciones" class="section level4">
 <h4><span class="header-section-number">3.3.2.1</span> Comparaciones</h4>
 <p>Aquí hemos usado un recurso nuevo, la comparación. R provee una serie de símbolos que permite comparar valores entre sí:</p>
-<pre><code>* `==` igual a 
-* `!=` no igual a 
-* `&gt;`  mayor a 
-* `&gt;=` mayor o igual a 
-* `&lt;`  menor a 
-* `&lt;=` menor o igual a </code></pre>
+<pre><code>* __==__ igual a 
+* __!=__ no igual a 
+* __&gt;__  mayor a 
+* __&gt;=__ mayor o igual a 
+* __&lt;__  menor a 
+* __&lt;=__ menor o igual a </code></pre>
 <p>Atención especial merece el símbolo que compara igualdad, <code>==</code>. Un error muy común es escribir <code>BARRIO = &quot;RETIRO&quot;</code>, (un sólo símbolo <code>=</code>) que le indica a R que guarde el valor “RETIRO” dentro de la variable BARRIO, en lugar de verificar si son iguales. Para ésto último, lo correcto es <code>BARRIO == &quot;RETIRO&quot;</code>, tal como lo usamos en el ejemplo de filter().</p>
 <p>También hay que tener en cuenta el uso de comillas. Para que R no se confunda, cuando queramos usar valores de texto (de tipo <em>character</em>) los rodeamos con comillas para que quede claro que no nos referimos a una variable con ese nombre, si la hubiera, sino en forma literal a esa palabra o secuencia de texto. En el caso de los números, no hace falta el uso de comillas, ya que en R ningún nombre de variable puede comenzar con o estar compuesta sólo por números.</p>
 <p>Filtrando los registros de períodos para los cuales se registran más de 100 incidentes:</p>
