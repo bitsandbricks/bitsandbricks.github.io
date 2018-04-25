@@ -411,12 +411,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="comparaciones" class="section level4">
 <h4><span class="header-section-number">3.3.2.1</span> Comparaciones</h4>
 <p>Aquí hemos usado un recurso nuevo, la comparación. R provee una serie de símbolos que permite comparar valores entre sí:</p>
-<pre><code>* == igual a 
-* != no igual a 
-* &gt;  mayor a 
-* &gt;= mayor o igual a 
-* &lt;  menor a 
-* &lt;= menor o igual a </code></pre>
+<pre><code>* ==   igual a 
+* !=   no igual a 
+* &gt;    mayor a 
+* &gt;=   mayor o igual a 
+* &lt;    menor a 
+* &lt;=   menor o igual a </code></pre>
 <p>Atención especial merece el símbolo que compara igualdad, <code>==</code>. Un error muy común es escribir <code>BARRIO = &quot;RETIRO&quot;</code>, (un sólo símbolo <code>=</code>) que le indica a R que guarde el valor “RETIRO” dentro de la variable BARRIO, en lugar de verificar si son iguales. Para ésto último, lo correcto es <code>BARRIO == &quot;RETIRO&quot;</code>, tal como lo usamos en el ejemplo de filter().</p>
 <p>También hay que tener en cuenta el uso de comillas. Para que R no se confunda, cuando queramos usar valores de texto (de tipo <em>character</em>) los rodeamos con comillas para que quede claro que no nos referimos a una variable con ese nombre, si la hubiera, sino en forma literal a esa palabra o secuencia de texto. En el caso de los números, no hace falta el uso de comillas, ya que en R ningún nombre de variable puede comenzar con o estar compuesta sólo por números.</p>
 <p>Filtrando los registros de períodos para los cuales se registran más de 100 incidentes:</p>
