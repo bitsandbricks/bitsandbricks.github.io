@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2018-04-25">
+<meta name="date" content="2018-04-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -187,6 +187,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Ésta inevitable etapa de preparación es llamada <em>data wrangling</em> en inglés, algo así como el proceso de “domar los datos”. El término hace referencia, en clave de humor, al esfuerzo que requiere la puesta en orden cuando los datos son cuantiosos, de muchas fuentes distintas, o en particular desprolijos. Para que la experiencia sea lo menos tediosa posible, y podamos pasar rápido al momento de extraer conocimiento, vamos a practicar algunas técnicas muy útiles de <em>wrangling</em>.</p>
 <div id="primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo" class="section level2">
 <h2><span class="header-section-number">3.1</span> Primeros pasos al examinar un conjunto de datos nuevo</h2>
+<p>Si no lo hicimos aún en la sesión en la que estamos trabajando, cargamos <code>tidyverse</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
 <p>Vamos a practicar usando los registros del Sistema Único de Atención Ciudadana (SUACI) de la Ciudad Autónoma de Buenos Aires. El SUACI es el repositorio donde se integran las solicitudes y reclamos que los ciudadanos presentan a la ciudad por distintos canales: en persona, por teléfono o usando la aplicación <a href="https://gestioncolaborativa.buenosaires.gob.ar/prestaciones">BA 147</a>. Vamos a trabajar con una versión de los datos que ha sido simplificada para hacer más ameno el trabajo con ella. Quién quiera acceder a los datos en su esplendor de complejidad original, puede encontrarlos en el portal de datos abiertos de la ciudad: <a href="https://data.buenosaires.gob.ar/" class="uri">https://data.buenosaires.gob.ar/</a></p>
 <p>Comenzamos por acceder al archivo con los registros para cargarlo en R como un dataframe. Tendremos que ejercitar un poco la paciencia porque es un archivo de varios megas, que podría tardar unos minutos en ser descargado.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">atencion_ciudadano &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://bitsandbricks.github.io/data/gcba_suaci_barrios.csv&quot;</span>)</code></pre></div>
@@ -331,8 +333,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>summarise()</code>: producir sumarios -un valor extraído de muchos, por ejemplo el promedio- con el contenido de las columnas</li>
 </ul>
 <p>Estas funciones tienen una sintaxis, una forma de escribirse, uniforme. El primer argumento que toman siempre es un dataframe; los siguientes indican qué hacer con los datos. El resultado siempre es un nuevo dataframe.</p>
-<p>Las funciones son parte de <a href="http://dplyr.tidyverse.org/">dplyr</a>, uno de los paquetes de funciones de la familia <a href="https://www.tidyverse.org/">Tidyverse</a>. Si no lo hicimos aún en la sesión en la que estamos trabajando, cargamos <code>tidyverse</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+<p>Las funciones son parte de <a href="http://dplyr.tidyverse.org/">dplyr</a>, uno de los componentes de la familia de paquetes <a href="https://www.tidyverse.org/">Tidyverse</a>. Ya tenemos disponible todo lo necesario, activado cuando invocamos <code>library(tidiverse)</code> al comienzo.</p>
+<p>Manos a la obra.</p>
 <div id="seleccionar-columnas-con-select" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> Seleccionar columnas con <code>select()</code></h3>
 <p>Muchas veces tendremos que lidiar con datasets con decenas de variables. Alguna que otra vez, con centenas. En esos casos el primer problema es librarnos de semejante cantidad de columnas, reteniendo sólo aquellas en las que estamos interesados. Para un dataset como el de reclamos de los ciudadanos, que tiene pocas columnas, select() no es tan importante. Aún así, podemos usar select() con fines demostrativos.</p>

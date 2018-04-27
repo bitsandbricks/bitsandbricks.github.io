@@ -125,7 +125,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-04-25}
+  \date{2018-04-27}
 
 \usepackage{booktabs}
 
@@ -1153,6 +1153,15 @@ vamos a practicar algunas técnicas muy útiles de \emph{wrangling}.
 \section{Primeros pasos al examinar un conjunto de datos
 nuevo}\label{primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo}
 
+Si no lo hicimos aún en la sesión en la que estamos trabajando, cargamos
+\texttt{tidyverse}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
 Vamos a practicar usando los registros del Sistema Único de Atención
 Ciudadana (SUACI) de la Ciudad Autónoma de Buenos Aires. El SUACI es el
 repositorio donde se integran las solicitudes y reclamos que los
@@ -1518,15 +1527,12 @@ indican qué hacer con los datos. El resultado siempre es un nuevo
 dataframe.
 
 Las funciones son parte de \href{http://dplyr.tidyverse.org/}{dplyr},
-uno de los paquetes de funciones de la familia
-\href{https://www.tidyverse.org/}{Tidyverse}. Si no lo hicimos aún en la
-sesión en la que estamos trabajando, cargamos \texttt{tidyverse}.
+uno de los componentes de la familia de paquetes
+\href{https://www.tidyverse.org/}{Tidyverse}. Ya tenemos disponible todo
+lo necesario, activado cuando invocamos \texttt{library(tidiverse)} al
+comienzo.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tidyverse)}
-\end{Highlighting}
-\end{Shaded}
+Manos a la obra.
 
 \subsection{\texorpdfstring{Seleccionar columnas con
 \texttt{select()}}{Seleccionar columnas con select()}}\label{seleccionar-columnas-con-select}
