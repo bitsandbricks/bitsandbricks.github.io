@@ -125,7 +125,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-04-29}
+  \date{2018-05-10}
 
 \usepackage{booktabs}
 
@@ -3185,8 +3185,8 @@ después, con o sin tratamiento, en un lugar o en otro.
 
 Este capítulo le debe mucho a \emph{ModernDive: An Introduction to
 Statistical and Data Sciences via R} por Chester Ismay y Albert Y. Kim,
-disponible en forma gratuita \url{http://http://moderndive.com/}.
-ModernDive es un recurso muy recomendable para quienes quieran continuar
+disponible en forma gratuita en \url{http://moderndive.com/}. ModernDive
+es un recurso muy recomendable para quienes quieran continuar
 profundizando su conocimiento más allá de los temas que veremos a
 continuación.
 
@@ -3598,28 +3598,28 @@ paso del tiempo:
 ##  -162888.14        86.81
 \end{verbatim}
 
-Tal como indicaba el scatterplot, obtuvimos un coeficiente positivo.
-Según el modelo, cada año que pasa resulta en un incremento de 86
-dólares en el PBI per cápita del país. Sin embargo, sabemos que no todas
-las observaciones cumple al pie de la letra con ese incremento. ¿Debería
+Tal como indicaba el \emph{scatterplot}, obtuvimos un coeficiente
+positivo. Según el modelo, cada año que pasa resulta en un incremento de
+86 dólares en el PBI per cápita del país. Sin embargo, sabemos que no en
+todos los años se cumple al pie de la letra tal incremento. ¿Debería
 preocuparnos eso? Una parte importante del análisis basado en
-regresiones es revisar las desviaciones, y decidir si ameritan buscar
-una explicación. Para ello, lo mejor es empezar por prestar atención a
-los residuos.
+regresiones es revisar los desvíos, y decidir si ameritan buscar una
+explicación. Para ello, lo mejor es empezar por prestar atención a los
+residuos.
 
 \subsection{Revolviendo los residuos}\label{revolviendo-los-residuos}
 
 Los residuos, en la jerga estadística, no son otra cosa que las
-diferencias encontradas entre el valor que predice un modelo y el valor
-observado para una variable. Es decir, el valor para cada punto de
-\(y - \widehat{y}\). Los residuos representan el desvío de cada
-observación respecto al valor esperado por el modelo.
+diferencias encontradas entre el valor que predice un modelo para una
+variable y el valor observado en la práctica. Es decir, el valor para
+cada punto de \(y - \widehat{y}\). Los residuos representan el desvío de
+cada observación respecto al valor ``esperado'' por el modelo.
 
 Cuando los desvíos son pequeños, es decir cuando los residuos son
 pequeños, decimos que nuestro modelo se ajusta bien a los datos
 observados. Cuando los residuos son grandes ocurre lo contrario, y
-quizás deberíamos buscar otros modelos para representar la relación
-entre las variables.
+quizás deberíamos buscar otra forma de describir, de modelar, la
+relación entre las variables.
 
 Prestemos atención a los residuos de nuestro modelo de PBV vs.~tiempo.
 Podemos extraer los residuos usando la función \texttt{residuals()},
@@ -3781,8 +3781,8 @@ mejor lo que está ocurriendo. Usamos \texttt{geom\_jitter()} igual que
 \includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-128-1.pdf}
 
 Algún ojo avizor habrá notado que la clasificación por color no es
-necesaria, ya el continente ya está señalado por su posición en el exe
-de las \texttt{x}. El color cumple aquí una función más que nada
+necesaria, ya que el continente ya está señalado por su posición en el
+eje de las \texttt{x}. El color cumple aquí una función más que nada
 cosmética, en pos de hacer al gráfico maś atractivo a la vista.
 
 También podemos visualizar la diferencia de distribución de expectactiva
@@ -3883,8 +3883,8 @@ Notamos que:
 \end{enumerate}
 
 Con la magia de los verbos de transformación que sabemos, aislemos a los
-países en Asia con menor expectativa de vida para encontrar identificar
-al \emph{outlier}.
+países en Asia con menor expectativa de vida para identificar al
+\emph{outlier}.
 
 \begin{Shaded}
 \begin{Highlighting}[]

@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2018-04-29">
+<meta name="date" content="2018-05-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -184,7 +184,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Capítulo 
 5</span> Modelado estadístico</h1>
 <p>Llegamos a un tema de gran interés para quienes realizan investigaciones formales. La posición central que tiene el modelado en la investigación científica se debe a que cuantifica relaciones: permite pasar de decir “La luz solar abundante mejora el crecimiento de las plantas” a “por cada hora adicional de exposición mensual a la luz solar, los cultivos aumentaron su rinde en un 1%”. La cuantificación permite realizar comparaciones, algo clave para entender un fenómeno estudiado: antes y después, con o sin tratamiento, en un lugar o en otro.</p>
-<p>Este capítulo le debe mucho a <em>ModernDive: An Introduction to Statistical and Data Sciences via R</em> por Chester Ismay y Albert Y. Kim, disponible en forma gratuita <a href="http://http://moderndive.com/" class="uri">http://http://moderndive.com/</a>. ModernDive es un recurso muy recomendable para quienes quieran continuar profundizando su conocimiento más allá de los temas que veremos a continuación.</p>
+<p>Este capítulo le debe mucho a <em>ModernDive: An Introduction to Statistical and Data Sciences via R</em> por Chester Ismay y Albert Y. Kim, disponible en forma gratuita en <a href="http://moderndive.com/" class="uri">http://moderndive.com/</a>. ModernDive es un recurso muy recomendable para quienes quieran continuar profundizando su conocimiento más allá de los temas que veremos a continuación.</p>
 <p>En términos matemáticos, se habla de “modelar” debido a que estamos creando un modelo, una reconstrucción simplificada (¡simplificada en extremo!) de cómo funciona un proceso observado en el mundo real. En un modelo de datos, siempre tenemos al menos</p>
 <ul>
 <li>Una variable resultante, siempre una sola, también llamada variable “dependiente”,</li>
@@ -332,12 +332,12 @@ modelo_PBI</code></pre></div>
 ## Coefficients:
 ## (Intercept)          año  
 ##  -162888.14        86.81</code></pre>
-<p>Tal como indicaba el scatterplot, obtuvimos un coeficiente positivo. Según el modelo, cada año que pasa resulta en un incremento de 86 dólares en el PBI per cápita del país. Sin embargo, sabemos que no todas las observaciones cumple al pie de la letra con ese incremento. ¿Debería preocuparnos eso? Una parte importante del análisis basado en regresiones es revisar las desviaciones, y decidir si ameritan buscar una explicación. Para ello, lo mejor es empezar por prestar atención a los residuos.</p>
+<p>Tal como indicaba el <em>scatterplot</em>, obtuvimos un coeficiente positivo. Según el modelo, cada año que pasa resulta en un incremento de 86 dólares en el PBI per cápita del país. Sin embargo, sabemos que no en todos los años se cumple al pie de la letra tal incremento. ¿Debería preocuparnos eso? Una parte importante del análisis basado en regresiones es revisar los desvíos, y decidir si ameritan buscar una explicación. Para ello, lo mejor es empezar por prestar atención a los residuos.</p>
 </div>
 <div id="revolviendo-los-residuos" class="section level3">
 <h3><span class="header-section-number">5.1.2</span> Revolviendo los residuos</h3>
-<p>Los residuos, en la jerga estadística, no son otra cosa que las diferencias encontradas entre el valor que predice un modelo y el valor observado para una variable. Es decir, el valor para cada punto de <span class="math inline">\(y - \widehat{y}\)</span>. Los residuos representan el desvío de cada observación respecto al valor esperado por el modelo.</p>
-<p>Cuando los desvíos son pequeños, es decir cuando los residuos son pequeños, decimos que nuestro modelo se ajusta bien a los datos observados. Cuando los residuos son grandes ocurre lo contrario, y quizás deberíamos buscar otros modelos para representar la relación entre las variables.</p>
+<p>Los residuos, en la jerga estadística, no son otra cosa que las diferencias encontradas entre el valor que predice un modelo para una variable y el valor observado en la práctica. Es decir, el valor para cada punto de <span class="math inline">\(y - \widehat{y}\)</span>. Los residuos representan el desvío de cada observación respecto al valor “esperado” por el modelo.</p>
+<p>Cuando los desvíos son pequeños, es decir cuando los residuos son pequeños, decimos que nuestro modelo se ajusta bien a los datos observados. Cuando los residuos son grandes ocurre lo contrario, y quizás deberíamos buscar otra forma de describir, de modelar, la relación entre las variables.</p>
 <p>Prestemos atención a los residuos de nuestro modelo de PBV vs. tiempo. Podemos extraer los residuos usando la función <code>residuals()</code>,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">residuos &lt;-<span class="st"> </span><span class="kw">residuals</span>(modelo_PBI)
 
@@ -388,7 +388,7 @@ residuos</code></pre></div>
 <span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Expectativa de vida por continente&quot;</span>,
          <span class="dt">y =</span> <span class="st">&quot;expectativa de vida&quot;</span>)</code></pre></div>
 <p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-128-1.png" width="1050" /></p>
-<p>Algún ojo avizor habrá notado que la clasificación por color no es necesaria, ya el continente ya está señalado por su posición en el exe de las <code>x</code>. El color cumple aquí una función más que nada cosmética, en pos de hacer al gráfico maś atractivo a la vista.</p>
+<p>Algún ojo avizor habrá notado que la clasificación por color no es necesaria, ya que el continente ya está señalado por su posición en el eje de las <code>x</code>. El color cumple aquí una función más que nada cosmética, en pos de hacer al gráfico maś atractivo a la vista.</p>
 <p>También podemos visualizar la diferencia de distribución de expectactiva de vida de los países, con un histograma facetado por continente:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> data_mundial_<span class="dv">2007</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expVida, <span class="dt">fill =</span> continente)) <span class="op">+</span>
@@ -427,7 +427,7 @@ modelo_exp_continente</code></pre></div>
 <li>Los residuos están repartidos en forma pareja entre positivos y negativos. Eso indica que su promedio será cercano a cero, lo cual es bueno.</li>
 <li>En Asia hay un país cuyo valor observado está muy por debajo del esperado por el modelo. Se separa tanto de los demás que debemos considerarlo un <em>outlier</em>, un valor tan inusual que amerita ser revisado.</li>
 </ol>
-<p>Con la magia de los verbos de transformación que sabemos, aislemos a los países en Asia con menor expectativa de vida para encontrar identificar al <em>outlier</em>.</p>
+<p>Con la magia de los verbos de transformación que sabemos, aislemos a los países en Asia con menor expectativa de vida para identificar al <em>outlier</em>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_mundial_<span class="dv">2007</span> <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">filter</span>(continente <span class="op">==</span><span class="st"> &quot;Asia&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">arrange</span>(expVida) <span class="op">%&gt;%</span><span class="st"> </span>
