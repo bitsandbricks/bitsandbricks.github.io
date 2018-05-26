@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2018-05-10">
+<meta name="date" content="2018-05-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -425,7 +425,8 @@ Figura 6.2: La inescapable proyección Mercator (cortesía Jecowa)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">barrios_geo &lt;-<span class="st"> </span>barrios_geo <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(atencion_por_barrio_principal_rubro)</code></pre></div>
 <p>Y mostramos el rubro principal por barrio en un mapa</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> barrios_geo, <span class="kw">aes</span>(<span class="dt">fill =</span> RUBRO)) </code></pre></div>
+<span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> barrios_geo, <span class="kw">aes</span>(<span class="dt">fill =</span> RUBRO)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Principal categoría de las solicitudes/reclamos&quot;</span>)</code></pre></div>
 <p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-167-1.png" width="1050" /></p>
 </div>
 <div id="combinando-capas-geograficas" class="section level2">

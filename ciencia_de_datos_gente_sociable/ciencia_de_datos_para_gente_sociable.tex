@@ -125,7 +125,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-05-10}
+  \date{2018-05-26}
 
 \usepackage{booktabs}
 
@@ -5038,7 +5038,8 @@ Y mostramos el rubro principal por barrio en un mapa
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ barrios_geo, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ RUBRO)) }
+\StringTok{    }\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ barrios_geo, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ RUBRO)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Principal categoría de las solicitudes/reclamos"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
