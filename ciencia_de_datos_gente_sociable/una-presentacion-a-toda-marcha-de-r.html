@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2018-05-26">
+<meta name="date" content="2018-06-28">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -295,11 +295,8 @@ superficie_habitacion_m2</code></pre></div>
 <h2><span class="header-section-number">2.2</span> Visualización: la exploración gráfica de la información</h2>
 <p>Ahora es vamos a pisar el acelerador. Insisto: nadie debe preocuparse si algunos conceptos parecen ser demasiado complejos. En las próximas secciones practicaremos de forma gradual las técnicas que vamos a usar ahora, y todo tendrá sentido -¡lo prometo!. Pero antes, seamos un poquito irresponsables con el poder de R y empleemos un arsenal sofisticado de herramientas para ver de que somos capaces.</p>
 <p>En la introducción hablamos de los paquetes, conjuntos de programas que extienden la funcionalidad de R. Vamos a cargar uno de los paquetes más usados, <code>tidyverse</code>. Tidyverse incluye una gran cantidad de funciones diseñadas por y para practicantes de la ciencia de datos. Estas funciones comparten una filosofía y una sintaxis común, por lo que al aprender una en cierto modo aprendemos a usar todas. El valor que aportan es que, sin dudas, ayudan a realizar de manera más fácil las tareas típicas de la ciencia de datos: importar, limpiar, comprender y comunicar datos.</p>
-<p>Si acabamos de instalar R y RStudio, el paquete aún no estará disponible en nuestro sistema. Para instalarlo, usamos la función <code>install.packages()</code> y le pasamos el nombre del paquete deseado, “tidyverse”, entre comillas. Los dos comandos siguientes, que también debemos ejecutar, se aseguran de que dispongamos de ciertas funciones del paquete que son “experimentales” (es decir, en fase de prueba) pero que queremos agregar porque las vamos a usar en breve. La instalación puede tomar unos minutos, así que tengamos paciencia.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)
-
-<span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
-devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tidyverse/ggplot2&quot;</span>)</code></pre></div>
+<p>Si acabamos de instalar R y RStudio, el paquete aún no estará disponible en nuestro sistema. Para instalarlo, usamos la función <code>install.packages()</code> y le pasamos el nombre del paquete deseado, “tidyverse”, entre comillas.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</code></pre></div>
 <p>De aquí en más, podremos activar el conjunto de funciones que provee <code>tidyverse</code> cada vez que queramos. Para eso, lo invocamos con la función <code>library()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
 <p>… y listo para usar. La razón por la cual activamos tidyverse es que en este momento nos vienen bien dos de sus funciones: <code>mutate()</code> para modificar valores, y <code>ggplot()</code> para hacer gráficos.</p>
@@ -318,11 +315,11 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <h3><span class="header-section-number">2.2.1</span> Haciendo mapas</h3>
 <p>Vamos a presentar un paquete más, el último para éste capítulo: <code>sf</code>. Quizás algunos tengan experiencia con sistemas de información geográfica (GIS por sus siglas en inglés), al estilo de <a href="https://qgis.org/en/site/">QGIS</a> o <a href="https://www.arcgis.com/features/index.html">ArcGIS</a>, que permiten crear, manipular y combinar archivos con datos espaciales para producir mapas que pueden ser simples o en extremo sofisticados. En R, el paquete <code>sf</code> brinda herramientas que permiten realizar tares similares.</p>
 <p>Nuestro objetivo es obtener un mapa de la ciudad de Buenos Aires con sus comunas.</p>
-<p>Primero, instalamos sf en caso de que aún no lo hayamos hecho. Sólo es necesario hacerlo una vez:</p>
+<p>Primero, instalamos <code>sf</code> en caso de que aún no lo hayamos hecho.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;sf&quot;</span>)</code></pre></div>
-<p>Pedimos a R que active el paquete:</p>
+<p>Vale la pena insistir: Sólo es necesario instalar los paquetes una vez. De aquí en más, cada vez que querramos echar mano a las funciones incluidas en <code>sf</code>, sólo necesitamos activarlo pues ya estará listo en nuestro sistema. Pedimos a R que active el paquete así:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sf)</code></pre></div>
-<p>Y cargamos un archivo georeferenciado con las comunas de la Ciudad Autónoma de Buenos Aires, disponible online en formato <a href="https://es.wikipedia.org/wiki/GeoJSON"><em>geojson</em></a>, un estándar de representación de datos geográficos que es fácil de usar:</p>
+<p>Luego, cargamos un archivo georeferenciado con las comunas de la Ciudad Autónoma de Buenos Aires, disponible online en formato <a href="https://es.wikipedia.org/wiki/GeoJSON"><em>geojson</em></a>, un estándar de representación de datos geográficos que es fácil de usar:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">comunas &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&#39;https://bitsandbricks.github.io/data/CABA_comunas.geojson&#39;</span>)</code></pre></div>
 <pre><code>## Reading layer `CABA_comunas&#39; from data source `https://bitsandbricks.github.io/data/CABA_comunas.geojson&#39; using driver `GeoJSON&#39;
 ## Simple feature collection with 15 features and 4 fields

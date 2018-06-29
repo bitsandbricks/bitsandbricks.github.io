@@ -125,7 +125,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-05-26}
+  \date{2018-06-28}
 
 \usepackage{booktabs}
 
@@ -645,18 +645,11 @@ comunicar datos.
 Si acabamos de instalar R y RStudio, el paquete aún no estará disponible
 en nuestro sistema. Para instalarlo, usamos la función
 \texttt{install.packages()} y le pasamos el nombre del paquete deseado,
-``tidyverse'', entre comillas. Los dos comandos siguientes, que también
-debemos ejecutar, se aseguran de que dispongamos de ciertas funciones
-del paquete que son ``experimentales'' (es decir, en fase de prueba)
-pero que queremos agregar porque las vamos a usar en breve. La
-instalación puede tomar unos minutos, así que tengamos paciencia.
+``tidyverse'', entre comillas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
-
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"tidyverse/ggplot2"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -739,8 +732,7 @@ mapas que pueden ser simples o en extremo sofisticados. En R, el paquete
 Nuestro objetivo es obtener un mapa de la ciudad de Buenos Aires con sus
 comunas.
 
-Primero, instalamos sf en caso de que aún no lo hayamos hecho. Sólo es
-necesario hacerlo una vez:
+Primero, instalamos \texttt{sf} en caso de que aún no lo hayamos hecho.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -748,7 +740,10 @@ necesario hacerlo una vez:
 \end{Highlighting}
 \end{Shaded}
 
-Pedimos a R que active el paquete:
+Vale la pena insistir: Sólo es necesario instalar los paquetes una vez.
+De aquí en más, cada vez que querramos echar mano a las funciones
+incluidas en \texttt{sf}, sólo necesitamos activarlo pues ya estará
+listo en nuestro sistema. Pedimos a R que active el paquete así:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -756,7 +751,7 @@ Pedimos a R que active el paquete:
 \end{Highlighting}
 \end{Shaded}
 
-Y cargamos un archivo georeferenciado con las comunas de la Ciudad
+Luego, cargamos un archivo georeferenciado con las comunas de la Ciudad
 Autónoma de Buenos Aires, disponible online en formato
 \href{https://es.wikipedia.org/wiki/GeoJSON}{\emph{geojson}}, un
 estándar de representación de datos geográficos que es fácil de usar:
