@@ -121,7 +121,7 @@ ga('send', 'pageview');
         
           
             <li>
-              <a title="Fotos viejas" href="http://cargocollective.com/metrosis">Fotos viejas</a>
+              <a title="Manual de ciencia de datos" href="https://bitsandbricks.github.io/ciencia_de_datos_gente_sociable/">Manual de ciencia de datos</a>
             </li>
           
         
@@ -422,22 +422,21 @@ estadias &lt;- locationdf %&gt;%
   select(-run_id) 
 
 estadias</code></pre>
-<pre><code>## Source: local data frame [171 x 4]
-## Groups: CITY_NAME, CNTRY_NAME [28]
-## 
-##                CITY_NAME CNTRY_NAME             date_in
-##                    &lt;chr&gt;      &lt;chr&gt;       &lt;S3: POSIXct&gt;
-## 1           Buenos Aires  Argentina 2011-04-04 20:31:28
-## 2               La Plata  Argentina 2011-05-23 11:04:39
-## 3           Buenos Aires  Argentina 2011-05-23 20:34:25
-## 4               La Plata  Argentina 2011-06-10 12:27:03
-## 5           Buenos Aires  Argentina 2011-06-11 01:14:17
-## 6                  Salta  Argentina 2011-08-08 15:38:56
-## 7  San Miguel De Tucuman  Argentina 2011-08-10 14:24:08
-## 8           Buenos Aires  Argentina 2011-08-11 22:50:24
-## 9               La Plata  Argentina 2011-10-05 12:06:48
-## 10          Buenos Aires  Argentina 2011-10-05 13:21:20
-## # ... with 161 more rows, and 1 more variables: date_out &lt;S3: POSIXct&gt;</code></pre>
+<pre><code>## # A tibble: 171 x 4
+## # Groups:   CITY_NAME, CNTRY_NAME [28]
+##    CITY_NAME             CNTRY_NAME date_in        date_out      
+##    &lt;chr&gt;                 &lt;chr&gt;      &lt;dttm&gt;         &lt;dttm&gt;        
+##  1 Buenos Aires          Argentina  1301959888.636 1306159287.876
+##  2 La Plata              Argentina  1306159479.886 1306192359.628
+##  3 Buenos Aires          Argentina  1306193665.488 1307719425.635
+##  4 La Plata              Argentina  1307719623.741 1307748874.83 
+##  5 Buenos Aires          Argentina  1307765657.954 1312817838.016
+##  6 Salta                 Argentina  1312828736.928 1312995091.661
+##  7 San Miguel De Tucuman Argentina  1312997048.009 1313106833.44 
+##  8 Buenos Aires          Argentina  1313113824.791 1317501265.995
+##  9 La Plata              Argentina  1317827208.834 1317830169.106
+## 10 Buenos Aires          Argentina  1317831680.811 1317831887.856
+## # ... with 161 more rows</code></pre>
 <p>Con la data prolija, es fácil hacer un ranking de tiempo pasado en cada ciudad…:</p>
 <pre class="r"><code>ranking &lt;- estadias %&gt;% 
   mutate(semanas = difftime(date_out,
@@ -447,21 +446,20 @@ estadias</code></pre>
   summarise(total_semanas = round(sum(semanas), 1)) %&gt;% 
   arrange(desc(total_semanas))
 ranking</code></pre>
-<pre><code>## Source: local data frame [28 x 3]
-## Groups: CITY_NAME [28]
-## 
-##          CITY_NAME     CNTRY_NAME total_semanas
-##              &lt;chr&gt;          &lt;chr&gt;        &lt;time&gt;
-## 1     Buenos Aires      Argentina   185.5 weeks
-## 2           Boston  United States    83.3 weeks
-## 3         New York  United States     4.0 weeks
-## 4          Cordoba      Argentina     0.9 weeks
-## 5         La Plata      Argentina     0.9 weeks
-## 6        Frankfurt        Germany     0.7 weeks
-## 7          Rosario      Argentina     0.7 weeks
-## 8        Reykjavik        Iceland     0.6 weeks
-## 9       Birmingham United Kingdom     0.5 weeks
-## 10 Washington D.C.  United States     0.5 weeks
+<pre><code>## # A tibble: 28 x 3
+## # Groups:   CITY_NAME [28]
+##    CITY_NAME       CNTRY_NAME     total_semanas
+##    &lt;chr&gt;           &lt;chr&gt;          &lt;time&gt;       
+##  1 Buenos Aires    Argentina      185.5        
+##  2 Boston          United States  83.3         
+##  3 New York        United States  4            
+##  4 Cordoba         Argentina      0.9          
+##  5 La Plata        Argentina      0.9          
+##  6 Frankfurt       Germany        0.7          
+##  7 Rosario         Argentina      0.7          
+##  8 Reykjavik       Iceland        0.6          
+##  9 Birmingham      United Kingdom 0.5          
+## 10 Washington D.C. United States  0.5          
 ## # ... with 18 more rows</code></pre>
 <p>… y un mapa de países visitados y duración total de estadías:</p>
 <pre class="r"><code>library(rworldmap)
