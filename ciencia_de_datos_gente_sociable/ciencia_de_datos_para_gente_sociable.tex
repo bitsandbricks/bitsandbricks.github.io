@@ -125,7 +125,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-07-28}
+  \date{2018-07-30}
 
 \usepackage{booktabs}
 
@@ -136,6 +136,8 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
+\includegraphics[width=25.38in]{imagenes/ilustración portada}
+
 \chapter*{¿Para quién es esto?}\label{para-quien-es-esto}
 \addcontentsline{toc}{chapter}{¿Para quién es esto?}
 
@@ -256,7 +258,7 @@ análisis. Hablando de etapas, Hadley Wickham, uno de los referentes
 actuales en el campo, las define así:
 
 \begin{figure}
-\includegraphics[width=6.28in]{imagenes/proceso_ciencia_datos} \caption{etapas en la aplicación de ciencia de datos}\label{fig:unnamed-chunk-3}
+\includegraphics[width=6.28in]{imagenes/proceso_ciencia_datos} \caption{etapas en la aplicación de ciencia de datos}\label{fig:unnamed-chunk-4}
 \end{figure}
 
 Y todo ello llevado a cabo mediante la programación, por supuesto.
@@ -314,7 +316,7 @@ desarrollados, y los del norte donde el nivel socioeconómico y la
 calidad de vida son mayores.
 
 \begin{figure}
-\includegraphics[width=6.78in]{imagenes/noticia_caba} \caption{Artículo en la edición online de El País}\label{fig:unnamed-chunk-4}
+\includegraphics[width=6.78in]{imagenes/noticia_caba} \caption{Artículo en la edición online de El País}\label{fig:unnamed-chunk-5}
 \end{figure}
 
 Uno de los aspectos más lamentables de la disparidad norte-sur, y sin
@@ -359,7 +361,7 @@ la acción!
 Aprovechemos para dar un nombre a los áreas que vemos en RStudio:
 
 \begin{figure}
-\includegraphics[width=8.13in]{imagenes/Interfaz_RStudio} \caption{La interfaz de RStudio}\label{fig:unnamed-chunk-5}
+\includegraphics[width=8.13in]{imagenes/Interfaz_RStudio} \caption{La interfaz de RStudio}\label{fig:unnamed-chunk-6}
 \end{figure}
 
 Vamos a escribir nuestro código (las instrucciones que \texttt{R}
@@ -681,7 +683,7 @@ cada comuna durante 2016:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-18-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-19-1.pdf}
 
 Para realizar una visualización con ésta herramienta, siempre se
 comienza con la función ggplot(), que crea un eje de coordenadas sobre
@@ -847,7 +849,7 @@ espacial creado por sf es muy fácil con la ayuda de ggplot
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-23-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-24-1.pdf}
 
 Si queremos agregar una leyenda al mapa que identifique cada comuna con
 su número, usamos:
@@ -859,7 +861,7 @@ su número, usamos:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-24-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-25-1.pdf}
 
 Dentro de ``aes()'' usé el parámetro ``fill'' (relleno en inglés) para
 pedirle a ggplot que llene cada polígono con un color distinto de
@@ -904,7 +906,7 @@ ggplot que definimos antes:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-26-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-27-1.pdf}
 
 La identificación por colores no hace fácil reconocer con rapidez que
 número corresponde a cada comuna; es un recurso que funciona mejor con
@@ -998,7 +1000,7 @@ Y en el mapa:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-30-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-31-1.pdf}
 
 Todo en orden. Ahora hagamos lo mismo con el dataframe de mortalidad,
 aprovechando que lista las comunas en el mismo orden (del 1 al 15) y por
@@ -1053,7 +1055,7 @@ quiere resaltar la divergencia de una variable.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-32-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-33-1.pdf}
 
 Para una comparación visual más precisa entre los valores de cada
 comuna, le pedimos a ggplot un gráfico de barras, con la capa
@@ -1073,7 +1075,7 @@ geográfica.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-33-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-34-1.pdf}
 
 Por último, usamos a R de calculadora. Separamos las comunas en dos
 dataframes distintos según su ubicación, con el comando
@@ -2468,7 +2470,7 @@ en el capítulo de introducción a R, continuaremos usando
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-83-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-84-1.pdf}
 
 ¿Un gráfico vacío? Recordemos que ggplot funciona por capas. Primero uno
 declara el dataframe que va a usar, y luego agrega una o más capas con
@@ -2481,7 +2483,7 @@ scatterplot, en la práctica dibujar puntos, es con \texttt{geom\_point}:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-84-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-85-1.pdf}
 
 Lo que hicimos fue pedirle a ggplot que dibuje un punto por cada fila
 (representando a cada comuna), con la posición en el eje de las
@@ -2515,7 +2517,7 @@ indicarle a R que queremos que trate a la variable como categórica:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-85-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-86-1.pdf}
 
 En ese caso, no es tan fácil discernir cuál es cuál, pero mirando con
 cuidado descubrimos que la comuna 1 es el \emph{outlier}, el valor fuera
@@ -2545,7 +2547,7 @@ usamos
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-87-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-88-1.pdf}
 
 Volvamos a nuestros puntos para practicar dos codificaciones estéticas
 que no hemos probado, color y tamaño.
@@ -2561,7 +2563,7 @@ esa variable, además de su altura en el gráfico.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-88-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-89-1.pdf}
 
 Y para distinguir cuál es cuál, podemos pedirle a ggplot que cambie la
 forma (\emph{shape}) de cada punto según la comuna a la que corresponde.
@@ -2573,7 +2575,7 @@ forma (\emph{shape}) de cada punto según la comuna a la que corresponde.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-89-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-90-1.pdf}
 
 ¡Hey, sólo aparecen seis de las comunas! \texttt{ggplot()} usa cómo
 máximo 6 formas distintas, debido a que una cantidad mayor sería de
@@ -2601,7 +2603,7 @@ será aplicado a todos los puntos.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-90-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-91-1.pdf}
 
 Obsérvese que \texttt{color\ =\ "blue"} está escrito por fuera de los
 paréntesis de \texttt{aes()}. De paso, hicimos uso de una característica
@@ -2622,7 +2624,7 @@ Tras un vistazo a la lista, me decido por ``darkolivegreen4'':
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-91-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-92-1.pdf}
 
 Bellísimo.
 
@@ -2635,7 +2637,7 @@ En cuanto al tamaño, la fórmula es la misma:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-92-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-93-1.pdf}
 
 El valor de \texttt{size} se da en píxeles. Es una medida difícil de
 estimar antes de ver el resultado, pero es cuestión de probar algunos
@@ -2650,7 +2652,7 @@ podemos ajustar varios, o todos, los atributos a la vez
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-93-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-94-1.pdf}
 
 \section{Facetado}\label{facetado}
 
@@ -2757,7 +2759,7 @@ prestamos más atención.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-96-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-97-1.pdf}
 
 Los culpables de la anomalía son los trámites; en ninguna otra categoría
 la comuna 1 se separa del resto. Sabiendo que la base de donde provienen
@@ -2811,7 +2813,7 @@ que vamos a usar \texttt{weight\ =\ total}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-97-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-98-1.pdf}
 
 Tenemos dos problemas. El primero es que los valores en el eje de las
 \texttt{y} son grandes, y R nos quiere hacer un favor expresándolos en
@@ -2844,7 +2846,7 @@ agregar \texttt{coord\_flip}:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-99-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-100-1.pdf}
 
 Ahora si podemos interpretar el gráfico. San Nicolás y Monserrat son los
 barrios a la cabeza, lo cual no sorprende sabiendo que pertenecen a la
@@ -2866,7 +2868,7 @@ corresponde a cada subcategoría:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-100-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-101-1.pdf}
 
 !Esos trámites otra vez! En cierto modo, estamos recorriendo las mismas
 conclusiones a las que arribamos usando scatterplots, pero mostrando la
@@ -2886,7 +2888,7 @@ barras, pero no su interior:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-101-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-102-1.pdf}
 
 También podemos cambiar las categorías. Si qusiéramos ver el total de
 registros por cada tipo de trámite:
@@ -2898,7 +2900,7 @@ registros por cada tipo de trámite:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-102-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-103-1.pdf}
 
 Notamos que las quejas y denuncias son eventos poco frecuentes en
 comparación con las otras clases de contacto entre ciudadanos y ciudad.
@@ -2915,7 +2917,7 @@ contacto?
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-103-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-104-1.pdf}
 
 Hemos obtenido una visualización indigerible. Quizás con un facetado por
 barrio\ldots{}
@@ -2928,7 +2930,7 @@ barrio\ldots{}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-104-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-105-1.pdf}
 
 Esta opción es un poco mejor, ya que al menos permite identificar pronto
 los barrios salientes, y discernir diferencias generales si se la mira
@@ -2989,7 +2991,7 @@ que elegir una variable y asignarla a las \texttt{x}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-106-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-107-1.pdf}
 
 \texttt{geom\_histogram()} divide el rango de valores en una cantidad
 arbitraria de segmentos iguales (``bins'' en inglés) y cuenta cuantas
@@ -3039,7 +3041,7 @@ y creamos el facetado como ya sabemos:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-108-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-109-1.pdf}
 
 Aparecen las diferencias. Los reclamos tienen una dispersión mínima, con
 casi todas las observaciones apiladas en torno a unos 1000 contactos
@@ -3112,7 +3114,7 @@ sirva de ejemplo. El original:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-109-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-110-1.pdf}
 
 versus la versión pulida usando \texttt{labs()}:
 
@@ -3130,7 +3132,7 @@ versus la versión pulida usando \texttt{labs()}:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-110-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-111-1.pdf}
 
 Ahora si, a compartir.
 
@@ -3156,7 +3158,7 @@ usarse (mostrar relaciones, distribuciones, cambio a través del tiempo,
 etc).
 
 \begin{figure}
-\includegraphics[width=10.91in]{imagenes/data_to_viz} \caption{from Data to Viz - www.data-to-viz.com/}\label{fig:unnamed-chunk-111}
+\includegraphics[width=10.91in]{imagenes/data_to_viz} \caption{from Data to Viz - www.data-to-viz.com/}\label{fig:unnamed-chunk-112}
 \end{figure}
 
 Y lo más interesante: Para todas y cada una de las visualizaciones se
@@ -3330,7 +3332,7 @@ para intentar anticipar los resultados de la regresión lineal.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-114-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-115-1.pdf}
 
 Bien, no necesitamos recurrir a la matemática para saber que tiempo y
 expectativa de vida están correlacionadas en forma positiva. Esto es, el
@@ -3471,7 +3473,7 @@ respectivos valores que nos indica el modelo, \texttt{-389.6063} y
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-118-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-119-1.pdf}
 
 Aquí no vemos más que los datos que ya teníamos. Pero proyectemos la
 línea hacia el futuro. Con \texttt{xlim()} e \texttt{ylim()} podemos
@@ -3493,7 +3495,7 @@ que ahora podemos ver hacia donde va.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-119-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-120-1.pdf}
 
 Ahí está la predicción. Según nuestro modelo, para el año 2030 la
 expectativa de vida en la Argentina habrá superado los 80 años.
@@ -3532,7 +3534,7 @@ una línea de tendencia. Aquí usamos \texttt{method\ =\ "lm"} por
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-120-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-121-1.pdf}
 
 Hacer una regresión lineal se trata de encontrar la línea que atraviesa
 nuestra nube de puntos de modo tal que la suma de las distancias de cada
@@ -3563,7 +3565,7 @@ año, agregando la línea de regresión para:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-121-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-122-1.pdf}
 
 Sigue siendo evidente una fuerte tendencia lineal, pero las
 observaciones ya no se ciñen de forma tan estrecha a la línea idealizada
@@ -3652,7 +3654,7 @@ corresponden a observaciones a las que el modelo se ajusta bien.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-125-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-126-1.pdf}
 
 Siempre podemos esperar una cierta divergencia entre las predicciones y
 los valores observados, por lo que los residuos siempre tendrán (en
@@ -3705,7 +3707,7 @@ vertical que señale el año de la crisis:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-126-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-127-1.pdf}
 
 Es claro que el modelo se beneficiaría de poder tener en cuenta la
 irrupción de las crisis en el país. Esto se lograría agregando una
@@ -3747,7 +3749,7 @@ recientes, las de 2007.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-127-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-128-1.pdf}
 
 Ya podemos vislumbrar que el continente incide en la expectativa de
 vida, con África sufriendo los números más bajos. La profusión de puntos
@@ -3770,7 +3772,7 @@ mejor lo que está ocurriendo. Usamos \texttt{geom\_jitter()} igual que
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-128-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-129-1.pdf}
 
 Algún ojo avizor habrá notado que la clasificación por color no es
 necesaria, ya que el continente ya está señalado por su posición en el
@@ -3792,7 +3794,7 @@ de vida de los países, con un histograma facetado por continente:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-129-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-130-1.pdf}
 
 Bien, estamos convencidos de que hay una relación entre continente y
 expectativa de vida, aunque no la hemos cuantificado. Para eso,
@@ -3856,7 +3858,7 @@ ideal:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-132-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-133-1.pdf}
 
 Notamos que:
 
@@ -3914,7 +3916,7 @@ vida según los años.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-134-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-135-1.pdf}
 
 Vaya sopresa. A pesar de ser en extremo baja comparada con el resto de
 Asia, la expectativa de vida en Afganistán en el 2007 es la más alta de
@@ -4376,7 +4378,7 @@ tipos de distorsión, o para encontrar una solución de compromiso que los
 balancee.
 
 \begin{figure}
-\includegraphics[width=9.49in]{imagenes/proyecciones} \caption{Distintos sistemas de proyección cartográfica (cortesía Daniel R. Strebe 2011)}\label{fig:unnamed-chunk-142}
+\includegraphics[width=9.49in]{imagenes/proyecciones} \caption{Distintos sistemas de proyección cartográfica (cortesía Daniel R. Strebe 2011)}\label{fig:unnamed-chunk-143}
 \end{figure}
 
 La proyección más famosa es la Mercator, diseñada para asistir la
@@ -4395,7 +4397,7 @@ inconsolable irritación de los geógrafos, Mercator se convirtió en el
 estándar de facto para aplicaciones geográficas en la web.
 
 \begin{figure}
-\includegraphics[width=4.53in]{imagenes/Mercator-proj} \caption{La inescapable proyección Mercator (cortesía Jecowa)}\label{fig:unnamed-chunk-143}
+\includegraphics[width=4.53in]{imagenes/Mercator-proj} \caption{La inescapable proyección Mercator (cortesía Jecowa)}\label{fig:unnamed-chunk-144}
 \end{figure}
 
 En la práctica, si trabajamos en forma frecuente con archivos
@@ -4576,7 +4578,7 @@ Nuestro aliado \texttt{ggplot()} se encarga de ello.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-147-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-148-1.pdf}
 
 Ademas de encontrarnos con la reconocible silueta de la ciudad,
 comprobamos lo que el resumen de la data había sugerido: la mayoría de
@@ -4594,7 +4596,7 @@ Podemos analizar eso mismo: ¿cuántas viviendas hay por radio?
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-148-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-149-1.pdf}
 
 EL grosor de la línea que traza las fronteras entre radios hace difícil
 determinar el color de relleno. Esto suele pasar cuando se grafica
@@ -4608,7 +4610,7 @@ solución es definir el color de la línea como \texttt{NA}, que para
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-149-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-150-1.pdf}
 
 Así esta mejor. Nótese que definimos el color por fuera de
 \texttt{aes()}. Cuando queremos asignar un valor fijo a alguno de los
@@ -4625,7 +4627,7 @@ gran radio censal al oeste. ¿A qué barrio corresponde?
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-150-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-151-1.pdf}
 
 Hemos logrado otro de nuestros gráficos ilegibles, intentando mostrar
 demasiadas variables categóricas a la vez. Una forma de resolver el
@@ -4640,7 +4642,7 @@ censales.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-151-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-152-1.pdf}
 
 Cómo había anticipado el resumen vía \texttt{summary()}, la gran mayoría
 de los radios tiene menos de medio km\^{}2. Unos pocos superan los 2
@@ -4658,7 +4660,7 @@ corresponden.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-152-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-153-1.pdf}
 Nuestro gran radio censal al este, con población considerable,
 corresponde a Puerto Madero.
 
@@ -4674,7 +4676,7 @@ la división de una por otra.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-153-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-154-1.pdf}
 
 Hay un radio censal que parece brillar, destacándose entre los demás.
 ¿Dónde está? Esta vez lo resolvemos en forma analítica en lugar de
@@ -4760,7 +4762,7 @@ Con nuestros datos, podemos visualizar la densidad de la población así:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-155-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-156-1.pdf}
 
 Este último gráfico representa de forma mucho mas precisa la
 distribución de habitantes en la ciudad, haciendo saltar a la vista los
@@ -4869,7 +4871,7 @@ fronteras de la unidad de agregación - los barrios.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-160-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-161-1.pdf}
 
 Como efecto secundario de la operación (que en la jerga del \emph{GIS}
 se conoce como ``disolver polígonos'') podemos ver algunas líneas
@@ -4927,7 +4929,7 @@ sea la misma.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-163-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-164-1.pdf}
 
 Tal como habíamos verificado cuando hicimos la exploración del dataset
 en el capítulo 2, en los barrios céntricos se registra la mayoría de los
@@ -4944,7 +4946,7 @@ mostrar valores per cápita.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-164-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-165-1.pdf}
 
 Normalizar los datos hace evidente que los barrios son parejos en su
 grado de demanda por habitante, exceptuando los casos salientes que
@@ -5035,7 +5037,7 @@ Y mostramos el rubro principal por barrio en un mapa
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-167-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-168-1.pdf}
 
 \section{Combinando capas
 geográficas}\label{combinando-capas-geograficas}
@@ -5109,7 +5111,7 @@ Combinar capas mostrado distintas geometrías es simple usando
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-170-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-171-1.pdf}
 
 ¡Voilà! Podríamos también aprovechar el lienzo en blanco de la
 superficie de los barrios para hacer un mapa temático que muestre la
@@ -5162,7 +5164,7 @@ barrio:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-173-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-174-1.pdf}
 
 Aquí se cumplen las expectativas: la cantidad de emergencias reportadas
 sigue en forma clara un patrón relacionado con la cantidad de estaciones

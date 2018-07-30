@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2018-07-28">
+<meta name="date" content="2018-07-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -192,7 +192,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="a-investigar-cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autonoma-de-buenos-aires" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> A investigar: ¿Cual es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</h3>
 <p>Buenos Aires es una ciudad que desde hace décadas presenta una <a href="https://elpais.com/internacional/2016/10/16/argentina/1476629610_416732.html">marcada polarización</a> entre sus barrios del sur, relativamente menos desarrollados, y los del norte donde el nivel socioeconómico y la calidad de vida son mayores.</p>
-<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
 <img src="imagenes/noticia_caba.jpg" alt="Artículo en la edición online de El País" width="325" />
 <p class="caption">
 Figura 2.1: Artículo en la edición online de El País
@@ -212,7 +212,7 @@ Figura 2.1: Artículo en la edición online de El País
 <div id="escribiendo-un-script" class="section level3">
 <h3><span class="header-section-number">2.1.3</span> Escribiendo un script</h3>
 <p>Aprovechemos para dar un nombre a los áreas que vemos en RStudio:</p>
-<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<div class="figure"><span id="fig:unnamed-chunk-6"></span>
 <img src="imagenes/Interfaz_RStudio.jpg" alt="La interfaz de RStudio" width="390" />
 <p class="caption">
 Figura 2.2: La interfaz de RStudio
@@ -304,7 +304,7 @@ superficie_habitacion_m2</code></pre></div>
 <p>Por ejemplo, veamos a cuanto asciende la tasa de mortalidad infantil en cada comuna durante 2016:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mortalidad) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(Comuna), <span class="dt">y =</span> Tasa2016))</code></pre></div>
-<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-18-1.png" width="1050" /></p>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-19-1.png" width="1050" /></p>
 <p>Para realizar una visualización con ésta herramienta, siempre se comienza con la función ggplot(), que crea un eje de coordenadas sobre el cual se pueden agregar capas. El primer parámetro que recibe ggplot() es el dataset que queremos usar para el gráfico; en nuestro caso, ggplot(mortalidad). Ejecutar sólo ggplot(mortalidad) nos devuelve un gráfico vacío; la gracia está en agregar una o más capas especificando cómo queremos mostrar los datos. Estas capas se agregan con un signo <code>+</code>.</p>
 <p>En nuestro ejemplo, <code>geom_col()</code> crea columnas cuya posición en el eje de las x depende de la variable “Comuna”, mientas que la altura (posición en el eje de las y) depende del valor de la variable “Tasa2016”. Existen muchas funciones de tipo “geom_XXX”, que agregan distintas clases de capas al gráfico: geom_point, geom_polygon, geom_text y muchos, muchos más que iremos viendo más adelante.</p>
 <p>Cada función “geom_” toma como parámetro un conjunto de definiciones “estéticas” que le indican una variable a graficar (“mortalidad” en nuestro caso), cómo (color, tamaño, etc) y dónde (posición x, posición y del eje). Estos parámetros van siempre dentro de una función auxiliar, <code>aes()</code>. En nuestro ejemplo, “geom_line(aes(x = año, y = mortalidad, group = Comuna, color = factor(Comuna)))”.</p>
@@ -358,11 +358,11 @@ superficie_habitacion_m2</code></pre></div>
 <p>Y hablando de coordenadas, generar un mapa a partir de un dataframe espacial creado por sf es muy fácil con la ayuda de ggplot</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(comunas) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_sf</span>()</code></pre></div>
-<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-23-1.png" width="1050" /></p>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-24-1.png" width="1050" /></p>
 <p>Si queremos agregar una leyenda al mapa que identifique cada comuna con su número, usamos:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(comunas) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_sf</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> comunas))</code></pre></div>
-<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-24-1.png" width="1050" /></p>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-25-1.png" width="1050" /></p>
 <p>Dentro de “aes()” usé el parámetro “fill” (relleno en inglés) para pedirle a ggplot que llene cada polígono con un color distinto de acuerdo al campo “comunas”.</p>
 <p>Aprovechando que tenemos un mapa, deberíamos clasificar las comunas entre las que pertenecen al norte y las que pertenecen al sur de la ciudad. No hay una línea divisoria oficial, pero la traza de la Avenida Rivadavia suele ser tomada como frontera: Rivadavia es la <a href="https://www.clarin.com/ediciones-anteriores/avenida-rivadaviaun-largo-recorrido-contrastes_0_B1reo181CYe.html">“divisoria simbólica del Norte y el Sur de la Ciudad, con sus diferencias de desarrollo”</a></p>
 <p>Por esas casualidades de la vida, tengo un archivo geográfico que contiene la línea que dibuja a avenida Rivadavia al atravesar la ciudad. Lo bajamos:</p>
@@ -378,7 +378,7 @@ superficie_habitacion_m2</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(comunas) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_sf</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> comunas)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> rivadavia, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
-<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-26-1.png" width="1050" /></p>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-27-1.png" width="1050" /></p>
 <p>La identificación por colores no hace fácil reconocer con rapidez que número corresponde a cada comuna; es un recurso que funciona mejor con menos categorías que nuestras 15. Podríamos arreglarlo, por ejemplo evitando la codificación por color, y dibujando una etiqueta con número dibujada sobre cada comuna. ¡Pero no en este momento! En aras de la sencillez, vamos a aguzar la vista y tomar nota de cuales comunas tienen gran parte de su territorio al sur de la Avenida Rivadavia. Según mi interpretación, son las comunas 1, 3, 4, 5, 7, 8 y 9. (Hay que admitir que la comuna 1 parece estar repartida en partes más o menos iguales, pero vamos a dejársela al sur en forma arbitraria para no complicar el ejercicio).</p>
 </div>
 <div id="agregando-datos" class="section level3">
@@ -418,7 +418,7 @@ nueva_columna</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(comunas) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_sf</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> ubicacion)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> rivadavia, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
-<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-30-1.png" width="1050" /></p>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-31-1.png" width="1050" /></p>
 <p>Todo en orden. Ahora hagamos lo mismo con el dataframe de mortalidad, aprovechando que lista las comunas en el mismo orden (del 1 al 15) y por lo tanto podemos “pegarle” el mismo vector de etiquetas con ubicación que ya preparamos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mortalidad &lt;-<span class="st"> </span><span class="kw">mutate</span>(mortalidad, ubicación =<span class="st"> </span>nueva_columna)
                          
@@ -440,14 +440,14 @@ nueva_columna</code></pre></div>
 <span class="st">    </span><span class="kw">geom_sf</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> mortalidad<span class="op">$</span>Tasa2016)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> rivadavia, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">scale_fill_distiller</span>(<span class="dt">palette =</span> <span class="st">&quot;Spectral&quot;</span>)</code></pre></div>
-<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-32-1.png" width="1050" /></p>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-33-1.png" width="1050" /></p>
 <p>Para una comparación visual más precisa entre los valores de cada comuna, le pedimos a ggplot un gráfico de barras, con la capa <code>geom_col()</code>. En las variables estéticas, definimos que la posición de las barras en el eje de las x estará dada por el número de cada comuna, la altura de las barras (eje y) será dada por su tasa de mortalidad, y su color de relleno (fill) dependerá de su ubicación geográfica.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mortalidad) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Comuna, <span class="dt">y =</span> Tasa2016, <span class="dt">fill =</span> ubicación)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Mortalidad infantil en la Ciudad Autónoma de Buenos Aires&quot;</span>,
          <span class="dt">subtitle =</span> <span class="st">&quot;Año 2016&quot;</span>,
          <span class="dt">y =</span> <span class="st">&quot;tasa&quot;</span>) </code></pre></div>
-<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-33-1.png" width="1050" /></p>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-34-1.png" width="1050" /></p>
 <p>Por último, usamos a R de calculadora. Separamos las comunas en dos dataframes distintos según su ubicación, con el comando <code>filter()</code>…</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">comunas_al_sur &lt;-<span class="st"> </span><span class="kw">filter</span>(mortalidad, ubicación <span class="op">==</span><span class="st"> &quot;Sur&quot;</span>)
 
