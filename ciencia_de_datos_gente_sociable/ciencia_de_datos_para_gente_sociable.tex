@@ -116,16 +116,17 @@
 }
 
 \setlength{\droptitle}{-2em}
+
   \title{Ciencia de Datos para Gente Sociable}
-  \pretitle{\vspace{\droptitle}\centering\huge}
+    \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-\subtitle{Una introducción a la exploración, análisis y visualización de datos}
+  \subtitle{Una introducción a la exploración, análisis y visualización de datos}
   \author{Antonio Vazquez Brust}
-  \preauthor{\centering\large\emph}
+    \preauthor{\centering\large\emph}
   \postauthor{\par}
-  \predate{\centering\large\emph}
+      \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-08-17}
+    \date{2018-10-17}
 
 \usepackage{booktabs}
 
@@ -284,15 +285,14 @@ licencias ni costos de adquisición de ningún tipo.
 Expertos de todo el mundo colaboran en forma activa con el proyecto, no
 sólo desarrollando el lenguaje en sí (llamado ``R base''), sino también
 extendiéndolo con nuevas habilidades que pueden ser incorporadas por los
-usuarios finales en forma de ``paquetes'' de funciones que pueden ser
-instaladas.
+usuarios finales en forma de ``paquetes'' instalables.
 
 La calidad del lenguaje en sí, de los paquetes instalables que le
 agregan un sinfín de funciones (desde algoritmos de inteligencia
-artificial hasta la generación de mapas interactivos) y de la comunidad
-de usuarios que comparte información en foros y blogs, ha hecho de R uno
-de los lenguajes de programación más populares del mundo. En el campo
-del análisis de datos, es la herramienta por excelencia en muchas
+artificial hasta mapas interactivos) y de la comunidad de usuarios que
+comparte información en foros y blogs, ha hecho de R uno de los
+lenguajes de programación más populares del mundo. En el campo del
+análisis de datos, es la herramienta por excelencia en muchas
 universidades, empresas de tecnología, y redacciones de periodismo de
 datos.
 
@@ -4189,12 +4189,12 @@ que, a nivel estadístico, se supera el 95\% de confianza en que la
 relación existe en la realidad y no es producto de una casualidad en los
 datos. Pasando ese umbral se considera que los datos son
 ``estadísticamente significativos'', y desde hace muchos años encontrar
-un \emph{valor p} menor a 0,5 es la meta dorada de los investigadores
+un \emph{valor p} menor a 0,05 es la meta dorada de los investigadores
 que emplean análisis estadístico. ¿Porqué un 95\% de confianza alcanza?
 ¿Porqué no relajar el límite a 90\%, o quizás mejor, exigir al menos un
 99 o 99,9\% de seguridad? La verdad es que no hay ninguna razón
-trascendental. El 95\% de certeza es tan sólo un valor arbitrario que en
-algún momento se volvió estándar. Es importante aclara que en los
+trascendental. El 95\% de certeza es tan sólo un umbral arbitrario que
+en algún momento se volvió estándar. Es importante aclarar que en los
 últimos años ha crecido una reacción de rechazo a esta norma arbitraria,
 dentro de la propia comunidad científica. Quienes siguen confiando en
 los \emph{valores p} son llamados ``frecuentistas''; los que proponen
@@ -4307,7 +4307,7 @@ el PBI, reduciendo la del contintente.
 mapas}\label{informacion-geografica-y-mapas}
 
 Hemos llegado al capítulo final, dedicado al análisis y visualización de
-información geográfica. Aquí incursionaremos en el el dominio de los
+información geográfica. Aquí incursionaremos en el dominio de los
 \emph{SIG} (``Sistemas de Información Geográfica'') también conocidos
 como \emph{GIS} por sus siglas en inglés.
 
@@ -4334,8 +4334,8 @@ precisa sobre su ubicación geográfica. Al mismo tiempo, maduran y se
 hacen más fáciles de usar las herramientas para análisis y visualización
 espacial.
 
-En los procesos sociales, el ``dónde'' suele ser un aspecto clave,
-central para quienes estudiamos, por ejemplo, las ciudades o las
+En los procesos sociales, el ``dónde'' suele ser un aspecto clave. Es
+central para quienes estudiamos -por ejemplo- las ciudades o las
 dinámicas de la política, siempre tan arraigadas a lo territorial. Esto
 vuelve al mapa una de las herramientas de visualización más importantes
 que podemos emplear.
