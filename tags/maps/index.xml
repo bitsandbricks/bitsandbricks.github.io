@@ -2,47 +2,626 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Maps on Bits &amp; Bricks</title>
-    <link>/tags/maps/</link>
+    <link>https://bitsandbricks.github.io/tags/maps/</link>
     <description>Recent content in Maps on Bits &amp; Bricks</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
     <lastBuildDate>Sat, 10 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/maps/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://bitsandbricks.github.io/tags/maps/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Visualizando con R el historial de ubicaciones de Google (parte III)</title>
-      <link>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii/</link>
+      <link>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii/</link>
       <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii/</guid>
-      <description>En la entrega anterior, seguimos el rastro del usuario a través de las calles, y descubrimos donde vive.
-Como cierre, vamos a visualizar los vuelos con los que el usuario conectó las ciudades por donde estuvo.
-Para reproducir los resultados, recomiendo correr antes el código de la parte I, que deja preparados los sets de datos que vamos a utilizar aquí.
-Identificando vuelos Durante los ejercicios anteriores, notamos que los datos contienen ubicaciones registradas a ambos lados del Atlántico.</description>
+      <guid>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii/</guid>
+      <description>&lt;p&gt;En la &lt;a href=&#34;https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iI/&#34;&gt;entrega anterior&lt;/a&gt;, seguimos el rastro del usuario a través de las calles, y descubrimos donde vive.&lt;/p&gt;
+&lt;p&gt;Como cierre, vamos a visualizar los vuelos con los que el usuario conectó las ciudades por donde estuvo.&lt;/p&gt;
+&lt;p&gt;Para reproducir los resultados, recomiendo correr antes el código de la &lt;a href=&#34;https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/&#34;&gt;parte I&lt;/a&gt;, que deja preparados los sets de datos que vamos a utilizar aquí.&lt;/p&gt;
+&lt;div id=&#34;identificando-vuelos&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Identificando vuelos&lt;/h2&gt;
+&lt;p&gt;Durante los ejercicios anteriores, notamos que los datos contienen ubicaciones registradas a ambos lados del Atlántico. A no ser que nuestro viajero haya optado por largos viajes en barco, podemos estar seguros de que ha tomado varios aviones. ¿Cómo podemos detectar los destinos unidos mediante vuelos?&lt;/p&gt;
+&lt;p&gt;Tras experimentar con varios métodos, me encontré con que la forma más simple es buscar registros de ubicación consecutivos separados por más de 250 Km. Tomando ventaja de la prohibición de usar las antenas del celular durante el vuelo, asumimos que si alguien recorrió un largo trecho desde su última conexión a GPS ha estado a bordo de una aeronave. Hay que aclarar que este criterio podría producir falsos positivos en caso de que el usuario haya viajado en auto por larguísimos trechos con su celular apagado (y falsos negativos en el caso de tramos en avión muy breves).&lt;/p&gt;
+&lt;p&gt;A continuación necesitamos traducir a metros la distancias entre geo-coordenadas. Podríamos escribir una función que aplique la &lt;a href=&#34;https://es.wikipedia.org/wiki/F%C3%B3rmula_del_haversine&#34;&gt;fórmula del haversine&lt;/a&gt;, o haciendo gala de una saludable pereza, usar la que viene incluida en el paquete &lt;code&gt;geosphere&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(geosphere)
+
+# Cargamos el dataset con el historial de ubicaciones, obtenido en  # https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/
+
+locationdf &amp;lt;- read.csv(&amp;#39;/home/havb/data/Google/Location History/locationdf.csv&amp;#39;, 
+                       stringsAsFactors = F)
+class(locationdf$date) &amp;lt;- &amp;#39;POSIXct&amp;#39;
+
+# La funcion distGeo toma dos listas con sets de coordenadas, 
+# y devuelve la distancia en m
+distance &amp;lt;- distGeo(locationdf[-nrow(locationdf), c(&amp;quot;lat&amp;quot;, &amp;quot;lon&amp;quot;)], 
+                      locationdf[-1, c(&amp;quot;lat&amp;quot;, &amp;quot;lon&amp;quot;)])
+
+# Unimos los datos de distancia con el dataset de ubicaciones
+# Descartamos la primera fila del dataset de ubicaciones, ya que al no registrarse 
+# una posición previa, no permite calcular distancia recorrida
+
+locationdf &amp;lt;- cbind(locationdf[-1,], distance)
+
+# Agregamos un indice al dataframe, que nos va a servir luego 
+# para encontrar el origen de los viajes
+
+locationdf &amp;lt;- cbind(index = 1:nrow(locationdf), locationdf)
+
+# Extraemos los destinos de los vuelos (arrivos a más de 250 KM del último registro)
+flights &amp;lt;- locationdf %&amp;gt;% 
+  select(index, lat, lon, date, year, CITY_NAME, CNTRY_NAME, distance) %&amp;gt;% 
+  filter(distance &amp;gt; 250000) 
+
+# Agregamos el lugar de salida de los vuelos
+
+findOrigin &amp;lt;- function(index) {
+  return(data.frame(prev_lat = locationdf[locationdf$index == index-1, &amp;quot;lat&amp;quot;],
+                    prev_lon = locationdf[locationdf$index == index-1, &amp;quot;lon&amp;quot;],
+                    prev_city = locationdf[locationdf$index == index-1, &amp;quot;CITY_NAME&amp;quot;])
+         )
+}
+
+# Finalmente, nuestra lista de vuelos
+flights &amp;lt;- cbind(flights, map_df(flights$index, findOrigin))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;La lista de vuelos encontrados luce así (versión abreviada):&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(flights[c(&amp;quot;CITY_NAME&amp;quot;, &amp;quot;prev_city&amp;quot;, &amp;quot;distance&amp;quot;, &amp;quot;year&amp;quot;)])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      CITY_NAME             prev_city  distance year
+## 1        Salta          Buenos Aires  934818.1 2011
+## 2 Buenos Aires San Miguel De Tucuman  850142.9 2011
+## 3  Resistencia          Buenos Aires  416533.2 2011
+## 4 Buenos Aires           Resistencia  416909.9 2011
+## 5       Madrid          Buenos Aires 8786212.0 2011
+## 6    Amsterdam                Madrid 1632970.9 2012&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Transformar la lista en una visualización es simple; sólo trazamos sobre un mapamundi las lineas que conectan orígenes y destinos:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(mapdata)
+
+maps::map(&amp;quot;world&amp;quot;, col=&amp;quot;#f2f2f2&amp;quot;, fill=TRUE, bg=&amp;quot;white&amp;quot;, lwd=0.15)#, xlim=xlim, ylim=ylim)
+
+points(bind_rows(flights[, c(&amp;quot;lon&amp;quot;, &amp;quot;lat&amp;quot;)], 
+             flights[, c(&amp;quot;prev_lon&amp;quot;, &amp;quot;lat&amp;quot;)]), 
+       col = &amp;quot;red&amp;quot;)
+
+lines(bind_rows(flights[, c(&amp;quot;lon&amp;quot;, &amp;quot;lat&amp;quot;)], 
+             flights[, c(&amp;quot;prev_lon&amp;quot;, &amp;quot;lat&amp;quot;)]), 
+      col = &amp;quot;orange&amp;quot;, lwd=2)
+title( main = &amp;quot;:/&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-10-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Simple si, pero esas líneas rectas quedan bastante raras. Dado que nuestro planeta es un esferoide, si proyectamos sobre un plano la distancia más corta entre dos puntos, la línea resultante no es una recta. Por ejemplo, así es como Delta Airlines muestra los vuelos que brinda en sociedad con Aerolíneas Argentinas:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://bitsandbricks.github.io/post/img/D_AA_destinos.jpg&#34; alt=&#34;Vuelos de Delta y Aerolíneas&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Vuelos de Delta y Aerolíneas&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Para reproducir esas curvas sobre el globo terráqueo, que llevan el simpático nombre de &lt;a href=&#34;https://es.wikipedia.org/wiki/Ortodr%C3%B3mica&#34;&gt;ortodrómicas&lt;/a&gt;, volvemos a recurrir al paquete &lt;code&gt;geosphere&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;curvas &amp;lt;- gcIntermediate(flights[c(&amp;quot;lon&amp;quot;, &amp;quot;lat&amp;quot;)], 
+                         flights[c(&amp;quot;prev_lon&amp;quot;, &amp;quot;prev_lat&amp;quot;)])
+
+maps::map(&amp;quot;world&amp;quot;, col=&amp;quot;#f2f2f2&amp;quot;, fill=TRUE, bg=&amp;quot;white&amp;quot;, lwd=0.15)#, xlim=xlim, ylim=ylim)
+
+points(bind_rows(flights[, c(&amp;quot;lon&amp;quot;, &amp;quot;lat&amp;quot;)], 
+             flights[, c(&amp;quot;prev_lon&amp;quot;, &amp;quot;lat&amp;quot;)]), 
+       col = &amp;quot;red&amp;quot;)
+
+for(i in 1:length(curvas)){
+  lines(curvas[[i]], col = &amp;quot;orange&amp;quot;, lwd=2)
+}
+
+title( main = &amp;quot;:)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-10-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;inflando-el-globo&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Inflando el globo&lt;/h1&gt;
+&lt;p&gt;Por último, hagamos una proyección esférica. De paso podemos mostrar más información, como el año en que se efectuó cada vuelo, o la cantidad de veces que se pasó por un destino. Para ello, necesitamos (como siempre!) preparar nuestros datos.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Generamos las coordenadas de las curvas/trayectos
+
+curvas &amp;lt;- gcIntermediate(flights[,c(&amp;#39;prev_lon&amp;#39;, &amp;#39;prev_lat&amp;#39;)], 
+                           flights[,c(&amp;#39;lon&amp;#39;, &amp;#39;lat&amp;#39;)], 
+                           100, addStartEnd=TRUE, sp=TRUE)
+
+# Convertimos las curvas (que son un &amp;quot;spatial object&amp;quot;) en una lista de dataframes que vamos a poder plotear
+
+curvas &amp;lt;- map_df(curvas@lines, fortify)
+
+# Agregamos la data de los vuelos
+
+flights$index &amp;lt;- 1:nrow(flights)
+
+curvas &amp;lt;- merge(curvas, flights, by.x = &amp;quot;id&amp;quot;, by.y = &amp;quot;index&amp;quot;, all.x = T)
+
+# Acomodamos los datos de las ciudades para agregarlas a la visuaizacion
+# Unimos las ciudades, sean origen o destino, en una sola lista
+
+ciudades &amp;lt;- bind_rows(flights[c(&amp;quot;lat&amp;quot;, &amp;quot;lon&amp;quot;, &amp;quot;CITY_NAME&amp;quot;)] %&amp;gt;% 
+                        setNames(c(&amp;quot;lat&amp;quot;, &amp;quot;lon&amp;quot;, &amp;quot;ciudad&amp;quot;)),
+                      flights[c(&amp;quot;prev_lat&amp;quot;, &amp;quot;prev_lon&amp;quot;, &amp;quot;prev_city&amp;quot;)] %&amp;gt;% 
+                        setNames(c(&amp;quot;lat&amp;quot;, &amp;quot;lon&amp;quot;, &amp;quot;ciudad&amp;quot;)))
+
+
+ciudades &amp;lt;- ciudades %&amp;gt;%
+  # Las coordenadas de las ciudades difieren enre registros, debido a difrentes 
+  # posiciones exactas del usuario. Lo arreglamos...
+  aggregate(data = ., cbind(lon, lat) ~ ciudad, FUN = function(x) mean(range(x))) %&amp;gt;% 
+  # Agregamos frecuencia de visitas
+  left_join(count(ciudades, ciudad)) &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ahora si, generemos la visualización. Indicamos el año del vuelo mediante su color, y la cantidad de veces que el usuario pasó por una ciudad mediante el tamaño del punto que la representa.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## Un globo terráqueo
+library(hrbrthemes)
+library(ggrepel)
+ggplot() +
+  borders(&amp;quot;world&amp;quot;, colour=&amp;quot;gray80&amp;quot;, fill=&amp;quot;gray95&amp;quot;) +
+  # Graficamos los trayectos, diferenciando por año 
+  geom_path(data = curvas, 
+            aes(long, lat.x , 
+                group = group, 
+                color = as.factor(year)),
+            size = 1.6,
+            alpha = .85) +
+  scale_color_brewer(palette = &amp;quot;YlGn&amp;quot;) +
+  # Agregamos las ciudades
+  geom_point(data=ciudades, aes(x = lon, y = lat, size = n), 
+             shape = 16, alpha = .5) +
+  # y etiquetas con los nombres
+  geom_label_repel(data = ciudades, 
+            aes(lon, lat, label = ciudad, angle = 10, 
+                group = NULL), 
+            size = 3) +
+  # Centramos la proyección en el Océano Atlántico
+  coord_map(&amp;quot;ortho&amp;quot;, orientation = c(10, -40, 0)) +
+  labs(y = &amp;quot;&amp;quot;, x = &amp;quot;&amp;quot;,
+       title=&amp;quot;Historial de ubicaciones de Google&amp;quot;,
+       subtitle=&amp;quot;vuelos detectados&amp;quot;,
+       color = &amp;quot;Año&amp;quot;,
+       size = &amp;quot;Frecuencia&amp;quot;) +
+  theme_ipsum() &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-10-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;No luce nada mal.&lt;/p&gt;
+&lt;p&gt;Para terminar, una simple conclusión: Google sabe demasiado sobre sus usuarios. Sería bueno pensar en como podemos remediarlo. No me refiero a “volver atrás” y dejar de usar tecnologías como el GPS y los registros de ubicación, sino a encontrar la forma de tomar control de nuestros datos, y tener el derecho a saber que se hace con ellos, limitando los usos que no nos convenzan.&lt;/p&gt;
+&lt;/div&gt;
+</description>
     </item>
     
     <item>
       <title>Visualizando con R el historial de ubicaciones de Google (parte II)</title>
-      <link>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</link>
+      <link>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</link>
       <pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</guid>
-      <description>En la parte I, vimos cómo descargar, limpiar y comenzar a visualizar los datos de nuestra ubicación que Google guarda cuando usamos servicios de la compañía. Hasta aquí nos habíamos concentrado en clasificar los datos según el tiempo y según los países visitados.
-Ahora vamos a poner nuestra atención en el interior de las ciudades, para seguir los rastros que dejamos al recorrer las calles.
-Para reproducir los resultados, recomiendo correr antes el código de la parte I, que deja preparados los sets de datos que vamos a utilizar aquí.</description>
+      <guid>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</guid>
+      <description>&lt;p&gt;En la &lt;a href=&#34;https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/&#34;&gt;parte I&lt;/a&gt;, vimos cómo descargar, limpiar y comenzar a visualizar los datos de nuestra ubicación que Google guarda cuando usamos servicios de la compañía. Hasta aquí nos habíamos concentrado en clasificar los datos según el tiempo y según los países visitados.&lt;/p&gt;
+&lt;p&gt;Ahora vamos a poner nuestra atención en el interior de las ciudades, para seguir los rastros que dejamos al recorrer las calles.&lt;/p&gt;
+&lt;p&gt;Para reproducir los resultados, recomiendo correr antes el código de la &lt;a href=&#34;https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/&#34;&gt;parte I&lt;/a&gt;, que deja preparados los sets de datos que vamos a utilizar aquí.&lt;/p&gt;
+&lt;div id=&#34;se-lo-que-hiciste-el-verano-pasado&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Se lo que hiciste el verano pasado&lt;/h2&gt;
+&lt;p&gt;O al menos, lo se si puedo poner mis garras en tu historial de ubicaciones, lo cual no es tan fácil… a no ser que uno trabaje en Google o para los amigos de la NSA. En todo caso, volvamos al dataset que nos fue amablemente donado.&lt;/p&gt;
+&lt;p&gt;Por el análisis que realizamos en la entrega anterior, sabemos que el usuario ha vivido en Buenos Aires y en Boston, y que ha visitado varias ciudades, entre ellas Nueva York. Vamos a empezar por visualizar sus movimientos en una ciudad donde está de visita. Cuando pasa unos días en una ciudad que ya conoce, siempre va a los mismo lugares?&lt;/p&gt;
+&lt;p&gt;Vamos a responder esa pregunta aprovechando las funciones de &lt;code&gt;ggmap&lt;/code&gt;, que hacen muy pero muy fácil poner en pantalla un mapa de calles de cualquier lugar del mundo.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(ggmap)
+library(forcats)
+library(hrbrthemes)
+library(RColorBrewer)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Cargamos el dataset con el historial de ubicaciones, obtenido en  # https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/
+
+locationdf &amp;lt;- read.csv(&amp;#39;/home/havb/data/Google/Location History/locationdf.csv&amp;#39;, 
+                       stringsAsFactors = F)
+class(locationdf$date) &amp;lt;- &amp;#39;POSIXct&amp;#39;
+
+# Bajamos un mapa centrado en el Central Park de NY
+NY  &amp;lt;- get_map(&amp;quot;Central Park, NY&amp;quot;, source = &amp;quot;stamen&amp;quot;, maptype = &amp;quot;toner-lite&amp;quot;, zoom = 12)
+
+# Proyectamos el mapa
+ggmap(NY) +
+  # y trazamos por encima las coordenadas de cada ubicación del usuario registrada en el área
+  geom_point(data = filter(locationdf, CITY_NAME == &amp;quot;New York&amp;quot;),
+             aes(x = lon, y = lat, color = fct_inorder(paste(month, year))), 
+             alpha = .5) +
+  theme_ipsum() +
+  scale_color_brewer(type = &amp;quot;qual&amp;quot;, palette = &amp;quot;Set2&amp;quot;) +
+  labs(title=&amp;quot;Paradero del usuario&amp;quot;,
+       color = &amp;quot;Fecha&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;El mapa es claro, y muestra que en distintas ocasiones el usuario recorrió, en general, zonas diferentes de la ciudad. La mayor parte de su actividad transcurrió en Manhattan (en la visita de enero 2016 no abandonó la isla) con algunas visitas a New Jersey (al oeste del Río Hudson) y Brooklyn (al este del East River). En su última estadía se aventuró más al norte que de costumbre, pasando la mayor parte del tiempo en Harlem. Por la acumulación concentrada de puntos en ciertas parcelas, también es fácil deducir donde se ha alojado en cada ocasión.&lt;/p&gt;
+&lt;p&gt;Lo interesante de un dataset con tanta resolución temporal y espacial es que podemos seguir al usuario cuando se mete dentro de los edificios. Por ejemplo, podemos saber si, y cuando, visita cualquiera de los destinos famosos en la ciudad. Por ejemplo, ¿alguna vez visito el Museo de Arte Moderno de Nueva York? Hagamos zoom en el MoMA, esta vez descartando los datos de latitud y longitud, que no hacen falta:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;MoMA &amp;lt;- get_map(&amp;quot;MOMA, NY&amp;quot;, zoom = 18)
+
+ggmap(MoMA) + 
+  geom_point(data = filter(locationdf, CITY_NAME == &amp;quot;New York&amp;quot;),
+             aes(x = lon, y = lat, color = fct_inorder(paste(month, year))), 
+             alpha = .7, size = 3)  +
+  theme_ipsum() +
+  scale_color_brewer(type = &amp;quot;qual&amp;quot;, palette = &amp;quot;Set2&amp;quot;) +
+  labs(y = &amp;quot;&amp;quot;, x = &amp;quot;&amp;quot;,
+       title=&amp;quot;¿Visitando el Museum of Modern Art?&amp;quot;,
+       color = &amp;quot;Fecha&amp;quot;) +
+  # Eliminamos las etiquetas de latitud y longitud de los ejes 
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank()) +
+  coord_map()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Bastante fácil de leer. En enero del 2016, y otra vez en enero año siguiente, se registran visitas al museo. De hecho, sabiendo las fechas y el ala del edificio visitada, hasta podríamos saber que obras fueron apreciadas. Según el calendario del MoMA, en enero del 2017 se exhibió &lt;a href=&#34;https://www.moma.org/calendar/exhibitions/1668&#34;&gt;“A Revolutionary Impulse: The Rise of the Russian Avant-Garde”&lt;/a&gt;. Hasta podemos ver como lucían las obras:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://bitsandbricks.github.io/post/img/MoMA.jpg&#34; alt=&#34;Exhibición en el MoMA, enero 2017&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Exhibición en el MoMA, enero 2017&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Podríamos verificar si el usuario pasó por cualquier otra atracción. O restaurantes en particular. Iglesias, supermercados, monumentos. Si visitó una zona roja o cualquier otra área con fama cuestionable, y cuanto tiempo pasó allí. Todo eso y mucho más está guardado en los servers de Google, y nosotros lo entregamos voluntariamente!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;buscando-un-hogar&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Buscando un hogar&lt;/h2&gt;
+&lt;p&gt;Pasemos ahora a una ciudad donde el usuario tuvo o tiene su residencia permanente. Cuando uno usa Google Maps, tiene la opción de definir la dirección de su hogar. Lo interesante de asunto es que la empresa no necesita para nada que el usuario se lo diga; en todo caso, es una facilidad de cara al usuario, al que le queda su casa como una especie de &lt;em&gt;bookmark&lt;/em&gt; en el mapa. ¿Y porqué Google no necesita que se lo digamos?&lt;/p&gt;
+&lt;p&gt;Bueno, primero veamos como lucen todos los registros de ubicación en la ciudad donde vive el usuario, Buenos Aires:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;BA  &amp;lt;- get_map(&amp;quot;Buenos Aires, Argentina&amp;quot;, source = &amp;quot;stamen&amp;quot;, maptype = &amp;quot;toner-lite&amp;quot;, zoom = 11)
+
+ggmap(BA) + 
+  geom_point(data = filter(locationdf, CITY_NAME == &amp;quot;Buenos Aires&amp;quot;),
+             aes(x = lon, y = lat), 
+             alpha = .1, color = &amp;quot;orange&amp;quot;) +
+  theme_ipsum() +
+  labs(y = &amp;quot;&amp;quot;, x = &amp;quot;&amp;quot;,
+       title=&amp;quot;¿Dónde vive el usuario?&amp;quot;,
+       subtitle = &amp;quot;versión difícil&amp;quot;) +
+  # Eliminamos las etiquetas de latitud y longitud de los ejes 
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank()) +
+  coord_map()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Vemos que nuestro querido usuario ha estado por todos lados (salvo el sur-oeste de la ciudad, que parece ser &lt;em&gt;terra incognita&lt;/em&gt; para nuestro donante de datos), y que ha recorrido profusamente las arterias que comunican la ciudad con su área metropolitana. Pero no tenemos idea de donde vive, porque hay demasiado puntos sobre el mapa, y se hace imposible “leer” donde pasa la mayor parte de su tiempo.&lt;/p&gt;
+&lt;p&gt;Vamos a recurrir a una técnica de visualización que se llama &lt;em&gt;hexagon binning&lt;/em&gt;, útil cuando lo que queremos es encontrar los lugares donde la intensidad de una variable se destaca. En éste caso, vamos a dividir el espacio de la cuidad en hexágonos, asignarle a cada uno un valor asociado a la frecuencia de registros realizados desde allí, y buscar los que muestren valores altos.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(hexbin)
+
+myPalette &amp;lt;- colorRampPalette(brewer.pal(7,&amp;#39;Oranges&amp;#39;))
+
+ggmap(BA) + 
+  coord_equal() +
+  stat_binhex(aes(x = lon, y = lat), 
+              binwidth = c(0.0075,0.0075), 
+              alpha = .5, 
+              data = locationdf) + 
+  scale_fill_gradientn(colours=myPalette(7), name = &amp;quot;Cantidad de registros&amp;quot;) + 
+  theme_ipsum() +
+  labs(y = &amp;quot;&amp;quot;, x = &amp;quot;&amp;quot;,
+       title=&amp;quot;¿Dónde vive el usuario?&amp;quot;,
+       subtitle = &amp;quot;versión fácil&amp;quot;,
+       fill = &amp;quot;Cantidad de registros&amp;quot;) +
+  # Eliminamos las etiquetas de latitud y longitud de los ejes 
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank())&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Bingo. El solitario hexágono de intensidad máxima señala el domicilio del usuario -o al menos, el lugar donde pasa la mayor parte de sus horas. Si hiciéramos zoom sobre el mapa podríamos ver la parcela donde vive, y por lo tanto su dirección exacta, pero nos vamos a abstener.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;descubriendo-habitos&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Descubriendo hábitos&lt;/h2&gt;
+&lt;p&gt;Podemos continuar usando la técnica de los hexágonos para buscar patrones. Por ejemplo, identificar los lugares donde el usuario es registrado con frecuencia, develando los centro de su actividad cotidiana. Haciendo un facetado por año, podemos incluso visualizar como “la vida cotidiana” cambia a lo largo del tiempo. Vamos a filtrar el dataset para considerar sólo registros de ubicación capturados durante el trajín de la semana: de 9 a 18, de lunes a viernes. Como notamos en la visualización anterior, los alrededores de la casa del usuario dominan el mapa. Para evitarlo en este mapa, vamos a aplicar un transformación logarítmica al conteo de ubicaciones, que tiene como efecto reducir la diferencia entre valores máximos y mínimos.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(lubridate)
+
+ggmap(BA) + 
+  coord_equal() +
+  stat_binhex(data = filter(locationdf, 
+                           CITY_NAME == &amp;quot;Buenos Aires&amp;quot;, 
+                           hour(with_tz(date, &amp;quot;America/Buenos Aires&amp;quot;)) &amp;gt; 9 &amp;amp;
+                             hour(with_tz(date, &amp;quot;America/Buenos Aires&amp;quot;)) &amp;lt; 18,
+                           wday(with_tz(date, &amp;quot;America/Buenos Aires&amp;quot;)) %in% 2:6),
+              aes(x = lon, y = lat), 
+              binwidth = c(0.0075, 0.0075), 
+              alpha = .7) + 
+  # Aplicamos una transformación logarítmica
+  scale_fill_gradientn(colours=myPalette(9), trans = &amp;quot;log10&amp;quot;, name = &amp;quot;Location frequency&amp;quot;) +
+  theme_ipsum() +
+  labs(y = &amp;quot;&amp;quot;, x = &amp;quot;&amp;quot;,
+       title=&amp;quot;Patrones de actividad diurna&amp;quot;) +
+  # Eliminamos las etiquetas de latitud y longitud de los ejes 
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank()) +
+  # y eliminamos la leyenda
+  guides(fill = FALSE) +
+  facet_wrap(~year)  &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Los resultados muestran una diferencia clara entre su actividad en los años 2011 y 2012, con una variedad de sitios visitados más reducida, en comparación con 2014 y 2015 cuando su rutina diaria parece haber sido mucho más variada. Su actividad está claramente concentrada en el área que corresponde al centro económico de la ciudad. Hace incursiones al exterior de la ciudad, hacia el norte, pero rara vez en otra dirección. En lo que va del 2017, sus radio de acción es notablemente más acotado: Su tiempo se reparte en dos regiones nítidamente demarcadas, sin presencia observable en otros sectores. En todo el año 2016 su celular no se reportó ni una sola vez desde los confines de la ciudad. Como ya habíamos notado en la &lt;a href=&#34;https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/&#34;&gt;parte I&lt;/a&gt; de ésta serie, estaba viviendo en otro país.&lt;/p&gt;
+&lt;p&gt;Cómo planificador urbano, me causa vértigo imaginar todos los estudios que podríamos hacer sobre nuestras ciudades si tuviéramos acceso a la información que acumula Google: matrices origen/ destino de tránsito minuto a minuto, tendencias de actividad económica, recreativa, cultural, efecto en el tránsito peatonal y vehicular de cortes de servicio, cierre de calles y otros percances, estudios de adecuación del código de uso del suelo, e infinidad más. Claro que, aún más vértigo me da pensar todo lo que saben de nosotros, a nivel individual, no sólo Google sino los &lt;a href=&#34;http://www.telam.com.ar/notas/201312/44925-las-principales-revelaciones-de-edward-snowden.html&#34;&gt;servicios de inteligencia de los gobiernos que acceden a esos datos&lt;/a&gt;. En fin.&lt;/p&gt;
+&lt;p&gt;En la próxima (y final) entrega, vamos a reproducir los viajes del usuario entre ciudades, mostrando como podemos reconstruir su historial de viajes aéreos en base a sus registros de ubicación. Y con una linda visualización, por supuesto… si vamos a espiar, lo haremos con estilo.&lt;/p&gt;
+&lt;/div&gt;
+</description>
     </item>
     
     <item>
       <title>Visualizando con R el historial de ubicaciones de Google (parte I)</title>
-      <link>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</link>
+      <link>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</link>
       <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</guid>
-      <description>La irrupción de computadoras llenas de sensores que viajan el bolsillo de cada ciudadano -nuestros celulares- ha sido de sobra aprovechada por Google. Si no nos tomamos la molestia de inhabilitar funciones de localización activas de fábrica, todos los usuarios de celulares Android reportamos a Google nuestra posición, en forma constante. Y los usuarios de iPhones también, cuando usan servicios de la compañía en sus teléfonos.
-A esta altura, ya todos sabemos que Google es una compañía bastante creepy.</description>
+      <guid>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</guid>
+      <description>&lt;p&gt;La irrupción de computadoras llenas de sensores que viajan el bolsillo de cada ciudadano -nuestros celulares- ha sido de sobra aprovechada por Google. Si no nos tomamos la molestia de inhabilitar funciones de localización activas de fábrica, todos los usuarios de celulares Android reportamos a Google nuestra posición, en forma constante. Y los usuarios de iPhones también, cuando usan servicios de la compañía en sus teléfonos.&lt;/p&gt;
+&lt;p&gt;A esta altura, ya todos sabemos que Google es una compañía bastante &lt;em&gt;creepy&lt;/em&gt;. A cambio de unos cuantos servicios que hemos pasado a considerar imprescindibles, “sólo” quieren conocimiento completo de quiénes somos, qué hacemos, qué deseamos, y dónde estamos. Lo que Google hace con la cuantiosa información que acumula de sus miles de millones de usuarios es un misterio, al menos en cuanto a los detalles y al alcance de sus análisis.&lt;/p&gt;
+&lt;p&gt;Por eso es interesante hacer algunos ejercicios por nuestra cuenta, visualizando los datos de localización que Google ha recopilado sobre nosotros. Interroguemos a la data con una pregunta general en mente: ¿Qué puede inferir Google acerca de mi si sabe donde estoy?&lt;/p&gt;
+&lt;div id=&#34;descargando-nuestra-informacion-de-ubicacion&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Descargando nuestra información de ubicación&lt;/h2&gt;
+&lt;p&gt;El primer paso es acceder a la información que Google dispone de nosotros. Entrando en &lt;a href=&#34;https://takeout.google.com/settings/takeout&#34; class=&#34;uri&#34;&gt;https://takeout.google.com/settings/takeout&lt;/a&gt; podemos descargar archivos comprimidos con la información personal que Google mantiene en sus distintos servicios. Para nuestros fines, solo necesitamos los datos de ubicación. De-seleccionamos todas las opciones, y activamos sólo “Location History” / “Historial de Ubicaciones”, en formato JSON:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://bitsandbricks.github.io/post/img/G_location_history.png&#34; alt=&#34;Google takeout&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Google takeout&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Cliqueando en “Siguiente” podemos iniciar la descarga.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;preparacion-de-los-datos&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Preparación de los datos&lt;/h2&gt;
+&lt;p&gt;Una amable persona me ha donado su set de datos de ubicación para que juegue con ellos. Con el archivo de ubicaciones en nuestro poder, el impulso es generar visualizaciones de inmediato… pero como de costumbre, hay que masajear los datos para que queden utilizables.&lt;/p&gt;
+&lt;p&gt;Primero convertimos el archivo JSON a un dataframe. Lo leemos como objeto de R usando la función &lt;code&gt;fromJSON&lt;/code&gt;, disponible en el paquete &lt;code&gt;jsonlite&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(jsonlite)
+raw &amp;lt;- fromJSON(&amp;#39;../../../../data/Google/Location History/Location History.json&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Generamos un dataframe con pares latitud/longitud más la fecha. Y de paso algunos datos extra, como velocidad, precisión del registro, dirección, altitud, y la actividad que Google supone que estábamos realizando (estar quietos, viajar a pie, en bici, otro vehículo, etc):&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(lubridate)
+
+locs &amp;lt;- raw$locations
+locationdf &amp;lt;- data.frame(t=rep(0,nrow(locs)))
+
+# convertimos lat y long a variables numéricas
+locationdf$lat &amp;lt;- as.numeric(locs$latitudeE7/1E7)
+locationdf$lon &amp;lt;- as.numeric(locs$longitudeE7/1E7)
+
+# Nos llevamos los datos de precisión
+locationdf$accuracy &amp;lt;- locs$accuracy
+
+# Y la actividad más probable para cada lectura de posición
+act &amp;lt;- map_df(locs$activity, 
+              function(f) {
+                if(is.null(f[[1]])) 
+                  data.frame(activity=NA,confidence=NA,stringsAsFactors=F) 
+                else 
+                  data.frame(activity=f[[2]][[1]][[1]][1],
+                             confidence=f[[2]][[1]][[2]][1],stringsAsFactors=F)
+                })
+
+# Agregar los datos de actividad a nuestro dataframe principal
+locationdf$activity &amp;lt;- act$activity
+locationdf$confidence &amp;lt;- act$confidence
+
+# Velocity, altitude y heading también
+locationdf$velocity &amp;lt;- locs$velocity
+locationdf$altitude &amp;lt;- locs$altitude
+locationdf$heading &amp;lt;- locs$heading
+
+# Agregar un campo con fecha en calendario gregoriano, 
+# y campos para día de la semana, mes y año
+# El formato de la fecha es POSIX * 1000 (milliseconds) lo pasamos a una escala más útil...
+locationdf$date &amp;lt;- as.numeric(locs$timestampMs)/1000
+class(locationdf$date) &amp;lt;- &amp;#39;POSIXct&amp;#39;
+locationdf$weekday &amp;lt;- weekdays(as.Date(locationdf$date))
+locationdf$month &amp;lt;- months(as.Date(locationdf$date))
+locationdf$year &amp;lt;- year(as.Date(locationdf$date))
+
+# En el campo &amp;quot;activity&amp;quot; convertimos valores NA en &amp;quot;UNKNOWN&amp;quot;
+locationdf$activity = ifelse(is.na(locationdf$activity), &amp;quot;UNKNOWN&amp;quot;, locationdf$activity)
+
+
+# Agregar un indice y ordenarlo en reversa (el registro más reciente al final)
+locationdf &amp;lt;- locationdf[rev(rownames(locationdf)),]&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;primera-aproximacion-a-los-datos&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Primera aproximación a los datos&lt;/h2&gt;
+&lt;p&gt;Para ir conociendo los datos, vamos a empezar con algo básico: Determinar que lapso de tiempo abarcan, y que tipo de “actividades” han sido registradas.&lt;/p&gt;
+&lt;p&gt;Para que los &lt;em&gt;plots&lt;/em&gt; nos queden bonitos, usaremos los &lt;em&gt;themes&lt;/em&gt; credos por Bob Rudis, &lt;a href=&#34;https://hrbrmstr.github.io/hrbrthemes/&#34;&gt;“hrbrthemes”&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#devtools::install_github(&amp;quot;hrbrmstr/hrbrthemes&amp;quot;)
+library(hrbrthemes)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Y ahora, un &lt;a href=&#34;http://www.datavizcatalogue.com/methods/stacked_area_graph.html&#34;&gt;“stacked area chart”&lt;/a&gt;, para mostrar la evolución de la cantidad de registros capturados diariamente. Este tipo de visualización funciona bien cuando se quiere mostrar a lo largo del tiempo la contribución que distintas categorías hacen a un total.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Renombrar activity como actividad, crear campo con mes y año, agrupar por actividad + fecha
+locationdf %&amp;gt;% 
+  mutate(fecha = ymd(date(date))) %&amp;gt;% 
+  group_by(activity, fecha) %&amp;gt;% 
+  summarise(total = n()) %&amp;gt;% 
+  arrange(fecha, activity, desc(total)) %&amp;gt;% 
+  ggplot(aes(x=fecha, y=total)) + 
+  geom_area(aes(fill=activity), position=&amp;quot;stack&amp;quot;) +
+  scale_x_date() +
+  ylim(c(0, 1750)) +
+  labs(y=&amp;quot;registros&amp;quot;,
+       title=&amp;quot;Historial de ubicaciones de Google&amp;quot;,
+       subtitle=&amp;quot;Cantidad de registros por dia y por actividad&amp;quot;) +
+  scale_fill_brewer(palette = &amp;quot;Set3&amp;quot;) +
+  theme_ipsum()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;El gráfico indica que tenemos registros desde el 2011 hasta mediados del 2017. Durante los dos primeros años, los registros de ubicación fueron escasos. A fines del 2012 explota la frecuencia diaria de notificaciones a Google de la posición del usuario. Hay valles donde la frecuencia de registros baja notablemente, en 2013, 2014 y 2015. El del 2013 (la pendiente prolija) sin dudas parece resultado de un error u omisiones en la data… quizás Google también pierde datos cada tanto! Desde su apogeo en 2014 y 2015, con unos 1500 registros por día, parece ser que se han apiadado de la batería de nuestros celulares y los envíos de coordenadas a la madre nodriza no son tan constantes como antaño.&lt;/p&gt;
+&lt;p&gt;En cuanto a las actividades registradas, “unknown” -desconocido- es la categoría más común. Le siguen “still” (o quieto), y mucho más lejos “tilting” (realizando un giro) y “on foot” (caminando). Es decir que para la gran mayoría de las veces que lee nuestra ubicación, Google sabe donde estamos pero no puede determinar de que modo nos movemos. Diría que en la práctica esto es compensado analizando registros de posición en conjunto: si un registro dado es identificado como “on foot” (por ejemplo) por el algoritmo que categoriza la actividad, otros registros donde la dirección y velocidad son más o menos constantes pueden considerarse parte de la misma secuencia de movimiento.&lt;/p&gt;
+&lt;p&gt;Para visualizar cuantos registros aporta cada categoría en la suma total, intentemos con un “waffle chart”. Los gráficos de waffle son una alternativa a los gráficos de torta, que además de continuar con la nomenclatura gastronómica resultan, al menos en teoría, más fáciles de interpretar que sus primos circulares.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(waffle)
+
+top5 &amp;lt;- locationdf %&amp;gt;% 
+  filter(activity != &amp;quot;UNKNOWN&amp;quot;) %&amp;gt;% 
+  group_by(activity) %&amp;gt;% 
+  tally() %&amp;gt;% 
+  arrange(desc(n)) %&amp;gt;% 
+  slice(1:5)
+
+# 1 cuadradito del waflle = 10000 registros
+# De paso, conertimso el dataframe en un vector nombrado como quiere la funcion waffle()
+top5 &amp;lt;- structure(top5[[2]] / 10000, names = top5[[1]])
+
+waffle(top5,
+       rows = 4,
+       legend_pos = &amp;quot;bottom&amp;quot;,
+       xlab = &amp;quot;1 cuadradito == 10.000 registros&amp;quot;,
+       title = &amp;quot;Top 5 actividades identificadas&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Vemos que, al menos en cuanto a lo que ha podido establecer Google, el usuario es encontrado caminando en forma tres veces más habitual que a bordo de un vehículo. Por otro lado, “still” le gana por goleada a “on foot”, así que esa propensión a caminar es balanceada por cierto sedentarismo. Todo un mal de nuestros días, je. En todo caso las conclusiones deben ser tomadas con pinzas; estamos asumiendo que las actividades no identificadas (“unknown”) se reparten en la misma proporción que las etiquetadas.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;prestando-atencion-a-un-categoria-en-particular&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Prestando atención a un categoría en particular&lt;/h2&gt;
+&lt;p&gt;Concentrémonos en los registros que encuentran al usuario caminando. Cuál es su día de mayor movimiento a pie?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;locationdf %&amp;gt;% 
+  mutate(weekday = ordered(weekday, 
+                           levels = c(&amp;quot;lunes&amp;quot;, &amp;quot;martes&amp;quot;, &amp;quot;miércoles&amp;quot;, &amp;quot;jueves&amp;quot;, 
+                                      &amp;quot;viernes&amp;quot;, &amp;quot;sábado&amp;quot;, &amp;quot;domingo&amp;quot;))) %&amp;gt;% 
+  filter(activity == &amp;quot;ON_FOOT&amp;quot;) %&amp;gt;% 
+  count(weekday) %&amp;gt;% 
+  mutate(pct=n/sum(n)) %&amp;gt;% 
+  ggplot(aes(weekday, pct)) +
+  geom_col() +
+  scale_y_percent() +
+  labs(x=&amp;quot;&amp;quot;, 
+       y=&amp;quot;Porporción de los registros capturados por Google (%)&amp;quot;,
+       title=&amp;quot;Movimiento a pie registrado&amp;quot;,
+       subtitle=&amp;quot;según el día de la semana&amp;quot;) + 
+  theme_ipsum(grid=&amp;quot;Y&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Para nuestro usuario donante, el viernes es el gran día para pasear (quizás de noche?), al igual que el fin de semana. El lunes, en cambio, registra los valores más bajos. Lunes de ánimo caído? Quizás no! Cada vez que visualizamos resúmenes de datos acumulados durante un período largo, es importante verificar que no se no esté escapando algo relacionado con el paso del tiempo. En este caso, la suma total por día de la semana podría estar ocultando diferencias claras entre distintos años. Peguemos una mirada, separando los registros por año:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;locationdf %&amp;gt;% 
+  mutate(weekday = ordered(weekday, 
+                           levels = c(&amp;quot;lunes&amp;quot;, &amp;quot;martes&amp;quot;, &amp;quot;miércoles&amp;quot;, &amp;quot;jueves&amp;quot;, 
+                                      &amp;quot;viernes&amp;quot;, &amp;quot;sábado&amp;quot;, &amp;quot;domingo&amp;quot;))) %&amp;gt;% 
+  filter(activity == &amp;quot;ON_FOOT&amp;quot;) %&amp;gt;% 
+  count(weekday, year) %&amp;gt;% 
+  mutate(pct=n/sum(n)) %&amp;gt;% 
+  ggplot(aes(weekday, pct)) +
+  geom_col() +
+  facet_wrap(~year, scales = &amp;quot;free&amp;quot;) +
+  labs(x=&amp;quot;&amp;quot;, 
+       y=&amp;quot;Porporción anual de los registros capturados por Google&amp;quot;,
+       title=&amp;quot;Movimiento a pie registrado&amp;quot;,
+       subtitle=&amp;quot;según el día de la semana&amp;quot;) + 
+  theme_ipsum(grid=&amp;quot;Y&amp;quot;) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.text.y=element_blank())&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Queda claro que el gráfico anterior resultaba engañoso. Si los datos de Google son confiables, nuestro usuario ha ido variando sus ritmos diarios con los años. En 2012 (y en el 2016 también) su día de paseo era el domingo. En lo que va del 2017, la mayor actividad de caminata se registra los miércoles.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;identificando-lugares&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Identificando lugares&lt;/h2&gt;
+&lt;p&gt;Vamos ahora al grano. Al visualizar datos de ubicación, sin duda queremos ver lugares en el mapa! Para empezar, agreguemos un campo a nuestro dataset con la ciudad en la que fue efectuado cada registro. Esto es más complejo de lo que podría pensarse de inmediato, ya que la definición de “qué es” una ciudad varía entre regiones. También es difícil encontrar consenso acerca de las fronteras exactas de muchas de las miles de ciudades que en este mundo hay. Decidir a que ciudad corresponde un set de coordenadas puntual no debería ser muy complicado; pero escribir un algoritmo que lo haga en gran escala para coordenadas en cualquier lugar del globo es un desafío considerable.&lt;/p&gt;
+&lt;p&gt;En este caso, estoy interesado en seguir los movimientos de un usuario mientras visita por trabajo o turismo distintas ciudades. Por eso no me preocupa saber el nombre de la localidad en la que se encuentre en cada momento, si no el de la ciudad principal de la región. La solución para el problema así definido:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Tomar una lista con la posición y la población de las ciudades del mundo&lt;/li&gt;
+&lt;li&gt;Seleccionar aquellas que cuentan con una población considerable, digamos 100.000 habitantes&lt;/li&gt;
+&lt;li&gt;Para cada ubicación registrada por Google, encontrar la ciudad más cercana de nuestra lista&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Es una de esas tareas que serían desesperantes para un ser humano, pero triviales par una computadora. Excelente.&lt;/p&gt;
+&lt;p&gt;En &lt;a href=&#34;https://opendata.arcgis.com/datasets/6996f03a1b364dbab4008d99380370ed_0.csv&#34; class=&#34;uri&#34;&gt;https://opendata.arcgis.com/datasets/6996f03a1b364dbab4008d99380370ed_0.csv&lt;/a&gt; se puede descargar una base de datos de acceso libre y gratuito, que incluye (entre otros campos) nombre, código de país, latitud, longitud y población de las principales ciudades del mundo. Justo lo que necesitamos.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;cities &amp;lt;- read.csv(&amp;#39;/home/havb/data/World_Cities.csv&amp;#39;, stringsAsFactors = F) %&amp;gt;% 
+  filter(POP &amp;gt; 100000)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Algo a tener en cuenta aquí es la performance del algoritmo que vamos a usar para encontrar la ciudad más cercana. Tenemos más de 1200 ciudades:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;nrow(cities)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 1231&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Y más de 1.300.000 registros de ubicación:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;nrow(locationdf)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 1312415&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Usar un &lt;em&gt;loop&lt;/em&gt; “inocente” que compare cada registros contra todas las ciudades para encontrar la más cercana requeriría más de 1600 millones de operaciones. Está bien que la computadora no se cansa, pero el que se cansa es uno de esperar a que termine. Pero no hay nada que temer! Echaremos mano de un algoritmo muy eficiente para éste tipo de búsquedas, &lt;a href=&#34;https://es.wikipedia.org/wiki/K-vecinos_m%C3%A1s_cercanos&#34;&gt;K-nearest neighbors&lt;/a&gt; o Knn. En el mundo &lt;code&gt;R&lt;/code&gt; hay varias implementaciones de knn listas para usar. Vamos a usar la del paquete &lt;code&gt;SearchTrees&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(SearchTrees)
+
+# Creamos un árbol de búsqueda con las posiciones definidas por las columnas de latitud y longitud 
+tree &amp;lt;- createTree(cities, columns=c(2,1)) 
+
+# Funcion para encontrar la ciudad mas cercanas a un punto dado
+
+findMetro &amp;lt;- function(lat, lon, tree, cities) {
+  return(cities[knnLookup(tree, lat, lon, k=1), c(&amp;quot;CITY_NAME&amp;quot;, &amp;quot;CNTRY_NAME&amp;quot;)])
+}
+
+
+# Encontrar el area metropolitana para cada registro
+
+locationdf &amp;lt;- cbind(locationdf,
+                    map2_df(locationdf$lat, locationdf$lon, 
+                            findMetro, tree = tree, cities = cities))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Habiendo identificado cada ciudad, vale la pena agregar dos campos más que van a ser útiles para visualizar la data: país, y tiempo de estadía. Para calcular el tiempo de estadía, asignemos un identificador a cada secuencia de registros consecutivos efectuados en la misma ciudad usando &lt;a href=&#34;https://es.wikipedia.org/wiki/Run-length_encoding&#34;&gt;“run-lengh encoding”&lt;/a&gt; para luego extraer fecha de inicio y final de cada una. Agregar el país es fácil; sólo necesitamos hacer un &lt;em&gt;join&lt;/em&gt; contra una tabla de ciudades y naciones.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;runs &amp;lt;- rle(locationdf$CITY_NAME)
+estadias &amp;lt;- locationdf %&amp;gt;% 
+  mutate(run_id = rep(seq_along(runs$lengths), runs$lengths)) %&amp;gt;% 
+  group_by(CITY_NAME, CNTRY_NAME, run_id) %&amp;gt;% 
+  summarise(date_in = min(date),
+            date_out = max(date)) %&amp;gt;% 
+  arrange(date_in) %&amp;gt;% 
+  select(-run_id) 
+
+estadias&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 171 x 4
+## # Groups:   CITY_NAME, CNTRY_NAME [28]
+##    CITY_NAME             CNTRY_NAME date_in        date_out      
+##    &amp;lt;chr&amp;gt;                 &amp;lt;chr&amp;gt;      &amp;lt;dttm&amp;gt;         &amp;lt;dttm&amp;gt;        
+##  1 Buenos Aires          Argentina  1301959888.636 1306159287.876
+##  2 La Plata              Argentina  1306159479.886 1306192359.628
+##  3 Buenos Aires          Argentina  1306193665.488 1307719425.635
+##  4 La Plata              Argentina  1307719623.741 1307748874.83 
+##  5 Buenos Aires          Argentina  1307765657.954 1312817838.016
+##  6 Salta                 Argentina  1312828736.928 1312995091.661
+##  7 San Miguel De Tucuman Argentina  1312997048.009 1313106833.44 
+##  8 Buenos Aires          Argentina  1313113824.791 1317501265.995
+##  9 La Plata              Argentina  1317827208.834 1317830169.106
+## 10 Buenos Aires          Argentina  1317831680.811 1317831887.856
+## # ... with 161 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Con la data prolija, es fácil hacer un ranking de tiempo pasado en cada ciudad…:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ranking &amp;lt;- estadias %&amp;gt;% 
+  mutate(semanas = difftime(date_out,
+                         date_in,
+                         units = &amp;quot;weeks&amp;quot;)) %&amp;gt;% 
+  group_by(CITY_NAME, CNTRY_NAME) %&amp;gt;% 
+  summarise(total_semanas = round(sum(semanas), 1)) %&amp;gt;% 
+  arrange(desc(total_semanas))
+ranking&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 28 x 3
+## # Groups:   CITY_NAME [28]
+##    CITY_NAME       CNTRY_NAME     total_semanas
+##    &amp;lt;chr&amp;gt;           &amp;lt;chr&amp;gt;          &amp;lt;time&amp;gt;       
+##  1 Buenos Aires    Argentina      185.5        
+##  2 Boston          United States  83.3         
+##  3 New York        United States  4            
+##  4 Cordoba         Argentina      0.9          
+##  5 La Plata        Argentina      0.9          
+##  6 Frankfurt       Germany        0.7          
+##  7 Rosario         Argentina      0.7          
+##  8 Reykjavik       Iceland        0.6          
+##  9 Birmingham      United Kingdom 0.5          
+## 10 Washington D.C. United States  0.5          
+## # ... with 18 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;… y un mapa de países visitados y duración total de estadías:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(rworldmap)
+# Preparar la data
+
+toMap &amp;lt;- joinCountryData2Map(ungroup(ranking),
+                             joinCode = &amp;quot;NAME&amp;quot;,
+                             nameJoinColumn = &amp;quot;CNTRY_NAME&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 28 codes from your data successfully matched countries in the map
+## 0 codes from your data failed to match with a country code in the map
+## 233 codes from the map weren&amp;#39;t represented in your data&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# A mapear!
+library(RColorBrewer)
+
+mapCountryData(toMap, 
+               nameColumnToPlot = &amp;quot;total_semanas&amp;quot;,
+               catMethod = &amp;quot;pretty&amp;quot;,
+               colourPalette = brewer.pal(5, &amp;quot;YlGn&amp;quot;), 
+               oceanCol= &amp;quot;lightblue&amp;quot;, 
+               missingCountryCol= &amp;quot;grey40&amp;quot;,
+               mapTitle= &amp;quot;Estadía total (semanas)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Por último, tracemos una línea de tiempo que siga el derrotero de nuestro usuario. Es fácil detectar cuando se muda:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(timeline)
+
+estadias &amp;lt;- estadias %&amp;gt;% 
+  mutate(tipo = ifelse(difftime(date_out, date_in, units = &amp;quot;weeks&amp;quot;) &amp;gt;= 3,
+                       &amp;quot;residencia&amp;quot;,
+                       &amp;quot;visita&amp;quot;)) %&amp;gt;% 
+  as.data.frame
+
+timeline(filter(estadias, tipo == &amp;quot;residencia&amp;quot;),
+         filter(estadias, tipo == &amp;quot;visita&amp;quot; )[c(1,3)],
+         text.size = 0, group.col = &amp;quot;tipo&amp;quot;, 
+         event.label.method = 2, event.text.size = 2) + 
+  theme_ipsum() + 
+  scale_fill_ipsum(name = &amp;quot;Residencia&amp;quot;) + 
+  labs(x=&amp;quot;año&amp;quot;, 
+       y=&amp;quot;&amp;quot;,
+       title=&amp;quot;Ciudad de residencia y ciudades visitadas&amp;quot;,
+       subtitle = &amp;quot;Inferencia según registros de ubicación de Google&amp;quot;,
+       caption = &amp;quot;cada punto representa una visita&amp;quot;) +
+  theme(axis.text.y=element_blank())&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Hay algunos problemas con esta visualización: La nube de puntos que representa ciudades visitadas es difícil de leer, e incluye en algunos casos la ciudad donde se supone que el usuario reside. Esto último se debe a que definimos una “visita” como cualquier estadía menor a un mes. Cuando el usuario pasa unas pocas semanas en su casa debido a viajes frecuentes, ese periodo aparece como si hubiera estado de visita en nuestro gráfico. De todas formas, para un puñado de líneas de código los resultados son interesantes, y de hecho permiten hacerse una buena idea de los desplazamientos del usuario. Y si lo vemos nosotros con tanta facilidad, desde ya que Google lo sabe desde hace tiempo.&lt;/p&gt;
+&lt;p&gt;En la parte II, vamos a hacer zoom a nivel ciudad para perseguir más a nuestro pobre usuario, tratando de identificar donde vive, donde trabaja y como cambia su conducta según el día de la semana. Pero todo con benévolas intenciones, por supuesto.&lt;/p&gt;
+&lt;/div&gt;
+</description>
     </item>
     
   </channel>

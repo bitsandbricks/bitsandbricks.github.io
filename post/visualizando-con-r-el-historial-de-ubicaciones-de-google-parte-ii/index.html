@@ -16,27 +16,27 @@ Ahora vamos a poner nuestra atención en el interior de las ciudades, para segui
 Para reproducir los resultados, recomiendo correr antes el código de la parte I, que deja preparados los sets de datos que vamos a utilizar aquí.">
   <meta name="twitter:description" content="En la parte I, vimos cómo descargar, limpiar y comenzar a visualizar los datos de nuestra ubicación que Google guarda cuando usamos servicios de la compañía. Hasta aquí nos habíamos concentrado en …">
   <meta name="author" content="H. Antonio Vazquez Brust"/>
-  <link href='/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta property="og:image" content="/img/avatar-icon.png" />
-  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <link href='https://bitsandbricks.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="https://bitsandbricks.github.io/img/avatar-icon.png" />
+  <meta name="twitter:image" content="https://bitsandbricks.github.io/img/avatar-icon.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@vazquezbrust" />
   <meta name="twitter:creator" content="@vazquezbrust" />
-  <meta property="og:url" content="/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/" />
+  <meta property="og:url" content="https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Bits &amp; Bricks" />
 
   <meta name="generator" content="Hugo 0.21" />
-  <link rel="canonical" href="/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/" />
-  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Bits &amp; Bricks">
+  <link rel="canonical" href="https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/" />
+  <link rel="alternate" href="https://bitsandbricks.github.io/index.xml" type="application/rss+xml" title="Bits &amp; Bricks">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="https://bitsandbricks.github.io/css/main.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://bitsandbricks.github.io/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://bitsandbricks.github.io/css/highlight.min.css" />
 
 
 
@@ -109,7 +109,7 @@ ga('send', 'pageview');
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Bits &amp; Bricks</a>
+      <a class="navbar-brand" href="https://bitsandbricks.github.io/">Bits &amp; Bricks</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -123,7 +123,7 @@ ga('send', 'pageview');
         
           
             <li>
-              <a title="Manual de ciencia de datos" href="https://bitsandbricks.github.io/ciencia_de_datos_gente_sociable/">Manual de ciencia de datos</a>
+              <a title="Manual de ciencia de datos" href="/ciencia_de_datos_gente_sociable/">Manual de ciencia de datos</a>
             </li>
           
         
@@ -143,8 +143,8 @@ ga('send', 'pageview');
     <div class="avatar-container">
       <div class="avatar-img-border">
         
-          <a title="Bits &amp; Bricks" href="/">
-            <img class="avatar-img" src="/img/avatar-icon.png" alt="Bits &amp; Bricks" />
+          <a title="Bits &amp; Bricks" href="https://bitsandbricks.github.io/">
+            <img class="avatar-img" src="https://bitsandbricks.github.io/img/avatar-icon.png" alt="Bits &amp; Bricks" />
           </a>
         
       </div>
@@ -165,7 +165,7 @@ ga('send', 'pageview');
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="/post/img/midtown.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bitsandbricks.github.io/post/img/midtown.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -234,9 +234,8 @@ ga('send', 'pageview');
 library(ggmap)
 library(forcats)
 library(hrbrthemes)
-library(RColorBrewer)
-
-# Cargamos el dataset con el historial de ubicaciones, obtenido en  # https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/
+library(RColorBrewer)</code></pre>
+<pre class="r"><code># Cargamos el dataset con el historial de ubicaciones, obtenido en  # https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/
 
 locationdf &lt;- read.csv(&#39;/home/havb/data/Google/Location History/locationdf.csv&#39;, 
                        stringsAsFactors = F)
@@ -255,7 +254,7 @@ ggmap(NY) +
   scale_color_brewer(type = &quot;qual&quot;, palette = &quot;Set2&quot;) +
   labs(title=&quot;Paradero del usuario&quot;,
        color = &quot;Fecha&quot;) </code></pre>
-<p><img src="/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-2-1.png" width="720" /></p>
+<p><img src="/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-4-1.png" width="720" /></p>
 <p>El mapa es claro, y muestra que en distintas ocasiones el usuario recorrió, en general, zonas diferentes de la ciudad. La mayor parte de su actividad transcurrió en Manhattan (en la visita de enero 2016 no abandonó la isla) con algunas visitas a New Jersey (al oeste del Río Hudson) y Brooklyn (al este del East River). En su última estadía se aventuró más al norte que de costumbre, pasando la mayor parte del tiempo en Harlem. Por la acumulación concentrada de puntos en ciertas parcelas, también es fácil deducir donde se ha alojado en cada ocasión.</p>
 <p>Lo interesante de un dataset con tanta resolución temporal y espacial es que podemos seguir al usuario cuando se mete dentro de los edificios. Por ejemplo, podemos saber si, y cuando, visita cualquiera de los destinos famosos en la ciudad. Por ejemplo, ¿alguna vez visito el Museo de Arte Moderno de Nueva York? Hagamos zoom en el MoMA, esta vez descartando los datos de latitud y longitud, que no hacen falta:</p>
 <pre class="r"><code>MoMA &lt;- get_map(&quot;MOMA, NY&quot;, zoom = 18)
@@ -274,7 +273,7 @@ ggmap(MoMA) +
         axis.text.y = element_blank(),
         axis.ticks = element_blank()) +
   coord_map()</code></pre>
-<p><img src="/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-3-1.png" width="720" /></p>
+<p><img src="/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-5-1.png" width="720" /></p>
 <p>Bastante fácil de leer. En enero del 2016, y otra vez en enero año siguiente, se registran visitas al museo. De hecho, sabiendo las fechas y el ala del edificio visitada, hasta podríamos saber que obras fueron apreciadas. Según el calendario del MoMA, en enero del 2017 se exhibió <a href="https://www.moma.org/calendar/exhibitions/1668">“A Revolutionary Impulse: The Rise of the Russian Avant-Garde”</a>. Hasta podemos ver como lucían las obras:</p>
 <div class="figure">
 <img src="/post/img/MoMA.jpg" alt="Exhibición en el MoMA, enero 2017" />
@@ -301,7 +300,7 @@ ggmap(BA) +
         axis.text.y = element_blank(),
         axis.ticks = element_blank()) +
   coord_map()</code></pre>
-<p><img src="/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-4-1.png" width="720" /></p>
+<p><img src="/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-6-1.png" width="720" /></p>
 <p>Vemos que nuestro querido usuario ha estado por todos lados (salvo el sur-oeste de la ciudad, que parece ser <em>terra incognita</em> para nuestro donante de datos), y que ha recorrido profusamente las arterias que comunican la ciudad con su área metropolitana. Pero no tenemos idea de donde vive, porque hay demasiado puntos sobre el mapa, y se hace imposible “leer” donde pasa la mayor parte de su tiempo.</p>
 <p>Vamos a recurrir a una técnica de visualización que se llama <em>hexagon binning</em>, útil cuando lo que queremos es encontrar los lugares donde la intensidad de una variable se destaca. En éste caso, vamos a dividir el espacio de la cuidad en hexágonos, asignarle a cada uno un valor asociado a la frecuencia de registros realizados desde allí, y buscar los que muestren valores altos.</p>
 <pre class="r"><code>library(hexbin)
@@ -324,7 +323,7 @@ ggmap(BA) +
   theme(axis.text.x = element_blank(),
         axis.text.y = element_blank(),
         axis.ticks = element_blank())</code></pre>
-<p><img src="/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-5-1.png" width="720" /></p>
+<p><img src="/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-7-1.png" width="720" /></p>
 <p>Bingo. El solitario hexágono de intensidad máxima señala el domicilio del usuario -o al menos, el lugar donde pasa la mayor parte de sus horas. Si hiciéramos zoom sobre el mapa podríamos ver la parcela donde vive, y por lo tanto su dirección exacta, pero nos vamos a abstener.</p>
 </div>
 <div id="descubriendo-habitos" class="section level2">
@@ -354,7 +353,7 @@ ggmap(BA) +
   # y eliminamos la leyenda
   guides(fill = FALSE) +
   facet_wrap(~year)  </code></pre>
-<p><img src="/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-6-1.png" width="720" /></p>
+<p><img src="/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-8-1.png" width="720" /></p>
 <p>Los resultados muestran una diferencia clara entre su actividad en los años 2011 y 2012, con una variedad de sitios visitados más reducida, en comparación con 2014 y 2015 cuando su rutina diaria parece haber sido mucho más variada. Su actividad está claramente concentrada en el área que corresponde al centro económico de la ciudad. Hace incursiones al exterior de la ciudad, hacia el norte, pero rara vez en otra dirección. En lo que va del 2017, sus radio de acción es notablemente más acotado: Su tiempo se reparte en dos regiones nítidamente demarcadas, sin presencia observable en otros sectores. En todo el año 2016 su celular no se reportó ni una sola vez desde los confines de la ciudad. Como ya habíamos notado en la <a href="https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/">parte I</a> de ésta serie, estaba viviendo en otro país.</p>
 <p>Cómo planificador urbano, me causa vértigo imaginar todos los estudios que podríamos hacer sobre nuestras ciudades si tuviéramos acceso a la información que acumula Google: matrices origen/ destino de tránsito minuto a minuto, tendencias de actividad económica, recreativa, cultural, efecto en el tránsito peatonal y vehicular de cortes de servicio, cierre de calles y otros percances, estudios de adecuación del código de uso del suelo, e infinidad más. Claro que, aún más vértigo me da pensar todo lo que saben de nosotros, a nivel individual, no sólo Google sino los <a href="http://www.telam.com.ar/notas/201312/44925-las-principales-revelaciones-de-edward-snowden.html">servicios de inteligencia de los gobiernos que acceden a esos datos</a>. En fin.</p>
 <p>En la próxima (y final) entrega, vamos a reproducir los viajes del usuario entre ciudades, mostrando como podemos reconstruir su historial de viajes aéreos en base a sus registros de ubicación. Y con una linda visualización, por supuesto… si vamos a espiar, lo haremos con estilo.</p>
@@ -365,12 +364,12 @@ ggmap(BA) +
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/" data-toggle="tooltip" data-placement="top" title="Visualizando con R el historial de ubicaciones de Google (parte I)">&larr; Previous Post</a>
+            <a href="https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/" data-toggle="tooltip" data-placement="top" title="Visualizando con R el historial de ubicaciones de Google (parte I)">&larr; Previous Post</a>
           </li>
         
         
           <li class="next">
-            <a href="/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii/" data-toggle="tooltip" data-placement="top" title="Visualizando con R el historial de ubicaciones de Google (parte III)">Next Post &rarr;</a>
+            <a href="https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii/" data-toggle="tooltip" data-placement="top" title="Visualizando con R el historial de ubicaciones de Google (parte III)">Next Post &rarr;</a>
           </li>
         
       </ul>
@@ -381,9 +380,9 @@ ggmap(BA) +
             <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'bits-bricks';
-    var disqus_identifier = '\/post\/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii\/';
+    var disqus_identifier = 'https:\/\/bitsandbricks.github.io\/post\/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii\/';
     var disqus_title = 'Visualizando con R el historial de ubicaciones de Google (parte II)';
-    var disqus_url = '\/post\/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii\/';
+    var disqus_url = 'https:\/\/bitsandbricks.github.io\/post\/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -441,7 +440,7 @@ ggmap(BA) +
               </li>
           
           <li>
-            <a href="/index.xml" title="RSS">
+            <a href="https://bitsandbricks.github.io/index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -457,7 +456,7 @@ ggmap(BA) +
 
           
             &nbsp;&bull;&nbsp;
-            <a href="/">Bits &amp; Bricks</a>
+            <a href="https://bitsandbricks.github.io/">Bits &amp; Bricks</a>
           
         </p>
         
@@ -474,8 +473,8 @@ ggmap(BA) +
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="/js/main.js"></script>
-<script src="/js/highlight.min.js"></script>
+<script src="https://bitsandbricks.github.io/js/main.js"></script>
+<script src="https://bitsandbricks.github.io/js/highlight.min.js"></script>
 <script> hljs.initHighlightingOnLoad(); </script>
 <script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>

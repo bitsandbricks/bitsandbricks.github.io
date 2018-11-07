@@ -2,75 +2,75 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Bits &amp; Bricks</title>
-    <link>/categories/</link>
+    <link>https://bitsandbricks.github.io/categories/</link>
     <description>Recent content in Categories on Bits &amp; Bricks</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
     
-	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://bitsandbricks.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Informática Urbana</title>
-      <link>/categories/inform%C3%A1tica-urbana/</link>
+      <link>https://bitsandbricks.github.io/categories/inform%C3%A1tica-urbana/</link>
       <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/categories/inform%C3%A1tica-urbana/</guid>
+      <guid>https://bitsandbricks.github.io/categories/inform%C3%A1tica-urbana/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Modelos Predictivos</title>
-      <link>/categories/modelos-predictivos/</link>
+      <link>https://bitsandbricks.github.io/categories/modelos-predictivos/</link>
       <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/categories/modelos-predictivos/</guid>
+      <guid>https://bitsandbricks.github.io/categories/modelos-predictivos/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Open Data</title>
-      <link>/categories/open-data/</link>
+      <link>https://bitsandbricks.github.io/categories/open-data/</link>
       <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/categories/open-data/</guid>
+      <guid>https://bitsandbricks.github.io/categories/open-data/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Scraping</title>
-      <link>/categories/scraping/</link>
+      <link>https://bitsandbricks.github.io/categories/scraping/</link>
       <pubDate>Sat, 09 Sep 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/categories/scraping/</guid>
+      <guid>https://bitsandbricks.github.io/categories/scraping/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Series De Tiempo</title>
-      <link>/categories/series-de-tiempo/</link>
+      <link>https://bitsandbricks.github.io/categories/series-de-tiempo/</link>
       <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/categories/series-de-tiempo/</guid>
+      <guid>https://bitsandbricks.github.io/categories/series-de-tiempo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Transporte</title>
-      <link>/categories/transporte/</link>
+      <link>https://bitsandbricks.github.io/categories/transporte/</link>
       <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/categories/transporte/</guid>
+      <guid>https://bitsandbricks.github.io/categories/transporte/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Visualización</title>
-      <link>/categories/visualizaci%C3%B3n/</link>
+      <link>https://bitsandbricks.github.io/categories/visualizaci%C3%B3n/</link>
       <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/categories/visualizaci%C3%B3n/</guid>
+      <guid>https://bitsandbricks.github.io/categories/visualizaci%C3%B3n/</guid>
       <description></description>
     </item>
     
