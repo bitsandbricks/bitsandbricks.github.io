@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2018-12-05">
+<meta name="date" content="2019-01-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -276,7 +276,7 @@ superficie_habitacion_m2</code></pre></div>
 ## 13     13      4.5
 ## 14     14      3.2
 ## 15     15      6.4</code></pre>
-<p>Vemos que la tabla tiene 15 columnas (una por <a href="https://es.wikipedia.org/wiki/Comunas_de_la_ciudad_de_Buenos_Aires">cada comuna de la ciudad</a>) y 7 columnas (una que indica la comuna, y 6 con los valores de mortalidad para cada año entre 2010 y 2017).</p>
+<p>Vemos que la tabla tiene 15 filas (una por <a href="https://es.wikipedia.org/wiki/Comunas_de_la_ciudad_de_Buenos_Aires">cada comuna de la ciudad</a>) y 7 columnas (una que indica la comuna, y 6 con los valores de mortalidad para cada año entre 2010 y 2017).</p>
 <p>En R, las tablas son llamadas <code>dataframes</code>. El dataframe es el objeto por excelencia del análisis de datos. En concepto, es muy similar a una tabla de excel; al fin y al cabo, ambos formatos guardan información en celdas identificadas por fila y columna.</p>
 <p>Algunas funciones útiles para explorar un dataframe que no conocemos son <code>dim()</code>, que nos da las dimensiones del dataframe (cantidad de filas y columnas), <code>names()</code> que nos dice como se llaman sus columnas (que en general representan variables), y <code>head()</code> que nos permite echar un vistazo rápido al contenido, mostrando sólo las seis primeras filas (ésto es útil porque con frecuencia trabajamos con dataframes que contienen miles o millones de filas, con lo que no tiene sentido tratar de volcar todas en pantalla).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(mortalidad)</code></pre></div>
