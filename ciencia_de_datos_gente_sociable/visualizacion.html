@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ciencia de Datos para Gente Sociable</title>
-  <meta name="description" content="Ciencia de Datos para Gente Sociable">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <title>Capítulo 4 Visualización | Ciencia de Datos para Gente Sociable</title>
+  <meta name="description" content="Capítulo 4 Visualización | Ciencia de Datos para Gente Sociable">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Ciencia de Datos para Gente Sociable" />
+  <meta property="og:title" content="Capítulo 4 Visualización | Ciencia de Datos para Gente Sociable" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="bitsandbricks/datos_sociables" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Ciencia de Datos para Gente Sociable" />
+  <meta name="twitter:title" content="Capítulo 4 Visualización | Ciencia de Datos para Gente Sociable" />
   
   
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2019-01-29">
+<meta name="date" content="2019-04-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="modelado-estadistico.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -204,7 +205,7 @@ contactos_por_comuna</code></pre></div>
 <pre><code>## # A tibble: 16 x 2
 ##    COMUNA miles_contactos
 ##     &lt;int&gt;           &lt;dbl&gt;
-##  1      1          685   
+##  1      1          685.  
 ##  2      2           48.8 
 ##  3      3           71.2 
 ##  4      4           94.5 
@@ -213,12 +214,12 @@ contactos_por_comuna</code></pre></div>
 ##  7      7           95.8 
 ##  8      8           61.3 
 ##  9      9           91.2 
-## 10     10          114   
-## 11     11          139   
-## 12     12          123   
-## 13     13          106   
+## 10     10          114.  
+## 11     11          139.  
+## 12     12          123.  
+## 13     13          106.  
 ## 14     14           99.3 
-## 15     15          107   
+## 15     15          107.  
 ## 16     NA            5.78</code></pre>
 <p>Lo que nos falta ahora es la cantidad de habitantes en cada comuna. <em>No problem</em>. El dato es fácil de conseguir, otra vez cortesía de la Dirección General de Estadística y Censos de la Ciudad de Buenos Aires. Traemos la proyección al año 2017 de la cantidad de habitantes por comuna.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">habitantes &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://bitsandbricks.github.io/data/gcba_pob_comunas_17.csv&quot;</span>)
@@ -247,7 +248,7 @@ contactos_por_comuna</code></pre></div>
 <pre><code>## # A tibble: 16 x 3
 ##    COMUNA miles_contactos POBLACION
 ##     &lt;int&gt;           &lt;dbl&gt;     &lt;int&gt;
-##  1      1          685       253271
+##  1      1          685.      253271
 ##  2      2           48.8     149720
 ##  3      3           71.2     192763
 ##  4      4           94.5     238809
@@ -256,12 +257,12 @@ contactos_por_comuna</code></pre></div>
 ##  7      7           95.8     240607
 ##  8      8           61.3     226649
 ##  9      9           91.2     170605
-## 10     10          114       170282
-## 11     11          139       189986
-## 12     12          123       213914
-## 13     13          106       235967
+## 10     10          114.      170282
+## 11     11          139.      189986
+## 12     12          123.      213914
+## 13     13          106.      235967
 ## 14     14           99.3     226944
-## 15     15          107       182409
+## 15     15          107.      182409
 ## 16     NA            5.78        NA</code></pre>
 <p>!Preparativos terminados! Hagamos por fin nuestro scatterplot. Tal como en el capítulo de introducción a R, continuaremos usando <code>ggplot()</code> para visualizar:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(contactos_por_comuna)</code></pre></div>
@@ -364,7 +365,7 @@ contactos_por_comuna</code></pre></div>
 ## 2      1 QUEJA                      17.4    253271
 ## 3      1 RECLAMO                    55.7    253271
 ## 4      1 SOLICITUD                  20.9    253271
-## 5      1 TRAMITE                   568      253271
+## 5      1 TRAMITE                   568.     253271
 ## 6      2 DENUNCIA                   10.2    149720</code></pre>
 <p>Listos para facetar. Producimos un scatterplot igual que antes, y le agregamos una capa adicional con <code>facet_wrap()</code>. La variable a “facetar”, la que recibirá un gráfico por cada una de sus categorías, siempre se escribe a continuación del signo <code>~</code>; en nuestro caso, queda como <code>~TIPO_PRESTACION</code>. El simbolillo en cuestión denota lo que en R se denomina una <em>fórmula</em> y ya nos lo cruzaremos de nuevo, pero por ahora no le prestamos más atención.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(contactos_por_comuna_y_tipo) <span class="op">+</span><span class="st"> </span>
@@ -541,7 +542,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -551,6 +552,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -568,7 +573,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

@@ -126,7 +126,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-01-29}
+    \date{2019-04-22}
 
 \usepackage{booktabs}
 
@@ -161,7 +161,7 @@ herramientas necesarias serán explicadas sobre la marcha.
 \section*{Antes de empezar}\label{antes-de-empezar}
 \addcontentsline{toc}{section}{Antes de empezar}
 
-Para practicar los ejemplos que se explicarán a lo argo del libro, es
+Para practicar los ejemplos que se explicarán a lo largo del libro, es
 necesario instalar el \href{https://cloud.r-project.org/}{lenguaje de
 programación R}, y la interfaz gráfica
 \href{https://www.rstudio.com/products/rstudio/download/}{RStudio
@@ -386,11 +386,11 @@ las funciones son secuencias de código ya listas para usar, que realizan
 tareas útiles. Por ejemplo, mostrar algo en pantalla. En nuestro caso,
 completamos la función con algo más: un \emph{parámetro}, pues así se le
 llama a los valores que una función espera de parte del usuario para
-saber que hacer. La función print espera que le demos un número para el
-cual calcular su raíz cuadrada (\emph{square root} en inglés), y eso
-hicimos: le pasamos cómo parámetro \texttt{144}, un número. Los
-parámetros siempre se escriben entre paréntesis, a continuación del
-nombre de la función.
+saber que hacer. La función \texttt{sqrt()} espera que le demos un
+número para el cual calcular su raíz cuadrada (\emph{square root} en
+inglés), y eso hicimos: le pasamos cómo parámetro \texttt{144}, un
+número. Los parámetros siempre se escriben entre paréntesis, a
+continuación del nombre de la función.
 
 Ahora vamos a aprender la combinación de teclas más importante al usar
 RStudio: \texttt{Ctrl} + \texttt{Enter}. Presionar \texttt{Ctrl} +
@@ -398,7 +398,7 @@ RStudio: \texttt{Ctrl} + \texttt{Enter}. Presionar \texttt{Ctrl} +
 la ejecute de inmediato, y espere en la siguiente instrucción, si la
 hubiera.
 
-Cambien podemos buscar una línea que deseemos ejecutar, posicionando el
+También podemos buscar una línea que deseemos ejecutar, posicionando el
 cursor de texto (que luce como una barra vertical que titila, en el
 panel de edición) sobre ella. Si a continuación pulsamos \texttt{Ctrl} +
 \texttt{Enter}, la línea será ejecutada y el cursor se moverá sólo hasta
@@ -2380,7 +2380,7 @@ grandes.
 ## # A tibble: 16 x 2
 ##    COMUNA miles_contactos
 ##     <int>           <dbl>
-##  1      1          685   
+##  1      1          685.  
 ##  2      2           48.8 
 ##  3      3           71.2 
 ##  4      4           94.5 
@@ -2389,12 +2389,12 @@ grandes.
 ##  7      7           95.8 
 ##  8      8           61.3 
 ##  9      9           91.2 
-## 10     10          114   
-## 11     11          139   
-## 12     12          123   
-## 13     13          106   
+## 10     10          114.  
+## 11     11          139.  
+## 12     12          123.  
+## 13     13          106.  
 ## 14     14           99.3 
-## 15     15          107   
+## 15     15          107.  
 ## 16     NA            5.78
 \end{verbatim}
 
@@ -2445,7 +2445,7 @@ Por suerte, ya sabemos como combinar tablas usando \texttt{left\_join()}
 ## # A tibble: 16 x 3
 ##    COMUNA miles_contactos POBLACION
 ##     <int>           <dbl>     <int>
-##  1      1          685       253271
+##  1      1          685.      253271
 ##  2      2           48.8     149720
 ##  3      3           71.2     192763
 ##  4      4           94.5     238809
@@ -2454,12 +2454,12 @@ Por suerte, ya sabemos como combinar tablas usando \texttt{left\_join()}
 ##  7      7           95.8     240607
 ##  8      8           61.3     226649
 ##  9      9           91.2     170605
-## 10     10          114       170282
-## 11     11          139       189986
-## 12     12          123       213914
-## 13     13          106       235967
+## 10     10          114.      170282
+## 11     11          139.      189986
+## 12     12          123.      213914
+## 13     13          106.      235967
 ## 14     14           99.3     226944
-## 15     15          107       182409
+## 15     15          107.      182409
 ## 16     NA            5.78        NA
 \end{verbatim}
 
@@ -2741,7 +2741,7 @@ olvidar agregar luego los datos de población
 ## 2      1 QUEJA                      17.4    253271
 ## 3      1 RECLAMO                    55.7    253271
 ## 4      1 SOLICITUD                  20.9    253271
-## 5      1 TRAMITE                   568      253271
+## 5      1 TRAMITE                   568.     253271
 ## 6      2 DENUNCIA                   10.2    149720
 \end{verbatim}
 
