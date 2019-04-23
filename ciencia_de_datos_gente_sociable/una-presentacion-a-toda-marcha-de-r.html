@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Vazquez Brust">
 
 
-<meta name="date" content="2019-04-22">
+<meta name="date" content="2019-04-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -257,9 +257,10 @@ superficie_habitacion_m2</code></pre></div>
 </div>
 <div id="cargar-los-datos" class="section level3">
 <h3><span class="header-section-number">2.1.4</span> Cargar los datos</h3>
-<p>Vamos a cargar datos de mortalidad infantil, por comuna de la ciudad, en el año 2016, publicados por la <a href="http://www.estadisticaciudad.gob.ar/eyc/?p=67358">Dirección General de Estadística y Censos</a> de Buenos Aires. El formato original de los datos es “.xls” (planilla de hojas de cálculo). Yo lo he convertido a .csv (“comma separated values”) un formato muy popular en el mundo de la ciencia de datos, ya que es muy fácil de manipular y compartir entre sistemas… es posible abrir un archivo .csv hasta con el <a href="https://es.wikipedia.org/wiki/Bloc_de_notas">humilde block de notas</a>. Al igual que los archivos .xls, los .csv se utilizan para guardar información tabular: un rectángulo con filas y columnas. R incluye una función que lee archivos .csv, que se llama <code>read.csv</code>. La usamos así:</p>
+<p>Vamos a cargar datos de mortalidad infantil, por comuna de la ciudad, en el año 2016, publicados por la <a href="https://www.estadisticaciudad.gob.ar/eyc/">Dirección General de Estadística y Censos</a> de Buenos Aires. El formato original de los datos es “.xls” (planilla de hojas de cálculo). Yo lo he convertido a .csv (“comma separated values”) un formato muy popular en el mundo de la ciencia de datos, ya que es muy fácil de manipular y compartir entre sistemas… es posible abrir un archivo .csv hasta con el <a href="https://es.wikipedia.org/wiki/Bloc_de_notas">humilde block de notas</a>. Al igual que los archivos .xls, los .csv se utilizan para guardar información tabular: un rectángulo con filas y columnas. R incluye una función que lee archivos .csv, que se llama <code>read.csv</code>. La usamos así:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mortalidad &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://bitsandbricks.github.io/data/mortalidad_infantil_caba_2016.csv&#39;</span>)</code></pre></div>
-<p>Obsérvese que los datos están alojados en un servidor de internet (accesibles vía <strong><a href="https://bitsandbricks" class="uri">https://bitsandbricks</a>…</strong>). Eso no es problema para la función read.csv, que con la misma soltura lee archivos guardados en nuestra PC o publicados en un sitio web. Para ver el contenido de la variable donde guardamos el resultado de leer la data, <code>mortalidad</code>, sólo hace falta escribir su nombre:</p>
+<p>Obsérvese que los datos están alojados en un servidor de internet (accesibles vía una dirección web). Eso no es problema para la función read.csv, que con la misma soltura lee archivos guardados en nuestra PC o publicados en un sitio <em>online</em>.</p>
+<p>Una vez leído el archivo, para ver el contenido de la variable donde guardamos el resultado -que hemos llamado <code>mortalidad</code>- sólo hace falta escribir su nombre:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mortalidad</code></pre></div>
 <pre><code>##    Comuna Tasa2016
 ## 1       1      9.5

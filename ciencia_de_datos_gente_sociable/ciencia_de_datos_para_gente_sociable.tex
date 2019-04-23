@@ -126,7 +126,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-04-22}
+    \date{2019-04-23}
 
 \usepackage{booktabs}
 
@@ -522,14 +522,14 @@ infantil en la Ciudad de Buenos Aires?. Suficiente introducción\ldots{}
 
 Vamos a cargar datos de mortalidad infantil, por comuna de la ciudad, en
 el año 2016, publicados por la
-\href{http://www.estadisticaciudad.gob.ar/eyc/?p=67358}{Dirección
-General de Estadística y Censos} de Buenos Aires. El formato original de
-los datos es ``.xls'' (planilla de hojas de cálculo). Yo lo he
-convertido a .csv (``comma separated values'') un formato muy popular en
-el mundo de la ciencia de datos, ya que es muy fácil de manipular y
-compartir entre sistemas\ldots{} es posible abrir un archivo .csv hasta
-con el \href{https://es.wikipedia.org/wiki/Bloc_de_notas}{humilde block
-de notas}. Al igual que los archivos .xls, los .csv se utilizan para
+\href{https://www.estadisticaciudad.gob.ar/eyc/}{Dirección General de
+Estadística y Censos} de Buenos Aires. El formato original de los datos
+es ``.xls'' (planilla de hojas de cálculo). Yo lo he convertido a .csv
+(``comma separated values'') un formato muy popular en el mundo de la
+ciencia de datos, ya que es muy fácil de manipular y compartir entre
+sistemas\ldots{} es posible abrir un archivo .csv hasta con el
+\href{https://es.wikipedia.org/wiki/Bloc_de_notas}{humilde block de
+notas}. Al igual que los archivos .xls, los .csv se utilizan para
 guardar información tabular: un rectángulo con filas y columnas. R
 incluye una función que lee archivos .csv, que se llama
 \texttt{read.csv}. La usamos así:
@@ -541,11 +541,13 @@ incluye una función que lee archivos .csv, que se llama
 \end{Shaded}
 
 Obsérvese que los datos están alojados en un servidor de internet
-(accesibles vía \textbf{\url{https://bitsandbricks}\ldots{}}). Eso no es
-problema para la función read.csv, que con la misma soltura lee archivos
-guardados en nuestra PC o publicados en un sitio web. Para ver el
-contenido de la variable donde guardamos el resultado de leer la data,
-\texttt{mortalidad}, sólo hace falta escribir su nombre:
+(accesibles vía una dirección web). Eso no es problema para la función
+read.csv, que con la misma soltura lee archivos guardados en nuestra PC
+o publicados en un sitio \emph{online}.
+
+Una vez leído el archivo, para ver el contenido de la variable donde
+guardamos el resultado -que hemos llamado \texttt{mortalidad}- sólo hace
+falta escribir su nombre:
 
 \begin{Shaded}
 \begin{Highlighting}[]
