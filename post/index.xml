@@ -28,21 +28,19 @@
 &lt;/div&gt;
 &lt;div id=&#34;paquetes-a-utilizar&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Paquetes a utilizar&lt;/h2&gt;
-&lt;p&gt;Los herramientas generales de Tidyverse, siempre útiles para el proceso general de análisis de datos&lt;/p&gt;
+&lt;p&gt;Los herramientas generales de Tidyverse, siempre útiles para el proceso general de análisis de datos:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;y cinco paquetes especializados:&lt;/p&gt;
+&lt;p&gt;y cuatro paquetes especializados:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;sf&lt;/code&gt; para leer y procesar datos geoespaciales&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;geosphere&lt;/code&gt; para calcular distancias sobre la superficie terrestre&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;dbscan&lt;/code&gt; para emplear el algoritmo homónimo de machine learning que permite encontrar &lt;em&gt;clusters&lt;/em&gt; de elementos próximos&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;ggmap&lt;/code&gt; para obtener y visualizar mapas detallados de la ciudad que analizaremos&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;ggrepel&lt;/code&gt; para etiquetar en forma prolija nuestros mapas con gran cantidad de puntos&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(sf)
 library(geosphere)
 library(dbscan)
-library(ggmap)
-library(ggrepel)&lt;/code&gt;&lt;/pre&gt;
+library(ggmap)&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;los-datos&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Los datos&lt;/h2&gt;
@@ -234,16 +232,14 @@ hulls_por_cat &amp;lt;- mdz_cluster_hulls %&amp;gt;%
 
 ggmap(mendoza) + 
   coord_sf(crs = st_crs(3857)) + # Necesario cuando se combinan ggmap y geom_sf
-    geom_sf(data = hulls_por_cat, fill = NA, size = 1.5,
+    geom_sf(data = hulls_por_cat, fill = NA, size = 1.5, alpha = .5,
             aes(color = factor(categoria)), inherit.aes = FALSE) +
     geom_point(data = filter(mdz_poi, cluster == 0), size = .1, alpha =.1,
                aes(x = lng, y = lat)) +
     geom_point(data = filter(mdz_poi, cluster != 0), size = .2, alpha =.2,
-               aes(x = lng, y = lat, color = factor(categoria))) + 
-    ggrepel::geom_label_repel(data = hulls_por_cat,
-                              aes(label = categoria, color = factor(categoria), geometry = geom),
-                              stat = &amp;quot;sf_coordinates&amp;quot;,
-                              inherit.aes = FALSE) +
+               aes(x = lng, y = lat, color = factor(categoria))) +
+    # definimos la escala de colores 
+    scale_color_brewer(palette = &amp;quot;Paired&amp;quot;) +
     labs(y = &amp;quot;&amp;quot;, x = &amp;quot;&amp;quot;,
          title=&amp;quot;Mendoza: clusters de actividad identificados&amp;quot;,
          color = &amp;quot;categoría&amp;quot;) +
@@ -251,7 +247,8 @@ ggmap(mendoza) +
     theme(axis.text.x = element_blank(),
           axis.text.y = element_blank(),
           axis.ticks = element_blank()) +
-    guides(colour = FALSE)&lt;/code&gt;&lt;/pre&gt;
+    guides(colour = guide_legend(override.aes = list(size=4, alpha = 1))) +
+    theme(legend.position=&amp;quot;bottom&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-07-05-dbscan-machine-learning-para-detectar-centros-de-actividad-urbana.es_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
