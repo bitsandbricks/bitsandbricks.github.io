@@ -188,10 +188,11 @@ ggmap(mendoza) +
     map_df(assign_clusters) &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Listo!&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;producto-final-un-grafico-facetado-por-categoria-con-todos-los-clusters-hallados&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Producto final: un gráfico facetado por categoría con todos los clusters hallados&lt;/h2&gt;
+&lt;div id=&#34;producto-final-un-mapa-con-todos-los-clusters-hallados-por-categoria&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Producto final: un mapa con todos los clusters hallados por categoría&lt;/h2&gt;
 &lt;p&gt;Antes de llevar los resultados al mapa, extraigamos para cada cluster su &lt;em&gt;convex hull&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://miro.medium.com/max/1016/1*F4IUmOJbbLMJiTgHxpoc7Q.png&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://miro.medium.com/max/1016/1*F4IUmOJbbLMJiTgHxpoc7Q.png&#34; /&gt;&lt;!-- --&gt;
+(gráfico cortesía de &lt;a href=&#34;https://medium.com/@harshitsikchi/convex-hulls-explained-baab662c4e94&#34;&gt;Harshit Sikchi&lt;/a&gt;)&lt;/p&gt;
 &lt;p&gt;La “envolvente convexa” de un cluster no es otra cosa que un polígono que encierra todos sus puntos. La idea es usarlas para mostrar en el mapa la extensión de las áreas que hemos identificado como centros de actividad.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;get_hull&amp;lt;- function(df) {
     
