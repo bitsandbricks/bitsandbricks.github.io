@@ -59,7 +59,7 @@ head(mdz_poi)&lt;/code&gt;&lt;/pre&gt;
 ## 4 Banelco                                       atm   banca     -32.9 -68.8
 ## 5 Cajero Automatico Banelco                     atm   banca     -32.9 -68.8
 ## 6 Citibank                                      bank  banca     -32.9 -68.8&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Se trata de lugares en el área urbbana de Mendoza, de 93 tipos distintos, agrupados en 12 categorías generales:&lt;/p&gt;
+&lt;p&gt;Se trata de lugares en el área urbana de Mendoza, de 93 tipos distintos, agrupados en 12 categorías generales:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;count(mdz_poi, categoria, tipo)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 93 x 3
 ##    categoria tipo                 n
