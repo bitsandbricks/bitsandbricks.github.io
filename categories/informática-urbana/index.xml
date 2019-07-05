@@ -2,37 +2,277 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Informática Urbana on Bits &amp; Bricks</title>
-    <link>https://bitsandbricks.github.io/categories/inform%C3%A1tica-urbana/</link>
+    <link>/categories/inform%C3%A1tica-urbana/</link>
     <description>Recent content in Informática Urbana on Bits &amp; Bricks</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
-    <lastBuildDate>Sat, 13 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 05 Jul 2019 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://bitsandbricks.github.io/categories/inform%C3%A1tica-urbana/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/categories/inform%C3%A1tica-urbana/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>DBSCAN: Machine Learning para detectar centros de actividad urbana</title>
+      <link>/post/dbscan-machine-learning-para-detectar-centros-de-actividad-urbana/</link>
+      <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
+      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
+      <guid>/post/dbscan-machine-learning-para-detectar-centros-de-actividad-urbana/</guid>
+      <description>&lt;div id=&#34;el-algoritmo-dbscan&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;El algoritmo DBSCAN&lt;/h2&gt;
+&lt;p&gt;DBSCAN es un algoritmo de machine learning diseñado para detectar en forma automática “clusters”, es decir elementos próximos entre si de acuerdo a sus atributos en varias dimensiones.&lt;/p&gt;
+&lt;p&gt;A diferencia de otros algoritmos de clustering como &lt;em&gt;KMeans&lt;/em&gt;, DBSCAN resulta muy adecuado para buscar patrones de agrupación en el espacio físico. Por ejemplo, en la distribución espacial de actividades humanas.&lt;/p&gt;
+&lt;p&gt;Como se ilustra debajo, entre varias alternativas DBSCAN es la única cuyos resultados aproximan los de un analista humano que estuviera clasificando puntos aglomerados en un mapa (&lt;a href=&#34;https://www.hipparchus.org/hipparchus-clustering/&#34;&gt;fuente&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.hipparchus.org/hipparchus-clustering/images/userguide/cluster_comparison.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Pongámoslo a trabajar entonces, para identificar los centros comerciales (y de otros tipos de actividad) en la ciudad de Mendoza y sus alrededores. Un ejercicio como este, si se repitiera con cierta frecuencia, permitiría detectar la aparición, desplazamiento o desaparición de distintos centros de actividad especializada en la ciudad: zonas con oferta concentrada de bares, de servicios profesionales, de tiendas de bicicletas o lo que fuere.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;paquetes-a-utilizar&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Paquetes a utilizar&lt;/h2&gt;
+&lt;p&gt;Los herramientas generales de Tidyverse, siempre útiles para el proceso general de análisis de datos&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;y cinco paquetes especializados:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sf&lt;/code&gt; para leer y procesar datos geoespaciales&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;geosphere&lt;/code&gt; para calcular distancias sobre la superficie terrestre&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dbscan&lt;/code&gt; para emplear el algoritmo homónimo de machine learning que permite encontrar &lt;em&gt;clusters&lt;/em&gt; de elementos próximos&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ggmap&lt;/code&gt; para obtener y visualizar mapas detallados de la ciudad que analizaremos&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ggrepel&lt;/code&gt; para etiquetar en forma prolija nuestros mapas con gran cantidad de puntos&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(sf)
+library(geosphere)
+library(dbscan)
+library(ggmap)
+library(ggrepel)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;los-datos&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Los datos&lt;/h2&gt;
+&lt;p&gt;Trabajaremos con un dataset de “puntos de interés”, o &lt;em&gt;PoI&lt;/em&gt; en la jerga de aplicaciones espaciales (por “Points of Interest”).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mdz_poi &amp;lt;- read_csv(&amp;#39;https://bitsandbricks.github.io/data/mendoza_poi.csv&amp;#39;)
+
+head(mdz_poi)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 5
+##   nombre                                        tipo  categoria   lat   lng
+##   &amp;lt;chr&amp;gt;                                         &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+## 1 Banco de la Nación Argentina                  atm   banca     -32.9 -68.8
+## 2 Hospital Central BANCO DE LA NACION ARGENTIN… atm   banca     -32.9 -68.8
+## 3 Banelco                                       atm   banca     -32.9 -68.8
+## 4 Banelco                                       atm   banca     -32.9 -68.8
+## 5 Cajero Automatico Banelco                     atm   banca     -32.9 -68.8
+## 6 Citibank                                      bank  banca     -32.9 -68.8&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Se trata de lugares en el área urbbana de Mendoza, de 93 tipos distintos, agrupados en 12 categorías generales:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;count(mdz_poi, categoria, tipo)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 93 x 3
+##    categoria tipo                 n
+##    &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;            &amp;lt;int&amp;gt;
+##  1 banca     atm                 93
+##  2 banca     bank               112
+##  3 culto     church             248
+##  4 culto     mosque               2
+##  5 culto     place_of_worship     4
+##  6 culto     synagogue            3
+##  7 cultura   art_gallery         14
+##  8 cultura   library             18
+##  9 cultura   museum              55
+## 10 educacion school             890
+## # … with 83 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Los datos fueron compildos a mediados del 2017, a partir de consultas a la base de &lt;a href=&#34;https://cloud.google.com/maps-platform/places/?&amp;amp;sign=0&#34;&gt;Google Places&lt;/a&gt;. Google Places es la base de datos donde Google registra información sobre puntos de interés (comercios, prestadores de servicios, terminales de transporte y un largo etcétera) en cualquier parte del mundo. La forma habitual de acceder a partes de esta información es mediante la Google Maps, desde un navegador o una app de smartphone, pero también es posible consultar la base de forma automatizada, la forma en la cual se relevaron las datos que estamos usando.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;implementando-dbscan&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Implementando DBSCAN&lt;/h2&gt;
+&lt;p&gt;Para practicar, empecemor por detectar clusters de bares.&lt;/p&gt;
+&lt;div id=&#34;i.-realizar-una-matriz-de-distancias&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;I. Realizar una matriz de distancias&lt;/h3&gt;
+&lt;p&gt;El primer paso para aplicar el algorimto es obtener una matriz con la distancia que media entre todos los puntos a analiar. Dado que trabajamos con lugares situados sobre la superficie terrestre, debemos calcular distancias geográficas; es decir, tomar en cuenta la curvatura de la superficie. Para ellos podemos usar la función &lt;code&gt;distm()&lt;/code&gt; del paquete &lt;code&gt;geosphere&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Veamos como lucen nuestros bares en el mapa:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mdz_bares &amp;lt;- mdz_poi %&amp;gt;% 
+    filter(tipo == &amp;quot;bar&amp;quot;)
+
+# Definir la &amp;quot;caja&amp;quot; de coordenadas donde entran los datos, para luego pedir el mapa
+bbox &amp;lt;- c(min(mdz_poi$lng),
+          min(mdz_poi$lat),
+          max(mdz_poi$lng),
+          max(mdz_poi$lat))
+
+mendoza &amp;lt;- get_stamenmap(bbox = bbox, maptype = &amp;quot;toner-background&amp;quot;, zoom = 13)
+
+
+ggmap(mendoza) +
+    geom_point(data = mdz_bares, aes(x = lng, y = lat), color = &amp;quot;orange&amp;quot;, alpha = .5)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-07-05-dbscan-machine-learning-para-detectar-centros-de-actividad-urbana.es_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Ahora creamos la matriz con la distancia entre cada par de puntos (es decir, medimos la distancia de cada bar contra todos los demás), el insumo que requiere DBSCAN.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;distancias &amp;lt;- mdz_bares %&amp;gt;%
+    select(lng, lat) %&amp;gt;% # extraemos las columnas de longitud y latitud
+    distm(fun = distGeo) %&amp;gt;% # Calculamos las distancias de acuerdo a la curvatura de la Tierra
+    as.dist() # convertimos en una matriz de distancias (el tipo de objeto que DBSCAN espera)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ii.-definir-parametros&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;II. Definir parámetros&lt;/h3&gt;
+&lt;p&gt;Con la matriz de distancias a mano, es hora de decisiones. Tenemos que fijar dos parámetros, con el fin de indentificar zonas densas, medidas por la cantidad de objetos cercanos a cualquier punto dado:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;epsilon&lt;/em&gt; es el radio de “vecindad” en torno a un punto.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;minPts&lt;/em&gt; es la cantidad mínima de vecinos dentro del radio &lt;em&gt;epsilon&lt;/em&gt; que alcanzan para definir a ese punto como miembro de un cluster&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;((fuente)[&lt;a href=&#34;http://www.sthda.com/english/wiki/print.php?id=246#concepts-of-density-based-clustering&#34; class=&#34;uri&#34;&gt;http://www.sthda.com/english/wiki/print.php?id=246#concepts-of-density-based-clustering&lt;/a&gt;])&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.sthda.com/sthda/RDoc/images/dbscan-principle.png&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+&lt;p&gt;En (a) vemos a &lt;em&gt;x&lt;/em&gt;, un punto “núcleo”(&lt;em&gt;core&lt;/em&gt;). Son puntos “núcleo” aquellos que dentro de su radio &lt;em&gt;epsilon&lt;/em&gt; tienen la cantidad mínima de vecinos definida como minPts. En (b) vemos tambiéb a &lt;em&gt;y&lt;/em&gt; y a &lt;em&gt;z&lt;/em&gt;. &lt;em&gt;y&lt;/em&gt; es un punto “borde” porque su cantiadad de vecinos es menor a minPts, pero de todas formas se encuentra en la vecindad de un punto núcleo. Los puntos núcleo y brode que comparten vecindad son parte del mismo clúster. &lt;em&gt;z&lt;/em&gt; es considerado “ruido” ya que no es núcleo ni borde, y por tanto no pertenece a un cluster.&lt;/p&gt;
+&lt;p&gt;Ahora bien, ¿cómo decidimos que cantidad es buena para minPts, y que distancia para &lt;em&gt;epsilon&lt;/em&gt;? No hay receta infalible. Depende de cada caso, y se pueden encontrar por prueba y error. Para nuestro problema, decidamoslo así: vamos a considerar como cluster aquellas zonas donde, en un radio de una cuadra a la redonda de un bar dado (1 cuadra = 128 m, le), se encuentren al menos otros 5 bares. Tendremos entonces &lt;em&gt;epsilon&lt;/em&gt; = 128 y minPts = 5.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;iii.-aplicar-el-algoritmo&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;III. Aplicar el algoritmo&lt;/h3&gt;
+&lt;p&gt;Alla vamos:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;clusters &amp;lt;- dbscan(distancias, eps = 128, minPts = 5)
+
+clusters&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## DBSCAN clustering for 321 objects.
+## Parameters: eps = 128, minPts = 5
+## The clustering contains 9 cluster(s) and 207 noise points.
+## 
+##   0   1   2   3   4   5   6   7   8   9 
+## 207   8  43   6   6  22   6  12   6   5 
+## 
+## Available fields: cluster, eps, minPts&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Con nuestras reglas, encontramos 9 clusteres en la ciudad. Los bares cuyo valor asignado es 0 son “ruido”, los que no pertenecen a ningún cluster.&lt;/p&gt;
+&lt;div id=&#34;iv.-visualizar-los-resultados&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;IV. Visualizar los resultados&lt;/h4&gt;
+&lt;p&gt;Agreguemos a cada bar el cluster que le corresponde:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mdz_bares &amp;lt;- mdz_bares%&amp;gt;% 
+    cbind(cluster = clusters[[&amp;quot;cluster&amp;quot;]])&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Y con eso a podemos proyectar los resultados en un mapa:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Visualizamos en un capa los bares sin cluster, y luego los que estan agrupados en otra
+ggmap(mendoza) +
+    geom_point(data = filter(mdz_bares, cluster == 0), 
+               aes(x = lng, y = lat), 
+               alpha = .5) +
+    geom_point(data = filter(mdz_bares, cluster &amp;gt; 0), 
+               aes(x = lng, y = lat, color = factor(cluster)), 
+               alpha = .5) +
+    labs(title = &amp;quot;Mendoza: clusters de bares&amp;quot;,
+         color = &amp;quot;cluster&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-07-05-dbscan-machine-learning-para-detectar-centros-de-actividad-urbana.es_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;automatizando-la-deteccion&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Automatizando la detección&lt;/h2&gt;
+&lt;p&gt;Vamos a crear una función que realice todos los pasos que vimos antes: realizar la matriz de distancia, fijar los parámetros de DBSCAN, aplicar el algoritmo, y agregar los identificadores de cluster a la data original.&lt;/p&gt;
+&lt;p&gt;Ya que vamos a lidiar con categorías generales (por ejemplo “servicios” incluye de todo, desde dentistas a funerarias) vamos a ponernos exigentes con los parámetros. Consideraremos que un punto pertenece a un cluster de actividad cuando tiene al menos 25 vecinos en una cuadra a la redonda. Con algunas excepciones: para banca, cultura, culto, educacion, entretenimiento, espacios_verdes, gobierno_y_serv_publicos, y “salud” dejaremos en 5 al umbral, ya que se trata de sitios de mayor “peso”. Seis bares en estrecha proximidad no representan una agrupación notable, pero con seis sedes de la administración pública, o seis museos, ya hablaríamos un centro de actividad.&lt;/p&gt;
+&lt;p&gt;Si no elegimos un valor par minPts, nuestra función se encargará de verificar el tipo de categoría a la que corresponden los puntos, y fijar el parámetro en forma acorde.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;assign_clusters &amp;lt;- function(poi_df, minPts = NA) {
+    
+    # Para ciertas categorias, como educacion o salud, consideramos que a partir de n = 5 ya se 
+    # forma clustering.
+    # Para las demas (retail y servicios) el umbral se eleva a 25
+    
+    if(is.na(minPts)) {
+        if(poi_df[1, &amp;quot;categoria&amp;quot;] %in% c(&amp;quot;banca&amp;quot;, &amp;quot;cultura&amp;quot;, &amp;quot;culto&amp;quot;, &amp;quot;educacion&amp;quot;, &amp;quot;entretenimiento&amp;quot;, 
+                                         &amp;quot;espacios_verdes&amp;quot;, &amp;quot;gobierno_y_serv_publicos&amp;quot;, &amp;quot;salud&amp;quot;)) {
+            minPts &amp;lt;- 5
+        } else minPts &amp;lt;- 25
+    }
+    
+    
+    eps &amp;lt;- 128 #  metros de distancia máxima entre miembros de un cluster
+    
+    poi_df[c(&amp;quot;lng&amp;quot;, &amp;quot;lat&amp;quot;)] %&amp;gt;% 
+        distm(fun = distHaversine) %&amp;gt;%
+        as.dist() %&amp;gt;% 
+        dbscan(eps = eps, minPts = minPts) %&amp;gt;% 
+        .[[&amp;quot;cluster&amp;quot;]] %&amp;gt;% 
+        cbind(poi_df, cluster = .)
+    
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ahora aplicamos la función a nuestros datos.&lt;/p&gt;
+&lt;p&gt;ATENCION! Con menos de 16 GB de RAM en el sistema, es posible que los recursos no alcancen para procesar el próximo bloque de código. El consumo de memoria de DBSCAN aumenta en forma exponencial (cuadrática) a medida que se incrementan la cantidad de puntos a analizar.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mdz_poi &amp;lt;- mdz_poi %&amp;gt;%
+    # separamos el dataset en una lista con un dataframe por cada categoría
+    split(mdz_poi$categoria) %&amp;gt;%  
+    # Le aplicamos al dataframe de cada categoría la función de clustering
+    map_df(assign_clusters) &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Listo!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;producto-final-un-grafico-facetado-por-categoria-con-todos-los-clusters-hallados&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Producto final: un gráfico facetado por categoría con todos los clusters hallados&lt;/h2&gt;
+&lt;p&gt;Antes de llevar los resultados al mapa, extraigamos para cada cluster su &lt;em&gt;convex hull&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://miro.medium.com/max/1016/1*F4IUmOJbbLMJiTgHxpoc7Q.png&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+&lt;p&gt;La “envolvente convexa” de un cluster no es otra cosa que un polígono que encierra todos sus puntos. La idea us usarlas para mostrar en el mapa la extensión de las áreas que hemos identificado como centros de actividad.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;get_hull&amp;lt;- function(df) {
+    
+    cbind(df$lng, df$lat) %&amp;gt;% 
+        as.matrix() %&amp;gt;%
+        st_multipoint() %&amp;gt;% 
+        st_convex_hull() %&amp;gt;% 
+        st_sfc(crs = 4326) %&amp;gt;% 
+        {st_sf(categoria = df$categoria[1], cluster = df$cluster[1], geom = .)}
+}
+
+hulls &amp;lt;- function(df) {
+    
+    df %&amp;gt;%
+        split(.$cluster) %&amp;gt;% 
+        map(get_hull) %&amp;gt;% 
+        reduce(rbind)
+    
+}
+
+mdz_cluster_hulls &amp;lt;- mdz_poi %&amp;gt;%
+    filter(cluster != 0) %&amp;gt;%
+    select(lng, lat, categoria, cluster) %&amp;gt;% 
+    split(.$categoria) %&amp;gt;% 
+    map(hulls) %&amp;gt;% 
+    reduce(rbind) &lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#Para reducir la cantidad de etiquetas
+hulls_por_cat &amp;lt;- mdz_cluster_hulls %&amp;gt;% 
+    group_by(categoria) %&amp;gt;% 
+    summarise()
+
+# A graficar
+
+ggmap(mendoza) + 
+  coord_sf(crs = st_crs(3857)) + # Necesario cuando se combinan ggmap y geom_sf
+    geom_sf(data = hulls_por_cat, fill = NA, size = 1.5,
+            aes(color = factor(categoria)), inherit.aes = FALSE) +
+    geom_point(data = filter(mdz_poi, cluster == 0), size = .1, alpha =.1,
+               aes(x = lng, y = lat)) +
+    geom_point(data = filter(mdz_poi, cluster != 0), size = .2, alpha =.2,
+               aes(x = lng, y = lat, color = factor(categoria))) + 
+    ggrepel::geom_label_repel(data = hulls_por_cat,
+                              aes(label = categoria, color = factor(categoria), geometry = geom),
+                              stat = &amp;quot;sf_coordinates&amp;quot;,
+                              inherit.aes = FALSE) +
+    labs(y = &amp;quot;&amp;quot;, x = &amp;quot;&amp;quot;,
+         title=&amp;quot;Mendoza: clusters de actividad identificados&amp;quot;,
+         color = &amp;quot;categoría&amp;quot;) +
+    # Eliminamos las etiquetas de latitud y longitud de los ejes 
+    theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          axis.ticks = element_blank()) +
+    guides(colour = FALSE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-07-05-dbscan-machine-learning-para-detectar-centros-de-actividad-urbana.es_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Taxis en Buenos Aires: mapas claros y negocios turbios</title>
-      <link>https://bitsandbricks.github.io/post/taxis-en-buenos-aires-mapas-claros-y-negocios-turbios/</link>
+      <link>/post/taxis-en-buenos-aires-mapas-claros-y-negocios-turbios/</link>
       <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>https://bitsandbricks.github.io/post/taxis-en-buenos-aires-mapas-claros-y-negocios-turbios/</guid>
-      <description>&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leaflet/leaflet.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leaflet/leaflet.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leafletfix/leafletfix.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;link href=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leaflet-label/leaflet.label.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leaflet-label/leaflet.label.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/Proj4Leaflet/proj4-compressed.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/Proj4Leaflet/proj4leaflet.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leaflet-binding/leaflet.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leaflet-providers/leaflet-providers.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leaflet-providers-plugin/leaflet-providers-plugin.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://bitsandbricks.github.io/rmarkdown-libs/HomeButton/home-button.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/HomeButton/home-button.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/HomeButton/easy-button-src.min.js&#34;&gt;&lt;/script&gt;
+      <guid>/post/taxis-en-buenos-aires-mapas-claros-y-negocios-turbios/</guid>
+      <description>&lt;script src=&#34;/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;/rmarkdown-libs/leaflet/leaflet.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;/rmarkdown-libs/leaflet/leaflet.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;/rmarkdown-libs/leafletfix/leafletfix.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;link href=&#34;/rmarkdown-libs/leaflet-label/leaflet.label.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;/rmarkdown-libs/leaflet-label/leaflet.label.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/Proj4Leaflet/proj4-compressed.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/Proj4Leaflet/proj4leaflet.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/leaflet-binding/leaflet.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/leaflet-providers/leaflet-providers.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/leaflet-providers-plugin/leaflet-providers-plugin.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;/rmarkdown-libs/HomeButton/home-button.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;/rmarkdown-libs/HomeButton/home-button.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/HomeButton/easy-button-src.min.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;Hace unos meses, durante la &lt;a href=&#34;http://smartcityexpobuenosaires.com/&#34;&gt;Smart City Expo en Buenos Aires&lt;/a&gt; se organizó un &lt;a href=&#34;https://www.eventbrite.com.ar/e/dataton-un-dia-en-las-ciudades-a-traves-de-sus-datos-tickets-37843936232#&#34;&gt;&lt;strong&gt;Datatón&lt;/strong&gt;&lt;/a&gt; bajo el título de “Un día en las ciudades a través de sus datos”. El evento fue organizado por los equipos de datos abiertos de la Nación, y la Ciudad y Provincia&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; de Buenos Aires.&lt;/p&gt;
@@ -41,7 +281,7 @@
 &lt;h2&gt;Information is beautiful&lt;/h2&gt;
 &lt;p&gt;Cuando vi pasar el dataset, lo primero que se me ocurrió fue visualizar todos los viajes a la vez, al estilo del mapa que hizo el MIT Senseable City Lab para &lt;a href=&#34;http://hubcab.org&#34;&gt;los taxis de Nueva York&lt;/a&gt;:&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://bitsandbricks.github.io/post/img/hubcab.jpg&#34; alt=&#34;hubcab.org&#34; /&gt;
+&lt;img src=&#34;/post/img/hubcab.jpg&#34; alt=&#34;hubcab.org&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;hubcab.org&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;En resumidas cuentas, obtuve lo que buscaba, y algo más. En un ejemplo de los patrones que son difíciles de detectar en una lista de números, pero resultan evidentes una vez visualizados, en mi mapa relucen rastros de lo que a los porteños nos gusta llamar “la mafia de los taxis”.&lt;/p&gt;
@@ -81,7 +321,7 @@ taxis &amp;lt;- taxis %&amp;gt;%
                size = 0.06, 
                alpha = .5) + 
   coord_map()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;La data es lo suficientemente densa como para que se entrevea la estructura vial de la ciudad. Excelente! Ahora vamos a refinar la visualización.&lt;/p&gt;
 &lt;ol start=&#34;3&#34; style=&#34;list-style-type: upper-roman&#34;&gt;
 &lt;li&gt;Separamos las coordenadas en “orígenes” (donde el taxi levantó pasajeros) y destinos, los lugares de llegada.&lt;/li&gt;
@@ -172,7 +412,7 @@ size_range = c(0.2, 0.4)&lt;/code&gt;&lt;/pre&gt;
     labs(title=&amp;quot;Taxis en Buenos Aires: origen y destino de viajes&amp;quot;,
          subtitle = &amp;quot;Mayo - agosto 2017&amp;quot;,
          caption = &amp;quot;fuente: dataset BA Taxi - Datatón Smart City Expo Buenos Aires&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;que-curioso&#34; class=&#34;section level2&#34;&gt;
@@ -193,7 +433,7 @@ size_range = c(0.2, 0.4)&lt;/code&gt;&lt;/pre&gt;
                    y = lat),
                alpha = 0.5,
                color = &amp;quot;indianred1&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Confirmado, el “misterioso” aglutinamiento de llegadas sin salidas ocurre en Aeroparque.&lt;/p&gt;
 &lt;p&gt;Ahora pidámosle a Google un mapa de “Estación de buses Retiro”:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;qmap(&amp;quot;Estación de buses Retiro, Buenos Aires&amp;quot;, zoom = 15, color = &amp;quot;bw&amp;quot;, scale = 2) +  
@@ -207,7 +447,7 @@ size_range = c(0.2, 0.4)&lt;/code&gt;&lt;/pre&gt;
                    y = lat),
                alpha = 0.5,
                color = &amp;quot;indianred1&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Es la estación nomás!&lt;/p&gt;
 &lt;p&gt;Vamos a la explicación. Por si alguno no lo sabía, es &lt;em&gt;vox populi&lt;/em&gt; que en Aeroparque y Retiro operan &lt;a href=&#34;http://www.lanacion.com.ar/2027084-nadie-controla-las-paradas-de-taxis-del-aeroparque-pese-a-las-denuncias-por-irregularidades&#34;&gt;grupos de taxistas confabulados&lt;/a&gt; que toman control del área para su uso exclusivo. Quienes pagan por el privilegio, pueden trabajar allí. Los taxistas que no forman parte del negocio e intentan llevarse pasajeros son amenazados o sometidos a violencia para dejar claro que la regla es férrea. Debido a la virtual ausencia de viajes vía BA Taxi que parten desde allí, podemos asumir que los taxistas que trabajan con la app ignoran (por su propio bien!) a los pasajeros que los convocan desde los territorios calientes. La abundancia de puntos rojos demuestra que los choferes de BA Taxi visitan seguido los sitios, dejando pasajeros, pero no se atreven a ir a buscarlos allí.&lt;/p&gt;
 &lt;p&gt;Dicho esto, algunos puntitos verdes que asoman en ambos sitios sugieren el accionar de taxistas osados -o muy distraídos- que se han llevado pasajeros en las narices de la mafia.&lt;/p&gt;
@@ -233,7 +473,7 @@ geo_data &amp;lt;- taxis_destinos %&amp;gt;%
 
 plot(geo_data[&amp;quot;tipo&amp;quot;], col = c(&amp;quot;aquamarine&amp;quot;, &amp;quot;indianred1&amp;quot;), 
      key.pos = NULL, main = &amp;quot;salidas en verde, llegadas en rojo&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Se evidencia un pequeño problema: Existen varios viajes que terminan fuera de los límites de la Ciudad. Sólo nos interesan viajes dentro de sus fronteras, ya que fuera de ellas es natural que existan más llegadas que salidas, asumiendo que los pasajeros que hacen el camino inverso tenderán a utilizar servicios de taxi locales que no son registrados en el dataset de BA Taxi.&lt;/p&gt;
 &lt;p&gt;No hay problema. Leemos el archivo que contiene los límites de los &lt;a href=&#34;https://data.buenosaires.gob.ar/dataset/barrios&#34;&gt;barrios de Buenos Aires&lt;/a&gt; (también cortesía de Buenos Aires Data) y lo “disolvemos” para que nos quede un sólo polígono que representa la superficie de la ciudad.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;limites_CABA &amp;lt;- st_read(&amp;#39;../data/barrios/barrios_badata.shp&amp;#39;) %&amp;gt;% 
@@ -249,7 +489,7 @@ plot(geo_data[&amp;quot;tipo&amp;quot;], col = c(&amp;quot;aquamarine&amp;quot;,
 ## epsg (SRID):    NA
 ## proj4string:    +proj=tmerc +lat_0=-34.6297166 +lon_0=-58.4627 +k=0.9999980000000001 +x_0=100000 +y_0=100000 +ellps=intl +units=m +no_defs&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(limites_CABA)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Ahora combinamos nuestra data de taxis con la silueta de la ciudad, y filtramos el resultado para descartar los puntos que cae fuera de los límites.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;geo_data &amp;lt;- geo_data %&amp;gt;% 
     st_join(limites_CABA) %&amp;gt;% 
@@ -257,7 +497,7 @@ plot(geo_data[&amp;quot;tipo&amp;quot;], col = c(&amp;quot;aquamarine&amp;quot;,
 
 plot(geo_data[&amp;quot;tipo&amp;quot;], col = c(&amp;quot;aquamarine&amp;quot;, &amp;quot;indianred1&amp;quot;), 
      key.pos = NULL, main = &amp;quot;salidas en verde, llegadas en rojo&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;720&#34; /&gt; &lt;em&gt;Voilà!&lt;/em&gt;. Ahora creamos la grilla…&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;720&#34; /&gt; &lt;em&gt;Voilà!&lt;/em&gt;. Ahora creamos la grilla…&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;grilla &amp;lt;- geo_data %&amp;gt;% 
     st_make_grid(what = &amp;quot;polygons&amp;quot;, n = c(20, 20)) %&amp;gt;%
     st_sf() %&amp;gt;%
@@ -266,7 +506,7 @@ plot(geo_data[&amp;quot;tipo&amp;quot;], col = c(&amp;quot;aquamarine&amp;quot;,
 
 plot(geo_data[&amp;quot;tipo&amp;quot;], col = c(&amp;quot;aquamarine&amp;quot;, &amp;quot;indianred1&amp;quot;), key.pos = NULL, main = NULL) 
 plot(st_geometry(grilla), add = T)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;… y asociamos a cada par de coordenadas con la celda donde cae:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tasa_destino_origen &amp;lt;- geo_data %&amp;gt;% 
     st_join(grilla) %&amp;gt;% 
@@ -292,7 +532,7 @@ plot(st_geometry(grilla), add = T)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Antes de hacer cuentas, volvamos a anticipar los resultados con una visualización. Cómo se ve en el mapa la tasa origen/destino de cada zona de la ciudad?&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(tasa_destino_origen[&amp;quot;tasa&amp;quot;], 
      main = &amp;quot;Viajes de BA Taxi por zona: cantidad de llegadas por cada salida&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Oh si, esto salió bien. Aeroparque brilla como material radioactivo. Retiro, si bien está lejos en intensidad, también se distingue de sus alrededores.&lt;/p&gt;
 &lt;p&gt;Ahora si, los números. Filtremos la data para extraer las celdas donde la tasa es desproporcionada, eligiendo un piso (arbitrario) de 10 salidas por cada llegada.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;outliers &amp;lt;- tasa_destino_origen %&amp;gt;% 
@@ -317,7 +557,7 @@ outliers&lt;/code&gt;&lt;/pre&gt;
 ## 5 45       12  11.0 (-58.49042 -34.6756, -58.49033 -34.67566, -58.48972 -…&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Son sólo cinco áreas, de las cuales dos registran una cantidad de viajes un orden de magnitud mayor a las demás: IDs 353 y 277, que -como podemos comprobar- corresponden en efecto a Aeroparque y Retiro:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(outliers[&amp;quot;ID&amp;quot;])&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-20-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-20-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;De éste modo hemos medido el efecto de la mafia en las zonas donde operan, al menos en lo que respecta a los viajes registrados por BA Taxi. En los alrededores de Aeroparque, la tasa es de 88,25: por cada 88 taxistas que terminan un viaje allí, apenas 2 logran llevarse pasajeros. En retiro, la tasa es de casi 23 llegadas por cada salida.&lt;/p&gt;
 &lt;p&gt;Para ponerlo en perspectiva, el promedio de la ciudad es de 2,7:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean(tasa_destino_origen$tasa)&lt;/code&gt;&lt;/pre&gt;
@@ -337,7 +577,7 @@ outliers&lt;/code&gt;&lt;/pre&gt;
   geom_label(data = data.frame(x = c(mean(tasa_destino_origen$tasa), 22.89, 88.25),
                                y = rep(40, 3)),
              aes(x, y, label = c(&amp;quot;Media BA&amp;quot;, &amp;quot;Retiro&amp;quot;, &amp;quot;Aeroparque&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-22-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-22-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;por-ultimo-que-pasa-con-las-otras-tres-zonas-donde-los-taxis-dejan-pasajeros-pero-rara-vez-los-van-a-buscar&#34; class=&#34;section level2&#34;&gt;
@@ -362,10 +602,10 @@ mapview(st_geometry(outliers), map.types = c(&amp;quot;Esri.WorldImagery&amp;quo
     
     <item>
       <title>Predicción de demanda de servicios urbanos con open data &#43; Facebook Prophet</title>
-      <link>https://bitsandbricks.github.io/post/prediccion-de-demanda-de-servicios-urbanos-con-prophet/</link>
+      <link>/post/prediccion-de-demanda-de-servicios-urbanos-con-prophet/</link>
       <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>https://bitsandbricks.github.io/post/prediccion-de-demanda-de-servicios-urbanos-con-prophet/</guid>
+      <guid>/post/prediccion-de-demanda-de-servicios-urbanos-con-prophet/</guid>
       <description>&lt;p&gt;De todos los datasets que publica el portal de Open Data de Buenos Aires, mi favorito es sin dudas el que contiene los reclamos registrados por el Sistema Único de Atención Ciudadana (SUACI). El SUACI, también llamado &lt;a href=&#34;https://gestioncolaborativa.buenosaires.gob.ar/prestaciones&#34;&gt;BA 147&lt;/a&gt;, equivale a lo que en otras latitudes se conoce como &lt;a href=&#34;https://en.wikipedia.org/wiki/3-1-1&#34;&gt;servicio 311&lt;/a&gt;. El 311 es el número telefónico, complementado por un servicio web y en general una app también, al que los ciudadanos recurren para realizar reclamos al gobierno de la ciudad. En contraste con el servicio 911, el 311 (o 147 en Buenos Aires) se utiliza para reportar problemas que no involucran urgencias de salud o seguridad. Por ejemplo, si la cuadra de uno aparece llena de basura después de un evento multitudinario en las cercanías, se llama al 147 o se usa la app para que la ciudad envíe una cuadrilla de limpieza. En cambio, si una persona sufre un infarto en la vía pública, se llama al 911.&lt;/p&gt;
 &lt;p&gt;Si esto les resulta un poco confuso, no se preocupen, nos es culpa nuestra; hay un ligero exceso de nombres distintos para cosas similares. Los nombres SUACI y BA 147 coexisten porque -creo- SUACI registra las solicitudes al 147 pero también reclamos enviados a la ciudad por otros medios. En cuanto a 311 vs. 147, la popularidad de 311 como número para reclamos aún muy lejos del archifamoso 911. Por eso muchas ciudades en el mundo, BA incluida, coinciden en usar el 911 para emergencias pero varían en el número reservado para reclamos cotidianos.&lt;/p&gt;
 &lt;p&gt;Lo interesante de los servicios tipo 311 es que, cuando sus registros se comparten con el público, permiten hacer estudios sobre muchas facetas de la ciudad. Por ejemplo, &lt;a href=&#34;http://blog.datalook.io/using-data-analytics-to-make-bad-buildings-better-in-new-york-city/&#34;&gt;identificar edificios peligrosos por su deterioro&lt;/a&gt;, o probar que las “fronteras” entre comunidades distintas dentro de la ciudad &lt;a href=&#34;https://nextcity.org/daily/entry/311-calls-neighborhood-study&#34;&gt;generan más reclamos que áreas homogéneas&lt;/a&gt;.&lt;/p&gt;
@@ -455,7 +695,7 @@ ggplot(solicitudes_saneamiento, aes(as.Date(dia), total)) +
        title=&amp;quot;Demanda diaria de servicios de saneamiento urbano&amp;quot;,
        subtitle = &amp;quot;Ciudad de Buenos Aires: 2011 - 2016&amp;quot;,
        caption = &amp;quot;Fuente: https://data.buenosaires.gob.ar/&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;A primera vista, es obvio que los datos están sesgados, ya que la explosión en el número de solicitudes a partir de mediados del 2012 es atribuible a la forma en que la ciudad empezó a tomar nota de los reclamos, más que a un furor ciudadano por solicitar limpieza. Cuando hagamos nuestro modelo, vamos a descartar los registros de 2011 y 2012 porque tenemos claro que no son representativos.&lt;/p&gt;
 &lt;p&gt;El siguiente ingrediente que necesitamos es una lista de los feriados públicos en la Argentina durante el período analizado.&lt;/p&gt;
 &lt;/div&gt;
@@ -464,7 +704,7 @@ ggplot(solicitudes_saneamiento, aes(as.Date(dia), total)) +
 &lt;p&gt;Buscar una lista oficial de feriados resultó en frustración. Si bien el gobierno nacional publica una lista de los &lt;a href=&#34;https://www.argentina.gob.ar/feriados&#34;&gt;feriados vigentes para el año en curso&lt;/a&gt;, no existe un archivo para descargar con las fechas exactas de los feriados en años anteriores.&lt;/p&gt;
 &lt;p&gt;En los sitios web de varios diarios locales encontramos un historial de feriados, pero dispersos en distintas páginas web, y sin opción para descargarlos en un archivo de texto. Vamos a tener que “scrapear” la data. Cómo nos hacen laburar, che. Si tan solo alguien nos diera una API para toda información de consulta permanente, no tendríamos que hacer estas cosas!&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://bitsandbricks.github.io/post/img/API.png&#34; alt=&#34;ira&#34; /&gt;
+&lt;img src=&#34;/post/img/API.png&#34; alt=&#34;ira&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;ira&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Nuestro proveedor de fechas de feriados será La Nación, que publica un bonito &lt;a href=&#34;http://servicios.lanacion.com.ar/feriados/&#34;&gt;calendario de feriados oficiales&lt;/a&gt;, con la posibilidad de consultar los de años anteriores.&lt;/p&gt;
@@ -577,13 +817,13 @@ modelo &amp;lt;- solicitudes_saneamiento %&amp;gt;%
 &lt;li&gt;&lt;p&gt;Los meses de mayor actividad son los de la segunda mitad del año. Durante las vacaciones de invierno se observa una baja de la demanda, leve en comparación a la de fin de año…. a partir de mediados de Diciembre, la demanda cae en picada, y se mantiene mínima en Enero.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;prophet_plot_components(modelo, forecast) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Y por último, trazamos la predicción de nivel de demanda para lo que queda del año:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(modelo, forecast) + theme_ipsum() +
   labs(y = &amp;quot;solicitudes&amp;quot;, x = &amp;quot;fecha&amp;quot;,
        title=&amp;quot;Pronóstico: demanda diaria de servicios de saneamiento urbano&amp;quot;,
        subtitle = &amp;quot;Ciudad de Buenos Aires: 2013 - 2016, extendido a final del 2017&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Yo diría que, a no ser que esté operando con capacidad de sobra, Saneamiento Urbano va a necesitar más recursos!&lt;/p&gt;
 &lt;p&gt;Para la próxima: hacer análisis espacial además del temporal.&lt;/p&gt;
 &lt;/div&gt;

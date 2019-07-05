@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Maps on Bits &amp; Bricks</title>
-    <link>https://bitsandbricks.github.io/tags/maps/</link>
+    <link>/tags/maps/</link>
     <description>Recent content in Maps on Bits &amp; Bricks</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
     <lastBuildDate>Sat, 10 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://bitsandbricks.github.io/tags/maps/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/tags/maps/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Visualizando con R el historial de ubicaciones de Google (parte III)</title>
-      <link>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii/</link>
+      <link>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii/</link>
       <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii/</guid>
+      <guid>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii/</guid>
       <description>&lt;p&gt;En la &lt;a href=&#34;https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iI/&#34;&gt;entrega anterior&lt;/a&gt;, seguimos el rastro del usuario a través de las calles, y descubrimos donde vive.&lt;/p&gt;
 &lt;p&gt;Como cierre, vamos a visualizar los vuelos con los que el usuario conectó las ciudades por donde estuvo.&lt;/p&gt;
 &lt;p&gt;Para reproducir los resultados, recomiendo correr antes el código de la &lt;a href=&#34;https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/&#34;&gt;parte I&lt;/a&gt;, que deja preparados los sets de datos que vamos a utilizar aquí.&lt;/p&gt;
@@ -89,10 +89,10 @@ lines(bind_rows(flights[, c(&amp;quot;lon&amp;quot;, &amp;quot;lat&amp;quot;)],
              flights[, c(&amp;quot;prev_lon&amp;quot;, &amp;quot;lat&amp;quot;)]), 
       col = &amp;quot;orange&amp;quot;, lwd=2)
 title( main = &amp;quot;:/&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-10-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-10-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Simple si, pero esas líneas rectas quedan bastante raras. Dado que nuestro planeta es un esferoide, si proyectamos sobre un plano la distancia más corta entre dos puntos, la línea resultante no es una recta. Por ejemplo, así es como Delta Airlines muestra los vuelos que brinda en sociedad con Aerolíneas Argentinas:&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://bitsandbricks.github.io/post/img/D_AA_destinos.jpg&#34; alt=&#34;Vuelos de Delta y Aerolíneas&#34; /&gt;
+&lt;img src=&#34;/post/img/D_AA_destinos.jpg&#34; alt=&#34;Vuelos de Delta y Aerolíneas&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;Vuelos de Delta y Aerolíneas&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Para reproducir esas curvas sobre el globo terráqueo, que llevan el simpático nombre de &lt;a href=&#34;https://es.wikipedia.org/wiki/Ortodr%C3%B3mica&#34;&gt;ortodrómicas&lt;/a&gt;, volvemos a recurrir al paquete &lt;code&gt;geosphere&lt;/code&gt;:&lt;/p&gt;
@@ -110,7 +110,7 @@ for(i in 1:length(curvas)){
 }
 
 title( main = &amp;quot;:)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-10-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-10-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;inflando-el-globo&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Inflando el globo&lt;/h1&gt;
@@ -176,7 +176,7 @@ ggplot() +
        color = &amp;quot;Año&amp;quot;,
        size = &amp;quot;Frecuencia&amp;quot;) +
   theme_ipsum() &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-10-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-10-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;No luce nada mal.&lt;/p&gt;
 &lt;p&gt;Para terminar, una simple conclusión: Google sabe demasiado sobre sus usuarios. Sería bueno pensar en como podemos remediarlo. No me refiero a “volver atrás” y dejar de usar tecnologías como el GPS y los registros de ubicación, sino a encontrar la forma de tomar control de nuestros datos, y tener el derecho a saber que se hace con ellos, limitando los usos que no nos convenzan.&lt;/p&gt;
 &lt;/div&gt;
@@ -185,10 +185,10 @@ ggplot() +
     
     <item>
       <title>Visualizando con R el historial de ubicaciones de Google (parte II)</title>
-      <link>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</link>
+      <link>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</link>
       <pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</guid>
+      <guid>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii/</guid>
       <description>&lt;p&gt;En la &lt;a href=&#34;https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/&#34;&gt;parte I&lt;/a&gt;, vimos cómo descargar, limpiar y comenzar a visualizar los datos de nuestra ubicación que Google guarda cuando usamos servicios de la compañía. Hasta aquí nos habíamos concentrado en clasificar los datos según el tiempo y según los países visitados.&lt;/p&gt;
 &lt;p&gt;Ahora vamos a poner nuestra atención en el interior de las ciudades, para seguir los rastros que dejamos al recorrer las calles.&lt;/p&gt;
 &lt;p&gt;Para reproducir los resultados, recomiendo correr antes el código de la &lt;a href=&#34;https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/&#34;&gt;parte I&lt;/a&gt;, que deja preparados los sets de datos que vamos a utilizar aquí.&lt;/p&gt;
@@ -221,7 +221,7 @@ ggmap(NY) +
   scale_color_brewer(type = &amp;quot;qual&amp;quot;, palette = &amp;quot;Set2&amp;quot;) +
   labs(title=&amp;quot;Paradero del usuario&amp;quot;,
        color = &amp;quot;Fecha&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;El mapa es claro, y muestra que en distintas ocasiones el usuario recorrió, en general, zonas diferentes de la ciudad. La mayor parte de su actividad transcurrió en Manhattan (en la visita de enero 2016 no abandonó la isla) con algunas visitas a New Jersey (al oeste del Río Hudson) y Brooklyn (al este del East River). En su última estadía se aventuró más al norte que de costumbre, pasando la mayor parte del tiempo en Harlem. Por la acumulación concentrada de puntos en ciertas parcelas, también es fácil deducir donde se ha alojado en cada ocasión.&lt;/p&gt;
 &lt;p&gt;Lo interesante de un dataset con tanta resolución temporal y espacial es que podemos seguir al usuario cuando se mete dentro de los edificios. Por ejemplo, podemos saber si, y cuando, visita cualquiera de los destinos famosos en la ciudad. Por ejemplo, ¿alguna vez visito el Museo de Arte Moderno de Nueva York? Hagamos zoom en el MoMA, esta vez descartando los datos de latitud y longitud, que no hacen falta:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;MoMA &amp;lt;- get_map(&amp;quot;MOMA, NY&amp;quot;, zoom = 18)
@@ -240,10 +240,10 @@ ggmap(MoMA) +
         axis.text.y = element_blank(),
         axis.ticks = element_blank()) +
   coord_map()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Bastante fácil de leer. En enero del 2016, y otra vez en enero año siguiente, se registran visitas al museo. De hecho, sabiendo las fechas y el ala del edificio visitada, hasta podríamos saber que obras fueron apreciadas. Según el calendario del MoMA, en enero del 2017 se exhibió &lt;a href=&#34;https://www.moma.org/calendar/exhibitions/1668&#34;&gt;“A Revolutionary Impulse: The Rise of the Russian Avant-Garde”&lt;/a&gt;. Hasta podemos ver como lucían las obras:&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://bitsandbricks.github.io/post/img/MoMA.jpg&#34; alt=&#34;Exhibición en el MoMA, enero 2017&#34; /&gt;
+&lt;img src=&#34;/post/img/MoMA.jpg&#34; alt=&#34;Exhibición en el MoMA, enero 2017&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;Exhibición en el MoMA, enero 2017&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Podríamos verificar si el usuario pasó por cualquier otra atracción. O restaurantes en particular. Iglesias, supermercados, monumentos. Si visitó una zona roja o cualquier otra área con fama cuestionable, y cuanto tiempo pasó allí. Todo eso y mucho más está guardado en los servers de Google, y nosotros lo entregamos voluntariamente!&lt;/p&gt;
@@ -267,7 +267,7 @@ ggmap(BA) +
         axis.text.y = element_blank(),
         axis.ticks = element_blank()) +
   coord_map()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Vemos que nuestro querido usuario ha estado por todos lados (salvo el sur-oeste de la ciudad, que parece ser &lt;em&gt;terra incognita&lt;/em&gt; para nuestro donante de datos), y que ha recorrido profusamente las arterias que comunican la ciudad con su área metropolitana. Pero no tenemos idea de donde vive, porque hay demasiado puntos sobre el mapa, y se hace imposible “leer” donde pasa la mayor parte de su tiempo.&lt;/p&gt;
 &lt;p&gt;Vamos a recurrir a una técnica de visualización que se llama &lt;em&gt;hexagon binning&lt;/em&gt;, útil cuando lo que queremos es encontrar los lugares donde la intensidad de una variable se destaca. En éste caso, vamos a dividir el espacio de la cuidad en hexágonos, asignarle a cada uno un valor asociado a la frecuencia de registros realizados desde allí, y buscar los que muestren valores altos.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(hexbin)
@@ -290,7 +290,7 @@ ggmap(BA) +
   theme(axis.text.x = element_blank(),
         axis.text.y = element_blank(),
         axis.ticks = element_blank())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Bingo. El solitario hexágono de intensidad máxima señala el domicilio del usuario -o al menos, el lugar donde pasa la mayor parte de sus horas. Si hiciéramos zoom sobre el mapa podríamos ver la parcela donde vive, y por lo tanto su dirección exacta, pero nos vamos a abstener.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;descubriendo-habitos&#34; class=&#34;section level2&#34;&gt;
@@ -320,7 +320,7 @@ ggmap(BA) +
   # y eliminamos la leyenda
   guides(fill = FALSE) +
   facet_wrap(~year)  &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Los resultados muestran una diferencia clara entre su actividad en los años 2011 y 2012, con una variedad de sitios visitados más reducida, en comparación con 2014 y 2015 cuando su rutina diaria parece haber sido mucho más variada. Su actividad está claramente concentrada en el área que corresponde al centro económico de la ciudad. Hace incursiones al exterior de la ciudad, hacia el norte, pero rara vez en otra dirección. En lo que va del 2017, sus radio de acción es notablemente más acotado: Su tiempo se reparte en dos regiones nítidamente demarcadas, sin presencia observable en otros sectores. En todo el año 2016 su celular no se reportó ni una sola vez desde los confines de la ciudad. Como ya habíamos notado en la &lt;a href=&#34;https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/&#34;&gt;parte I&lt;/a&gt; de ésta serie, estaba viviendo en otro país.&lt;/p&gt;
 &lt;p&gt;Cómo planificador urbano, me causa vértigo imaginar todos los estudios que podríamos hacer sobre nuestras ciudades si tuviéramos acceso a la información que acumula Google: matrices origen/ destino de tránsito minuto a minuto, tendencias de actividad económica, recreativa, cultural, efecto en el tránsito peatonal y vehicular de cortes de servicio, cierre de calles y otros percances, estudios de adecuación del código de uso del suelo, e infinidad más. Claro que, aún más vértigo me da pensar todo lo que saben de nosotros, a nivel individual, no sólo Google sino los &lt;a href=&#34;http://www.telam.com.ar/notas/201312/44925-las-principales-revelaciones-de-edward-snowden.html&#34;&gt;servicios de inteligencia de los gobiernos que acceden a esos datos&lt;/a&gt;. En fin.&lt;/p&gt;
 &lt;p&gt;En la próxima (y final) entrega, vamos a reproducir los viajes del usuario entre ciudades, mostrando como podemos reconstruir su historial de viajes aéreos en base a sus registros de ubicación. Y con una linda visualización, por supuesto… si vamos a espiar, lo haremos con estilo.&lt;/p&gt;
@@ -330,10 +330,10 @@ ggmap(BA) +
     
     <item>
       <title>Visualizando con R el historial de ubicaciones de Google (parte I)</title>
-      <link>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</link>
+      <link>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</link>
       <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</guid>
+      <guid>/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/</guid>
       <description>&lt;p&gt;La irrupción de computadoras llenas de sensores que viajan el bolsillo de cada ciudadano -nuestros celulares- ha sido de sobra aprovechada por Google. Si no nos tomamos la molestia de inhabilitar funciones de localización activas de fábrica, todos los usuarios de celulares Android reportamos a Google nuestra posición, en forma constante. Y los usuarios de iPhones también, cuando usan servicios de la compañía en sus teléfonos.&lt;/p&gt;
 &lt;p&gt;A esta altura, ya todos sabemos que Google es una compañía bastante &lt;em&gt;creepy&lt;/em&gt;. A cambio de unos cuantos servicios que hemos pasado a considerar imprescindibles, “sólo” quieren conocimiento completo de quiénes somos, qué hacemos, qué deseamos, y dónde estamos. Lo que Google hace con la cuantiosa información que acumula de sus miles de millones de usuarios es un misterio, al menos en cuanto a los detalles y al alcance de sus análisis.&lt;/p&gt;
 &lt;p&gt;Por eso es interesante hacer algunos ejercicios por nuestra cuenta, visualizando los datos de localización que Google ha recopilado sobre nosotros. Interroguemos a la data con una pregunta general en mente: ¿Qué puede inferir Google acerca de mi si sabe donde estoy?&lt;/p&gt;
@@ -341,7 +341,7 @@ ggmap(BA) +
 &lt;h2&gt;Descargando nuestra información de ubicación&lt;/h2&gt;
 &lt;p&gt;El primer paso es acceder a la información que Google dispone de nosotros. Entrando en &lt;a href=&#34;https://takeout.google.com/settings/takeout&#34; class=&#34;uri&#34;&gt;https://takeout.google.com/settings/takeout&lt;/a&gt; podemos descargar archivos comprimidos con la información personal que Google mantiene en sus distintos servicios. Para nuestros fines, solo necesitamos los datos de ubicación. De-seleccionamos todas las opciones, y activamos sólo “Location History” / “Historial de Ubicaciones”, en formato JSON:&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://bitsandbricks.github.io/post/img/G_location_history.png&#34; alt=&#34;Google takeout&#34; /&gt;
+&lt;img src=&#34;/post/img/G_location_history.png&#34; alt=&#34;Google takeout&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;Google takeout&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Cliqueando en “Siguiente” podemos iniciar la descarga.&lt;/p&gt;
@@ -423,7 +423,7 @@ locationdf %&amp;gt;%
        subtitle=&amp;quot;Cantidad de registros por dia y por actividad&amp;quot;) +
   scale_fill_brewer(palette = &amp;quot;Set3&amp;quot;) +
   theme_ipsum()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;El gráfico indica que tenemos registros desde el 2011 hasta mediados del 2017. Durante los dos primeros años, los registros de ubicación fueron escasos. A fines del 2012 explota la frecuencia diaria de notificaciones a Google de la posición del usuario. Hay valles donde la frecuencia de registros baja notablemente, en 2013, 2014 y 2015. El del 2013 (la pendiente prolija) sin dudas parece resultado de un error u omisiones en la data… quizás Google también pierde datos cada tanto! Desde su apogeo en 2014 y 2015, con unos 1500 registros por día, parece ser que se han apiadado de la batería de nuestros celulares y los envíos de coordenadas a la madre nodriza no son tan constantes como antaño.&lt;/p&gt;
 &lt;p&gt;En cuanto a las actividades registradas, “unknown” -desconocido- es la categoría más común. Le siguen “still” (o quieto), y mucho más lejos “tilting” (realizando un giro) y “on foot” (caminando). Es decir que para la gran mayoría de las veces que lee nuestra ubicación, Google sabe donde estamos pero no puede determinar de que modo nos movemos. Diría que en la práctica esto es compensado analizando registros de posición en conjunto: si un registro dado es identificado como “on foot” (por ejemplo) por el algoritmo que categoriza la actividad, otros registros donde la dirección y velocidad son más o menos constantes pueden considerarse parte de la misma secuencia de movimiento.&lt;/p&gt;
 &lt;p&gt;Para visualizar cuantos registros aporta cada categoría en la suma total, intentemos con un “waffle chart”. Los gráficos de waffle son una alternativa a los gráficos de torta, que además de continuar con la nomenclatura gastronómica resultan, al menos en teoría, más fáciles de interpretar que sus primos circulares.&lt;/p&gt;
@@ -445,7 +445,7 @@ waffle(top5,
        legend_pos = &amp;quot;bottom&amp;quot;,
        xlab = &amp;quot;1 cuadradito == 10.000 registros&amp;quot;,
        title = &amp;quot;Top 5 actividades identificadas&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Vemos que, al menos en cuanto a lo que ha podido establecer Google, el usuario es encontrado caminando en forma tres veces más habitual que a bordo de un vehículo. Por otro lado, “still” le gana por goleada a “on foot”, así que esa propensión a caminar es balanceada por cierto sedentarismo. Todo un mal de nuestros días, je. En todo caso las conclusiones deben ser tomadas con pinzas; estamos asumiendo que las actividades no identificadas (“unknown”) se reparten en la misma proporción que las etiquetadas.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;prestando-atencion-a-un-categoria-en-particular&#34; class=&#34;section level2&#34;&gt;
@@ -466,7 +466,7 @@ waffle(top5,
        title=&amp;quot;Movimiento a pie registrado&amp;quot;,
        subtitle=&amp;quot;según el día de la semana&amp;quot;) + 
   theme_ipsum(grid=&amp;quot;Y&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Para nuestro usuario donante, el viernes es el gran día para pasear (quizás de noche?), al igual que el fin de semana. El lunes, en cambio, registra los valores más bajos. Lunes de ánimo caído? Quizás no! Cada vez que visualizamos resúmenes de datos acumulados durante un período largo, es importante verificar que no se no esté escapando algo relacionado con el paso del tiempo. En este caso, la suma total por día de la semana podría estar ocultando diferencias claras entre distintos años. Peguemos una mirada, separando los registros por año:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;locationdf %&amp;gt;% 
   mutate(weekday = ordered(weekday, 
@@ -485,7 +485,7 @@ waffle(top5,
   theme_ipsum(grid=&amp;quot;Y&amp;quot;) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         axis.text.y=element_blank())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Queda claro que el gráfico anterior resultaba engañoso. Si los datos de Google son confiables, nuestro usuario ha ido variando sus ritmos diarios con los años. En 2012 (y en el 2016 también) su día de paseo era el domingo. En lo que va del 2017, la mayor actividad de caminata se registra los miércoles.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;identificando-lugares&#34; class=&#34;section level2&#34;&gt;
@@ -595,7 +595,7 @@ mapCountryData(toMap,
                oceanCol= &amp;quot;lightblue&amp;quot;, 
                missingCountryCol= &amp;quot;grey40&amp;quot;,
                mapTitle= &amp;quot;Estadía total (semanas)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Por último, tracemos una línea de tiempo que siga el derrotero de nuestro usuario. Es fácil detectar cuando se muda:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(timeline)
 
@@ -617,7 +617,7 @@ timeline(filter(estadias, tipo == &amp;quot;residencia&amp;quot;),
        subtitle = &amp;quot;Inferencia según registros de ubicación de Google&amp;quot;,
        caption = &amp;quot;cada punto representa una visita&amp;quot;) +
   theme(axis.text.y=element_blank())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-07-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Hay algunos problemas con esta visualización: La nube de puntos que representa ciudades visitadas es difícil de leer, e incluye en algunos casos la ciudad donde se supone que el usuario reside. Esto último se debe a que definimos una “visita” como cualquier estadía menor a un mes. Cuando el usuario pasa unas pocas semanas en su casa debido a viajes frecuentes, ese periodo aparece como si hubiera estado de visita en nuestro gráfico. De todas formas, para un puñado de líneas de código los resultados son interesantes, y de hecho permiten hacerse una buena idea de los desplazamientos del usuario. Y si lo vemos nosotros con tanta facilidad, desde ya que Google lo sabe desde hace tiempo.&lt;/p&gt;
 &lt;p&gt;En la parte II, vamos a hacer zoom a nivel ciudad para perseguir más a nuestro pobre usuario, tratando de identificar donde vive, donde trabaja y como cambia su conducta según el día de la semana. Pero todo con benévolas intenciones, por supuesto.&lt;/p&gt;
 &lt;/div&gt;

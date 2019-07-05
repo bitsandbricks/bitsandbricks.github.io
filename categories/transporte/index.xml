@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Transporte on Bits &amp; Bricks</title>
-    <link>https://bitsandbricks.github.io/categories/transporte/</link>
+    <link>/categories/transporte/</link>
     <description>Recent content in Transporte on Bits &amp; Bricks</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
     <lastBuildDate>Sat, 13 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://bitsandbricks.github.io/categories/transporte/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/categories/transporte/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Taxis en Buenos Aires: mapas claros y negocios turbios</title>
-      <link>https://bitsandbricks.github.io/post/taxis-en-buenos-aires-mapas-claros-y-negocios-turbios/</link>
+      <link>/post/taxis-en-buenos-aires-mapas-claros-y-negocios-turbios/</link>
       <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>https://bitsandbricks.github.io/post/taxis-en-buenos-aires-mapas-claros-y-negocios-turbios/</guid>
-      <description>&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leaflet/leaflet.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leaflet/leaflet.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leafletfix/leafletfix.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;link href=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leaflet-label/leaflet.label.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leaflet-label/leaflet.label.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/Proj4Leaflet/proj4-compressed.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/Proj4Leaflet/proj4leaflet.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leaflet-binding/leaflet.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leaflet-providers/leaflet-providers.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/leaflet-providers-plugin/leaflet-providers-plugin.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://bitsandbricks.github.io/rmarkdown-libs/HomeButton/home-button.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/HomeButton/home-button.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://bitsandbricks.github.io/rmarkdown-libs/HomeButton/easy-button-src.min.js&#34;&gt;&lt;/script&gt;
+      <guid>/post/taxis-en-buenos-aires-mapas-claros-y-negocios-turbios/</guid>
+      <description>&lt;script src=&#34;/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;/rmarkdown-libs/leaflet/leaflet.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;/rmarkdown-libs/leaflet/leaflet.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;/rmarkdown-libs/leafletfix/leafletfix.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;link href=&#34;/rmarkdown-libs/leaflet-label/leaflet.label.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;/rmarkdown-libs/leaflet-label/leaflet.label.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/Proj4Leaflet/proj4-compressed.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/Proj4Leaflet/proj4leaflet.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/leaflet-binding/leaflet.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/leaflet-providers/leaflet-providers.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/leaflet-providers-plugin/leaflet-providers-plugin.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;/rmarkdown-libs/HomeButton/home-button.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;/rmarkdown-libs/HomeButton/home-button.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/HomeButton/easy-button-src.min.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;Hace unos meses, durante la &lt;a href=&#34;http://smartcityexpobuenosaires.com/&#34;&gt;Smart City Expo en Buenos Aires&lt;/a&gt; se organizó un &lt;a href=&#34;https://www.eventbrite.com.ar/e/dataton-un-dia-en-las-ciudades-a-traves-de-sus-datos-tickets-37843936232#&#34;&gt;&lt;strong&gt;Datatón&lt;/strong&gt;&lt;/a&gt; bajo el título de “Un día en las ciudades a través de sus datos”. El evento fue organizado por los equipos de datos abiertos de la Nación, y la Ciudad y Provincia&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; de Buenos Aires.&lt;/p&gt;
@@ -41,7 +41,7 @@
 &lt;h2&gt;Information is beautiful&lt;/h2&gt;
 &lt;p&gt;Cuando vi pasar el dataset, lo primero que se me ocurrió fue visualizar todos los viajes a la vez, al estilo del mapa que hizo el MIT Senseable City Lab para &lt;a href=&#34;http://hubcab.org&#34;&gt;los taxis de Nueva York&lt;/a&gt;:&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://bitsandbricks.github.io/post/img/hubcab.jpg&#34; alt=&#34;hubcab.org&#34; /&gt;
+&lt;img src=&#34;/post/img/hubcab.jpg&#34; alt=&#34;hubcab.org&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;hubcab.org&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;En resumidas cuentas, obtuve lo que buscaba, y algo más. En un ejemplo de los patrones que son difíciles de detectar en una lista de números, pero resultan evidentes una vez visualizados, en mi mapa relucen rastros de lo que a los porteños nos gusta llamar “la mafia de los taxis”.&lt;/p&gt;
@@ -81,7 +81,7 @@ taxis &amp;lt;- taxis %&amp;gt;%
                size = 0.06, 
                alpha = .5) + 
   coord_map()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;La data es lo suficientemente densa como para que se entrevea la estructura vial de la ciudad. Excelente! Ahora vamos a refinar la visualización.&lt;/p&gt;
 &lt;ol start=&#34;3&#34; style=&#34;list-style-type: upper-roman&#34;&gt;
 &lt;li&gt;Separamos las coordenadas en “orígenes” (donde el taxi levantó pasajeros) y destinos, los lugares de llegada.&lt;/li&gt;
@@ -172,7 +172,7 @@ size_range = c(0.2, 0.4)&lt;/code&gt;&lt;/pre&gt;
     labs(title=&amp;quot;Taxis en Buenos Aires: origen y destino de viajes&amp;quot;,
          subtitle = &amp;quot;Mayo - agosto 2017&amp;quot;,
          caption = &amp;quot;fuente: dataset BA Taxi - Datatón Smart City Expo Buenos Aires&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;que-curioso&#34; class=&#34;section level2&#34;&gt;
@@ -193,7 +193,7 @@ size_range = c(0.2, 0.4)&lt;/code&gt;&lt;/pre&gt;
                    y = lat),
                alpha = 0.5,
                color = &amp;quot;indianred1&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Confirmado, el “misterioso” aglutinamiento de llegadas sin salidas ocurre en Aeroparque.&lt;/p&gt;
 &lt;p&gt;Ahora pidámosle a Google un mapa de “Estación de buses Retiro”:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;qmap(&amp;quot;Estación de buses Retiro, Buenos Aires&amp;quot;, zoom = 15, color = &amp;quot;bw&amp;quot;, scale = 2) +  
@@ -207,7 +207,7 @@ size_range = c(0.2, 0.4)&lt;/code&gt;&lt;/pre&gt;
                    y = lat),
                alpha = 0.5,
                color = &amp;quot;indianred1&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Es la estación nomás!&lt;/p&gt;
 &lt;p&gt;Vamos a la explicación. Por si alguno no lo sabía, es &lt;em&gt;vox populi&lt;/em&gt; que en Aeroparque y Retiro operan &lt;a href=&#34;http://www.lanacion.com.ar/2027084-nadie-controla-las-paradas-de-taxis-del-aeroparque-pese-a-las-denuncias-por-irregularidades&#34;&gt;grupos de taxistas confabulados&lt;/a&gt; que toman control del área para su uso exclusivo. Quienes pagan por el privilegio, pueden trabajar allí. Los taxistas que no forman parte del negocio e intentan llevarse pasajeros son amenazados o sometidos a violencia para dejar claro que la regla es férrea. Debido a la virtual ausencia de viajes vía BA Taxi que parten desde allí, podemos asumir que los taxistas que trabajan con la app ignoran (por su propio bien!) a los pasajeros que los convocan desde los territorios calientes. La abundancia de puntos rojos demuestra que los choferes de BA Taxi visitan seguido los sitios, dejando pasajeros, pero no se atreven a ir a buscarlos allí.&lt;/p&gt;
 &lt;p&gt;Dicho esto, algunos puntitos verdes que asoman en ambos sitios sugieren el accionar de taxistas osados -o muy distraídos- que se han llevado pasajeros en las narices de la mafia.&lt;/p&gt;
@@ -233,7 +233,7 @@ geo_data &amp;lt;- taxis_destinos %&amp;gt;%
 
 plot(geo_data[&amp;quot;tipo&amp;quot;], col = c(&amp;quot;aquamarine&amp;quot;, &amp;quot;indianred1&amp;quot;), 
      key.pos = NULL, main = &amp;quot;salidas en verde, llegadas en rojo&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Se evidencia un pequeño problema: Existen varios viajes que terminan fuera de los límites de la Ciudad. Sólo nos interesan viajes dentro de sus fronteras, ya que fuera de ellas es natural que existan más llegadas que salidas, asumiendo que los pasajeros que hacen el camino inverso tenderán a utilizar servicios de taxi locales que no son registrados en el dataset de BA Taxi.&lt;/p&gt;
 &lt;p&gt;No hay problema. Leemos el archivo que contiene los límites de los &lt;a href=&#34;https://data.buenosaires.gob.ar/dataset/barrios&#34;&gt;barrios de Buenos Aires&lt;/a&gt; (también cortesía de Buenos Aires Data) y lo “disolvemos” para que nos quede un sólo polígono que representa la superficie de la ciudad.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;limites_CABA &amp;lt;- st_read(&amp;#39;../data/barrios/barrios_badata.shp&amp;#39;) %&amp;gt;% 
@@ -249,7 +249,7 @@ plot(geo_data[&amp;quot;tipo&amp;quot;], col = c(&amp;quot;aquamarine&amp;quot;,
 ## epsg (SRID):    NA
 ## proj4string:    +proj=tmerc +lat_0=-34.6297166 +lon_0=-58.4627 +k=0.9999980000000001 +x_0=100000 +y_0=100000 +ellps=intl +units=m +no_defs&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(limites_CABA)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Ahora combinamos nuestra data de taxis con la silueta de la ciudad, y filtramos el resultado para descartar los puntos que cae fuera de los límites.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;geo_data &amp;lt;- geo_data %&amp;gt;% 
     st_join(limites_CABA) %&amp;gt;% 
@@ -257,7 +257,7 @@ plot(geo_data[&amp;quot;tipo&amp;quot;], col = c(&amp;quot;aquamarine&amp;quot;,
 
 plot(geo_data[&amp;quot;tipo&amp;quot;], col = c(&amp;quot;aquamarine&amp;quot;, &amp;quot;indianred1&amp;quot;), 
      key.pos = NULL, main = &amp;quot;salidas en verde, llegadas en rojo&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;720&#34; /&gt; &lt;em&gt;Voilà!&lt;/em&gt;. Ahora creamos la grilla…&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;720&#34; /&gt; &lt;em&gt;Voilà!&lt;/em&gt;. Ahora creamos la grilla…&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;grilla &amp;lt;- geo_data %&amp;gt;% 
     st_make_grid(what = &amp;quot;polygons&amp;quot;, n = c(20, 20)) %&amp;gt;%
     st_sf() %&amp;gt;%
@@ -266,7 +266,7 @@ plot(geo_data[&amp;quot;tipo&amp;quot;], col = c(&amp;quot;aquamarine&amp;quot;,
 
 plot(geo_data[&amp;quot;tipo&amp;quot;], col = c(&amp;quot;aquamarine&amp;quot;, &amp;quot;indianred1&amp;quot;), key.pos = NULL, main = NULL) 
 plot(st_geometry(grilla), add = T)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;… y asociamos a cada par de coordenadas con la celda donde cae:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tasa_destino_origen &amp;lt;- geo_data %&amp;gt;% 
     st_join(grilla) %&amp;gt;% 
@@ -292,7 +292,7 @@ plot(st_geometry(grilla), add = T)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Antes de hacer cuentas, volvamos a anticipar los resultados con una visualización. Cómo se ve en el mapa la tasa origen/destino de cada zona de la ciudad?&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(tasa_destino_origen[&amp;quot;tasa&amp;quot;], 
      main = &amp;quot;Viajes de BA Taxi por zona: cantidad de llegadas por cada salida&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Oh si, esto salió bien. Aeroparque brilla como material radioactivo. Retiro, si bien está lejos en intensidad, también se distingue de sus alrededores.&lt;/p&gt;
 &lt;p&gt;Ahora si, los números. Filtremos la data para extraer las celdas donde la tasa es desproporcionada, eligiendo un piso (arbitrario) de 10 salidas por cada llegada.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;outliers &amp;lt;- tasa_destino_origen %&amp;gt;% 
@@ -317,7 +317,7 @@ outliers&lt;/code&gt;&lt;/pre&gt;
 ## 5 45       12  11.0 (-58.49042 -34.6756, -58.49033 -34.67566, -58.48972 -…&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Son sólo cinco áreas, de las cuales dos registran una cantidad de viajes un orden de magnitud mayor a las demás: IDs 353 y 277, que -como podemos comprobar- corresponden en efecto a Aeroparque y Retiro:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(outliers[&amp;quot;ID&amp;quot;])&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-20-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-20-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;De éste modo hemos medido el efecto de la mafia en las zonas donde operan, al menos en lo que respecta a los viajes registrados por BA Taxi. En los alrededores de Aeroparque, la tasa es de 88,25: por cada 88 taxistas que terminan un viaje allí, apenas 2 logran llevarse pasajeros. En retiro, la tasa es de casi 23 llegadas por cada salida.&lt;/p&gt;
 &lt;p&gt;Para ponerlo en perspectiva, el promedio de la ciudad es de 2,7:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean(tasa_destino_origen$tasa)&lt;/code&gt;&lt;/pre&gt;
@@ -337,7 +337,7 @@ outliers&lt;/code&gt;&lt;/pre&gt;
   geom_label(data = data.frame(x = c(mean(tasa_destino_origen$tasa), 22.89, 88.25),
                                y = rep(40, 3)),
              aes(x, y, label = c(&amp;quot;Media BA&amp;quot;, &amp;quot;Retiro&amp;quot;, &amp;quot;Aeroparque&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-22-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-01-13-taxis-en-buenos-aires-mapas-claros-y-negocios-turbios_files/figure-html/unnamed-chunk-22-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;por-ultimo-que-pasa-con-las-otras-tres-zonas-donde-los-taxis-dejan-pasajeros-pero-rara-vez-los-van-a-buscar&#34; class=&#34;section level2&#34;&gt;

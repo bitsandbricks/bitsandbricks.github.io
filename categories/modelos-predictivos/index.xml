@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Modelos Predictivos on Bits &amp; Bricks</title>
-    <link>https://bitsandbricks.github.io/categories/modelos-predictivos/</link>
+    <link>/categories/modelos-predictivos/</link>
     <description>Recent content in Modelos Predictivos on Bits &amp; Bricks</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
     <lastBuildDate>Tue, 27 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://bitsandbricks.github.io/categories/modelos-predictivos/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/categories/modelos-predictivos/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Predicción de demanda de servicios urbanos con open data &#43; Facebook Prophet</title>
-      <link>https://bitsandbricks.github.io/post/prediccion-de-demanda-de-servicios-urbanos-con-prophet/</link>
+      <link>/post/prediccion-de-demanda-de-servicios-urbanos-con-prophet/</link>
       <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>https://bitsandbricks.github.io/post/prediccion-de-demanda-de-servicios-urbanos-con-prophet/</guid>
+      <guid>/post/prediccion-de-demanda-de-servicios-urbanos-con-prophet/</guid>
       <description>&lt;p&gt;De todos los datasets que publica el portal de Open Data de Buenos Aires, mi favorito es sin dudas el que contiene los reclamos registrados por el Sistema Único de Atención Ciudadana (SUACI). El SUACI, también llamado &lt;a href=&#34;https://gestioncolaborativa.buenosaires.gob.ar/prestaciones&#34;&gt;BA 147&lt;/a&gt;, equivale a lo que en otras latitudes se conoce como &lt;a href=&#34;https://en.wikipedia.org/wiki/3-1-1&#34;&gt;servicio 311&lt;/a&gt;. El 311 es el número telefónico, complementado por un servicio web y en general una app también, al que los ciudadanos recurren para realizar reclamos al gobierno de la ciudad. En contraste con el servicio 911, el 311 (o 147 en Buenos Aires) se utiliza para reportar problemas que no involucran urgencias de salud o seguridad. Por ejemplo, si la cuadra de uno aparece llena de basura después de un evento multitudinario en las cercanías, se llama al 147 o se usa la app para que la ciudad envíe una cuadrilla de limpieza. En cambio, si una persona sufre un infarto en la vía pública, se llama al 911.&lt;/p&gt;
 &lt;p&gt;Si esto les resulta un poco confuso, no se preocupen, nos es culpa nuestra; hay un ligero exceso de nombres distintos para cosas similares. Los nombres SUACI y BA 147 coexisten porque -creo- SUACI registra las solicitudes al 147 pero también reclamos enviados a la ciudad por otros medios. En cuanto a 311 vs. 147, la popularidad de 311 como número para reclamos aún muy lejos del archifamoso 911. Por eso muchas ciudades en el mundo, BA incluida, coinciden en usar el 911 para emergencias pero varían en el número reservado para reclamos cotidianos.&lt;/p&gt;
 &lt;p&gt;Lo interesante de los servicios tipo 311 es que, cuando sus registros se comparten con el público, permiten hacer estudios sobre muchas facetas de la ciudad. Por ejemplo, &lt;a href=&#34;http://blog.datalook.io/using-data-analytics-to-make-bad-buildings-better-in-new-york-city/&#34;&gt;identificar edificios peligrosos por su deterioro&lt;/a&gt;, o probar que las “fronteras” entre comunidades distintas dentro de la ciudad &lt;a href=&#34;https://nextcity.org/daily/entry/311-calls-neighborhood-study&#34;&gt;generan más reclamos que áreas homogéneas&lt;/a&gt;.&lt;/p&gt;
@@ -107,7 +107,7 @@ ggplot(solicitudes_saneamiento, aes(as.Date(dia), total)) +
        title=&amp;quot;Demanda diaria de servicios de saneamiento urbano&amp;quot;,
        subtitle = &amp;quot;Ciudad de Buenos Aires: 2011 - 2016&amp;quot;,
        caption = &amp;quot;Fuente: https://data.buenosaires.gob.ar/&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;A primera vista, es obvio que los datos están sesgados, ya que la explosión en el número de solicitudes a partir de mediados del 2012 es atribuible a la forma en que la ciudad empezó a tomar nota de los reclamos, más que a un furor ciudadano por solicitar limpieza. Cuando hagamos nuestro modelo, vamos a descartar los registros de 2011 y 2012 porque tenemos claro que no son representativos.&lt;/p&gt;
 &lt;p&gt;El siguiente ingrediente que necesitamos es una lista de los feriados públicos en la Argentina durante el período analizado.&lt;/p&gt;
 &lt;/div&gt;
@@ -116,7 +116,7 @@ ggplot(solicitudes_saneamiento, aes(as.Date(dia), total)) +
 &lt;p&gt;Buscar una lista oficial de feriados resultó en frustración. Si bien el gobierno nacional publica una lista de los &lt;a href=&#34;https://www.argentina.gob.ar/feriados&#34;&gt;feriados vigentes para el año en curso&lt;/a&gt;, no existe un archivo para descargar con las fechas exactas de los feriados en años anteriores.&lt;/p&gt;
 &lt;p&gt;En los sitios web de varios diarios locales encontramos un historial de feriados, pero dispersos en distintas páginas web, y sin opción para descargarlos en un archivo de texto. Vamos a tener que “scrapear” la data. Cómo nos hacen laburar, che. Si tan solo alguien nos diera una API para toda información de consulta permanente, no tendríamos que hacer estas cosas!&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://bitsandbricks.github.io/post/img/API.png&#34; alt=&#34;ira&#34; /&gt;
+&lt;img src=&#34;/post/img/API.png&#34; alt=&#34;ira&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;ira&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Nuestro proveedor de fechas de feriados será La Nación, que publica un bonito &lt;a href=&#34;http://servicios.lanacion.com.ar/feriados/&#34;&gt;calendario de feriados oficiales&lt;/a&gt;, con la posibilidad de consultar los de años anteriores.&lt;/p&gt;
@@ -229,13 +229,13 @@ modelo &amp;lt;- solicitudes_saneamiento %&amp;gt;%
 &lt;li&gt;&lt;p&gt;Los meses de mayor actividad son los de la segunda mitad del año. Durante las vacaciones de invierno se observa una baja de la demanda, leve en comparación a la de fin de año…. a partir de mediados de Diciembre, la demanda cae en picada, y se mantiene mínima en Enero.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;prophet_plot_components(modelo, forecast) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Y por último, trazamos la predicción de nivel de demanda para lo que queda del año:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(modelo, forecast) + theme_ipsum() +
   labs(y = &amp;quot;solicitudes&amp;quot;, x = &amp;quot;fecha&amp;quot;,
        title=&amp;quot;Pronóstico: demanda diaria de servicios de saneamiento urbano&amp;quot;,
        subtitle = &amp;quot;Ciudad de Buenos Aires: 2013 - 2016, extendido a final del 2017&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://bitsandbricks.github.io/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Yo diría que, a no ser que esté operando con capacidad de sobra, Saneamiento Urbano va a necesitar más recursos!&lt;/p&gt;
 &lt;p&gt;Para la próxima: hacer análisis espacial además del temporal.&lt;/p&gt;
 &lt;/div&gt;
