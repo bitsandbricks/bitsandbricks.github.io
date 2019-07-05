@@ -224,8 +224,8 @@ ga('send', 'pageview');
       <article role="main" class="blog-post">
         <div id="el-algoritmo-dbscan" class="section level2">
 <h2>El algoritmo DBSCAN</h2>
-<p>DBSCAN es un algoritmo de machine learning diseñado para detectar en forma automática “clusters”, es decir elementos próximos entre si de acuerdo a sus atributos en varias dimensiones.</p>
-<p>A diferencia de otros algoritmos de clustering como <em>KMeans</em>, DBSCAN resulta muy adecuado para buscar patrones de agrupación en el espacio físico. Por ejemplo, en la distribución espacial de actividades humanas.</p>
+<p>DBSCAN es un algoritmo de <em>machine learning</em> diseñado para detectar en forma automática “clusters”, es decir elementos próximos entre si de acuerdo a sus atributos en varias dimensiones.</p>
+<p>A diferencia de otros algoritmos de <em>clustering</em> como <em>KMeans</em>, DBSCAN resulta muy adecuado para buscar patrones de agrupación en el espacio físico. Por ejemplo, en la distribución espacial de actividades humanas.</p>
 <p>Como se ilustra debajo, entre varias alternativas DBSCAN es la única cuyos resultados aproximan los de un analista humano que estuviera clasificando puntos aglomerados en un mapa (<a href="https://www.hipparchus.org/hipparchus-clustering/">fuente</a>).</p>
 <p><img src="https://www.hipparchus.org/hipparchus-clustering/images/userguide/cluster_comparison.png" width="100%" /></p>
 <p>Pongámoslo a trabajar entonces, para identificar los centros comerciales (y de otros tipos de actividad) en la ciudad de Mendoza y sus alrededores. Un ejercicio como este, si se repitiera con cierta frecuencia, permitiría detectar la aparición, desplazamiento o desaparición de distintos centros de actividad especializada en la ciudad: zonas con oferta concentrada de bares, de servicios profesionales, de tiendas de bicicletas o lo que fuere.</p>
@@ -279,14 +279,14 @@ head(mdz_poi)</code></pre>
 ##  9 cultura   museum              55
 ## 10 educacion school             890
 ## # … with 83 more rows</code></pre>
-<p>Los datos fueron compildos a mediados del 2017, a partir de consultas a la base de <a href="https://cloud.google.com/maps-platform/places/?&amp;sign=0">Google Places</a>. Google Places es la base de datos donde Google registra información sobre puntos de interés (comercios, prestadores de servicios, terminales de transporte y un largo etcétera) en cualquier parte del mundo. La forma habitual de acceder a partes de esta información es mediante la Google Maps, desde un navegador o una app de smartphone, pero también es posible consultar la base de forma automatizada, la forma en la cual se relevaron las datos que estamos usando.</p>
+<p>Los datos fueron compilados a mediados del 2017, a partir de consultas a la base de <a href="https://cloud.google.com/maps-platform/places/?&amp;sign=0">Google Places</a>. Google Places es la base de datos donde Google registra información sobre puntos de interés (comercios, prestadores de servicios, terminales de transporte y un largo etcétera) en cualquier parte del mundo. La forma habitual de acceder a partes de esta información es mediante la Google Maps, desde un navegador o una app de <em>smartphone</em>, pero también es posible consultar la base de forma automatizada, el modo con el cual se relevaron las datos que estamos usando.</p>
 </div>
 <div id="implementando-dbscan" class="section level2">
 <h2>Implementando DBSCAN</h2>
-<p>Para practicar, empecemor por detectar clusters de bares.</p>
+<p>Para practicar, empecemos por detectar clusters de bares.</p>
 <div id="i.-realizar-una-matriz-de-distancias" class="section level3">
 <h3>I. Realizar una matriz de distancias</h3>
-<p>El primer paso para aplicar el algorimto es obtener una matriz con la distancia que media entre todos los puntos a analiar. Dado que trabajamos con lugares situados sobre la superficie terrestre, debemos calcular distancias geográficas; es decir, tomar en cuenta la curvatura de la superficie. Para ellos podemos usar la función <code>distm()</code> del paquete <code>geosphere</code>.</p>
+<p>El primer paso para aplicar el algoritmo es obtener una matriz con la distancia que media entre todos los puntos a analizar. Dado que trabajamos con lugares situados sobre la superficie terrestre, debemos calcular distancias geográficas; es decir, tomar en cuenta la curvatura de la superficie. Para ellos podemos usar la función <code>distm()</code> del paquete <code>geosphere</code>.</p>
 <p>Veamos como lucen nuestros bares en el mapa:</p>
 <pre class="r"><code>mdz_bares &lt;- mdz_poi %&gt;% 
     filter(tipo == &quot;bar&quot;)
@@ -311,19 +311,19 @@ ggmap(mendoza) +
 </div>
 <div id="ii.-definir-parametros" class="section level3">
 <h3>II. Definir parámetros</h3>
-<p>Con la matriz de distancias a mano, es hora de decisiones. Tenemos que fijar dos parámetros, con el fin de indentificar zonas densas, medidas por la cantidad de objetos cercanos a cualquier punto dado:</p>
+<p>Con la matriz de distancias a mano, es hora de decisiones. Tenemos que fijar dos parámetros, con el fin de identificar zonas densas, medidas por la cantidad de objetos cercanos a cualquier punto dado:</p>
 <ul>
 <li><em>epsilon</em> es el radio de “vecindad” en torno a un punto.</li>
 <li><em>minPts</em> es la cantidad mínima de vecinos dentro del radio <em>epsilon</em> que alcanzan para definir a ese punto como miembro de un cluster</li>
 </ul>
 <p>((fuente)[<a href="http://www.sthda.com/english/wiki/print.php?id=246#concepts-of-density-based-clustering" class="uri">http://www.sthda.com/english/wiki/print.php?id=246#concepts-of-density-based-clustering</a>])</p>
 <p><img src="http://www.sthda.com/sthda/RDoc/images/dbscan-principle.png" /><!-- --></p>
-<p>En (a) vemos a <em>x</em>, un punto “núcleo”(<em>core</em>). Son puntos “núcleo” aquellos que dentro de su radio <em>epsilon</em> tienen la cantidad mínima de vecinos definida como minPts. En (b) vemos tambiéb a <em>y</em> y a <em>z</em>. <em>y</em> es un punto “borde” porque su cantiadad de vecinos es menor a minPts, pero de todas formas se encuentra en la vecindad de un punto núcleo. Los puntos núcleo y brode que comparten vecindad son parte del mismo clúster. <em>z</em> es considerado “ruido” ya que no es núcleo ni borde, y por tanto no pertenece a un cluster.</p>
-<p>Ahora bien, ¿cómo decidimos que cantidad es buena para minPts, y que distancia para <em>epsilon</em>? No hay receta infalible. Depende de cada caso, y se pueden encontrar por prueba y error. Para nuestro problema, decidamoslo así: vamos a considerar como cluster aquellas zonas donde, en un radio de una cuadra a la redonda de un bar dado (1 cuadra = 128 m, le), se encuentren al menos otros 5 bares. Tendremos entonces <em>epsilon</em> = 128 y minPts = 5.</p>
+<p>En (a) vemos a <em>x</em>, un punto “núcleo”(<em>core</em>). Son puntos “núcleo” aquellos que dentro de su radio <em>epsilon</em> tienen la cantidad mínima de vecinos definida como minPts. En (b) vemos también a <em>y</em> y a <em>z</em>. <em>y</em> es un punto “borde” porque su cantidad de vecinos es menor a minPts, pero de todas formas se encuentra en la vecindad de un punto núcleo. Los puntos núcleo y borde que comparten vecindad son parte del mismo cluster. <em>z</em> es considerado “ruido” ya que no es núcleo ni borde, y por tanto no pertenece a un cluster.</p>
+<p>Ahora bien, ¿cómo decidimos que cantidad es buena para minPts, y que distancia para <em>epsilon</em>? No hay receta infalible. Depende de cada caso, y se pueden encontrar por prueba y error. Para nuestro problema, decidámoslo así: vamos a considerar como cluster aquellas zonas donde, en un radio de una cuadra (128 metros) a la redonda de un bar dado, se encuentren al menos otros 5 bares. Tendremos entonces <em>epsilon</em> = 128 y minPts = 5.</p>
 </div>
 <div id="iii.-aplicar-el-algoritmo" class="section level3">
 <h3>III. Aplicar el algoritmo</h3>
-<p>Alla vamos:</p>
+<p>Allá vamos:</p>
 <pre class="r"><code>clusters &lt;- dbscan(distancias, eps = 128, minPts = 5)
 
 clusters</code></pre>
@@ -335,7 +335,7 @@ clusters</code></pre>
 ## 207   8  43   6   6  22   6  12   6   5 
 ## 
 ## Available fields: cluster, eps, minPts</code></pre>
-<p>Con nuestras reglas, encontramos 9 clusteres en la ciudad. Los bares cuyo valor asignado es 0 son “ruido”, los que no pertenecen a ningún cluster.</p>
+<p>Con nuestras reglas, encontramos 9 clusters en la ciudad. Los bares cuyo valor asignado es 0 son “ruido”, los que no pertenecen a ningún cluster.</p>
 <div id="iv.-visualizar-los-resultados" class="section level4">
 <h4>IV. Visualizar los resultados</h4>
 <p>Agreguemos a cada bar el cluster que le corresponde:</p>
@@ -359,8 +359,8 @@ ggmap(mendoza) +
 <div id="automatizando-la-deteccion" class="section level2">
 <h2>Automatizando la detección</h2>
 <p>Vamos a crear una función que realice todos los pasos que vimos antes: realizar la matriz de distancia, fijar los parámetros de DBSCAN, aplicar el algoritmo, y agregar los identificadores de cluster a la data original.</p>
-<p>Ya que vamos a lidiar con categorías generales (por ejemplo “servicios” incluye de todo, desde dentistas a funerarias) vamos a ponernos exigentes con los parámetros. Consideraremos que un punto pertenece a un cluster de actividad cuando tiene al menos 25 vecinos en una cuadra a la redonda. Con algunas excepciones: para banca, cultura, culto, educacion, entretenimiento, espacios_verdes, gobierno_y_serv_publicos, y “salud” dejaremos en 5 al umbral, ya que se trata de sitios de mayor “peso”. Seis bares en estrecha proximidad no representan una agrupación notable, pero con seis sedes de la administración pública, o seis museos, ya hablaríamos un centro de actividad.</p>
-<p>Si no elegimos un valor par minPts, nuestra función se encargará de verificar el tipo de categoría a la que corresponden los puntos, y fijar el parámetro en forma acorde.</p>
+<p>Ya que vamos a lidiar con categorías generales (por ejemplo “servicios” incluye de todo, desde dentistas a funerarias) vamos a ponernos exigentes con los parámetros. Consideraremos que un punto pertenece a un cluster de actividad cuando tiene al menos 25 vecinos en una cuadra a la redonda. Con algunas excepciones: para banca, cultura, culto, educación, entretenimiento, espacios_verdes, gobierno_y_serv_publicos y salud, dejaremos en 5 al umbral. Estos son sitios de mayor “peso”. Seis bares en estrecha proximidad no representan una agrupación notable, pero con seis sedes de la administración pública, o seis museos, ya hablaríamos un centro de actividad.</p>
+<p>Si bien permite especificar minPts si lo quisiéramos, nuestra función se encargará de verificar el tipo de categoría a la que corresponden los puntos, y fijar el parámetro en forma acorde.</p>
 <pre class="r"><code>assign_clusters &lt;- function(poi_df, minPts = NA) {
     
     # Para ciertas categorias, como educacion o salud, consideramos que a partir de n = 5 ya se 
@@ -398,7 +398,7 @@ ggmap(mendoza) +
 <h2>Producto final: un gráfico facetado por categoría con todos los clusters hallados</h2>
 <p>Antes de llevar los resultados al mapa, extraigamos para cada cluster su <em>convex hull</em>.</p>
 <p><img src="https://miro.medium.com/max/1016/1*F4IUmOJbbLMJiTgHxpoc7Q.png" /><!-- --></p>
-<p>La “envolvente convexa” de un cluster no es otra cosa que un polígono que encierra todos sus puntos. La idea us usarlas para mostrar en el mapa la extensión de las áreas que hemos identificado como centros de actividad.</p>
+<p>La “envolvente convexa” de un cluster no es otra cosa que un polígono que encierra todos sus puntos. La idea es usarlas para mostrar en el mapa la extensión de las áreas que hemos identificado como centros de actividad.</p>
 <pre class="r"><code>get_hull&lt;- function(df) {
     
     cbind(df$lng, df$lat) %&gt;% 
@@ -424,6 +424,11 @@ mdz_cluster_hulls &lt;- mdz_poi %&gt;%
     split(.$categoria) %&gt;% 
     map(hulls) %&gt;% 
     reduce(rbind) </code></pre>
+<p>Lo que hemos obtenido con el paso previo es una serie de polígonos, que representan las envolventes de los clusters que hallamos. Si echamos un vistazo, notamos que la venta al público (retail) es la actividad dominante, seguida de servicios -muy razonable.</p>
+<pre class="r"><code>ggplot(mdz_cluster_hulls) + 
+  geom_sf(aes(fill = categoria), alpha = .7, color = NA)</code></pre>
+<p><img src="/post/2019-07-05-dbscan-machine-learning-para-detectar-centros-de-actividad-urbana.es_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Y por último, todos los ingredientes previos -mapa base, PoI, clusters, envolventes- en una visualización:</p>
 <pre class="r"><code>#Para reducir la cantidad de etiquetas
 hulls_por_cat &lt;- mdz_cluster_hulls %&gt;% 
     group_by(categoria) %&gt;% 
@@ -451,7 +456,7 @@ ggmap(mendoza) +
           axis.text.y = element_blank(),
           axis.ticks = element_blank()) +
     guides(colour = FALSE)</code></pre>
-<p><img src="/post/2019-07-05-dbscan-machine-learning-para-detectar-centros-de-actividad-urbana.es_files/figure-html/unnamed-chunk-17-1.png" width="768" /></p>
+<p><img src="/post/2019-07-05-dbscan-machine-learning-para-detectar-centros-de-actividad-urbana.es_files/figure-html/unnamed-chunk-18-1.png" width="768" /></p>
 </div>
 
       </article>
