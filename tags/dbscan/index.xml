@@ -18,14 +18,11 @@
       <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
       <guid>/post/dbscan-machine-learning-para-detectar-centros-de-actividad-urbana/</guid>
-      <description>&lt;div id=&#34;el-algoritmo-dbscan&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;El algoritmo DBSCAN&lt;/h2&gt;
-&lt;p&gt;DBSCAN es un algoritmo de &lt;em&gt;machine learning&lt;/em&gt; diseñado para detectar en forma automática “clusters”, es decir elementos próximos entre si de acuerdo a sus atributos en varias dimensiones.&lt;/p&gt;
+      <description>&lt;p&gt;DBSCAN es un algoritmo de &lt;em&gt;machine learning&lt;/em&gt; diseñado para detectar en forma automática “clusters”, es decir elementos próximos entre si de acuerdo a sus atributos en varias dimensiones.&lt;/p&gt;
 &lt;p&gt;A diferencia de otros algoritmos de &lt;em&gt;clustering&lt;/em&gt; como &lt;em&gt;KMeans&lt;/em&gt;, DBSCAN resulta muy adecuado para buscar patrones de agrupación en el espacio físico. Por ejemplo, en la distribución espacial de actividades humanas.&lt;/p&gt;
 &lt;p&gt;Como se ilustra debajo, entre varias alternativas DBSCAN es la única cuyos resultados aproximan los de un analista humano que estuviera clasificando puntos aglomerados en un mapa ((fuente)[&lt;a href=&#34;https://www.hipparchus.org/hipparchus-clustering/&#34; class=&#34;uri&#34;&gt;https://www.hipparchus.org/hipparchus-clustering/&lt;/a&gt;]).&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://www.hipparchus.org/hipparchus-clustering/images/userguide/cluster_comparison.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Pongámoslo a trabajar entonces, para identificar los centros comerciales (y de otros tipos de actividad) en la ciudad de Mendoza y sus alrededores. Un ejercicio como este, si se repitiera con cierta frecuencia, permitiría detectar la aparición, desplazamiento o desaparición de distintos centros de actividad especializada en la ciudad: zonas con oferta concentrada de bares, de servicios profesionales, de tiendas de bicicletas o lo que fuere.&lt;/p&gt;
-&lt;/div&gt;
 &lt;div id=&#34;paquetes-a-utilizar&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Paquetes a utilizar&lt;/h2&gt;
 &lt;p&gt;Los herramientas generales de Tidyverse, siempre útiles para el proceso general de análisis de datos:&lt;/p&gt;
