@@ -313,8 +313,8 @@ ggmap(mendoza) +
 <li><em>epsilon</em> es el radio de “vecindad” en torno a un punto.</li>
 <li><em>minPts</em> es la cantidad mínima de vecinos dentro del radio <em>epsilon</em> que alcanzan para definir a ese punto como miembro de un cluster</li>
 </ul>
-<p>((fuente)[<a href="http://www.sthda.com/english/wiki/print.php?id=246#concepts-of-density-based-clustering" class="uri">http://www.sthda.com/english/wiki/print.php?id=246#concepts-of-density-based-clustering</a>])</p>
-<p><img src="http://www.sthda.com/sthda/RDoc/images/dbscan-principle.png" /><!-- --></p>
+<p><img src="http://www.sthda.com/sthda/RDoc/images/dbscan-principle.png" /><!-- -->
+(fuente <a href="http://www.sthda.com/english/wiki/print.php?id=246#concepts-of-density-based-clustering">aquí</a>)</p>
 <p>En (a) vemos a <em>x</em>, un punto “núcleo”(<em>core</em>). Son puntos “núcleo” aquellos que dentro de su radio <em>epsilon</em> tienen la cantidad mínima de vecinos definida como minPts. En (b) vemos también a <em>y</em> y a <em>z</em>. <em>y</em> es un punto “borde” porque su cantidad de vecinos es menor a minPts, pero de todas formas se encuentra en la vecindad de un punto núcleo. Los puntos núcleo y borde que comparten vecindad son parte del mismo cluster. <em>z</em> es considerado “ruido” ya que no es núcleo ni borde, y por tanto no pertenece a un cluster.</p>
 <p>Ahora bien, ¿cómo decidimos que cantidad es buena para minPts, y que distancia para <em>epsilon</em>? No hay receta infalible. Depende de cada caso, y se pueden encontrar por prueba y error. Para nuestro problema, decidámoslo así: vamos a considerar como cluster aquellas zonas donde, en un radio de una cuadra (128 metros) a la redonda de un bar dado, se encuentren al menos otros 5 bares. Tendremos entonces <em>epsilon</em> = 128 y minPts = 5.</p>
 </div>

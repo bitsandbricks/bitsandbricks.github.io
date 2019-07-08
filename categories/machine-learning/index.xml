@@ -108,8 +108,8 @@ ggmap(mendoza) +
 &lt;li&gt;&lt;em&gt;epsilon&lt;/em&gt; es el radio de “vecindad” en torno a un punto.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;minPts&lt;/em&gt; es la cantidad mínima de vecinos dentro del radio &lt;em&gt;epsilon&lt;/em&gt; que alcanzan para definir a ese punto como miembro de un cluster&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;((fuente)[&lt;a href=&#34;http://www.sthda.com/english/wiki/print.php?id=246#concepts-of-density-based-clustering&#34; class=&#34;uri&#34;&gt;http://www.sthda.com/english/wiki/print.php?id=246#concepts-of-density-based-clustering&lt;/a&gt;])&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://www.sthda.com/sthda/RDoc/images/dbscan-principle.png&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.sthda.com/sthda/RDoc/images/dbscan-principle.png&#34; /&gt;&lt;!-- --&gt;
+(fuente &lt;a href=&#34;http://www.sthda.com/english/wiki/print.php?id=246#concepts-of-density-based-clustering&#34;&gt;aquí&lt;/a&gt;)&lt;/p&gt;
 &lt;p&gt;En (a) vemos a &lt;em&gt;x&lt;/em&gt;, un punto “núcleo”(&lt;em&gt;core&lt;/em&gt;). Son puntos “núcleo” aquellos que dentro de su radio &lt;em&gt;epsilon&lt;/em&gt; tienen la cantidad mínima de vecinos definida como minPts. En (b) vemos también a &lt;em&gt;y&lt;/em&gt; y a &lt;em&gt;z&lt;/em&gt;. &lt;em&gt;y&lt;/em&gt; es un punto “borde” porque su cantidad de vecinos es menor a minPts, pero de todas formas se encuentra en la vecindad de un punto núcleo. Los puntos núcleo y borde que comparten vecindad son parte del mismo cluster. &lt;em&gt;z&lt;/em&gt; es considerado “ruido” ya que no es núcleo ni borde, y por tanto no pertenece a un cluster.&lt;/p&gt;
 &lt;p&gt;Ahora bien, ¿cómo decidimos que cantidad es buena para minPts, y que distancia para &lt;em&gt;epsilon&lt;/em&gt;? No hay receta infalible. Depende de cada caso, y se pueden encontrar por prueba y error. Para nuestro problema, decidámoslo así: vamos a considerar como cluster aquellas zonas donde, en un radio de una cuadra (128 metros) a la redonda de un bar dado, se encuentren al menos otros 5 bares. Tendremos entonces &lt;em&gt;epsilon&lt;/em&gt; = 128 y minPts = 5.&lt;/p&gt;
 &lt;/div&gt;
