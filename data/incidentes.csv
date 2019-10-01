@@ -1,0 +1,4 @@
+Location,Title,direccion,casos
+"{ ""Address"": ""Nicaragua 6025, C1414 Buenos Aires, Argentina"", ""Business Name"": ""Birkin Nicaragua"", ""Country Code"": ""AR"", ""Geo Coordinates"": { ""Latitude"": ""-34.5781309"", ""Longitude"": ""-58.4379201"" } }",Birkin Nicaragua,Nicaragua 6025,16
+"{ ""Address"": ""Maipú 979, C1006ACM CABA, Argentina"", ""Business Name"": ""SHOUT Café & Espresso Bar"", ""Country Code"": ""AR"", ""Geo Coordinates"": { ""Latitude"": ""-34.5965869"", ""Longitude"": ""-58.3768934"" } }",Shout | Café & Espresso Bar,Maipú 979,5
+"{ ""Address"": ""Maipú 745, C1006 CABA, Argentina"", ""Business Name"": ""Edison Café"", ""Country Code"": ""AR"", ""Geo Coordinates"": { ""Latitude"": ""-34.5994169"", ""Longitude"": ""-58.3769180"" } }",Edison Café,Maipú 745,1
