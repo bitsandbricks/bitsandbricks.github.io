@@ -1,4 +1,78 @@
-Location,Title,direccion,casos
-"{ ""Address"": ""Nicaragua 6025, C1414 Buenos Aires, Argentina"", ""Business Name"": ""Birkin Nicaragua"", ""Country Code"": ""AR"", ""Geo Coordinates"": { ""Latitude"": ""-34.5781309"", ""Longitude"": ""-58.4379201"" } }",Birkin Nicaragua,Nicaragua 6025,16
-"{ ""Address"": ""Maipú 979, C1006ACM CABA, Argentina"", ""Business Name"": ""SHOUT Café & Espresso Bar"", ""Country Code"": ""AR"", ""Geo Coordinates"": { ""Latitude"": ""-34.5965869"", ""Longitude"": ""-58.3768934"" } }",Shout | Café & Espresso Bar,Maipú 979,5
-"{ ""Address"": ""Maipú 745, C1006 CABA, Argentina"", ""Business Name"": ""Edison Café"", ""Country Code"": ""AR"", ""Geo Coordinates"": { ""Latitude"": ""-34.5994169"", ""Longitude"": ""-58.3769180"" } }",Edison Café,Maipú 745,1
+direccion,casos
+Ayacucho 706,5
+Presidente José Evaristo Uriburu 100,16
+Gurruchaga 1876 A,16
+Avenida Jujuy 364,3
+Esmeralda 699 esquina,12
+Arenales 837,10
+Avenida Paseo Colón 591,14
+Maipú 53,16
+Serrano 907,12
+Nicaragua 6025,7
+Presidente Teniente General Juan Domingo Perón 489,8
+Bartolomé Mitre 913,16
+Armenia 1929,14
+Bonpland 1367,10
+Viamonte 1649,3
+El Salvador 4580,6
+Virrey del Pino 2235,11
+Arenales 2802,8
+Soler 4499,8
+Bonpland 1968,6
+Maipú 979,7
+José A. Terry 300,16
+Avenida Federico Lacroze 2699,13
+Río de Janeiro 579,7
+Maipú 745,12
+Uruguay 1048,10
+Moldes 3802,16
+Fitz Roy 2192,13
+Virrey Avilés 3895,6
+Capitán General Ramón Freire C1426AWA,3
+Holmberg 2004,6
+Paraguay 3257,15
+Thames 1824,13
+Honduras 4730,16
+Pierina Dealessi 1330,11
+Jorge Luis Borges 2008,13
+Franklin D. Roosevelt 1894,9
+Felipe Vallese 3192,2
+Castillo 720,16
+Avenida Santa Fe 3618,4
+Bonpland 1173,7
+San Martín 487,6
+Céspedes 3115,11
+Pasteur 672,5
+Avenida Corrientes 802,7
+Echeverría 1550,1
+Avenida Callao 477,2
+Bolívar 1422,7
+Olga Cossettini 1182,5
+Olga Cossettini 1124,4
+República Arabe Siria 3037,8
+República Arabe Siria 3061,1
+Avenida San Juan 4359,4
+Paraguay 627,12
+Doctor Juan Felipe Aranguren 3053,11
+Cavia 2985,8
+Costa Rica 4827,5
+Blanco Encalada 2457,8
+Avenida Triunvirato 4307,3
+Costa Rica 5722,11
+Tucumán 1327,4
+Marcelo Torcuato de Alvear 790,6
+Thames 1891,6
+San Martín 989,9
+Esmeralda 266,6
+Costa Rica 5901,16
+Moreno 818,1
+Presidente Teniente General Juan Domingo Perón 731,16
+Defensa 313,7
+Serrano 1415,6
+Arroyo 940,14
+Suipacha 637,13
+Florida 833,9
+Ciudad de La Paz 2300,6
+Florida 833,4
+Humboldt 1542,13
+Thames 1535,12
