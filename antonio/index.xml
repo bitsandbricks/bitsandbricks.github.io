@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Lo ultimo</title>
+      <link>https://bitsandbricks.github.io/antonio/portfolio/work1/</link>
+      <pubDate>Tue, 05 Nov 2019 18:25:22 +0530</pubDate>
+      
+      <guid>https://bitsandbricks.github.io/antonio/portfolio/work1/</guid>
+      <description>&lt;p&gt;OH YEAH however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Name of the work 2</title>
       <link>https://bitsandbricks.github.io/antonio/portfolio/work2/</link>
       <pubDate>Sat, 05 Nov 2016 19:41:01 +0530</pubDate>
@@ -108,15 +117,6 @@
       
       <guid>https://bitsandbricks.github.io/antonio/posts/my-first-post/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Name of the work 1</title>
-      <link>https://bitsandbricks.github.io/antonio/portfolio/work1/</link>
-      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
-      
-      <guid>https://bitsandbricks.github.io/antonio/portfolio/work1/</guid>
-      <description>&lt;p&gt;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life. One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&lt;/p&gt;</description>
     </item>
     
   </channel>

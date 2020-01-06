@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Portfolios on H. Antonio Vazquez Brust</title>
+    <title>HAVB on H. Antonio Vazquez Brust</title>
     <link>https://bitsandbricks.github.io/antonio/portfolio/</link>
-    <description>Recent content in Portfolios on H. Antonio Vazquez Brust</description>
+    <description>Recent content in HAVB on H. Antonio Vazquez Brust</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 05 Nov 2016 20:23:59 +0530</lastBuildDate>
+    <lastBuildDate>Tue, 05 Nov 2019 18:25:22 +0530</lastBuildDate>
     
 	<atom:link href="https://bitsandbricks.github.io/antonio/portfolio/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lo ultimo</title>
+      <link>https://bitsandbricks.github.io/antonio/portfolio/work1/</link>
+      <pubDate>Tue, 05 Nov 2019 18:25:22 +0530</pubDate>
+      
+      <guid>https://bitsandbricks.github.io/antonio/portfolio/work1/</guid>
+      <description>&lt;p&gt;OH YEAH however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Name of the work 2</title>
@@ -99,15 +108,6 @@
       
       <guid>https://bitsandbricks.github.io/antonio/portfolio/work11/</guid>
       <description>&lt;p&gt;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Name of the work 1</title>
-      <link>https://bitsandbricks.github.io/antonio/portfolio/work1/</link>
-      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
-      
-      <guid>https://bitsandbricks.github.io/antonio/portfolio/work1/</guid>
-      <description>&lt;p&gt;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life. One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&lt;/p&gt;</description>
     </item>
     
   </channel>
