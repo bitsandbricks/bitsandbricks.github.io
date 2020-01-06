@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>DBSCAN on Bits &amp; Bricks</title>
-    <link>/tags/dbscan/</link>
+    <link>https://bitsandbricks.github.io/tags/dbscan/</link>
     <description>Recent content in DBSCAN on Bits &amp; Bricks</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
     <lastBuildDate>Fri, 05 Jul 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/dbscan/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://bitsandbricks.github.io/tags/dbscan/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>DBSCAN: Machine Learning para detectar centros de actividad urbana</title>
-      <link>/post/dbscan-machine-learning-para-detectar-centros-de-actividad-urbana/</link>
+      <link>https://bitsandbricks.github.io/post/dbscan-machine-learning-para-detectar-centros-de-actividad-urbana/</link>
       <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/post/dbscan-machine-learning-para-detectar-centros-de-actividad-urbana/</guid>
+      <guid>https://bitsandbricks.github.io/post/dbscan-machine-learning-para-detectar-centros-de-actividad-urbana/</guid>
       <description>DBSCAN es un algoritmo de machine learning diseñado para detectar en forma automática “clusters”, es decir elementos próximos entre si de acuerdo a sus atributos en varias dimensiones.
 A diferencia de otros algoritmos de clustering como KMeans, DBSCAN resulta muy adecuado para buscar patrones de agrupación en el espacio físico. Por ejemplo, en la distribución espacial de actividades humanas.
 Como se ilustra debajo, entre varias alternativas DBSCAN es la única cuyos resultados aproximan los de un analista humano que estuviera clasificando puntos aglomerados en un mapa:</description>
