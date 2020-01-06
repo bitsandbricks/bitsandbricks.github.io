@@ -7,12 +7,13 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
+    <lastBuildDate>Fri, 05 Jul 2019 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Informática Urbana</title>
+      <title>informática urbana</title>
       <link>/categories/inform%C3%A1tica-urbana/</link>
       <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
@@ -21,56 +22,11 @@
     </item>
     
     <item>
-      <title>Machine Learning</title>
+      <title>machine learning</title>
       <link>/categories/machine-learning/</link>
       <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
       <guid>/categories/machine-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Modelos Predictivos</title>
-      <link>/categories/modelos-predictivos/</link>
-      <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
-      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/categories/modelos-predictivos/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Open Data</title>
-      <link>/categories/open-data/</link>
-      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
-      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/categories/open-data/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Scraping</title>
-      <link>/categories/scraping/</link>
-      <pubDate>Sat, 09 Sep 2017 00:00:00 +0000</pubDate>
-      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/categories/scraping/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Series De Tiempo</title>
-      <link>/categories/series-de-tiempo/</link>
-      <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
-      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/categories/series-de-tiempo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Transporte</title>
-      <link>/categories/transporte/</link>
-      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
-      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
-      <guid>/categories/transporte/</guid>
       <description></description>
     </item>
     
@@ -80,6 +36,51 @@
       <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
       <guid>/categories/visualizaci%C3%B3n/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>open data</title>
+      <link>/categories/open-data/</link>
+      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
+      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
+      <guid>/categories/open-data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>transporte</title>
+      <link>/categories/transporte/</link>
+      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
+      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
+      <guid>/categories/transporte/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scraping</title>
+      <link>/categories/scraping/</link>
+      <pubDate>Sat, 09 Sep 2017 00:00:00 +0000</pubDate>
+      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
+      <guid>/categories/scraping/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>modelos predictivos</title>
+      <link>/categories/modelos-predictivos/</link>
+      <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
+      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
+      <guid>/categories/modelos-predictivos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>series de tiempo</title>
+      <link>/categories/series-de-tiempo/</link>
+      <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
+      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
+      <guid>/categories/series-de-tiempo/</guid>
       <description></description>
     </item>
     

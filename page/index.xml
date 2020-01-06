@@ -8,7 +8,7 @@
     <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
     <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
     
-        <atom:link href="/page/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/page/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,20 +17,9 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
       <guid>/page/about/</guid>
-      <description>
-
-&lt;h2 id=&#34;antonio-vazquez-brust&#34;&gt;Antonio Vazquez Brust&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;img/Antonio-Vazquez-Brust-420x420.png&#34; alt=&#34;Antonio Vazquez Brust&#34; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Buenas! Soy Planificador Urbano/Regional y Científico de Datos.&lt;/p&gt;
-
-&lt;p&gt;Mi campo de interés actual es la aplicación práctica de las ciencias de datos y el análisis computacional como herramientas de gobernanza en las ciudades latinoamericanas.&lt;/p&gt;
-
-&lt;p&gt;Me pueden encontrar en Twitter como &lt;a href=&#34;https://twitter.com/vazquezbrust&#34;&gt;@vazquezbrust&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>Antonio Vazquez Brust Buenas! Soy Planificador Urbano/Regional y Científico de Datos.
+Mi campo de interés actual es la aplicación práctica de las ciencias de datos y el análisis computacional como herramientas de gobernanza en las ciudades latinoamericanas.
+Me pueden encontrar en Twitter como @vazquezbrust</description>
     </item>
     
   </channel>
