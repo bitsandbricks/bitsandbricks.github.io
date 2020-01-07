@@ -29,5 +29,14 @@
       <description>&lt;p&gt;El Curso de Ciencia de Datos y Políticas Públicas, una iniciativa para capacitar a empleados del Gobierno de la Ciudad de Buenos Aires en el uso de nuevas técnicas en materia de análisis, explotación, visualización y comunicación con datos.&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>Desarrollo de aplicaciones</title>
+      <link>https://bitsandbricks.github.io/antonio/portfolio/app_tacc/</link>
+      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://bitsandbricks.github.io/antonio/portfolio/app_tacc/</guid>
+      <description>&lt;p&gt;Desarrollo de aplicaciones interactivas&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>
