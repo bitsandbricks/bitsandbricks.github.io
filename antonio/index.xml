@@ -6,7 +6,7 @@
     <description>Recent content on H. Antonio Vazquez Brust</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Jan 2020 21:35:43 -0300</lastBuildDate>
+    <lastBuildDate>Tue, 05 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://bitsandbricks.github.io/antonio/index.xml" rel="self" type="application/rss+xml" />
     
@@ -39,6 +39,15 @@
     </item>
     
     <item>
+      <title>Índice de Confianza y Acceso a Vacunas (ICAV)</title>
+      <link>https://bitsandbricks.github.io/antonio/portfolio/icav/</link>
+      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://bitsandbricks.github.io/antonio/portfolio/icav/</guid>
+      <description>&lt;p&gt;Como &lt;em&gt;Research Fellow&lt;/em&gt; de la Fundación Bunge y Born trabajo en el desarrollo del Índice de Confianza y Acceso a Vacunas (ICAV). El índice fue diseñado para identificar las barreras que impiden el acceso a la vacunación, así como cambios en la confianza pública respecto de la importancia, seguridad y eficacia de las vacunas.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Aplicaciones para apoyar políticas públicas</title>
       <link>https://bitsandbricks.github.io/antonio/portfolio/app_tacc/</link>
       <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
@@ -48,11 +57,11 @@
     </item>
     
     <item>
-      <title>My First Post</title>
-      <link>https://bitsandbricks.github.io/antonio/posts/my-first-post/</link>
-      <pubDate>Sun, 05 Jan 2020 21:35:43 -0300</pubDate>
+      <title></title>
+      <link>https://bitsandbricks.github.io/antonio/portfolio/bigdata_chagas/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://bitsandbricks.github.io/antonio/posts/my-first-post/</guid>
+      <guid>https://bitsandbricks.github.io/antonio/portfolio/bigdata_chagas/</guid>
       <description></description>
     </item>
     
