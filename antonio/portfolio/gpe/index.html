@@ -2,7 +2,7 @@
 <html lang="en-us">
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Diseño curricular y coordinación académica: Curso de Posgrado en Big Data e Inteligencia Territorial</title>
+<title>GPE: georreferenciación y visualización de datos para análisis de programas sociales</title>
 <meta name="description" content="H. Antonio Vazquez Brust">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="all,follow">
@@ -108,21 +108,36 @@
   <div class="row">
     <div class="col-lg-8">
       <div class="content-column-content">
-         <h1>Diseño curricular y coordinación académica: Curso de Posgrado en Big Data e Inteligencia Territorial</h1>
-         <p>El curso de posgrado Big Data e Inteligencia Territorial en la Facultad Latinoamericana de Ciencias Sociales (FLACSO) enseña principios de estadística computacional, programación y sistemas de información geográfica -GIS- junto al marco teórico para su aplicación en la gestión del territorio.</p>
+         <h1>GPE: georreferenciación y visualización de datos para análisis de programas sociales</h1>
+         <p>Con el apoyo del Banco Interamericano de Desarrollo hice disponible al público la herramienta GPE (Georeferenced Program Evaluation) un conjunto de funciones creadas para facilitar el análisis de programas públicos donde patrones de accesibilidad, ubicación y frecuencia de uso son importantes.</p>
 
-<p>Diseñe la currícula del curso, del cual soy coordinador académico del curso y docente en Ciencia de Datos Geográfica.</p>
+<p>GPE (por &ldquo;Geo-referenced Program Evaluation&rdquo;) o <a href="https://code.iadb.org/es/herramientas/egp">EPG en español</a>, el paquete de funciones para usar con el <a href="https://www.r-project.org/about.html">lenguaje de programación R</a>. Fue diseñado para hacer la vida más fácil a quienes analizan dinámicas de movimiento en el contexto urbano.</p>
 
-<p>Enseñamos a los estudiantes cómo emplear análisis espacial y ciencia de datos para enfrentar problemas complejos en ámbitos donde el territorio es determinante.</p>
+<p>Por ejemplo, para medir el impacto de programas sociales donde las métricas de acceso (distancias y tiempos de viaje, lugares visitados, etc) son de interés. De hecho, desarrollé el conjunto de funciones que hoy componen GPE para ayudar al BID y al GCBA en la evaluación del Pase Cultural de la Ciudad de Buenos Aires, un programa que busca alentar el acceso a la oferta cultural entre los jóvenes, en distintas categorías (música, cine, literatura, etc) y en distintos lugares de la ciudad.</p>
 
-<p><img src="https://bitsandbricks.github.io/antonio/img/portfolio/BDeIT/BDeIT_large.jpg" alt="Flyer de la edición 2019 de curso de posgrado Big Data e Inteligencia Territorial" /></p>
+<p>GPE es ahora parte de catálogo de <a href="https://code.iadb.org/es">Código para el Desarrollo</a>, la iniciativa de software abierto para gobiernos y ciudadanos del BID que busca abrir, compartir y reutilizar las herramientas para resolver con datos y analítica los desafíos de políticas públicas.</p>
 
-<p>Las alumnas y alumnos participantes adquieren la capacidad de abordar con confianza la ejecución de proyectos de gestión y estudio del territorio, que requieran combinar habilidades analíticas, conceptuales y  computacionales.</p>
+<p>Partiendo de listas de orígenes y destinos con sus direcciones, así como de registros de visitas, GPE permite:</p>
 
-<p><img src="https://bitsandbricks.github.io/antonio/img/portfolio/BDeIT/cohorte_2019.jpg" alt="&quot;alumando 2019&quot;" />
-<em>(parte de) la cohorte inaugural, 2019</em></p>
+<p>I.  Georreferenciar direcciones postales (es decir, transformar direcciones de calle en puntos precisos de latitud y longitud)</p>
 
-<p>Pueden encontrarse más detalles en la <a href="https://www.flacso.org.ar/formacion-academica/big-data-e-inteligencia-territorial/">página oficial del curso de posgrado</a>.</p>
+<p>II.  Obtener mapas con la grilla vial de la ciudad, y visualizar proyectados por encima los puntos con ubicaciones de orígenes y destinos</p>
+
+<p><img src="https://bitsandbricks.github.io/antonio/img/portfolio/GPE/0.png" alt="Origenes y destinos" /></p>
+
+<p>III. Estimar de distancias y tiempos de viaje entre sitios a acceder y origen de las personas, en transporte público, a pie, en bicicleta o en auto</p>
+
+<p><img src="https://bitsandbricks.github.io/antonio/img/portfolio/GPE/0_5.png" alt="Tiempos de viaje" /></p>
+
+<p>IV.  Realizar métricas de frecuencia, distribución por grupos y distancia recorrida para transacciones/accesos entre personas y sitios</p>
+
+<p>V. Realizar visualizaciones que permitan explorar la diferencia entre frecuencia y tipo de visitas según características de las personas (dependiendo de la información que se disponga: nivel socioeconómico, antigüedad en el programa, programa en que participa, etc) o de los sitios (tipo de sitio, etc).</p>
+
+<p><img src="https://bitsandbricks.github.io/antonio/img/portfolio/GPE/1.png" alt="&quot;Diferencias entre grupos&quot;" /></p>
+
+<p>Se pueden consultar instrucciones de uso detalladas en <a href="https://gpe.netlify.com/articles/using_gpe">https://gpe.netlify.com/articles/using_gpe</a>.</p>
+
+<p>El código de GPE es open source. De manera que quienes quieran modificarlo o colaborar con su desarrollo pueden acceder al repositorio en <a href="https://github.com/EL-BID/GPE">https://github.com/EL-BID/GPE</a>.</p>
          
       </div>
     </div>
