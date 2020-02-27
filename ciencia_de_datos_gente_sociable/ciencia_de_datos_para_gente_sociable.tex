@@ -21,7 +21,6 @@
 \usepackage{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={Ciencia de Datos para Gente Sociable},
@@ -78,7 +77,11 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
+% grffile has become a legacy package: https://ctan.org/pkg/grffile
+\IfFileExists{grffile.sty}{%
+\usepackage{grffile}
+}{}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -132,7 +135,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-08-15}
+    \date{2020-02-27}
 
 \usepackage{booktabs}
 
@@ -149,8 +152,8 @@
 
 \includegraphics[width=1\linewidth]{imagenes/portada}
 
-\hypertarget{para-quien-es-esto}{%
-\section*{¿Para quién es esto?}\label{para-quien-es-esto}}
+\hypertarget{para-quiuxe9n-es-esto}{%
+\section*{¿Para quién es esto?}\label{para-quiuxe9n-es-esto}}
 \addcontentsline{toc}{section}{¿Para quién es esto?}
 
 Este libro fue escrito con una audiencia en mente formada por urbanistas, sociólogos, politólogas y otros entusiastas que se acercan al tema desde las Ciencias Sociales. Aún así, y por supuesto, todas las personas y algoritmos con capacidad de procesar lenguaje son bienvenidas.
@@ -165,8 +168,8 @@ No hace falta ningún conocimiento previo de programación; todas las herramient
 
 Para practicar los ejemplos que se explicarán a lo largo del libro, es necesario instalar el \href{https://cloud.r-project.org/}{lenguaje de programación R}, y la interfaz gráfica \href{https://www.rstudio.com/products/rstudio/download/}{RStudio Desktop}.
 
-\hypertarget{que-es-la-ciencia-de-datos}{%
-\chapter{¿Qué es la ciencia de datos?}\label{que-es-la-ciencia-de-datos}}
+\hypertarget{quuxe9-es-la-ciencia-de-datos}{%
+\chapter{¿Qué es la ciencia de datos?}\label{quuxe9-es-la-ciencia-de-datos}}
 
 La \emph{Big Data} ha llegado para quedarse, y asumimos que su efecto en la sociedad será permanente. Así como pasó con la escritura, los medios de comunicación o tantos otros inventos humanos de inmenso impacto cultural, el incremento en la producción y análisis computacional de grandes volúmenes de datos está transformando cada una de nuestras actividades. Algunas profesiones se ven en crisis, otras se benefician, y también se crean algunas nuevas.
 
@@ -176,8 +179,8 @@ En forma acorde, \emph{data scientist} o ``científico de datos'' es también un
 
 Avanzar las fronteras de la ciencia de datos, crear los algoritmos y técnicas informáticas que abren nuevas posibilidades de análisis es una tarea compleja, llevada a cabo por especialistas con profundos conocimientos de matemática. Y sin embargo ``usar'' la ciencia de datos, aplicar sus principios para resolver problemas complejos, es bastante más fácil. Para empezar sólo necesitamos paciencia para aprender algunos conceptos fundamentales de programación y estadística, empleándolos para entender y comunicar con datos. De eso se trata este libro.
 
-\hypertarget{que-significa-hacer-ciencia-de-datos}{%
-\section{¿Qué significa hacer ciencia de datos?}\label{que-significa-hacer-ciencia-de-datos}}
+\hypertarget{quuxe9-significa-hacer-ciencia-de-datos}{%
+\section{¿Qué significa hacer ciencia de datos?}\label{quuxe9-significa-hacer-ciencia-de-datos}}
 
 Ya dijimos que la ciencia de datos se trata de emplear técnicas de programación para analizar datos. Pero no es sólo eso; la ciencia de datos aplicada requiere el desarrollo de habilidades en cuatro áreas:
 
@@ -204,8 +207,8 @@ A lo largo de los capítulos de este libro vamos a aprender técnicas de program
 
 Allá vamos.
 
-\hypertarget{una-presentacion-a-toda-marcha-de-r}{%
-\chapter{Una presentación a toda marcha de R}\label{una-presentacion-a-toda-marcha-de-r}}
+\hypertarget{una-presentaciuxf3n-a-toda-marcha-de-r}{%
+\chapter{Una presentación a toda marcha de R}\label{una-presentaciuxf3n-a-toda-marcha-de-r}}
 
 \texttt{R} es un lenguaje de programación especializado en análisis y visualización de datos. Es un producto de código abierto, lo cual significa que cualquier persona puede usarlo y modificarlo sin pagar licencias ni costos de adquisición de ningún tipo.
 
@@ -218,8 +221,8 @@ La calidad del lenguaje en sí, de los paquetes instalables que le agregan un si
 
 A continuación reproduciremos un ejercicio paso a paso, para ilustrar la potencia de una herramienta de análisis como R. Que nadie se preocupe si algunas de las operaciones parecen no tener sentido, o resultan arbitrarias. ¡Es normal! Nadie aprende un lenguaje en 10 minutos, sea R o esperanto. La idea es tener exposición temprana a un caso de uso interesante, usando datos reales. Y que nos sirva como motivación para practicar luego ejercicios básicos que son muy necesarios pero, a veces, no tan emocionantes.
 
-\hypertarget{a-investigar-cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autonoma-de-buenos-aires}{%
-\subsection{A investigar: ¿Cual es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?}\label{a-investigar-cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autonoma-de-buenos-aires}}
+\hypertarget{a-investigar-cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autuxf3noma-de-buenos-aires}{%
+\subsection{A investigar: ¿Cual es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?}\label{a-investigar-cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autuxf3noma-de-buenos-aires}}
 
 Buenos Aires es una ciudad que desde hace décadas presenta una \href{https://elpais.com/internacional/2016/10/16/argentina/1476629610_416732.html}{marcada polarización} entre sus barrios del sur, relativamente menos desarrollados, y los del norte donde el nivel socioeconómico y la calidad de vida son mayores.
 
@@ -428,8 +431,8 @@ Algunas funciones útiles para explorar un dataframe que no conocemos son \textt
 ## 6      6      2.4
 \end{verbatim}
 
-\hypertarget{visualizacion-la-exploracion-grafica-de-la-informacion}{%
-\section{Visualización: la exploración gráfica de la información}\label{visualizacion-la-exploracion-grafica-de-la-informacion}}
+\hypertarget{visualizaciuxf3n-la-exploraciuxf3n-gruxe1fica-de-la-informaciuxf3n}{%
+\section{Visualización: la exploración gráfica de la información}\label{visualizaciuxf3n-la-exploraciuxf3n-gruxe1fica-de-la-informaciuxf3n}}
 
 Ahora es vamos a pisar el acelerador. Insisto: nadie debe preocuparse si algunos conceptos parecen ser demasiado complejos. En las próximas secciones practicaremos de forma gradual las técnicas que vamos a usar ahora, y todo tendrá sentido -¡lo prometo!. Pero antes, seamos un poquito irresponsables con el poder de R y empleemos un arsenal sofisticado de herramientas para ver de que somos capaces.
 
@@ -646,8 +649,8 @@ Podemos armar una sucesión de 15 ``etiquetas'' según el punto cardinal que le 
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "Sur"   "Norte" "Sur"   "Sur"   "Sur"   "Norte" "Sur"   "Sur"  
-##  [9] "Sur"   "Norte" "Norte" "Norte" "Norte" "Norte" "Norte"
+##  [1] "Sur"   "Norte" "Sur"   "Sur"   "Sur"   "Norte" "Sur"   "Sur"   "Sur"  
+## [10] "Norte" "Norte" "Norte" "Norte" "Norte" "Norte"
 \end{verbatim}
 
 Ya podemos agregar nuestra nueva columna usando una función que ya vimos, mutate(). En el dataframe, vamos a ponerle a nuestra nueva columna un nombre descriptivo, ``ubicación'' :
@@ -775,8 +778,8 @@ Por último, usamos a R de calculadora. Separamos las comunas en dos dataframes 
 ## [1] 2.044788
 \end{verbatim}
 
-\hypertarget{cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autonoma-de-buenos-aires}{%
-\subsection{¿Cuál es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?}\label{cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autonoma-de-buenos-aires}}
+\hypertarget{cuuxe1l-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autuxf3noma-de-buenos-aires}{%
+\subsection{¿Cuál es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?}\label{cuuxe1l-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autuxf3noma-de-buenos-aires}}
 
 En base a lo que descubrimos, vamos a responder en forma sucinta.
 
@@ -897,8 +900,8 @@ Las categorías posibles para un factor son llamadas ``niveles'' (\emph{levels})
 
 Para acceder en forma rápida al contenido de la columna BARRIO, hemos utilizado por primera vez un ``truco'' muy práctico. Para obtener el contenido de cualquier columna en particular, basta con el nombre del dataframe seguido del símbolo \texttt{\$} y el nombre de la columna a extraer: \texttt{atencion\_ciudadano\$BARRIO}, o \texttt{atencion\_ciudadano\$total}, etc.
 
-\hypertarget{cruzando-variables-la-operacion-join}{%
-\section{\texorpdfstring{Cruzando variables: la operación \texttt{join}}{Cruzando variables: la operación join}}\label{cruzando-variables-la-operacion-join}}
+\hypertarget{cruzando-variables-la-operaciuxf3n-join}{%
+\section{\texorpdfstring{Cruzando variables: la operación \texttt{join}}{Cruzando variables: la operación join}}\label{cruzando-variables-la-operaciuxf3n-join}}
 
 Al realizar un análisis ``en la vida real'', es decir, usando datos salvajes en lugar de los prolijos datasets de práctica, es muy habitual encontrar que nos falta una variable que necesitamos. Si tenemos suerte, la información que necesitamos también está disponible en forma de tabla, con algún campo en común, y podemos llevar el cabo un cruce de datos para traérnosla.
 
@@ -1238,8 +1241,8 @@ Filtrando los registros de períodos para los cuales se registran más de 100 in
 ## 6  201301 ALUMBRADO         RECLAMO  BARRACAS   118      4
 \end{verbatim}
 
-\hypertarget{operadores-logicos}{%
-\subsubsection{Operadores lógicos}\label{operadores-logicos}}
+\hypertarget{operadores-luxf3gicos}{%
+\subsubsection{Operadores lógicos}\label{operadores-luxf3gicos}}
 
 Cuando le pasamos múltiples condiciones a filter(), la función devuelve las filas que cumplen con todas.
 
@@ -1714,15 +1717,15 @@ Con esto cerramos la sección de transformación de datos. Las técnicas para ex
 
 A medida que vayamos progresando en nuestra familiaridad con las funciones -y agregando técnicas nuevas- vamos a ser capaces de procesar grandes cantidades de datos con soltura. Y obtener en pocos minutos lo que de otra forma, sin herramientas computacionales, tardaría días o sería inviable por lo tedioso.
 
-\hypertarget{visualizacion}{%
-\chapter{Visualización}\label{visualizacion}}
+\hypertarget{visualizaciuxf3n}{%
+\chapter{Visualización}\label{visualizaciuxf3n}}
 
 La visualización de información es una de las técnica más poderosas, y a la vez más accesibles, de las que disponemos como analistas de datos. La visualización es el proceso de hacer visibles los contrastes, ritmos y eventos que los datos expresan, que no podemos percibir cuando vienen en forma de áridas listas de números y categorías.
 
 Vamos a aprender a realizar las visualizaciones más usadas, y las opciones de ajuste con las que podemos lograr que luzcan tal como queremos.
 
-\hypertarget{una-buena-visualizacion-para-empezar-el-scatterplot}{%
-\section{\texorpdfstring{Una buena visualización para empezar: el \emph{scatterplot}}{Una buena visualización para empezar: el scatterplot}}\label{una-buena-visualizacion-para-empezar-el-scatterplot}}
+\hypertarget{una-buena-visualizaciuxf3n-para-empezar-el-scatterplot}{%
+\section{\texorpdfstring{Una buena visualización para empezar: el \emph{scatterplot}}{Una buena visualización para empezar: el scatterplot}}\label{una-buena-visualizaciuxf3n-para-empezar-el-scatterplot}}
 
 Los gráficos de dispersión, o \emph{scatterplots}, son quizás el tipo de visualización más conocido. Consisten en puntos proyectados en un eje de coordenadas, donde cada punto representa una observación. Son útiles para mostrar la correlación entre dos variables numéricas.
 
@@ -1924,8 +1927,8 @@ Y para distinguir cuál es cuál, podemos pedirle a ggplot que cambie la forma (
 
 ¡Hey, sólo aparecen seis de las comunas! \texttt{ggplot()} usa cómo máximo 6 formas distintas, debido a que una cantidad mayor sería de veras muy difícil de discernir para nuestros pobres ojos. Moraleja: la estética \texttt{shape} sirve sólo cuando manejamos pocas categorías. De todas formas -en mi opinión- es el método de codificación que menos gracia tiene, así que no es grave que su utilidad sea limitada.
 
-\hypertarget{ajustando-color-y-tamano}{%
-\section{Ajustando color y tamaño}\label{ajustando-color-y-tamano}}
+\hypertarget{ajustando-color-y-tamauxf1o}{%
+\section{Ajustando color y tamaño}\label{ajustando-color-y-tamauxf1o}}
 
 Hemos visto que especificando atributos estéticos y las variables que representan dentro
 de \texttt{aes()} podemos ajustas posición, tamaño, color y hasta la forma de los puntos de acuerdo a sus valores. Pero, ¿qué pasa si queremos usar un tamaño o un color arbitrario para nuestros puntos? Es decir, si no nos gusta el color negro y queremos que sean todos azules, o si nos parece que se ven pequeños y queremos que sean todos un poco más grandes. Fácil: definimos el \texttt{color} o \texttt{size} que queremos por fuera de las función \texttt{aes()}, y será aplicado a todos los puntos.
@@ -2065,8 +2068,8 @@ Los culpables de la anomalía son los trámites; en ninguna otra categoría la c
 
 Pero valga el ejemplo para mencionar algo fundamental: por más ciencia de datos que apliquemos, siempre vamos a llegar a un punto en que nuestros hallazgos no tendrán sentido sin combinarlos con lo que se llama ``conocimiento de dominio''. El conocimiento de dominio es el saber especializado sobre el tema que estamos tratando, sea el ciclo reproductivo de la gaviota austral o la organización administrativa del Gobierno de la Ciudad Autónoma de Buenos Aires. Esto no debería desanimarnos, ¡al contrario!. El análisis de datos como profesión conlleva un constante aprendizaje sobre los más variados temas. Y a la inversa: si somos expertos en cualquier campo, aún con un puñado de técnicas básicas de R podemos extraer conocimiento de nuestros datos que jamas encontraría un experto programador que no conoce el paño.
 
-\hypertarget{graficos-de-barras}{%
-\section{Gráficos de barras}\label{graficos-de-barras}}
+\hypertarget{gruxe1ficos-de-barras}{%
+\section{Gráficos de barras}\label{gruxe1ficos-de-barras}}
 
 Si hay un tipo de visualización que compite en popularidad con el \emph{scatterplot}, son los gráficos de barras (\emph{bar charts} en inglés). Solemos encontrarlos acompañando artículos en diarios y revistas, sin duda porque son fáciles de leer de un vistazo. Los gráficos de barras se usan mucho para hacer comparaciones: quién tiene más y quién tiene menos de alguna variable continua cómo ingresos, edad, altura o similares.
 
@@ -2256,8 +2259,8 @@ y creamos el facetado como ya sabemos:
 
 Aparecen las diferencias. Los reclamos tienen una dispersión mínima, con casi todas las observaciones apiladas en torno a unos 1000 contactos mensuales; siempre son bajas. La cantidad mensual de denuncias, reclamos y solicitudes muestra una dispersión mayor, pero aún así tendencia a rondar un valor típico. Los trámites son el extremo opuesto a las qeujas, ya que muestran una gran dispersión, pudiendo tomar cualquier valor de menos de 10.000 a más de 40.000 registros de forma bastante pareja.
 
-\hypertarget{preparando-una-visualizacion-para-compartir}{%
-\section{Preparando una visualización para compartir}\label{preparando-una-visualizacion-para-compartir}}
+\hypertarget{preparando-una-visualizaciuxf3n-para-compartir}{%
+\section{Preparando una visualización para compartir}\label{preparando-una-visualizaciuxf3n-para-compartir}}
 
 Lo último que nos queda por decir en este capítulo es que los gráficos que hemos producido hasta aquí están pensandos para nuestro propio consumo. Son parte, y parte dundamental, de lo que llamamos análisis exploratorio de datos. En el contexto de la exploración, lo importante es trabajar en forma rápida, probando una u otra técnica de visuzalización y refinando nuestros resultados hasta hallar patrones interesantes, o sacarnos dudas acerca de los datos. No necesitamos ponerle título a las visualizaciones, porque ya sabemos de que tratan (¡acabamos de escribirlas!). No nos preocupa que los nombres de los ejes indiquen en forma clara la variable representan, porque ya lo sabemos de antemano.
 
@@ -2334,8 +2337,8 @@ El sitio web \emph{from Data to Viz} (\url{https://www.data-to-viz.com/}) es un 
 
 Y lo más interesante: Para todas y cada una de las visualizaciones se incluye el código en R que permite reproducirlas. A partir de allí sólo es cuestión de adaptar los ejemplos a nuestros datos para realizar de forma fácil la visualización que nos interesa.
 
-\hypertarget{modelado-estadistico}{%
-\chapter{Modelado estadístico}\label{modelado-estadistico}}
+\hypertarget{modelado-estaduxedstico}{%
+\chapter{Modelado estadístico}\label{modelado-estaduxedstico}}
 
 Llegamos a un tema de gran interés para quienes realizan investigaciones formales. La posición central que tiene el modelado en la investigación científica se debe a que cuantifica relaciones: permite pasar de decir ``La luz solar abundante mejora el crecimiento de las plantas'' a ``por cada hora adicional de exposición mensual a la luz solar, los cultivos aumentaron su rinde en un 1\%''. La cuantificación permite realizar comparaciones, algo clave para entender un fenómeno estudiado: antes y después, con o sin tratamiento, en un lugar o en otro.
 
@@ -2365,8 +2368,8 @@ Existen muchísimas técnicas para modelar datos, algunas de ellas simples como 
 
 La humilde regresión lineal, fácil de explicar y muy fácil de resolver con la ayuda de una computadora, es el caballito de batalla del modelado estadístico. A pesar de que no es adecuada para ciertos tipo de datos, y de que existen métodos más modernos que explotan con intensidad el potencial de las computadoras, la regresión lineal sigue siendo la herramienta más común. Un poco por costumbre, y otro porque es el método más fácil de interpretar, lo que favorece entender y comunicar sus resultados.
 
-\hypertarget{regresion-lineal-simple}{%
-\section{Regresión lineal simple}\label{regresion-lineal-simple}}
+\hypertarget{regresiuxf3n-lineal-simple}{%
+\section{Regresión lineal simple}\label{regresiuxf3n-lineal-simple}}
 
 La encarnación más sencilla de la regresión lineal es la simple o univariada. Tenemos nuestra variable \(y\), numérica, y una sola variable predictora \(x\), que puede ser numérica o categórica.
 
@@ -2383,7 +2386,7 @@ Descarguemos el dataset y echémosle un vistazo como ya sabemos hacer:
 \end{Shaded}
 
 \begin{verbatim}
-##           pais         continente       año          expVida     
+##           pais         continente       anio         expVida     
 ##  Afghanistan:  12   Africa  :624   Min.   :1952   Min.   :23.60  
 ##  Albania    :  12   Americas:300   1st Qu.:1966   1st Qu.:48.20  
 ##  Algeria    :  12   Asia    :396   Median :1980   Median :60.71  
@@ -2403,8 +2406,10 @@ Descarguemos el dataset y echémosle un vistazo como ya sabemos hacer:
 
 Con el poder de \texttt{summary()}, podemos decir unas cuantas cosas acerca de nuestros dataset. Las observaciones son de un país, su continente, un año determinado y su expectativa de vida, población y\ldots{} ¿PBI\_PC?. Esa última es PBI per cápita. Que, según parece, hay 12 observaciones por país. Que el rango de años es de 1952 a 2007. Que a lo largo de esos años, la menor expectativa registrada ha sido de 23 años (¡uf!) y la mayor de 82. Que el país menos poblado en el dataset ha tenido apenas más de 60.000 habitantes, mientras que el más populoso ha alcanzado los 1300 millones.
 
-\hypertarget{regresion-con-una-variable-numerica}{%
-\subsection{Regresión con una variable numérica}\label{regresion-con-una-variable-numerica}}
+Notemos también que la variable que representa el año de cada medición aparece nombrada como ``anio''. Esto se debe a la necesidad de evitar que en el nombre de la variable aparezca la ``ñ'', letra que los hispanparlantes apreciamos pero suele traer problemas cuando se cruza con sistemas informáticos.
+
+\hypertarget{regresiuxf3n-con-una-variable-numuxe9rica}{%
+\subsection{Regresión con una variable numérica}\label{regresiuxf3n-con-una-variable-numuxe9rica}}
 
 Hagamos nuestra pregunta: ¿Cómo ha se relaciona el paso del tiempo (variable explicativa) con la expectativa de vida en la Argentina?
 
@@ -2420,7 +2425,7 @@ Para contestar, primero filtremos los datos que nos interesan:
 \end{Shaded}
 
 \begin{verbatim}
-##         pais continente  año expVida     pobl    PBI_PC
+##         pais continente anio expVida     pobl    PBI_PC
 ## 1  Argentina   Americas 1952  62.485 17876956  5911.315
 ## 2  Argentina   Americas 1957  64.399 19610538  6856.856
 ## 3  Argentina   Americas 1962  65.142 21283783  7133.166
@@ -2440,7 +2445,7 @@ Como dijimos en el capítulo de visualización, los scatterplots son útiles par
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ data_arg) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ año, }\DataTypeTok{y =}\NormalTok{ expVida)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ anio, }\DataTypeTok{y =}\NormalTok{ expVida)) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Correlación entre tiempo y expectativa de vida"}\NormalTok{,}
          \DataTypeTok{subtitle =} \StringTok{"Argentina"}\NormalTok{,}
          \DataTypeTok{y =} \StringTok{"expectativa de vida"}\NormalTok{)}
@@ -2455,7 +2460,7 @@ Obtener la correlación entre dos variables es fácil. La función \texttt{cor()
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{cor}\NormalTok{(data_arg}\OperatorTok{$}\NormalTok{año, data_arg}\OperatorTok{$}\NormalTok{expVida)}
+\KeywordTok{cor}\NormalTok{(data_arg}\OperatorTok{$}\NormalTok{anio, data_arg}\OperatorTok{$}\NormalTok{expVida)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2478,7 +2483,7 @@ Vamos a la regresión lineal entonces, para medir de una buena vez la correlaci�
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{modelo_exp <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(expVida }\OperatorTok{~}\StringTok{ }\NormalTok{año, }\DataTypeTok{data =}\NormalTok{ data_arg)}
+\NormalTok{modelo_exp <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(expVida }\OperatorTok{~}\StringTok{ }\NormalTok{anio, }\DataTypeTok{data =}\NormalTok{ data_arg)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2497,14 +2502,14 @@ Retomando nuestra pregunta\ldots{} ¿cuál es el efecto? Nos lo dice el modelo c
 \begin{verbatim}
 ## 
 ## Call:
-## lm(formula = expVida ~ año, data = data_arg)
+## lm(formula = expVida ~ anio, data = data_arg)
 ## 
 ## Coefficients:
-## (Intercept)          año  
+## (Intercept)         anio  
 ##   -389.6063       0.2317
 \end{verbatim}
 
-Ahí está. En nuestro modelo, el \emph{coeficiente} de la variable ``año'' es 0.2317. Significado: incrementando en una unidad la variable año, la variable expectativa de vida se incrementa en 0.2317. Dicho de otra manera, por cada año que pasa la expectativa de vida en la Argentina aumenta casi 3 meses.
+Ahí está. En nuestro modelo, el \emph{coeficiente} de la variable \emph{año} (o ``anio'', para usar el nombre con el que aparece en los datos) es 0.2317. Significado: incrementando en una unidad la variable año, la variable expectativa de vida se incrementa en 0.2317. Dicho de otra manera, por cada año que pasa la expectativa de vida en la Argentina aumenta casi 3 meses.
 
 El otro coeficiente que aparece, ``(Intercept)'' es la intersección. En términos de interpretado del modelo, la intersección rara vez tiene utilidad. Para lo que sí sirve es para trazar la línea que permite ``predecir'' valores para años en los que no tenemos observaciones. Recordemos la fórmula que define una línea recta:
 
@@ -2519,7 +2524,7 @@ Lo podemos visualizar con ayuda de \texttt{ggplot()}, que por supuesto incluye u
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ data_arg) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ año, }\DataTypeTok{y =}\NormalTok{ expVida)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ anio, }\DataTypeTok{y =}\NormalTok{ expVida)) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Correlación entre tiempo y expectativa de vida"}\NormalTok{,}
          \DataTypeTok{subtitle =} \StringTok{"Argentina"}\NormalTok{,}
          \DataTypeTok{y =} \StringTok{"expectativa de vida"}\NormalTok{,}
@@ -2535,7 +2540,7 @@ Aquí no vemos más que los datos que ya teníamos. Pero proyectemos la línea h
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ data_arg) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ año, }\DataTypeTok{y =}\NormalTok{ expVida)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ anio, }\DataTypeTok{y =}\NormalTok{ expVida)) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Correlación entre tiempo y expectativa de vida"}\NormalTok{,}
          \DataTypeTok{subtitle =} \StringTok{"Argentina"}\NormalTok{,}
          \DataTypeTok{y =} \StringTok{"expectativa de vida"}\NormalTok{,}
@@ -2560,12 +2565,12 @@ Ya que estamos, aprendamos otro truco. \texttt{ggplot()} puede agregar a nuestro
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ data_arg) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ año, }\DataTypeTok{y =}\NormalTok{ expVida)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ anio, }\DataTypeTok{y =}\NormalTok{ expVida)) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Correlación entre tiempo y expectativa de vida"}\NormalTok{,}
          \DataTypeTok{subtitle =} \StringTok{"Argentina"}\NormalTok{,}
          \DataTypeTok{y =} \StringTok{"expectativa de vida"}\NormalTok{,}
          \DataTypeTok{caption =} \StringTok{"con línea de regresión vía geom_smooth()"}\NormalTok{) }\OperatorTok{+}
-\StringTok{    }\KeywordTok{geom_smooth}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ año, }\DataTypeTok{y =}\NormalTok{ expVida), }\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{)}
+\StringTok{    }\KeywordTok{geom_smooth}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ anio, }\DataTypeTok{y =}\NormalTok{ expVida), }\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2580,11 +2585,11 @@ En general, es inusual encontrar una correlación tan nítida entre variables ``
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ data_arg) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ año, }\DataTypeTok{y =}\NormalTok{ PBI_PC)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ anio, }\DataTypeTok{y =}\NormalTok{ PBI_PC)) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Correlación entre PBI y expectativa de vida"}\NormalTok{,}
          \DataTypeTok{subtitle =} \StringTok{"Argentina"}\NormalTok{,}
          \DataTypeTok{y =} \StringTok{"PBI per cápita"}\NormalTok{) }\OperatorTok{+}
-\StringTok{    }\KeywordTok{geom_smooth}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ año, }\DataTypeTok{y =}\NormalTok{ PBI_PC), }\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{)}
+\StringTok{    }\KeywordTok{geom_smooth}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ anio, }\DataTypeTok{y =}\NormalTok{ PBI_PC), }\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2596,7 +2601,7 @@ Obtengamos el modelo del PBI per cápita de la Argentina en relación al paso de
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{modelo_PBI <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(PBI_PC }\OperatorTok{~}\StringTok{ }\NormalTok{año, }\DataTypeTok{data =}\NormalTok{ data_arg)}
+\NormalTok{modelo_PBI <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(PBI_PC }\OperatorTok{~}\StringTok{ }\NormalTok{anio, }\DataTypeTok{data =}\NormalTok{ data_arg)}
 
 \NormalTok{modelo_PBI}
 \end{Highlighting}
@@ -2605,10 +2610,10 @@ Obtengamos el modelo del PBI per cápita de la Argentina en relación al paso de
 \begin{verbatim}
 ## 
 ## Call:
-## lm(formula = PBI_PC ~ año, data = data_arg)
+## lm(formula = PBI_PC ~ anio, data = data_arg)
 ## 
 ## Coefficients:
-## (Intercept)          año  
+## (Intercept)         anio  
 ##  -162888.14        86.81
 \end{verbatim}
 
@@ -2632,10 +2637,10 @@ Prestemos atención a los residuos de nuestro modelo de PBV vs.~tiempo. Podemos 
 \end{Shaded}
 
 \begin{verbatim}
-##          1          2          3          4          5          6 
-##  -656.9180  -145.4351  -303.1836   182.5450  1138.5722  1340.5021 
-##          7          8          9         10         11         12 
-##  -174.6855  -466.9699  -732.2809   492.5240 -2111.1755  1436.5051
+##          1          2          3          4          5          6          7 
+##  -656.9180  -145.4351  -303.1836   182.5450  1138.5722  1340.5021  -174.6855 
+##          8          9         10         11         12 
+##  -466.9699  -732.2809   492.5240 -2111.1755  1436.5051
 \end{verbatim}
 
 agregarlos a nuestro dataframe,
@@ -2651,7 +2656,7 @@ y visualizarlos comparados con una línea que indica el cero, trazada por \textt
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{(data_arg) }\OperatorTok{+}
-\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ año, }\DataTypeTok{y =}\NormalTok{ residuo_ml)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ anio, }\DataTypeTok{y =}\NormalTok{ residuo_ml)) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{0}\NormalTok{, }\DataTypeTok{col =} \StringTok{"blue"}\NormalTok{) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"año"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"residuo del modelo lineal"}\NormalTok{)}
 \end{Highlighting}
@@ -2677,7 +2682,7 @@ Por lo visto, nuestro modelo cumple con \texttt{1.} pero no con \texttt{2}, ya q
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{(data_arg) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ año, }\DataTypeTok{y =}\NormalTok{ PBI_PC)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ anio, }\DataTypeTok{y =}\NormalTok{ PBI_PC)) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{geom_vline}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{xintercept =} \DecValTok{2001}\NormalTok{), }\DataTypeTok{color =} \StringTok{"red"}\NormalTok{) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Evolución del PBI en la Argentina"}\NormalTok{,}
          \DataTypeTok{y =} \StringTok{"PBI per cápita"}\NormalTok{,}
@@ -2691,8 +2696,8 @@ Es claro que el modelo se beneficiaría de poder tener en cuenta la irrupción d
 
 En aras de la simplicidad, sigamos practicando con los datos disponibles.
 
-\hypertarget{regresion-con-una-variable-categorica}{%
-\subsection{Regresión con una variable categórica}\label{regresion-con-una-variable-categorica}}
+\hypertarget{regresiuxf3n-con-una-variable-categuxf3rica}{%
+\subsection{Regresión con una variable categórica}\label{regresiuxf3n-con-una-variable-categuxf3rica}}
 
 El dataset con datos del mundo provisto por Gapminder incluye dos variables categóricas: país y continente. Con 142 países representados, podemos descartar a la primera como variable para realizar un modelo -recordemos que para entender la interrelación de variables, cuantas menos involucremos mejor. Los cinco continentes habitados representan un conjunto mucho más práctico, por lo que la pregunta será ``¿Cuánto incide el continente en la expectativa de vida de los países?''
 
@@ -2700,7 +2705,7 @@ Comencemos por explorar los datos tomando las observaciones más recientes, las 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data_mundial_}\DecValTok{2007}\NormalTok{ <-}\StringTok{ }\NormalTok{data_mundial }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(año }\OperatorTok{==}\StringTok{ }\DecValTok{2007}\NormalTok{)}
+\NormalTok{data_mundial_}\DecValTok{2007}\NormalTok{ <-}\StringTok{ }\NormalTok{data_mundial }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(anio }\OperatorTok{==}\StringTok{ }\DecValTok{2007}\NormalTok{)}
 
 \KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ data_mundial_}\DecValTok{2007}\NormalTok{) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ continente, }\DataTypeTok{y =}\NormalTok{ expVida, }\DataTypeTok{color =}\NormalTok{ continente)) }\OperatorTok{+}
@@ -2759,10 +2764,10 @@ Bien, estamos convencidos de que hay una relación entre continente y expectativ
 ## lm(formula = expVida ~ continente, data = data_mundial_2007)
 ## 
 ## Coefficients:
-##        (Intercept)  continenteAmericas      continenteAsia  
-##              54.81               18.80               15.92  
-##   continenteEurope   continenteOceania  
-##              22.84               25.91
+##        (Intercept)  continenteAmericas      continenteAsia    continenteEurope  
+##              54.81               18.80               15.92               22.84  
+##  continenteOceania  
+##              25.91
 \end{verbatim}
 
 ¿Qué ocurrió aquí? \texttt{lm()} inspeccionó el contenido de la variable ``continente'' y encontró cinco niveles o categorías. Tomó el primero en orden alfabético, ``Africa'' como línea de base. El primer coeficiente de la regresión (la intersección) es el promedio de la expectativa de vida en África. Para cada una de las categorías restantes, el coeficiente representa la diferencia respecto a África de la expectativa de vida promedio en cada uno de los otros continentes. He allí la cuantificación: para un país en las Américas, podemos esperar -en promedio- una expectativa de vida que supera en 18.8 años la de los paises africanos. Para un país en Asia, son 15.92 los años adicionales, y así.
@@ -2812,7 +2817,7 @@ Con la magia de los verbos de transformación que sabemos, aislemos a los paíse
 \end{Shaded}
 
 \begin{verbatim}
-##          pais continente  año expVida     pobl    PBI_PC residuo_ml
+##          pais continente anio expVida     pobl    PBI_PC residuo_ml
 ## 1 Afghanistan       Asia 2007  43.828 31889923  974.5803 -26.900485
 ## 2        Iraq       Asia 2007  59.545 27499638 4471.0619 -11.183485
 ## 3    Cambodia       Asia 2007  59.723 14131858 1713.7787 -11.005485
@@ -2828,7 +2833,7 @@ Se trata de Afganistán. Como explicación, uno piensa de inmediato en las larga
 \NormalTok{data_afganistan <-}\StringTok{ }\NormalTok{data_mundial }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(pais }\OperatorTok{==}\StringTok{ "Afghanistan"}\NormalTok{)}
 
 \KeywordTok{ggplot}\NormalTok{(data_afganistan) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ año, }\DataTypeTok{y =}\NormalTok{ expVida)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ anio, }\DataTypeTok{y =}\NormalTok{ expVida)) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Expectativa de vida en Afganistán"}\NormalTok{,}
          \DataTypeTok{y =} \StringTok{"expectativa de vida"}\NormalTok{)}
 \end{Highlighting}
@@ -2840,8 +2845,8 @@ Vaya sopresa. A pesar de ser en extremo baja comparada con el resto de Asia, la 
 
 Dependiendo del esfuerzo que requiera determinar la causa de un \emph{outlier}, una alternativa razonable es dejarlo de lado. Es un poco cruel, pero realista: cuando tenemos cientos, miles o millones de observaciones, hacer una ``poda'' de los valores extremos que nuestros modelos no pueden explicar termina siendo la opción más razonable. Dedicar recursos limitados a la caza de una explicación o a complejizar el modelo agregando variables hasta lograr predecir los \emph{outliers} no tiene sentido cuando se trata de casos aislados y fortuitos. Por otra parte, eliminarlos antes de tiempo podría hacernos ignorar los casos más interesantes de un dataset, los que más información podrían revelar. Existen tratados completos dedicados a la cuestión de como manejar los \emph{outliers}, pero el conocimiento de dominio es la principal herramienta para decidir que hacer ante casos inusuales\ldots{} como siempre.
 
-\hypertarget{regresion-con-multiples-variables}{%
-\section{Regresión con múltiples variables}\label{regresion-con-multiples-variables}}
+\hypertarget{regresiuxf3n-con-muxfaltiples-variables}{%
+\section{Regresión con múltiples variables}\label{regresiuxf3n-con-muxfaltiples-variables}}
 
 Hasta aquí hemos usado la regresión lineal para hacer explícita la relación entre una variable \emph{resultante} \(y\) y una única variable \emph{predictiva} o \emph{explicativa} \(x\). En algunos de nuestros resultados pudimos intuir que el agregado de alguna variable explicativa adicional podría mejorar nuestras predicciones. De eso se trata la regresión lineal múltiple: incorporar una cantidad arbitraria de variables al modelo, buscando representar las múltiples dinámicas que inciden en el fenómeno estudiado.
 
@@ -2890,7 +2895,7 @@ Veamos el \emph{top ten} de países más poblados:
 \end{Shaded}
 
 \begin{verbatim}
-##                pais continente  año expVida      pobl   PBI_PC residuo_ml
+##                pais continente anio expVida      pobl   PBI_PC residuo_ml
 ## 1             Japan       Asia 2007  82.603 127467972 31656.07   11.87452
 ## 2  Hong Kong, China       Asia 2007  82.208   6980412 39724.98   11.47952
 ## 3           Iceland     Europe 2007  81.757    301931 36180.79    4.10840
@@ -2914,7 +2919,7 @@ y el de países con mayor expectativa de vida:
 \end{Shaded}
 
 \begin{verbatim}
-##             pais continente  año expVida       pobl    PBI_PC  residuo_ml
+##             pais continente anio expVida       pobl    PBI_PC  residuo_ml
 ## 1          China       Asia 2007  72.961 1318683096  4959.115  2.23251515
 ## 2          India       Asia 2007  64.698 1110396331  2452.210 -6.03048485
 ## 3  United States   Americas 2007  78.242  301139947 42951.653  4.63388000
@@ -2961,14 +2966,10 @@ Sería muy util que el resultado de \texttt{lm()} indique cuáles variables son 
 ## -22.496  -6.119   1.899   7.018  13.383 
 ## 
 ## Coefficients:
-##                    Estimate      Std. Error t value            Pr(>|t|)
-## (Intercept) 59.205198140717  1.040398672164  56.906 <0.0000000000000002
-## pobl         0.000000007001  0.000000005068   1.381               0.169
-## PBI_PC       0.000641608517  0.000058176209  11.029 <0.0000000000000002
-##                
-## (Intercept) ***
-## pobl           
-## PBI_PC      ***
+##                    Estimate      Std. Error t value            Pr(>|t|)    
+## (Intercept) 59.205198140717  1.040398672164  56.906 <0.0000000000000002 ***
+## pobl         0.000000007001  0.000000005068   1.381               0.169    
+## PBI_PC       0.000641608517  0.000058176209  11.029 <0.0000000000000002 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -3006,7 +3007,7 @@ Volvamos a nuestros modelos. Cuando hicimos regresiones simples no sabíamos aú
 \begin{verbatim}
 ## 
 ## Call:
-## lm(formula = expVida ~ año, data = data_arg)
+## lm(formula = expVida ~ anio, data = data_arg)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
@@ -3015,7 +3016,7 @@ Volvamos a nuestros modelos. Cuando hicimos regresiones simples no sabíamos aú
 ## Coefficients:
 ##                Estimate  Std. Error t value          Pr(>|t|)    
 ## (Intercept) -389.606345    9.677730  -40.26 0.000000000002140 ***
-## año            0.231708    0.004889   47.40 0.000000000000422 ***
+## anio           0.231708    0.004889   47.40 0.000000000000422 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -3072,8 +3073,8 @@ Continuando con las regresiones múltiples, intentemos un modelo con tres variab
 
 Observamos que la variable categórica es significativa. Con las demas variables fijas -es decir, en paises de similar PBI y población- el continente de origen explica en gran medida las diferencias en expectativa de vida en cada país, y con un efecto estimado enorme - ¡de 12 a 16 años!-. Notemos de todos modos que el coeficiente de la variable continente había sido mayor en el modelo simple, llegando a casi 26 años para Oceanía. ¿Porqué es menor ahora? Porque nuestro modelo es más completo, y tiene en cuenta más variables. Cuando lo único que teníamos para comparar países era su continente, era era la única variable a la que atribuir diferencias. Ahora que consideramos mútiples variables para explicar las diferencias, notamos la parte de la influencia que se lleva el PBI, reduciendo la del contintente.
 
-\hypertarget{informacion-geografica-y-mapas}{%
-\chapter{Información geográfica y mapas}\label{informacion-geografica-y-mapas}}
+\hypertarget{informaciuxf3n-geogruxe1fica-y-mapas}{%
+\chapter{Información geográfica y mapas}\label{informaciuxf3n-geogruxe1fica-y-mapas}}
 
 Hemos llegado al capítulo final, dedicado al análisis y visualización de información geográfica. Aquí incursionaremos en el dominio de los \emph{SIG} (``Sistemas de Información Geográfica'') también conocidos como \emph{GIS} por sus siglas en inglés.
 
@@ -3111,8 +3112,8 @@ En la práctica, si trabajamos en forma frecuente con archivos georreferenciados
 
 Otro problema asociado a trabajar con datos geográficos es el de los formatos de archivo. El formato más común es el denominado ``shapefile'', inventado por la empresa ESRI (los creadores del software ArcGIS). Es un formato incómodo porque guarda la información en varios archivos distintos, que suelen ser combinados en un archivo .zip para su distribución. Un inconveniente aún mayor es que los nombres de las variables en un shapefile deben tener 10 caracteres o menos, lo que facilita el uso de abreviaturas ininteligibles. A pesar de éstos y otros detrimentos, el formato es tan común que se ha vuelto sinónimo de archivo con información geográfica, y resiste a pesar de los esfuerzos por reemplazarlo con alternativas más modernas. Una de ellas es ``GeoJSON'', un estándar abierto que corrige los dos inconvenientes mencionados antes. Para nuestros ejercicios usaremos datos geográficos en esta último formato.
 
-\hypertarget{explorando-un-archivo-con-informacion-geografica}{%
-\section{Explorando un archivo con información geográfica}\label{explorando-un-archivo-con-informacion-geografica}}
+\hypertarget{explorando-un-archivo-con-informaciuxf3n-geogruxe1fica}{%
+\section{Explorando un archivo con información geográfica}\label{explorando-un-archivo-con-informaciuxf3n-geogruxe1fica}}
 
 Como hemos hecho antes, practicaremos con datos tomados del portal de datos abiertos de la Ciudad de Buenos Aires. En esta ocasión se trata de los radios censales de la ciudad. Los radios censales son particiones de la superficie de la ciudad que contienen una cantidad similar de hogares. Fueron definidos por el Instituto Nacional de Estadística y Censos (INDEC) para facilitar la labor durante la jornada del Censo Nacional de Población que se realiza cada diez años. La idea es asignar a cada censista un radio censal, estimando que puede recorrer todos los hogares incluidos durante el día. Los radios censales son la unidad de análisis espacial por excelencia, debido a que combinan alta granularidad con abundante información asociada de acceso público, producida como resultado del Censo.
 
@@ -3196,8 +3197,8 @@ Como con cualquier otro dataset, comenzamos nuestra exploración pidiendo su res
 
 Podemos sacar en limpio varias cosas. RADIO\_ID, por su nombre, debe ser el código que identifica cada radio censal. Tenemos columnas representando barrio y comuna de cada radio. Tenemos una columna para la población, y vemos que así como algún radio está deshabitado, el más poblado alcanza los 3945 habitantes. En cantidad de viviendas, el máximo es de 1405, y el de hogares 1093: eso significa que existe al menos un radio censal donde hay viviendas desocupadas; tomamos nota para revisarlo luego. ``HOGARES\_NBI'' representa la cantidad de hogares donde se registró que al menos una de las necesidades básicas no estaba satisfecha, con mínimo de 0 por radio, y máximo nada menos que de 403. También tenemos una columna con el área en km\^{}2, que muestra que en general los radios censales abarcan alrededor de medio kilómetro cuadrado, pero existe alguno que es casi 8 veces mayor al promedio. Por último queda la columna \texttt{geometry}, que contiene una serie de puntos que permiten trazar la silueta de cada radio (sus polígonos). Nosotros no vamos a prestarle atención, pero para R es fundamental, ya que le permite proyectar mapas y hacer cálculos geométricos cuando se lo pidamos.
 
-\hypertarget{visualizando-informacion-geografica}{%
-\section{Visualizando información geográfica}\label{visualizando-informacion-geografica}}
+\hypertarget{visualizando-informaciuxf3n-geogruxe1fica}{%
+\section{Visualizando información geográfica}\label{visualizando-informaciuxf3n-geogruxe1fica}}
 
 La visualización de información geográfica por excelencia es el mapa, ¡por supuesto!
 
@@ -3344,8 +3345,8 @@ Con nuestros datos, podemos visualizar la densidad de la población así:
 
 Este último gráfico representa de forma mucho mas precisa la distribución de habitantes en la ciudad, haciendo saltar a la vista los núcleos con mayor densidad de población. De paso, aprendimos un truco nuevo: agregando \texttt{scale\_fill\_viridis\_c()} le pedimos a \texttt{ggplot} que utilice la escala de colores conocida como ``viridis'', diseñada por expertos en visualización para ser fácil de leer\ldots{} y lucir bien.
 
-\hypertarget{volcando-en-el-mapa-informacion-de-multiples-fuentes}{%
-\section{Volcando en el mapa información de múltiples fuentes}\label{volcando-en-el-mapa-informacion-de-multiples-fuentes}}
+\hypertarget{volcando-en-el-mapa-informaciuxf3n-de-muxfaltiples-fuentes}{%
+\section{Volcando en el mapa información de múltiples fuentes}\label{volcando-en-el-mapa-informaciuxf3n-de-muxfaltiples-fuentes}}
 
 En algunos casos, un archivo con información geográfica contiene todos los datos que necesitamos. Pero lo habitual es que el archivo sólo brinde la ubicación y fronteras de nuestras unidades de análisis, de manera que necesitamos agregarle los datos que hemos obtenido de otras fuentes y queremos proyectar en un mapa.
 
@@ -3544,8 +3545,8 @@ Y mostramos el rubro principal por barrio en un mapa
 
 \includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-168-1.pdf}
 
-\hypertarget{combinando-capas-geograficas}{%
-\section{Combinando capas geográficas}\label{combinando-capas-geograficas}}
+\hypertarget{combinando-capas-geogruxe1ficas}{%
+\section{Combinando capas geográficas}\label{combinando-capas-geogruxe1ficas}}
 
 Comentamos al principio de capítulo que los archivos con datos espaciales pueden representar áreas (polígonos), líneas o puntos. Hasta ahora hemos hecho mapas con polígonos, pero según el caso podríamos querer mostrar otros tipos de geometría.
 
