@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 3 Poniendo los datos en forma | Ciencia de Datos para Gente Sociable</title>
   <meta name="description" content="Capítulo 3 Poniendo los datos en forma | Ciencia de Datos para Gente Sociable" />
-  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 3 Poniendo los datos en forma | Ciencia de Datos para Gente Sociable" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Antonio Vazquez Brust" />
 
 
-<meta name="date" content="2019-05-17" />
+<meta name="date" content="2020-02-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="una-presentacion-a-toda-marcha-de-r.html">
-<link rel="next" href="visualizacion.html">
+<link rel="prev" href="una-presentación-a-toda-marcha-de-r.html"/>
+<link rel="next" href="visualización.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -55,7 +58,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -133,27 +135,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>¿Para quién es esto?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#antes-de-empezar"><i class="fa fa-check"></i>Antes de empezar</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="que-es-la-ciencia-de-datos.html"><a href="que-es-la-ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> ¿Qué es la ciencia de datos?</a><ul>
-<li class="chapter" data-level="1.1" data-path="que-es-la-ciencia-de-datos.html"><a href="que-es-la-ciencia-de-datos.html#que-significa-hacer-ciencia-de-datos"><i class="fa fa-check"></i><b>1.1</b> ¿Qué significa hacer ciencia de datos?</a></li>
+<li class="chapter" data-level="1" data-path="qué-es-la-ciencia-de-datos.html"><a href="qué-es-la-ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> ¿Qué es la ciencia de datos?</a><ul>
+<li class="chapter" data-level="1.1" data-path="qué-es-la-ciencia-de-datos.html"><a href="qué-es-la-ciencia-de-datos.html#qué-significa-hacer-ciencia-de-datos"><i class="fa fa-check"></i><b>1.1</b> ¿Qué significa hacer ciencia de datos?</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html"><i class="fa fa-check"></i><b>2</b> Una presentación a toda marcha de R</a><ul>
-<li class="chapter" data-level="2.1" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#nuestro-primer-proyecto-en-r"><i class="fa fa-check"></i><b>2.1</b> Nuestro primer proyecto en R</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#a-investigar-cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autonoma-de-buenos-aires"><i class="fa fa-check"></i><b>2.1.1</b> A investigar: ¿Cual es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
-<li class="chapter" data-level="2.1.2" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#crear-un-proyecto-en-rstudio"><i class="fa fa-check"></i><b>2.1.2</b> Crear un proyecto en RStudio</a></li>
-<li class="chapter" data-level="2.1.3" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#escribiendo-un-script"><i class="fa fa-check"></i><b>2.1.3</b> Escribiendo un script</a></li>
-<li class="chapter" data-level="2.1.4" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#cargar-los-datos"><i class="fa fa-check"></i><b>2.1.4</b> Cargar los datos</a></li>
+<li class="chapter" data-level="2" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html"><i class="fa fa-check"></i><b>2</b> Una presentación a toda marcha de R</a><ul>
+<li class="chapter" data-level="2.1" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#nuestro-primer-proyecto-en-r"><i class="fa fa-check"></i><b>2.1</b> Nuestro primer proyecto en R</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#a-investigar-cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autónoma-de-buenos-aires"><i class="fa fa-check"></i><b>2.1.1</b> A investigar: ¿Cual es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
+<li class="chapter" data-level="2.1.2" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#crear-un-proyecto-en-rstudio"><i class="fa fa-check"></i><b>2.1.2</b> Crear un proyecto en RStudio</a></li>
+<li class="chapter" data-level="2.1.3" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#escribiendo-un-script"><i class="fa fa-check"></i><b>2.1.3</b> Escribiendo un script</a></li>
+<li class="chapter" data-level="2.1.4" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#cargar-los-datos"><i class="fa fa-check"></i><b>2.1.4</b> Cargar los datos</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#visualizacion-la-exploracion-grafica-de-la-informacion"><i class="fa fa-check"></i><b>2.2</b> Visualización: la exploración gráfica de la información</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#haciendo-mapas"><i class="fa fa-check"></i><b>2.2.1</b> Haciendo mapas</a></li>
-<li class="chapter" data-level="2.2.2" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#agregando-datos"><i class="fa fa-check"></i><b>2.2.2</b> Agregando datos</a></li>
+<li class="chapter" data-level="2.2" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#visualización-la-exploración-gráfica-de-la-información"><i class="fa fa-check"></i><b>2.2</b> Visualización: la exploración gráfica de la información</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#haciendo-mapas"><i class="fa fa-check"></i><b>2.2.1</b> Haciendo mapas</a></li>
+<li class="chapter" data-level="2.2.2" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#agregando-datos"><i class="fa fa-check"></i><b>2.2.2</b> Agregando datos</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#el-veredicto-final"><i class="fa fa-check"></i><b>2.3</b> El veredicto final</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="una-presentacion-a-toda-marcha-de-r.html"><a href="una-presentacion-a-toda-marcha-de-r.html#cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autonoma-de-buenos-aires"><i class="fa fa-check"></i><b>2.3.1</b> ¿Cuál es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
+<li class="chapter" data-level="2.3" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#el-veredicto-final"><i class="fa fa-check"></i><b>2.3</b> El veredicto final</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#cuál-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autónoma-de-buenos-aires"><i class="fa fa-check"></i><b>2.3.1</b> ¿Cuál es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
 </ul></li>
+<li class="chapter" data-level="2.4" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#ejercicios"><i class="fa fa-check"></i><b>2.4</b> Ejercicios</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html"><i class="fa fa-check"></i><b>3</b> Poniendo los datos en forma</a><ul>
 <li class="chapter" data-level="3.1" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo"><i class="fa fa-check"></i><b>3.1</b> Primeros pasos al examinar un conjunto de datos nuevo</a></li>
-<li class="chapter" data-level="3.2" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#cruzando-variables-la-operacion-join"><i class="fa fa-check"></i><b>3.2</b> Cruzando variables: la operación <code>join</code></a></li>
+<li class="chapter" data-level="3.2" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#cruzando-variables-la-operación-join"><i class="fa fa-check"></i><b>3.2</b> Cruzando variables: la operación <code>join</code></a></li>
 <li class="chapter" data-level="3.3" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#transformando-los-datos"><i class="fa fa-check"></i><b>3.3</b> Transformando los datos</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#seleccionar-columnas-con-select"><i class="fa fa-check"></i><b>3.3.1</b> Seleccionar columnas con <code>select()</code></a></li>
 <li class="chapter" data-level="3.3.2" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#filtrar-filas-con-filter"><i class="fa fa-check"></i><b>3.3.2</b> Filtrar filas con <code>filter()</code></a></li>
@@ -162,31 +165,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.5" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#extraer-sumarios-con-summarise"><i class="fa fa-check"></i><b>3.3.5</b> Extraer sumarios con <code>summarise()</code></a></li>
 <li class="chapter" data-level="3.3.6" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#bonus-el-operador-pipe"><i class="fa fa-check"></i><b>3.3.6</b> ¡BONUS! El operador “pipe”: <code>%&gt;%</code></a></li>
 </ul></li>
+<li class="chapter" data-level="3.4" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#ejercicios-1"><i class="fa fa-check"></i><b>3.4</b> Ejercicios</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="visualizacion.html"><a href="visualizacion.html"><i class="fa fa-check"></i><b>4</b> Visualización</a><ul>
-<li class="chapter" data-level="4.1" data-path="visualizacion.html"><a href="visualizacion.html#una-buena-visualizacion-para-empezar-el-scatterplot"><i class="fa fa-check"></i><b>4.1</b> Una buena visualización para empezar: el <em>scatterplot</em></a></li>
-<li class="chapter" data-level="4.2" data-path="visualizacion.html"><a href="visualizacion.html#ajustando-color-y-tamano"><i class="fa fa-check"></i><b>4.2</b> Ajustando color y tamaño</a></li>
-<li class="chapter" data-level="4.3" data-path="visualizacion.html"><a href="visualizacion.html#facetado"><i class="fa fa-check"></i><b>4.3</b> Facetado</a></li>
-<li class="chapter" data-level="4.4" data-path="visualizacion.html"><a href="visualizacion.html#graficos-de-barras"><i class="fa fa-check"></i><b>4.4</b> Gráficos de barras</a></li>
-<li class="chapter" data-level="4.5" data-path="visualizacion.html"><a href="visualizacion.html#histogramas"><i class="fa fa-check"></i><b>4.5</b> Histogramas</a></li>
-<li class="chapter" data-level="4.6" data-path="visualizacion.html"><a href="visualizacion.html#preparando-una-visualizacion-para-compartir"><i class="fa fa-check"></i><b>4.6</b> Preparando una visualización para compartir</a></li>
-<li class="chapter" data-level="4.7" data-path="visualizacion.html"><a href="visualizacion.html#otras-visualizaciones"><i class="fa fa-check"></i><b>4.7</b> Otras visualizaciones</a></li>
+<li class="chapter" data-level="4" data-path="visualización.html"><a href="visualización.html"><i class="fa fa-check"></i><b>4</b> Visualización</a><ul>
+<li class="chapter" data-level="4.1" data-path="visualización.html"><a href="visualización.html#una-buena-visualización-para-empezar-el-scatterplot"><i class="fa fa-check"></i><b>4.1</b> Una buena visualización para empezar: el <em>scatterplot</em></a></li>
+<li class="chapter" data-level="4.2" data-path="visualización.html"><a href="visualización.html#ajustando-color-y-tamaño"><i class="fa fa-check"></i><b>4.2</b> Ajustando color y tamaño</a></li>
+<li class="chapter" data-level="4.3" data-path="visualización.html"><a href="visualización.html#facetado"><i class="fa fa-check"></i><b>4.3</b> Facetado</a></li>
+<li class="chapter" data-level="4.4" data-path="visualización.html"><a href="visualización.html#gráficos-de-barras"><i class="fa fa-check"></i><b>4.4</b> Gráficos de barras</a></li>
+<li class="chapter" data-level="4.5" data-path="visualización.html"><a href="visualización.html#histogramas"><i class="fa fa-check"></i><b>4.5</b> Histogramas</a></li>
+<li class="chapter" data-level="4.6" data-path="visualización.html"><a href="visualización.html#preparando-una-visualización-para-compartir"><i class="fa fa-check"></i><b>4.6</b> Preparando una visualización para compartir</a></li>
+<li class="chapter" data-level="4.7" data-path="visualización.html"><a href="visualización.html#otras-visualizaciones"><i class="fa fa-check"></i><b>4.7</b> Otras visualizaciones</a></li>
+<li class="chapter" data-level="4.8" data-path="visualización.html"><a href="visualización.html#ejercicios-2"><i class="fa fa-check"></i><b>4.8</b> Ejercicios</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html"><i class="fa fa-check"></i><b>5</b> Modelado estadístico</a><ul>
-<li class="chapter" data-level="5.1" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#regresion-lineal-simple"><i class="fa fa-check"></i><b>5.1</b> Regresión lineal simple</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#regresion-con-una-variable-numerica"><i class="fa fa-check"></i><b>5.1.1</b> Regresión con una variable numérica</a></li>
-<li class="chapter" data-level="5.1.2" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#revolviendo-los-residuos"><i class="fa fa-check"></i><b>5.1.2</b> Revolviendo los residuos</a></li>
-<li class="chapter" data-level="5.1.3" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#regresion-con-una-variable-categorica"><i class="fa fa-check"></i><b>5.1.3</b> Regresión con una variable categórica</a></li>
+<li class="chapter" data-level="5" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html"><i class="fa fa-check"></i><b>5</b> Modelado estadístico</a><ul>
+<li class="chapter" data-level="5.1" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html#regresión-lineal-simple"><i class="fa fa-check"></i><b>5.1</b> Regresión lineal simple</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html#regresión-con-una-variable-numérica"><i class="fa fa-check"></i><b>5.1.1</b> Regresión con una variable numérica</a></li>
+<li class="chapter" data-level="5.1.2" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html#revolviendo-los-residuos"><i class="fa fa-check"></i><b>5.1.2</b> Revolviendo los residuos</a></li>
+<li class="chapter" data-level="5.1.3" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html#regresión-con-una-variable-categórica"><i class="fa fa-check"></i><b>5.1.3</b> Regresión con una variable categórica</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="modelado-estadistico.html"><a href="modelado-estadistico.html#regresion-con-multiples-variables"><i class="fa fa-check"></i><b>5.2</b> Regresión con múltiples variables</a></li>
+<li class="chapter" data-level="5.2" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html#regresión-con-múltiples-variables"><i class="fa fa-check"></i><b>5.2</b> Regresión con múltiples variables</a></li>
+<li class="chapter" data-level="5.3" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html#ejercicios-3"><i class="fa fa-check"></i><b>5.3</b> Ejercicios</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="informacion-geografica-y-mapas.html"><a href="informacion-geografica-y-mapas.html"><i class="fa fa-check"></i><b>6</b> Información geográfica y mapas</a><ul>
-<li class="chapter" data-level="6.1" data-path="informacion-geografica-y-mapas.html"><a href="informacion-geografica-y-mapas.html#los-datos-georreferenciados"><i class="fa fa-check"></i><b>6.1</b> Los datos georreferenciados</a></li>
-<li class="chapter" data-level="6.2" data-path="informacion-geografica-y-mapas.html"><a href="informacion-geografica-y-mapas.html#formatos-de-archivo"><i class="fa fa-check"></i><b>6.2</b> Formatos de archivo</a></li>
-<li class="chapter" data-level="6.3" data-path="informacion-geografica-y-mapas.html"><a href="informacion-geografica-y-mapas.html#explorando-un-archivo-con-informacion-geografica"><i class="fa fa-check"></i><b>6.3</b> Explorando un archivo con información geográfica</a></li>
-<li class="chapter" data-level="6.4" data-path="informacion-geografica-y-mapas.html"><a href="informacion-geografica-y-mapas.html#visualizando-informacion-geografica"><i class="fa fa-check"></i><b>6.4</b> Visualizando información geográfica</a></li>
-<li class="chapter" data-level="6.5" data-path="informacion-geografica-y-mapas.html"><a href="informacion-geografica-y-mapas.html#volcando-en-el-mapa-informacion-de-multiples-fuentes"><i class="fa fa-check"></i><b>6.5</b> Volcando en el mapa información de múltiples fuentes</a></li>
-<li class="chapter" data-level="6.6" data-path="informacion-geografica-y-mapas.html"><a href="informacion-geografica-y-mapas.html#combinando-capas-geograficas"><i class="fa fa-check"></i><b>6.6</b> Combinando capas geográficas</a></li>
+<li class="chapter" data-level="6" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html"><i class="fa fa-check"></i><b>6</b> Información geográfica y mapas</a><ul>
+<li class="chapter" data-level="6.1" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html#los-datos-georreferenciados"><i class="fa fa-check"></i><b>6.1</b> Los datos georreferenciados</a></li>
+<li class="chapter" data-level="6.2" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html#formatos-de-archivo"><i class="fa fa-check"></i><b>6.2</b> Formatos de archivo</a></li>
+<li class="chapter" data-level="6.3" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html#explorando-un-archivo-con-información-geográfica"><i class="fa fa-check"></i><b>6.3</b> Explorando un archivo con información geográfica</a></li>
+<li class="chapter" data-level="6.4" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html#visualizando-información-geográfica"><i class="fa fa-check"></i><b>6.4</b> Visualizando información geográfica</a></li>
+<li class="chapter" data-level="6.5" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html#volcando-en-el-mapa-información-de-múltiples-fuentes"><i class="fa fa-check"></i><b>6.5</b> Volcando en el mapa información de múltiples fuentes</a></li>
+<li class="chapter" data-level="6.6" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html#combinando-capas-geográficas"><i class="fa fa-check"></i><b>6.6</b> Combinando capas geográficas</a></li>
+<li class="chapter" data-level="6.7" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html#ejercicios-4"><i class="fa fa-check"></i><b>6.7</b> Ejercicios</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -216,12 +223,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo" class="section level2">
 <h2><span class="header-section-number">3.1</span> Primeros pasos al examinar un conjunto de datos nuevo</h2>
 <p>Si no lo hicimos aún en la sesión en la que estamos trabajando, cargamos <code>tidyverse</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
 <p>Vamos a practicar usando los registros del Sistema Único de Atención Ciudadana (SUACI) de la Ciudad Autónoma de Buenos Aires. El SUACI es el repositorio donde se integran las solicitudes y reclamos que los ciudadanos presentan a la ciudad por distintos canales: en persona, por teléfono o usando la aplicación <a href="https://gestioncolaborativa.buenosaires.gob.ar/prestaciones">BA 147</a>. Vamos a trabajar con una versión de los datos que ha sido simplificada para hacer más ameno el trabajo con ella. Quién quiera acceder a los datos en su esplendor de complejidad original, puede encontrarlos en el portal de datos abiertos de la ciudad: <a href="https://data.buenosaires.gob.ar/" class="uri">https://data.buenosaires.gob.ar/</a></p>
 <p>Comenzamos por acceder al archivo con los registros para cargarlo en R como un dataframe. Tendremos que ejercitar un poco la paciencia porque es un archivo de varios megas, que podría tardar unos minutos en ser descargado.</p>
-<pre class="sourceCode r"><code class="sourceCode r">atencion_ciudadano &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://bitsandbricks.github.io/data/gcba_suaci_barrios.csv&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">atencion_ciudadano &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://bitsandbricks.github.io/data/gcba_suaci_barrios.csv&quot;</span>)</a></code></pre></div>
 <p>Lo primero que deberíamos hacer con un dataframe que no conocemos es usar la función <code>str()</code>, que nos indica su estructura (por <em>structure</em> en inglés):</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(atencion_ciudadano)</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">str</span>(atencion_ciudadano)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    57431 obs. of  5 variables:
 ##  $ PERIODO        : int  201301 201301 201301 201301 201301 201301 201301 201301 201301 201301 ...
 ##  $ RUBRO          : Factor w/ 346 levels &quot;ACCESOS&quot;,&quot;ACERAS&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
@@ -231,7 +238,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Para empezar, nos enteramos que el objeto que estamos analizando es un dataframe (“data.frame”). Eso ya lo sabíamos, pero como str() puede usarse con cualquier clase de objeto en R, en ocasiones resultará que estamos ante un vector, una lista u otra clase de criatura. A continuación aparecen las dimensiones del dataframe: 57.432 observaciones (filas) con 5 variables (columnas). Los nombres de las columnas son PERIODO, RUBRO, TIPO_PRESTACION, BARRIO y total. Con eso ya podemos inferir que cada observación en el dataframe contiene la cantidad total de solicitudes según concepto, rubro y tipo de prestación (aunque no sepamos bien de que se tratan esas variables), en un período dado y en cada barrio.</p>
 <p>Con str() también obtenemos el tipo de datos representados pro cada variable, y un ejemplo de los valores contenidos en las primeras filas. <em>PERIODO</em> y <em>total</em> son variables de tipo “int”, es decir, números enteros o <em>integers</em> en inglés. El resto de las variables son de tipo “Factor”; en R las variables categóricas reciben el nombre de factores. ¿Y cómo sabe R que <em>RUBRO</em> o <em>BARRIO</em> son categorías? La culpable es la función <code>read.csv()</code> que usamos al principio. Si no se le aclara lo contrario, read.csv() interpreta como factores a todas las columnas que contienen texto. Para avisarle que no lo haga, hay que usar el parámetro <code>stringsAsFactors</code>, así: <code>misdatos &lt;- read.csv(&quot;archivo_con_mis_datos&quot;, stringsAsFactors = FALSE)</code>. En general es buena idea evitar que los campos de texto se asuman como factores, pero en éste caso está bien: todas las columnas de texto, en efecto, contienen variables categóricas. (Ante la duda, una variable es categórica cuando es razonable considerar que se elige entre un conjunto finito de variables posibles; por ejemplo, los barrios de Buenos Aires son un conjunto finito y predeterminado).</p>
 <p>La siguiente función a utilizar cuando estamos conociendo el contenido de un set de datos es <code>summary()</code>, que nos dará un resumen en forma de estadísticas descriptivas para las variables numéricas (cuartiles y mediana) y un vistazo a las categorías más representadas par los factores.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(atencion_ciudadano)</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw">summary</span>(atencion_ciudadano)</a></code></pre></div>
 <pre><code>##     PERIODO                         RUBRO        TIPO_PRESTACION 
 ##  Min.   :201301   SANEAMIENTO URBANO   : 4589   DENUNCIA :21606  
 ##  1st Qu.:201309   TRANSPORTE Y TRANSITO: 4580   QUEJA    : 3914  
@@ -249,7 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  RECOLETA   : 1729   Max.   :19221.00  
 ##  (Other)    :46008</code></pre>
 <p>Las categorías posibles para un factor son llamadas “niveles” (<em>levels</em>). Para ver todos los niveles del factor BARRIO, es decir todos los barrios representados en la columna con la variable BARRIO, podemos usar la función <code>levels()</code></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(atencion_ciudadano<span class="op">$</span>BARRIO)</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="kw">levels</span>(atencion_ciudadano<span class="op">$</span>BARRIO)</a></code></pre></div>
 <pre><code>##  [1] &quot; &quot;                    &quot;AGRONOMIA&quot;            &quot;ALMAGRO&quot;             
 ##  [4] &quot;BALVANERA&quot;            &quot;BARRACAS&quot;             &quot;BELGRANO&quot;            
 ##  [7] &quot;BOCA&quot;                 &quot;BOEDO&quot;                &quot;CABALLITO&quot;           
@@ -269,15 +276,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [49] &quot;VILLA SANTA RITA&quot;     &quot;VILLA SOLDATI&quot;        &quot;VILLA URQUIZA&quot;</code></pre>
 <p>Para acceder en forma rápida al contenido de la columna BARRIO, hemos utilizado por primera vez un “truco” muy práctico. Para obtener el contenido de cualquier columna en particular, basta con el nombre del dataframe seguido del símbolo <code>$</code> y el nombre de la columna a extraer: <code>atencion_ciudadano$BARRIO</code>, o <code>atencion_ciudadano$total</code>, etc.</p>
 </div>
-<div id="cruzando-variables-la-operacion-join" class="section level2">
+<div id="cruzando-variables-la-operación-join" class="section level2">
 <h2><span class="header-section-number">3.2</span> Cruzando variables: la operación <code>join</code></h2>
 <p>Al realizar un análisis “en la vida real”, es decir, usando datos salvajes en lugar de los prolijos datasets de práctica, es muy habitual encontrar que nos falta una variable que necesitamos. Si tenemos suerte, la información que necesitamos también está disponible en forma de tabla, con algún campo en común, y podemos llevar el cabo un cruce de datos para traérnosla.</p>
 <p>Para expresarlo con un ejemplo concreto: hemos visto que los registros de atención al ciudadano incluyen una columna con el barrio, que es la única variable relacionada con la geografía. Si nuestra unidad de análisis fuera la columna en lugar del barrio, necesitaríamos agrega la columna correspondiente. En este caso, estamos de suerte porque una tabla con los barrios de la Ciudad de Buenos Aires y la comuna a la que pertenecen es fácil de conseguir. Con esa tabla en nuestro poder, ya tenemos las piezas necesarias para el cruce de datos. En cada registro en el dataframe de atención al ciudadano, tenemos un barrio; podemos buscarlo en la tabla de barrios y comunas, tomar nota de la comuna asociada, y copiarla en nuestro dataset original. Por supuesto, hacerlo a mano para cada uno de las 57.432 filas en nuestro dataframe tardaría una eternidad, amén de que quizás perderíamos la cordura antes de terminar. ¡Nada de eso! Vamos a resolverlo en meros instantes escriviendo unas pocas líneas de código. Antes de continuar hagamos una pausa para conmiserar a los investigadores de eras pasadas, antes de la popularización de la computadora personal, que realizaban tareas de esta escala con lápiz, papel y paciencia.</p>
 <p>Existe una gran variedad de funciones que permiten combinar tablas relacionadas entre sí por una o varias variables en común. Para nuestro propósito, alcanza con conocer una: <code>left_join()</code>. La funcion toma como parámetros dos dataframes (que son tablas al fin y al cabo) busca las variables que tengan el mismo nombre y usandolas como referencia completa la primera de ellas, la de la izquierda, con los datos nuevos que aporta la segunda. <code>left_join</code> devuelve un dataframe nuevo con los datos combinados.</p>
 <p>Manos a la obra. Descargamos el dataframe con barrios y comunas,</p>
-<pre class="sourceCode r"><code class="sourceCode r">barrios_comunas &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://bitsandbricks.github.io/data/barrios_comunas.csv&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">barrios_comunas &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://bitsandbricks.github.io/data/barrios_comunas.csv&quot;</span>)</a></code></pre></div>
 <p>echamos un vistazo, comprobando que existe BARRIOS, una columna en común que lo relaciona con el dataframe de atención al ciudadano,</p>
-<pre class="sourceCode r"><code class="sourceCode r">barrios_comunas</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">barrios_comunas</a></code></pre></div>
 <pre><code>##               BARRIO COMUNA
 ## 1          AGRONOMIA     15
 ## 2            ALMAGRO      5
@@ -328,9 +335,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 47     VILLA SOLDATI      8
 ## 48     VILLA URQUIZA     12</code></pre>
 <p>y lo unimos (de allí el término “join”, unir en inglés) a nuestra data:</p>
-<pre class="sourceCode r"><code class="sourceCode r">atencion_ciudadano &lt;-<span class="st"> </span><span class="kw">left_join</span>(atencion_ciudadano, barrios_comunas)</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">atencion_ciudadano &lt;-<span class="st"> </span><span class="kw">left_join</span>(atencion_ciudadano, barrios_comunas)</a></code></pre></div>
 <p>Admiremos nuestra obra:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(atencion_ciudadano)</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">head</span>(atencion_ciudadano)</a></code></pre></div>
 <pre><code>##   PERIODO  RUBRO TIPO_PRESTACION    BARRIO total COMUNA
 ## 1  201301 ACERAS         RECLAMO AGRONOMIA     6     15
 ## 2  201301 ACERAS         RECLAMO   ALMAGRO   172      5
@@ -340,12 +347,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 6  201301 ACERAS         RECLAMO      BOCA    10      4</code></pre>
 <p>Es así de fácil. Bueno, no tanto… este fue un caso sencillo, pero hay todo tipo de datos y cruces allí afuera, y a veces se necesitan operaciones más complehas. Por eso hay toda una familia de funciones de <em>join</em> - <code>right_join()</code>, <code>inner_join()</code>, <code>full_join</code>, <code>anti_join()</code>, y alguna más. Pero podemos dejarlas en paz; para nuestras necesidades, con <code>left_join()</code> podemos areglarnos muy bien.</p>
 <p>Satisfechos con la mejora, si queremos guardar el dataframe “mejorado” para usarlo en otra ocasión, podemos hacerlo con <code>write.csv()</code>, que lo convierte en un archivo de texto que queda en nuestra PC.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(atencion_ciudadano, <span class="st">&quot;atencion_ciudadano.csv&quot;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">write.csv</span>(atencion_ciudadano, <span class="st">&quot;atencion_ciudadano.csv&quot;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Podemos seguir siempre ese formato para guardar nuestros datos. El primer parámetro es el dataframe que vamos a guardar, el segundo -siempre entre comillas- es el nombre de archivo, y la opcion final, <code>row.names = FALSE</code> sirve para evitar que R le agregue una columna al principio con numeros consecutivos (1, 2, 3, y así), cosa que quizás fue útil alguna vez pero en general no necesitamos.</p>
 <p>Para volver a leer los datos en otra ocasión, usamos <code>read.csv()</code> tal como ya hemos hecho.</p>
-<pre class="sourceCode r"><code class="sourceCode r">atencion_ciudadano &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;atencion_ciudadano.csv&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">atencion_ciudadano &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;atencion_ciudadano.csv&quot;</span>)</a></code></pre></div>
 <p>Y si queremos saber exactamente dónde ha guardado R nuestros datos, por ejemplo para abrirlos con otro programa, usamos la función <code>getwd</code> (por <em>get working directory</em> )</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getwd</span>()</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">getwd</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;/home/havb/Dropbox/Books/Mios/Ciencia de datos para gente sociable&quot;</code></pre>
 <p>El resultado será la dirección (la ubicacion de la la carpeta), donde estamos trabajando y hemos guardado los datos; por ejemplo <code>/home/antonio/Practicando R/</code>.</p>
 </div>
@@ -361,19 +368,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>summarise()</code>: producir sumarios -un valor extraído de muchos, por ejemplo el promedio- con el contenido de las columnas</li>
 </ul>
 <p>Estas funciones tienen una sintaxis, una forma de escribirse, uniforme. El primer argumento que toman siempre es un dataframe; los siguientes indican qué hacer con los datos. El resultado siempre es un nuevo dataframe.</p>
-<p>Las funciones son parte de <a href="http://dplyr.tidyverse.org/">dplyr</a>, uno de los componentes de la familia de paquetes <a href="https://www.tidyverse.org/">Tidyverse</a>. Ya tenemos disponible todo lo necesario, activado cuando invocamos <code>library(tidiverse)</code> al comienzo.</p>
+<p>Las funciones son parte de <a href="http://dplyr.tidyverse.org/">dplyr</a>, uno de los componentes de la familia de paquetes <a href="https://www.tidyverse.org/">Tidyverse</a>. Ya tenemos disponible todo lo necesario, activado cuando invocamos <code>library(tidyverse)</code> al comienzo.</p>
 <p>Manos a la obra.</p>
 <div id="seleccionar-columnas-con-select" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> Seleccionar columnas con <code>select()</code></h3>
 <p>Muchas veces tendremos que lidiar con datasets con decenas de variables. Alguna que otra vez, con centenas. En esos casos el primer problema es librarnos de semejante cantidad de columnas, reteniendo sólo aquellas en las que estamos interesados. Para un dataset como el de reclamos de los ciudadanos, que tiene pocas columnas, select() no es tan importante. Aún así, podemos usar select() con fines demostrativos.</p>
 <p>Sabemos que el dataset tiene 5 columnas:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(atencion_ciudadano)</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">names</span>(atencion_ciudadano)</a></code></pre></div>
 <pre><code>## [1] &quot;PERIODO&quot;         &quot;RUBRO&quot;           &quot;TIPO_PRESTACION&quot; &quot;BARRIO&quot;         
 ## [5] &quot;total&quot;           &quot;COMUNA&quot;</code></pre>
 <p>Si quisiéramos sólo las que contienen el período y el total, las seleccionamos por nombre, a continuación del nombre del dataframe:</p>
-<pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">select</span>(atencion_ciudadano, PERIODO, total)
-
-<span class="kw">head</span>(seleccion)</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">seleccion &lt;-<span class="st"> </span><span class="kw">select</span>(atencion_ciudadano, PERIODO, total)</a>
+<a class="sourceLine" id="cb72-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb72-3" data-line-number="3"><span class="kw">head</span>(seleccion)</a></code></pre></div>
 <pre><code>##   PERIODO total
 ## 1  201301     6
 ## 2  201301   172
@@ -382,9 +389,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5  201301    79
 ## 6  201301    10</code></pre>
 <p>También podemos seleccionar por contigüidad, por ejemplo “todas las columnas que van de RUBRO a BARRIO”:</p>
-<pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">select</span>(atencion_ciudadano, RUBRO<span class="op">:</span>BARRIO)
-
-<span class="kw">head</span>(seleccion)</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1">seleccion &lt;-<span class="st"> </span><span class="kw">select</span>(atencion_ciudadano, RUBRO<span class="op">:</span>BARRIO)</a>
+<a class="sourceLine" id="cb74-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb74-3" data-line-number="3"><span class="kw">head</span>(seleccion)</a></code></pre></div>
 <pre><code>##    RUBRO TIPO_PRESTACION    BARRIO
 ## 1 ACERAS         RECLAMO AGRONOMIA
 ## 2 ACERAS         RECLAMO   ALMAGRO
@@ -393,9 +400,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 ACERAS         RECLAMO  BELGRANO
 ## 6 ACERAS         RECLAMO      BOCA</code></pre>
 <p>Y podemos seleccionar por omisión. Si nos interesara todo el contenido del dataset menos la variable RUBRO, usaríamos</p>
-<pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">select</span>(atencion_ciudadano, <span class="op">-</span>RUBRO)
-
-<span class="kw">head</span>(seleccion)</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">seleccion &lt;-<span class="st"> </span><span class="kw">select</span>(atencion_ciudadano, <span class="op">-</span>RUBRO)</a>
+<a class="sourceLine" id="cb76-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb76-3" data-line-number="3"><span class="kw">head</span>(seleccion)</a></code></pre></div>
 <pre><code>##   PERIODO TIPO_PRESTACION    BARRIO total COMUNA
 ## 1  201301         RECLAMO AGRONOMIA     6     15
 ## 2  201301         RECLAMO   ALMAGRO   172      5
@@ -404,9 +411,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5  201301         RECLAMO  BELGRANO    79     13
 ## 6  201301         RECLAMO      BOCA    10      4</code></pre>
 <p>Al igual que con las selección por inclusión, podemos seleccionar por omisión de un rango de columnas contiguas (escritas entre paréntesis), o de varias columnas nombradas:</p>
-<pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">select</span>(atencion_ciudadano, <span class="op">-</span>(TIPO_PRESTACION<span class="op">:</span>total))
-
-<span class="kw">head</span>(seleccion)</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">seleccion &lt;-<span class="st"> </span><span class="kw">select</span>(atencion_ciudadano, <span class="op">-</span>(TIPO_PRESTACION<span class="op">:</span>total))</a>
+<a class="sourceLine" id="cb78-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb78-3" data-line-number="3"><span class="kw">head</span>(seleccion)</a></code></pre></div>
 <pre><code>##   PERIODO  RUBRO COMUNA
 ## 1  201301 ACERAS     15
 ## 2  201301 ACERAS      5
@@ -414,9 +421,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4  201301 ACERAS      4
 ## 5  201301 ACERAS     13
 ## 6  201301 ACERAS      4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">select</span>(atencion_ciudadano, <span class="op">-</span>RUBRO, <span class="op">-</span>BARRIO)
-
-<span class="kw">head</span>(seleccion)</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">seleccion &lt;-<span class="st"> </span><span class="kw">select</span>(atencion_ciudadano, <span class="op">-</span>RUBRO, <span class="op">-</span>BARRIO)</a>
+<a class="sourceLine" id="cb80-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb80-3" data-line-number="3"><span class="kw">head</span>(seleccion)</a></code></pre></div>
 <pre><code>##   PERIODO TIPO_PRESTACION total COMUNA
 ## 1  201301         RECLAMO     6     15
 ## 2  201301         RECLAMO   172      5
@@ -429,8 +436,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.3.2</span> Filtrar filas con <code>filter()</code></h3>
 <p>Una de las tareas más frecuentes en el análisis de datos es la de identificar observaciones que cumplen con determinada condición. <code>filter()</code> permite extraer subconjuntos del total en base a sus variables.</p>
 <p>Por ejemplo, para seleccionar registros que correspondan a Retiro, ocurridos en el primer mes de 2014 (período 201401):</p>
-<pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, BARRIO <span class="op">==</span><span class="st"> &quot;RETIRO&quot;</span>, PERIODO <span class="op">==</span><span class="st"> </span><span class="dv">201401</span>)
-<span class="kw">head</span>(seleccion)</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, BARRIO <span class="op">==</span><span class="st"> &quot;RETIRO&quot;</span>, PERIODO <span class="op">==</span><span class="st"> </span><span class="dv">201401</span>)</a>
+<a class="sourceLine" id="cb82-2" data-line-number="2"><span class="kw">head</span>(seleccion)</a></code></pre></div>
 <pre><code>##   PERIODO               RUBRO TIPO_PRESTACION BARRIO total COMUNA
 ## 1  201401              ACERAS         RECLAMO RETIRO    10      1
 ## 2  201401           ALUMBRADO         RECLAMO RETIRO    34      1
@@ -450,8 +457,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Atención especial merece el símbolo que compara igualdad, <code>==</code>. Un error muy común es escribir <code>BARRIO = &quot;RETIRO&quot;</code>, (un sólo símbolo <code>=</code>) que le indica a R que guarde el valor “RETIRO” dentro de la variable BARRIO, en lugar de verificar si son iguales. Para ésto último, lo correcto es <code>BARRIO == &quot;RETIRO&quot;</code>, tal como lo usamos en el ejemplo de filter().</p>
 <p>También hay que tener en cuenta el uso de comillas. Para que R no se confunda, cuando queramos usar valores de texto (de tipo <em>character</em>) los rodeamos con comillas para que quede claro que no nos referimos a una variable con ese nombre, si la hubiera, sino en forma literal a esa palabra o secuencia de texto. En el caso de los números, no hace falta el uso de comillas, ya que en R ningún nombre de variable puede comenzar con o estar compuesta sólo por números.</p>
 <p>Filtrando los registros de períodos para los cuales se registran más de 100 incidentes:</p>
-<pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, total <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>)
-<span class="kw">head</span>(seleccion)</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, total <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb85-2" data-line-number="2"><span class="kw">head</span>(seleccion)</a></code></pre></div>
 <pre><code>##   PERIODO     RUBRO TIPO_PRESTACION    BARRIO total COMUNA
 ## 1  201301    ACERAS         RECLAMO   ALMAGRO   172      5
 ## 2  201301    ACERAS         RECLAMO CABALLITO   109      6
@@ -460,13 +467,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5  201301 ALUMBRADO         RECLAMO   ALMAGRO   130      5
 ## 6  201301 ALUMBRADO         RECLAMO  BARRACAS   118      4</code></pre>
 </div>
-<div id="operadores-logicos" class="section level4">
+<div id="operadores-lógicos" class="section level4">
 <h4><span class="header-section-number">3.3.2.2</span> Operadores lógicos</h4>
 <p>Cuando le pasamos múltiples condiciones a filter(), la función devuelve las filas que cumplen con todas.</p>
 <p>Por ejemplo, con</p>
-<pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, PERIODO <span class="op">==</span><span class="st"> </span><span class="dv">201508</span>,  RUBRO <span class="op">==</span><span class="st"> &quot;SALUD&quot;</span>)
-
-<span class="kw">head</span>(seleccion)</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, PERIODO <span class="op">==</span><span class="st"> </span><span class="dv">201508</span>,  RUBRO <span class="op">==</span><span class="st"> &quot;SALUD&quot;</span>)</a>
+<a class="sourceLine" id="cb87-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb87-3" data-line-number="3"><span class="kw">head</span>(seleccion)</a></code></pre></div>
 <pre><code>##   PERIODO RUBRO TIPO_PRESTACION    BARRIO total COMUNA
 ## 1  201508 SALUD           QUEJA  BARRACAS     1      4
 ## 2  201508 SALUD           QUEJA CABALLITO     1      6
@@ -474,16 +481,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4  201508 SALUD           QUEJA  RECOLETA     1      2</code></pre>
 <p>obtenemos todos los registros cuyo rubro es “SALUD”, y cuyo período es 20108, agosto de 2015.</p>
 <p>Siguiendo el mismo formato, si intentamos</p>
-<pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, BARRIO <span class="op">==</span><span class="st"> &quot;RETIRO&quot;</span>, BARRIO <span class="op">==</span><span class="st"> &quot;PALERMO&quot;</span>)
-
-<span class="kw">head</span>(seleccion)</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, BARRIO <span class="op">==</span><span class="st"> &quot;RETIRO&quot;</span>, BARRIO <span class="op">==</span><span class="st"> &quot;PALERMO&quot;</span>)</a>
+<a class="sourceLine" id="cb89-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb89-3" data-line-number="3"><span class="kw">head</span>(seleccion)</a></code></pre></div>
 <pre><code>## [1] PERIODO         RUBRO           TIPO_PRESTACION BARRIO         
 ## [5] total           COMUNA         
 ## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
 <p>obtenemos un conjunto vacío. ¿Por qué? Es debido a que ninguna observación cumple con todas las condiciones; el ningún registro el barrio es Retiro y es Palermo. ¡Suena razonable!. Para obtener registros ocurrido en Retiro <strong>ó</strong> en Palermo, usamos el operador lógico <code>|</code> que significa… “ó”.</p>
-<pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, BARRIO <span class="op">==</span><span class="st"> &quot;RETIRO&quot;</span> <span class="op">|</span><span class="st"> </span>BARRIO <span class="op">==</span><span class="st"> &quot;PALERMO&quot;</span>)
-
-<span class="kw">head</span>(seleccion)</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, BARRIO <span class="op">==</span><span class="st"> &quot;RETIRO&quot;</span> <span class="op">|</span><span class="st"> </span>BARRIO <span class="op">==</span><span class="st"> &quot;PALERMO&quot;</span>)</a>
+<a class="sourceLine" id="cb91-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb91-3" data-line-number="3"><span class="kw">head</span>(seleccion)</a></code></pre></div>
 <pre><code>##   PERIODO               RUBRO TIPO_PRESTACION  BARRIO total COMUNA
 ## 1  201301              ACERAS         RECLAMO PALERMO   113     14
 ## 2  201301              ACERAS         RECLAMO  RETIRO    15      1
@@ -499,11 +506,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 * !(a &amp; b)  no (a y b) </code></pre>
 <p>Hemos visto ejemplos de <code>a &amp; b</code> (<code>PERIODO == 201508,  RUBRO == &quot;SALUD&quot;</code>, que filter toma como un <code>&amp;</code>) y de <code>a | b</code> (<code>BARRIO == &quot;RETIRO&quot; | BARRIO == &quot;PALERMO&quot;</code>)</p>
 <p>Un ejemplo de <code>a &amp; !b</code>, filas en las que el tipo de prestación sea “TRAMITE”, y en las que el rubro no sea “REGISTRO CIVIL”:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(atencion_ciudadano, TIPO_PRESTACION <span class="op">==</span><span class="st"> &quot;TRAMITE&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>(RUBRO <span class="op">==</span><span class="st"> &quot;REGISTRO CIVIL&quot;</span>))</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="kw">filter</span>(atencion_ciudadano, TIPO_PRESTACION <span class="op">==</span><span class="st"> &quot;TRAMITE&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>(RUBRO <span class="op">==</span><span class="st"> &quot;REGISTRO CIVIL&quot;</span>))</a></code></pre></div>
 <p>Y como ejemplo de <code>!(a &amp; b)</code>, todas las filas excepto las de tipo “DENUNCIA”, y rubro “SEGURIDAD E HIGIENE”:</p>
-<pre class="sourceCode r"><code class="sourceCode r">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, <span class="op">!</span>(TIPO_PRESTACION <span class="op">==</span><span class="st"> &quot;DENUNCIA&quot;</span> <span class="op">&amp;</span><span class="st"> </span>RUBRO <span class="op">==</span><span class="st"> &quot;SEGURIDAD E HIGIENE&quot;</span>))
-
-<span class="kw">head</span>(seleccion)</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1">seleccion &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, <span class="op">!</span>(TIPO_PRESTACION <span class="op">==</span><span class="st"> &quot;DENUNCIA&quot;</span> <span class="op">&amp;</span><span class="st"> </span>RUBRO <span class="op">==</span><span class="st"> &quot;SEGURIDAD E HIGIENE&quot;</span>))</a>
+<a class="sourceLine" id="cb95-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb95-3" data-line-number="3"><span class="kw">head</span>(seleccion)</a></code></pre></div>
 <pre><code>##   PERIODO  RUBRO TIPO_PRESTACION    BARRIO total COMUNA
 ## 1  201301 ACERAS         RECLAMO AGRONOMIA     6     15
 ## 2  201301 ACERAS         RECLAMO   ALMAGRO   172      5
@@ -517,9 +524,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.3.3</span> Ordenar filas con <code>arrange()</code></h3>
 <p>La función <code>arrange()</code> cambia el orden en el que aparecen las filas de un dataframe. Como primer parámetro toma un dataframe, al igual que el resto de los verbos de transformación que estamos aprendiendo. A continuación, espera un set de columnas para definir el orden.</p>
 <p>Por ejemplo, para ordenar por total de registros:</p>
-<pre class="sourceCode r"><code class="sourceCode r">ordenado &lt;-<span class="st"> </span><span class="kw">arrange</span>(atencion_ciudadano, total)
-
-<span class="kw">head</span>(ordenado)</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1">ordenado &lt;-<span class="st"> </span><span class="kw">arrange</span>(atencion_ciudadano, total)</a>
+<a class="sourceLine" id="cb97-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb97-3" data-line-number="3"><span class="kw">head</span>(ordenado)</a></code></pre></div>
 <pre><code>##   PERIODO  RUBRO TIPO_PRESTACION        BARRIO total COMUNA
 ## 1  201301 ACERAS         RECLAMO PUERTO MADERO     1      1
 ## 2  201301 ACERAS       SOLICITUD      BARRACAS     1      4
@@ -528,9 +535,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5  201301 ACERAS       SOLICITUD       COGHLAN     1     12
 ## 6  201301 ACERAS       SOLICITUD  CONSTITUCION     1      1</code></pre>
 <p>Si agregamos más columnas, se usan en orden para “desempatar”. Por ejemplo, si queremos que las filas con el mismo valor en <em>total</em> aparezcan en el orden alfabético del barrio que les corresponde, sólo necesitamos agregar esa columna:</p>
-<pre class="sourceCode r"><code class="sourceCode r">ordenado &lt;-<span class="st"> </span><span class="kw">arrange</span>(atencion_ciudadano, total, BARRIO)
-
-<span class="kw">head</span>(ordenado)</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1">ordenado &lt;-<span class="st"> </span><span class="kw">arrange</span>(atencion_ciudadano, total, BARRIO)</a>
+<a class="sourceLine" id="cb99-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb99-3" data-line-number="3"><span class="kw">head</span>(ordenado)</a></code></pre></div>
 <pre><code>##   PERIODO           RUBRO TIPO_PRESTACION    BARRIO total COMUNA
 ## 1  201301       ALUMBRADO       SOLICITUD AGRONOMIA     1     15
 ## 2  201301 ATENCION SOCIAL         RECLAMO AGRONOMIA     1     15
@@ -539,9 +546,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5  201301   RECUPERADORES         RECLAMO AGRONOMIA     1     15
 ## 6  201301       SEGURIDAD         RECLAMO AGRONOMIA     1     15</code></pre>
 <p>Si no se aclara lo contrario, el orden siempre es ascendente (de menor a mayor). Si quisiéramos orden de mayor a menor, usamos <code>desc()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">ordenado &lt;-<span class="st"> </span><span class="kw">arrange</span>(atencion_ciudadano, <span class="kw">desc</span>(total))
-
-<span class="kw">head</span>(ordenado)</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1">ordenado &lt;-<span class="st"> </span><span class="kw">arrange</span>(atencion_ciudadano, <span class="kw">desc</span>(total))</a>
+<a class="sourceLine" id="cb101-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb101-3" data-line-number="3"><span class="kw">head</span>(ordenado)</a></code></pre></div>
 <pre><code>##   PERIODO          RUBRO TIPO_PRESTACION      BARRIO total COMUNA
 ## 1  201502 REGISTRO CIVIL         TRAMITE   MONSERRAT 19221      1
 ## 2  201403 REGISTRO CIVIL         TRAMITE SAN NICOLAS 19209      1
@@ -553,19 +560,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">3.3.3.1</span> Valores faltantes</h4>
 <p>En el último ejemplo, aparecen varias filas cuyo valor para la columna BARRIO es <code>NA</code>. R representa los valores ausentes, desconocidos, con <code>NA</code> (“no disponible”, del inglés <em>Not Available</em>). Hay que tener cuidado con los valores <code>NA</code>, porque la mayoría de las comparaciones y operaciones lógicas que los involucran resultan indefinidas. En la práctica:</p>
 <p>¿Es 10 mayor a un valor desconocido?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">10</span> <span class="op">&gt;</span><span class="st"> </span><span class="ot">NA</span></code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1"><span class="dv">10</span> <span class="op">&gt;</span><span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 <p>R no sabe. (Nadie lo sabe, para ser justos)</p>
 <p>¿A cuanto asciende la suma de 10 más un valor desconocido?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="ot">NA</span> <span class="op">+</span><span class="st"> </span><span class="dv">10</span></code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="ot">NA</span> <span class="op">+</span><span class="st"> </span><span class="dv">10</span></a></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 <p>Y en particular… ¿es un valor desconocido igual a otro valor desconocido?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="ot">NA</span> <span class="op">==</span><span class="st"> </span><span class="ot">NA</span></code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="ot">NA</span> <span class="op">==</span><span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 <p>Por supuesto, la respuesta es desconocida también. La insistencia de R en no definir operaciones que involucran NA’s podría parecer irritante a primera vista, pero en realidad nos hace un favor. Al evitar extraer conclusiones cuando trata con datos faltantes, nos evita caer en errores garrafales en los casos en que analizamos y comparamos datos incompletos. Además, podemos preguntar a R si un valor es desconocido, y allí si contesta con seguridad. La función requerida es <code>is.na()</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">desconocido &lt;-<span class="st"> </span><span class="ot">NA</span>
-
-<span class="kw">is.na</span>(desconocido)</code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1">desconocido &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb109-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb109-3" data-line-number="3"><span class="kw">is.na</span>(desconocido)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Algo más a tener en cuenta con los valores desconocidos es cómo son interpretados cuando usamos funciones de transformación de datos. Por ejemplo, <code>filter()</code> ignora las filas que contienen NA’s en la variable que usa para filtrar. <code>arrange()</code> muestra las filas con NA’s en el campo por el que ordena, pero todas al final.</p>
 </div>
@@ -573,28 +580,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="agregar-nuevas-variables-con-mutate" class="section level3">
 <h3><span class="header-section-number">3.3.4</span> Agregar nuevas variables con <code>mutate()</code></h3>
 <p>Recurrimos a la función <code>mutate()</code> cuando queremos agregarle columnas adicionales a nuestro dataframe, en general en base a los valores de las columnas ya existentes. Vamos a ilustrarlo con un ejemplo sencillo. Imaginemos que tenemos el siguiente dataset:</p>
-<pre class="sourceCode r"><code class="sourceCode r">circulos &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">nombre =</span> <span class="kw">c</span>(<span class="st">&quot;Círculo 1&quot;</span>, <span class="st">&quot;Círculo 2&quot;</span>, <span class="st">&quot;Círculo 3&quot;</span>),
-                       tamañ<span class="dt">o =</span> <span class="kw">c</span>(<span class="st">&quot;Pequeño&quot;</span>, <span class="st">&quot;Mediano&quot;</span>, <span class="st">&quot;Grande&quot;</span>),
-                       <span class="dt">radio  =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>))
-
-circulos</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1">circulos &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">nombre =</span> <span class="kw">c</span>(<span class="st">&quot;Círculo 1&quot;</span>, <span class="st">&quot;Círculo 2&quot;</span>, <span class="st">&quot;Círculo 3&quot;</span>),</a>
+<a class="sourceLine" id="cb111-2" data-line-number="2">                       tamañ<span class="dt">o =</span> <span class="kw">c</span>(<span class="st">&quot;Pequeño&quot;</span>, <span class="st">&quot;Mediano&quot;</span>, <span class="st">&quot;Grande&quot;</span>),</a>
+<a class="sourceLine" id="cb111-3" data-line-number="3">                       <span class="dt">radio  =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb111-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb111-5" data-line-number="5">circulos</a></code></pre></div>
 <pre><code>##      nombre  tamaño radio
 ## 1 Círculo 1 Pequeño     1
 ## 2 Círculo 2 Mediano     3
 ## 3 Círculo 3  Grande     5</code></pre>
 <p>Podemos agregar una columna con el área de cada círculo con mutate():</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mutate</span>(circulos, <span class="dt">area =</span> <span class="fl">3.1416</span> <span class="op">*</span><span class="st"> </span>radio<span class="op">^</span><span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1"><span class="kw">mutate</span>(circulos, <span class="dt">area =</span> <span class="fl">3.1416</span> <span class="op">*</span><span class="st"> </span>radio<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##      nombre  tamaño radio    area
 ## 1 Círculo 1 Pequeño     1  3.1416
 ## 2 Círculo 2 Mediano     3 28.2744
 ## 3 Círculo 3  Grande     5 78.5400</code></pre>
 <p>Usando mutate(), definimos la columna “area”, indicando que su contenido será el valor de la columna “radio” en cada registro puesto en la fórmula del área de un círculo. Los operadores aritméticos (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>) son con frecuencia útiles para usar en conjunto con mutate().</p>
 <p>Volvamos ahora a nuestro dataframe con datos de reclamos. Supongamos que nos interesa agregar columnas con el mes y el año de cada registro. La columna período, con valores del tipo “201301”, contiene la información necesaria para derivar estas dos nuevas variables. Para separar la parte del año de la parte del mes, la función <code>substr()</code>, que extrae porciones de una variable de texto, nos va a dar una mano. La usamos así: el primer parámetro es una secuencia de caracteres, y los dos siguientes indican donde queremos que empiece y termine la porción a extraer.</p>
-<pre class="sourceCode r"><code class="sourceCode r">atencion_ciudadano &lt;-<span class="st"> </span><span class="kw">mutate</span>(atencion_ciudadano,
-                             AÑ<span class="dt">O =</span> <span class="kw">substr</span>(PERIODO, <span class="dv">1</span>, <span class="dv">4</span>),
-                             <span class="dt">MES =</span> <span class="kw">substr</span>(PERIODO, <span class="dv">5</span>, <span class="dv">6</span>))
-                                
-<span class="kw">head</span>(atencion_ciudadano) </code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1">atencion_ciudadano &lt;-<span class="st"> </span><span class="kw">mutate</span>(atencion_ciudadano,</a>
+<a class="sourceLine" id="cb115-2" data-line-number="2">                             AÑ<span class="dt">O =</span> <span class="kw">substr</span>(PERIODO, <span class="dv">1</span>, <span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb115-3" data-line-number="3">                             <span class="dt">MES =</span> <span class="kw">substr</span>(PERIODO, <span class="dv">5</span>, <span class="dv">6</span>))</a>
+<a class="sourceLine" id="cb115-4" data-line-number="4">                                </a>
+<a class="sourceLine" id="cb115-5" data-line-number="5"><span class="kw">head</span>(atencion_ciudadano) </a></code></pre></div>
 <pre><code>##   PERIODO  RUBRO TIPO_PRESTACION    BARRIO total COMUNA  AÑO MES
 ## 1  201301 ACERAS         RECLAMO AGRONOMIA     6     15 2013  01
 ## 2  201301 ACERAS         RECLAMO   ALMAGRO   172      5 2013  01
@@ -606,13 +613,13 @@ circulos</code></pre>
 <div id="extraer-sumarios-con-summarise" class="section level3">
 <h3><span class="header-section-number">3.3.5</span> Extraer sumarios con <code>summarise()</code></h3>
 <p>Llegamos al último de los verbos fundamentales para transformar datos. <code>summarise()</code> (por “resumir” en inglés) toma un dataframe completo y lo resume un una sola fila, de acuerdo a la operación que indiquemos. Por ejemplo, el promedio de la columna “total”:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summarise</span>(atencion_ciudadano, <span class="dt">promedio =</span> <span class="kw">mean</span>(total))</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1"><span class="kw">summarise</span>(atencion_ciudadano, <span class="dt">promedio =</span> <span class="kw">mean</span>(total))</a></code></pre></div>
 <pre><code>##   promedio
 ## 1  34.8478</code></pre>
 <p>Por si sola, <code>summarise()</code> no es de mucha ayuda. La gracia está en combinarla con <code>group_by()</code>, que cambia la unidad de análisis del dataframe completo a grupos individuales. Usar <code>summarise()</code> sobre un dataframe al que antes agrupamos con <code>group_by</code> resulta en resúmenes “por grupo”.</p>
-<pre class="sourceCode r"><code class="sourceCode r">agrupado &lt;-<span class="st"> </span><span class="kw">group_by</span>(atencion_ciudadano, AÑO)
-
-<span class="kw">summarise</span>(agrupado, <span class="dt">promedio_totales =</span> <span class="kw">mean</span>(total))</code></pre>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">agrupado &lt;-<span class="st"> </span><span class="kw">group_by</span>(atencion_ciudadano, AÑO)</a>
+<a class="sourceLine" id="cb119-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb119-3" data-line-number="3"><span class="kw">summarise</span>(agrupado, <span class="dt">promedio_totales =</span> <span class="kw">mean</span>(total))</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   AÑO   promedio_totales
 ##   &lt;chr&gt;            &lt;dbl&gt;
@@ -620,11 +627,11 @@ circulos</code></pre>
 ## 2 2014              30.2
 ## 3 2015              45.4</code></pre>
 <p>Podemos agrupar por múltiples columnas, generando más subgrupos; por ejemplo, promedios por por año y mes…</p>
-<pre class="sourceCode r"><code class="sourceCode r">agrupado &lt;-<span class="st"> </span><span class="kw">group_by</span>(atencion_ciudadano, AÑO, MES)
-
-sumario &lt;-<span class="st"> </span><span class="kw">summarise</span>(agrupado, <span class="dt">promedio =</span> <span class="kw">mean</span>(total))
-
-<span class="kw">head</span>(sumario)</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1">agrupado &lt;-<span class="st"> </span><span class="kw">group_by</span>(atencion_ciudadano, AÑO, MES)</a>
+<a class="sourceLine" id="cb121-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb121-3" data-line-number="3">sumario &lt;-<span class="st"> </span><span class="kw">summarise</span>(agrupado, <span class="dt">promedio =</span> <span class="kw">mean</span>(total))</a>
+<a class="sourceLine" id="cb121-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb121-5" data-line-number="5"><span class="kw">head</span>(sumario)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ## # Groups:   AÑO [1]
 ##   AÑO   MES   promedio
@@ -636,11 +643,11 @@ sumario &lt;-<span class="st"> </span><span class="kw">summarise</span>(agrupado
 ## 5 2013  05        28.0
 ## 6 2013  06        28.9</code></pre>
 <p>… o por año, mes y barrio:</p>
-<pre class="sourceCode r"><code class="sourceCode r">agrupado &lt;-<span class="st"> </span><span class="kw">group_by</span>(atencion_ciudadano, AÑO, MES, BARRIO)
-
-sumario &lt;-<span class="st"> </span><span class="kw">summarise</span>(agrupado, <span class="dt">promedio =</span> <span class="kw">mean</span>(total))
-
-<span class="kw">head</span>(sumario)</code></pre>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">agrupado &lt;-<span class="st"> </span><span class="kw">group_by</span>(atencion_ciudadano, AÑO, MES, BARRIO)</a>
+<a class="sourceLine" id="cb123-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb123-3" data-line-number="3">sumario &lt;-<span class="st"> </span><span class="kw">summarise</span>(agrupado, <span class="dt">promedio =</span> <span class="kw">mean</span>(total))</a>
+<a class="sourceLine" id="cb123-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb123-5" data-line-number="5"><span class="kw">head</span>(sumario)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ## # Groups:   AÑO, MES [1]
 ##   AÑO   MES   BARRIO    promedio
@@ -668,15 +675,15 @@ sumario &lt;-<span class="st"> </span><span class="kw">summarise</span>(agrupado
 4. los ordenamos en forma descendiente,
 5. mostramos sólo los primeros 5 (esto se puede hacer con la función `head()`, aclarando cuantas filas queremos ver)</code></pre>
 <p>En código:</p>
-<pre class="sourceCode r"><code class="sourceCode r">solo2014 &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, AÑO <span class="op">==</span><span class="st"> </span><span class="dv">2014</span>)
-
-solo2014_agrupado_barrio &lt;-<span class="st"> </span><span class="kw">group_by</span>(solo2014, BARRIO)
-
-total_por_barrio_<span class="dv">2014</span> &lt;-<span class="st"> </span><span class="kw">summarise</span>(solo2014_agrupado_barrio, <span class="dt">total =</span> <span class="kw">sum</span>(total))
-
-total_por_barrio_<span class="dv">2014</span>_ordenado &lt;-<span class="st"> </span><span class="kw">arrange</span>(total_por_barrio_<span class="dv">2014</span>, <span class="kw">desc</span>(total))
-
-<span class="kw">head</span>(total_por_barrio_<span class="dv">2014</span>_ordenado, <span class="dv">5</span>)</code></pre>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">solo2014 &lt;-<span class="st"> </span><span class="kw">filter</span>(atencion_ciudadano, AÑO <span class="op">==</span><span class="st"> </span><span class="dv">2014</span>)</a>
+<a class="sourceLine" id="cb127-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb127-3" data-line-number="3">solo2014_agrupado_barrio &lt;-<span class="st"> </span><span class="kw">group_by</span>(solo2014, BARRIO)</a>
+<a class="sourceLine" id="cb127-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb127-5" data-line-number="5">total_por_barrio_<span class="dv">2014</span> &lt;-<span class="st"> </span><span class="kw">summarise</span>(solo2014_agrupado_barrio, <span class="dt">total =</span> <span class="kw">sum</span>(total))</a>
+<a class="sourceLine" id="cb127-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb127-7" data-line-number="7">total_por_barrio_<span class="dv">2014</span>_ordenado &lt;-<span class="st"> </span><span class="kw">arrange</span>(total_por_barrio_<span class="dv">2014</span>, <span class="kw">desc</span>(total))</a>
+<a class="sourceLine" id="cb127-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb127-9" data-line-number="9"><span class="kw">head</span>(total_por_barrio_<span class="dv">2014</span>_ordenado, <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##   BARRIO        total
 ##   &lt;chr&gt;         &lt;int&gt;
@@ -687,12 +694,12 @@ total_por_barrio_<span class="dv">2014</span>_ordenado &lt;-<span class="st"> </
 ## 5 VILLA DEVOTO  15720</code></pre>
 <p>¡Funciona! Pero… el problema es que hemos generado un puñado de variables (“solo2014”, “solo2014_agrupado_barrio”, etc) que, es probable, no volveremos a usar. Además de ser inútiles una vez obtenido el resultado buscado, estas variables intermedias requieren que las nombremos. Decidir el nombre de estas variables que no nos importan toma tiempo (sobre todo cuando producimos muchas), y nos distrae de lo importante, que es el análisis.</p>
 <p>El pipe, <code>%&gt;%</code>, permite encadenar operaciones, conectando el resultado de una como el dato de entrada de la siguiente. La misma secuencia que realizamos antes puede resolverse con pipes, quedando así:</p>
-<pre class="sourceCode r"><code class="sourceCode r">atencion_ciudadano <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">filter</span>(AÑO <span class="op">==</span><span class="st"> </span><span class="dv">2014</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">group_by</span>(BARRIO) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">summarise</span>(<span class="dt">total =</span> <span class="kw">sum</span>(total)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">arrange</span>(<span class="kw">desc</span>(total)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">head</span>(<span class="dv">5</span>)</code></pre>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1">atencion_ciudadano <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-2" data-line-number="2"><span class="st">    </span><span class="kw">filter</span>(AÑO <span class="op">==</span><span class="st"> </span><span class="dv">2014</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-3" data-line-number="3"><span class="st">    </span><span class="kw">group_by</span>(BARRIO) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-4" data-line-number="4"><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">total =</span> <span class="kw">sum</span>(total)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-5" data-line-number="5"><span class="st">    </span><span class="kw">arrange</span>(<span class="kw">desc</span>(total)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-6" data-line-number="6"><span class="st">    </span><span class="kw">head</span>(<span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##   BARRIO        total
 ##   &lt;chr&gt;         &lt;int&gt;
@@ -704,14 +711,26 @@ total_por_barrio_<span class="dv">2014</span>_ordenado &lt;-<span class="st"> </
 <p>Una manera de pronunciar <code>%&gt;%</code> cuando leemos código es “y luego…”. Algo así como “tomamos el dataframe”atencion_ciudadano&quot; y luego filtramos los registros del año 2014, y luego agrupamos por barrio, y luego calculamos el total de registros para cada grupo, y luego los ordenamos en forma descendente por total, y luego vemos los cinco primeros&quot;.</p>
 <p>El uso de pipes permite concentrarse en las operaciones de transformación, y no en lo que está siendo transformado en cada paso. Esto hace al código mucho más sencillo de leer e interpretar. En el ejemplo con pipe, sólo tuvimos que nombrar un dataframe con el cual trabajar un única vez, al principio.</p>
 <p>Detrás de escena, <code>x %&gt;% f(y)</code> se transforma en <code>f(x, y)</code>. Por eso,</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(atencion_ciudadano, AÑO <span class="op">==</span><span class="st"> </span><span class="dv">2014</span>)</code></pre>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="kw">filter</span>(atencion_ciudadano, AÑO <span class="op">==</span><span class="st"> </span><span class="dv">2014</span>)</a></code></pre></div>
 <p>es equivalente a</p>
-<pre class="sourceCode r"><code class="sourceCode r">atencion_ciudadano <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(AÑO <span class="op">==</span><span class="st"> </span><span class="dv">2014</span>)</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1">atencion_ciudadano <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(AÑO <span class="op">==</span><span class="st"> </span><span class="dv">2014</span>)</a></code></pre></div>
 <p>Trabajar con pipes es una de las ventajas que hacen de R un lenguaje muy expresivo y cómodo para manipular datos, y a partir de aquí lo usaremos de forma habitual.</p>
 <p>Con esto cerramos la sección de transformación de datos. Las técnicas para examinar un dataframe, como <code>sumamry()</code> nos permiten entender de forma rápida con que clase de variables vamos a trabajar. Los cinco verbos de manipulación que aprendimos, usados en conjunto, brindan una enorme capacidad para adaptar el formato de los datos a nuestras necesidades. Y el operador pipe nos ayuda a escribir nuestro código de forma sucinta y fácil de interpretar.</p>
 <p>A medida que vayamos progresando en nuestra familiaridad con las funciones -y agregando técnicas nuevas- vamos a ser capaces de procesar grandes cantidades de datos con soltura. Y obtener en pocos minutos lo que de otra forma, sin herramientas computacionales, tardaría días o sería inviable por lo tedioso.</p>
-
 </div>
+</div>
+<div id="ejercicios-1" class="section level2">
+<h2><span class="header-section-number">3.4</span> Ejercicios</h2>
+<p>3.1. Tomemos otro dataset, como el que descargamos durante los ejercicios del capítulo anterior, eintentemos:</p>
+<ol style="list-style-type: upper-roman">
+<li>usar select() para seleccionar ciertas columnas y/o cambiar su orden</li>
+<li>usar filter() para filtrar las filas, descartando las que no cumplan cierta condición o condiciones a elección</li>
+<li>usar arrange() para ordenar el dataframe según alguna de sus variables</li>
+<li>usar mutate() para crear una o más columnas nuevas</li>
+<li>usar en combinación group_by() y summarise() para generar un resumen del dataset, que contenga al menos 3 variables (se pueden usar medias, máximos, conteos, etc)</li>
+</ol>
+<p>3.2. Si antes hicimos todos los pasos por separado, ahora intentemos hacer todo el procedimiento en una sola cadena de instrucciones usando el operador pipe: <code>%&gt;%</code></p>
+
 </div>
 </div>
             </section>
@@ -719,17 +738,19 @@ total_por_barrio_<span class="dv">2014</span>_ordenado &lt;-<span class="st"> </
           </div>
         </div>
       </div>
-<a href="una-presentacion-a-toda-marcha-de-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="visualizacion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="una-presentación-a-toda-marcha-de-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualización.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -737,12 +758,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -754,6 +774,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -772,8 +796,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
