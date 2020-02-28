@@ -794,6 +794,31 @@ Por supuesto, con esto no puede darse por cerrado el tema; hay muchas facetas qu
 
 En los siguientes capítulos practicaremos varias técnicas que nos permitirán profundizar nuestros análisis, en la nunca finalizada misión de entender un poco más.
 
+\hypertarget{ejercicios}{%
+\section{Ejercicios}\label{ejercicios}}
+
+2.1 Descarguemos un dataset en formato \emph{csv}. Pueden recurrir al portal de datos abiertos de su ciudad, o a cualquier otro repositorio público, como el de \href{https://databank.bancomundial.org/databases}{bases de datos del Banco Mundial}.
+
+2.2 Escribamos y ejecutemos el código R necesario para:
+
+\begin{itemize}
+\tightlist
+\item
+  leer el archivo y asignar su contenido a una variable
+\item
+  mostrar los nombres de sus columnas
+\item
+  mostrar sus dimensiones (cantidad de filas y columnas)
+\item
+  mostrar un resumen del contenido de cada una de las columnas
+\end{itemize}
+
+¡Eso es todo por ahora! Al resolverlo, habremos aprendido dos tareas simples pero fundamentales: cómo acceder nuestros propios datos, y como crear un reporte con nuestros resultados.
+
+Pistas:
+* aquí hay un tutorial que explica paso a paso \href{https://rpubs.com/HAVB/importar_datos}{cómo abrir un archivo en .csv R, con la ayuda de RStudio}
+* las funciones read.csv(), names(), dim() y summary() serán sus amigas
+
 \hypertarget{poniendo-los-datos-en-forma}{%
 \chapter{Poniendo los datos en forma}\label{poniendo-los-datos-en-forma}}
 
@@ -1717,6 +1742,28 @@ Con esto cerramos la sección de transformación de datos. Las técnicas para ex
 
 A medida que vayamos progresando en nuestra familiaridad con las funciones -y agregando técnicas nuevas- vamos a ser capaces de procesar grandes cantidades de datos con soltura. Y obtener en pocos minutos lo que de otra forma, sin herramientas computacionales, tardaría días o sería inviable por lo tedioso.
 
+\hypertarget{ejercicios-1}{%
+\section{Ejercicios}\label{ejercicios-1}}
+
+3.1. Tomemos otro dataset, como el que descargamos durante los ejercicios del capítulo anterior, eintentemos:
+
+\begin{enumerate}
+\def\labelenumi{\Roman{enumi}.}
+\tightlist
+\item
+  usar select() para seleccionar ciertas columnas y/o cambiar su orden
+\item
+  usar filter() para filtrar las filas, descartando las que no cumplan cierta condición o condiciones a elección
+\item
+  usar arrange() para ordenar el dataframe según alguna de sus variables
+\item
+  usar mutate() para crear una o más columnas nuevas
+\item
+  usar en combinación group\_by() y summarise() para generar un resumen del dataset, que contenga al menos 3 variables (se pueden usar medias, máximos, conteos, etc)
+\end{enumerate}
+
+3.2. Si antes hicimos todos los pasos por separado, ahora intentemos hacer todo el procedimiento en una sola cadena de instrucciones usando el operador pipe: \texttt{\%\textgreater{}\%}
+
 \hypertarget{visualizaciuxf3n}{%
 \chapter{Visualización}\label{visualizaciuxf3n}}
 
@@ -2336,6 +2383,27 @@ El sitio web \emph{from Data to Viz} (\url{https://www.data-to-viz.com/}) es un 
 \end{figure}
 
 Y lo más interesante: Para todas y cada una de las visualizaciones se incluye el código en R que permite reproducirlas. A partir de allí sólo es cuestión de adaptar los ejemplos a nuestros datos para realizar de forma fácil la visualización que nos interesa.
+
+\hypertarget{ejercicios-2}{%
+\section{Ejercicios}\label{ejercicios-2}}
+
+4.1. Tomar un dataset, y efectuarle las transformaciones necesarias para luego crear las siguients visualizaciones:
+
+\begin{itemize}
+\tightlist
+\item
+  Scatter plot: Mostrar correlación entre 2 variables numéricas.
+\item
+  Gráfico de Barras: Comparar variables categóricas.
+\item
+  Gráfico de Barras: Comparar variables categóricas mostrando la composición interna de las mismas.\\
+\item
+  Histograma: Mostrar la distribución de una variable continua.
+\end{itemize}
+
+4.2 Realicemos una versión facetada (con \texttt{facet\_wrap()}) de cada tipo de gráfico.
+
+4.3 Pongamos a cada visualización: título, subtítulo, etiquetas en los ejes, nombre descriptivo en la leyenda y nota al pie.
 
 \hypertarget{modelado-estaduxedstico}{%
 \chapter{Modelado estadístico}\label{modelado-estaduxedstico}}
@@ -3073,6 +3141,19 @@ Continuando con las regresiones múltiples, intentemos un modelo con tres variab
 
 Observamos que la variable categórica es significativa. Con las demas variables fijas -es decir, en paises de similar PBI y población- el continente de origen explica en gran medida las diferencias en expectativa de vida en cada país, y con un efecto estimado enorme - ¡de 12 a 16 años!-. Notemos de todos modos que el coeficiente de la variable continente había sido mayor en el modelo simple, llegando a casi 26 años para Oceanía. ¿Porqué es menor ahora? Porque nuestro modelo es más completo, y tiene en cuenta más variables. Cuando lo único que teníamos para comparar países era su continente, era era la única variable a la que atribuir diferencias. Ahora que consideramos mútiples variables para explicar las diferencias, notamos la parte de la influencia que se lleva el PBI, reduciendo la del contintente.
 
+\hypertarget{ejercicios-3}{%
+\section{Ejercicios}\label{ejercicios-3}}
+
+5.1 En base a un dataset de nuestra preferencia, mostremos la relación entre dos variables continuas o numéricas usando un gráfico de dispersión (geom\_point). Expliquemos lo que muestra el gráfico.
+
+5.2 Realicemos un modelo de regresión lineal para esas dos variables. Describamos los resultados, ofreciendo una interpretación.
+
+5.3 Mostremos la relación entre una variables categórica y otra continua/numérica, con un gráfico boxplot (mediante \texttt{geom\_boxplot()}) o un gráfico de puntos ``sacudidos'' (mediante \texttt{geom\_jitter()}). Expliquemos lo que muestra el gráfico.
+
+5.4 Realicemos un modelo de regresión lineal para esas dos variables, describiendo los resultados sin olvidar interpretarlos.
+
+5.5 Realicemos una regresión lineal con la variable a predecir de 5.1 o 5.3, con la misma variable predictora ya utilizada junto con otras adicionales. Es decir, realizar una regresión con múltiples variables predictoras. Describamos los resultados, interpretándolos. ¿En qué cambian respecto al modelo que usa sólo un predictor?
+
 \hypertarget{informaciuxf3n-geogruxe1fica-y-mapas}{%
 \chapter{Información geográfica y mapas}\label{informaciuxf3n-geogruxe1fica-y-mapas}}
 
@@ -3652,7 +3733,25 @@ Primero creamos un subconjunto de los datos con la suma, por barrio, de emergenc
 
 Aquí se cumplen las expectativas: la cantidad de emergencias reportadas sigue en forma clara un patrón relacionado con la cantidad de estaciones ubicadas en cada barrio. Y como era de esperarse, en barrios donde el SUBTE no ofrece cobertura la cantidad de emergencias es nula.
 
-Con eso cerramos el capítulo, y el libro. Hemos llegado al brusco final\ldots{} al menos brusco por ahora. Continuaré puliendo el texto, y más adelante quisiera agregar un breve capítulo de consideraciones finales.
+\hypertarget{ejercicios-4}{%
+\section{Ejercicios}\label{ejercicios-4}}
+
+6.1 descargar y abrir un dataset cuyos registros incluyan datos de ubicación en barrio, comuna o radio censal en la Ciudad de Buenos Aires. Por ejemplo, cualquiera de las \href{https://data.buenosaires.gob.ar/dataset/sistema-unico-atencion-ciudadana}{bases de datos anuales con reclamos registrados en el Sistema Único de Atención Ciudadana}.
+
+6.2 Realizar las transformaciones necesarias para hacer:
+
+\begin{itemize}
+\item
+  un mapa que muestre la distribución geográfica de una variable numérica del dataset (puede analizarse por comuna, barrio, radio censal, etc).
+\item
+  un mapa que muestre la distribución geográfica de una variable categórica del dataset (puede analizarse por comuna, barrio, radio censal, etc).
+\end{itemize}
+
+6.3 Elegir uno de los mapas anteriores e incorporarle una o más geometrías que sean relevantes al análisis. Estas pueden ser: estaciones y recorrido de trenes, recorrido de ciclovías, ubicación de comercios, o cualquier otra que les resulte interesante. Las geometrías pueden descargarse del portal de datos abiertos de la ciudad (\url{https://data.buenosaires.gob.ar/}). Por ejemplo, aquí hay un \href{https://data.buenosaires.gob.ar/dataset/oferta-establecimientos-gastronomicos}{dataset georeferenciado con la ubicación de locales de gastronomía}.
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Con eso cerramos el capítulo, y el libro.
 
 Mientras tanto, mi mensaje final es fácil de resumir. Espero que ``Ciencia de Datos para Gente Sociable'' haya sido una introducción satisfactoria al análisis, modelado y visualización de información, y tan sólo el inicio de un largo y gratificante recorrido.
 
