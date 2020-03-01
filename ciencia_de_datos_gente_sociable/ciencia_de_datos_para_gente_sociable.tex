@@ -135,7 +135,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2020-02-28}
+    \date{2020-02-29}
 
 \usepackage{booktabs}
 
@@ -175,7 +175,7 @@ La \emph{Big Data} ha llegado para quedarse, y asumimos que su efecto en la soci
 
 Big data es un término impreciso, que se usa cuando queremos hablar de los datos que nuestra sociedad crea y procesa en forma digital, con cada vez más creciente velocidad, volumen, y variedad.
 
-En forma acorde, \emph{data scientist} o ``científico de datos'' es también una profesión, o una actividad, que aún no está definida con toda claridad. El término, que abarca a quienes en forma cotidiana aplican técnicas de programación para analizar datos, no existía antes del 2008. Sólo cuatro años después la publicación Harvard Business Review agitó las aguas al declarar que quienes se desempeñan como científicos de datos pueden presumir de la profesión ``más sexy del siglo XXI'' {[}\^{}1{]}. Títulos exagerados aparte, lo que es seguro es que la discipina ofrece un conjunto cada vez más maduro de saberes orientados a explotar datos para extraer conocimiento. Las técnicas y principios que la comunidad de la ciencia de datos ha desarrollado pueden ser aprovechados en muchos ámbitos. Entre ellos, el de las ciencias sociales, que también están en una etapa de transformación e incorporan la programación analítica como un recurso cada vez extendido.
+En forma acorde, \emph{data scientist} o ``científico de datos'' es también una profesión, o una actividad, que aún no está definida con toda claridad. El término, que abarca a quienes en forma cotidiana aplican técnicas de programación para analizar datos, no existía antes del 2008. Sólo cuatro años después la publicación Harvard Business Review agitó las aguas al declarar que quienes se desempeñan como científicos de datos pueden presumir de la profesión ``más sexy del siglo XXI'' {[}\^{}1{]}. Títulos exagerados aparte, lo que es seguro es que la disciplina ofrece un conjunto cada vez más maduro de saberes orientados a explotar datos para extraer conocimiento. Las técnicas y principios que la comunidad de la ciencia de datos ha desarrollado pueden ser aprovechados en muchos ámbitos. Entre ellos, el de las ciencias sociales, que también están en una etapa de transformación e incorporan la programación analítica como un recurso cada vez extendido.
 
 Avanzar las fronteras de la ciencia de datos, crear los algoritmos y técnicas informáticas que abren nuevas posibilidades de análisis es una tarea compleja, llevada a cabo por especialistas con profundos conocimientos de matemática. Y sin embargo ``usar'' la ciencia de datos, aplicar sus principios para resolver problemas complejos, es bastante más fácil. Para empezar sólo necesitamos paciencia para aprender algunos conceptos fundamentales de programación y estadística, empleándolos para entender y comunicar con datos. De eso se trata este libro.
 
@@ -360,7 +360,7 @@ Vamos a cargar datos de mortalidad infantil, por comuna de la ciudad, en el año
 \end{Highlighting}
 \end{Shaded}
 
-Obsérvese que los datos están alojados en un servidor de internet (accesibles vía una dirección web). Eso no es problema para la función read.csv, que con la misma soltura lee archivos guardados en nuestra PC o publicados en un sitio \emph{online}.
+Obsérvese que los datos están alojados en un servidor de internet (accesibles vía una dirección web). Eso no es problema para la función \texttt{read.csv()}, que con la misma soltura lee archivos guardados en nuestra PC o publicados en un sitio \emph{online}.
 
 Una vez leído el archivo, para ver el contenido de la variable donde guardamos el resultado -que hemos llamado \texttt{mortalidad}- sólo hace falta escribir su nombre:
 
@@ -391,7 +391,7 @@ Una vez leído el archivo, para ver el contenido de la variable donde guardamos 
 
 Vemos que la tabla tiene 15 filas (una por \href{https://es.wikipedia.org/wiki/Comunas_de_la_ciudad_de_Buenos_Aires}{cada comuna de la ciudad}) y 2 columnas (una que indica la comuna, y otra con el valor de mortalidad infantil para el año 2016).
 
-En R, las tablas son llamadas \texttt{dataframes}. El dataframe es el objeto por excelencia del análisis de datos. En concepto, es muy similar a una tabla de excel; al fin y al cabo, ambos formatos guardan información en celdas identificadas por fila y columna.
+En R, las tablas son llamadas \texttt{dataframes}. El dataframe es el objeto por excelencia del análisis de datos. En concepto, es muy similar a una tabla de Excel; al fin y al cabo, ambos formatos guardan información en celdas identificadas por fila y columna.
 
 Algunas funciones útiles para explorar un dataframe que no conocemos son \texttt{dim()}, que nos da las dimensiones del dataframe (cantidad de filas y columnas), \texttt{names()} que nos dice como se llaman sus columnas (que en general representan variables), y \texttt{head()} que nos permite echar un vistazo rápido al contenido, mostrando sólo las seis primeras filas (ésto es útil porque con frecuencia trabajamos con dataframes que contienen miles o millones de filas, con lo que no tiene sentido tratar de volcar todas en pantalla).
 
@@ -496,7 +496,7 @@ Primero, instalamos \texttt{sf} en caso de que aún no lo hayamos hecho.
 \end{Highlighting}
 \end{Shaded}
 
-Vale la pena insistir: Sólo es necesario instalar los paquetes una vez. De aquí en más, cada vez que querramos echar mano a las funciones incluidas en \texttt{sf}, sólo necesitamos activarlo pues ya estará listo en nuestro sistema. Pedimos a R que active el paquete así:
+Vale la pena insistir: Sólo es necesario instalar los paquetes una vez. De aquí en más, cada vez que queramos echar mano a las funciones incluidas en \texttt{sf}, sólo necesitamos activarlo pues ya estará listo en nuestro sistema. Pedimos a R que active el paquete así:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -642,7 +642,8 @@ Podemos armar una sucesión de 15 ``etiquetas'' según el punto cardinal que le 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{nueva_columna <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Sur"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{, }\StringTok{"Sur"}\NormalTok{, }\StringTok{"Sur"}\NormalTok{, }\StringTok{"Sur"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{, }\StringTok{"Sur"}\NormalTok{, }\StringTok{"Sur"}\NormalTok{, }\StringTok{"Sur"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{)}
+\NormalTok{nueva_columna <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Sur"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{, }\StringTok{"Sur"}\NormalTok{, }\StringTok{"Sur"}\NormalTok{, }\StringTok{"Sur"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{, }\StringTok{"Sur"}\NormalTok{, }\StringTok{"Sur"}\NormalTok{, }
+                   \StringTok{"Sur"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{, }\StringTok{"Norte"}\NormalTok{)}
 
 \NormalTok{nueva_columna}
 \end{Highlighting}
@@ -823,7 +824,7 @@ I. Descarguemos un dataset en formato \emph{csv}. Pueden recurrir al portal de d
 
 Pistas:
 * aquí hay un tutorial que explica paso a paso \href{https://rpubs.com/HAVB/importar_datos}{cómo abrir un archivo en .csv R, con la ayuda de RStudio}
-* las funciones read.csv(), names(), dim() y summary() serán sus amigas
+* las funciones \texttt{read.csv()}, \texttt{names()}, \texttt{dim()} y \texttt{summary()} serán nuestras amigas
 
 \hypertarget{poniendo-los-datos-en-forma}{%
 \chapter{Poniendo los datos en forma}\label{poniendo-los-datos-en-forma}}
@@ -870,9 +871,9 @@ Lo primero que deberíamos hacer con un dataframe que no conocemos es usar la fu
 ##  $ total          : int  6 172 92 45 79 10 38 109 20 45 ...
 \end{verbatim}
 
-Para empezar, nos enteramos que el objeto que estamos analizando es un dataframe (``data.frame''). Eso ya lo sabíamos, pero como str() puede usarse con cualquier clase de objeto en R, en ocasiones resultará que estamos ante un vector, una lista u otra clase de criatura. A continuación aparecen las dimensiones del dataframe: 57.432 observaciones (filas) con 5 variables (columnas). Los nombres de las columnas son PERIODO, RUBRO, TIPO\_PRESTACION, BARRIO y total. Con eso ya podemos inferir que cada observación en el dataframe contiene la cantidad total de solicitudes según concepto, rubro y tipo de prestación (aunque no sepamos bien de que se tratan esas variables), en un período dado y en cada barrio.
+Para empezar, nos enteramos que el objeto que estamos analizando es un dataframe (``data.frame''). Eso ya lo sabíamos, pero como \texttt{str()} puede usarse con cualquier clase de objeto en R, en ocasiones resultará que estamos ante un vector, una lista u otra clase de criatura. A continuación aparecen las dimensiones del dataframe: 57.432 observaciones (filas) con 5 variables (columnas). Los nombres de las columnas son PERIODO, RUBRO, TIPO\_PRESTACION, BARRIO y total. Con eso ya podemos inferir que cada observación en el dataframe contiene la cantidad total de solicitudes según concepto, rubro y tipo de prestación (aunque no sepamos bien de que se tratan esas variables), en un período dado y en cada barrio.
 
-Con str() también obtenemos el tipo de datos representados pro cada variable, y un ejemplo de los valores contenidos en las primeras filas. \emph{PERIODO} y \emph{total} son variables de tipo ``int'', es decir, números enteros o \emph{integers} en inglés. El resto de las variables son de tipo ``Factor''; en R las variables categóricas reciben el nombre de factores. ¿Y cómo sabe R que \emph{RUBRO} o \emph{BARRIO} son categorías? La culpable es la función \texttt{read.csv()} que usamos al principio. Si no se le aclara lo contrario, read.csv() interpreta como factores a todas las columnas que contienen texto. Para avisarle que no lo haga, hay que usar el parámetro \texttt{stringsAsFactors}, así: \texttt{misdatos\ \textless{}-\ read.csv("archivo\_con\_mis\_datos",\ stringsAsFactors\ =\ FALSE)}. En general es buena idea evitar que los campos de texto se asuman como factores, pero en éste caso está bien: todas las columnas de texto, en efecto, contienen variables categóricas. (Ante la duda, una variable es categórica cuando es razonable considerar que se elige entre un conjunto finito de variables posibles; por ejemplo, los barrios de Buenos Aires son un conjunto finito y predeterminado).
+Con \texttt{str()} también obtenemos el tipo de datos representados pro cada variable, y un ejemplo de los valores contenidos en las primeras filas. \emph{PERIODO} y \emph{total} son variables de tipo ``int'', es decir, números enteros o \emph{integers} en inglés. El resto de las variables son de tipo ``Factor''; en R las variables categóricas reciben el nombre de factores. ¿Y cómo sabe R que \emph{RUBRO} o \emph{BARRIO} son categorías? La culpable es la función \texttt{read.csv()} que usamos al principio. Si no se le aclara lo contrario, \texttt{read.csv()} interpreta como factores a todas las columnas que contienen texto. Para avisarle que no lo haga, hay que usar el parámetro \texttt{stringsAsFactors}, así: \texttt{misdatos\ \textless{}-\ read.csv("archivo\_con\_mis\_datos",\ stringsAsFactors\ =\ FALSE)}. En general es buena idea evitar que los campos de texto se asuman como factores, pero en éste caso está bien: todas las columnas de texto, en efecto, contienen variables categóricas. (Ante la duda, una variable es categórica cuando es razonable considerar que se elige entre un conjunto finito de variables posibles; por ejemplo, los barrios de Buenos Aires son un conjunto finito y predeterminado).
 
 La siguiente función a utilizar cuando estamos conociendo el contenido de un set de datos es \texttt{summary()}, que nos dará un resumen en forma de estadísticas descriptivas para las variables numéricas (cuartiles y mediana) y un vistazo a las categorías más representadas par los factores.
 
@@ -936,9 +937,9 @@ Para acceder en forma rápida al contenido de la columna BARRIO, hemos utilizado
 
 Al realizar un análisis ``en la vida real'', es decir, usando datos salvajes en lugar de los prolijos datasets de práctica, es muy habitual encontrar que nos falta una variable que necesitamos. Si tenemos suerte, la información que necesitamos también está disponible en forma de tabla, con algún campo en común, y podemos llevar el cabo un cruce de datos para traérnosla.
 
-Para expresarlo con un ejemplo concreto: hemos visto que los registros de atención al ciudadano incluyen una columna con el barrio, que es la única variable relacionada con la geografía. Si nuestra unidad de análisis fuera la columna en lugar del barrio, necesitaríamos agrega la columna correspondiente. En este caso, estamos de suerte porque una tabla con los barrios de la Ciudad de Buenos Aires y la comuna a la que pertenecen es fácil de conseguir. Con esa tabla en nuestro poder, ya tenemos las piezas necesarias para el cruce de datos. En cada registro en el dataframe de atención al ciudadano, tenemos un barrio; podemos buscarlo en la tabla de barrios y comunas, tomar nota de la comuna asociada, y copiarla en nuestro dataset original. Por supuesto, hacerlo a mano para cada uno de las 57.432 filas en nuestro dataframe tardaría una eternidad, amén de que quizás perderíamos la cordura antes de terminar. ¡Nada de eso! Vamos a resolverlo en meros instantes escriviendo unas pocas líneas de código. Antes de continuar hagamos una pausa para conmiserar a los investigadores de eras pasadas, antes de la popularización de la computadora personal, que realizaban tareas de esta escala con lápiz, papel y paciencia.
+Para expresarlo con un ejemplo concreto: hemos visto que los registros de atención al ciudadano incluyen una columna con el barrio, que es la única variable relacionada con la geografía. Si nuestra unidad de análisis fuera la columna en lugar del barrio, necesitaríamos agrega la columna correspondiente. En este caso, estamos de suerte porque una tabla con los barrios de la Ciudad de Buenos Aires y la comuna a la que pertenecen es fácil de conseguir. Con esa tabla en nuestro poder, ya tenemos las piezas necesarias para el cruce de datos. En cada registro en el dataframe de atención al ciudadano, tenemos un barrio; podemos buscarlo en la tabla de barrios y comunas, tomar nota de la comuna asociada, y copiarla en nuestro dataset original. Por supuesto, hacerlo a mano para cada uno de las 57.432 filas en nuestro dataframe tardaría una eternidad, amén de que quizás perderíamos la cordura antes de terminar. ¡Nada de eso! Vamos a resolverlo en meros instantes escribiendo unas pocas líneas de código. Antes de continuar hagamos una pausa para conmiserar a los investigadores de eras pasadas, antes de la popularización de la computadora personal, que realizaban tareas de esta escala con lápiz, papel y paciencia.
 
-Existe una gran variedad de funciones que permiten combinar tablas relacionadas entre sí por una o varias variables en común. Para nuestro propósito, alcanza con conocer una: \texttt{left\_join()}. La funcion toma como parámetros dos dataframes (que son tablas al fin y al cabo) busca las variables que tengan el mismo nombre y usandolas como referencia completa la primera de ellas, la de la izquierda, con los datos nuevos que aporta la segunda. \texttt{left\_join} devuelve un dataframe nuevo con los datos combinados.
+Existe una gran variedad de funciones que permiten combinar tablas relacionadas entre sí por una o varias variables en común. Para nuestro propósito, alcanza con conocer una: \texttt{left\_join()}. La función toma como parámetros dos dataframes (que son tablas al fin y al cabo) busca las variables que tengan el mismo nombre y usándolas como referencia completa la primera de ellas, la de la izquierda, con los datos nuevos que aporta la segunda. \texttt{left\_join} devuelve un dataframe nuevo con los datos combinados.
 
 Manos a la obra. Descargamos el dataframe con barrios y comunas,
 
@@ -1034,7 +1035,7 @@ Admiremos nuestra obra:
 ## 6  201301 ACERAS         RECLAMO      BOCA    10      4
 \end{verbatim}
 
-Es así de fácil. Bueno, no tanto\ldots{} este fue un caso sencillo, pero hay todo tipo de datos y cruces allí afuera, y a veces se necesitan operaciones más complehas. Por eso hay toda una familia de funciones de \emph{join} - \texttt{right\_join()}, \texttt{inner\_join()}, \texttt{full\_join}, \texttt{anti\_join()}, y alguna más. Pero podemos dejarlas en paz; para nuestras necesidades, con \texttt{left\_join()} podemos areglarnos muy bien.
+Es así de fácil. Bueno, no tanto\ldots{} este fue un caso sencillo, pero hay todo tipo de datos y cruces allí afuera, y a veces se necesitan operaciones más complejas. Por eso hay toda una familia de funciones de \emph{join} - \texttt{right\_join()}, \texttt{inner\_join()}, \texttt{full\_join}, \texttt{anti\_join()}, y alguna más. Pero podemos dejarlas en paz; para nuestras necesidades, con \texttt{left\_join()} podemos alegrarnos muy bien.
 
 Satisfechos con la mejora, si queremos guardar el dataframe ``mejorado'' para usarlo en otra ocasión, podemos hacerlo con \texttt{write.csv()}, que lo convierte en un archivo de texto que queda en nuestra PC.
 
@@ -1044,7 +1045,7 @@ Satisfechos con la mejora, si queremos guardar el dataframe ``mejorado'' para us
 \end{Highlighting}
 \end{Shaded}
 
-Podemos seguir siempre ese formato para guardar nuestros datos. El primer parámetro es el dataframe que vamos a guardar, el segundo -siempre entre comillas- es el nombre de archivo, y la opcion final, \texttt{row.names\ =\ FALSE} sirve para evitar que R le agregue una columna al principio con numeros consecutivos (1, 2, 3, y así), cosa que quizás fue útil alguna vez pero en general no necesitamos.
+Podemos seguir siempre ese formato para guardar nuestros datos. El primer parámetro es el dataframe que vamos a guardar, el segundo -siempre entre comillas- es el nombre de archivo, y la opción final, \texttt{row.names\ =\ FALSE} sirve para evitar que R le agregue una columna al principio con números consecutivos (1, 2, 3, y así), cosa que quizás fue útil alguna vez pero en general no necesitamos.
 
 Para volver a leer los datos en otra ocasión, usamos \texttt{read.csv()} tal como ya hemos hecho.
 
@@ -1066,7 +1067,7 @@ Y si queremos saber exactamente dónde ha guardado R nuestros datos, por ejemplo
 ## [1] "/home/havb/Dropbox/Books/Mios/Ciencia de datos para gente sociable"
 \end{verbatim}
 
-El resultado será la dirección (la ubicacion de la la carpeta), donde estamos trabajando y hemos guardado los datos; por ejemplo \texttt{/home/antonio/Practicando\ R/}.
+El resultado será la dirección (la ubicación de la la carpeta), donde estamos trabajando y hemos guardado los datos; por ejemplo \texttt{/home/antonio/Practicando\ R/}.
 
 \hypertarget{transformando-los-datos}{%
 \section{Transformando los datos}\label{transformando-los-datos}}
@@ -1333,7 +1334,7 @@ obtenemos un conjunto vacío. ¿Por qué? Es debido a que ninguna observación c
 ## 6  201301           ALUMBRADO         RECLAMO  RETIRO    15      1
 \end{verbatim}
 
-Se trata de la lógica de conjuntos, o lógica booleana, que con un poco de suerte recordamos de nuestra época de escolares. Los símbolos importantes son \texttt{\&}, \texttt{\textbar{}}, y \texttt{!}: ``y'', ``ó'', y la negación que invierte preposiciones:
+Se trata de la lógica de conjuntos, o lógica \emph{booleana}, que con un poco de suerte recordamos de nuestra época de escolares. Los símbolos importantes son \texttt{\&}, \texttt{\textbar{}}, y \texttt{!}: ``y'', ``ó'', y la negación que invierte preposiciones:
 
 \begin{verbatim}
 * a & b     a y b
@@ -1643,7 +1644,7 @@ Podemos agrupar por múltiples columnas, generando más subgrupos; por ejemplo, 
 ## 6 2013  01    BOCA          9.97
 \end{verbatim}
 
-Con \texttt{summarise()} podemos usar cualquier función que tome una lista de valores y devuelva un sólo resutado. Para empezar, algunas de las que más podrian ayudarnos son:
+Con \texttt{summarise()} podemos usar cualquier función que tome una lista de valores y devuelva un sólo restado. Para empezar, algunas de las que más podrían ayudarnos son:
 
 \begin{verbatim}
 * `mean()`: Obtiene el promedio de los valores
@@ -1756,15 +1757,15 @@ I. Tomemos otro dataset, como el que descargamos durante los ejercicios del cap�
 \begin{itemize}
 \tightlist
 \item
-  usar select() para seleccionar ciertas columnas y/o cambiar su orden
+  usar \texttt{select()} para seleccionar ciertas columnas y/o cambiar su orden
 \item
-  usar filter() para filtrar las filas, descartando las que no cumplan cierta condición o condiciones a elección
+  usar \texttt{filter()} para filtrar las filas, descartando las que no cumplan cierta condición o condiciones a elección
 \item
-  usar arrange() para ordenar el dataframe según alguna de sus variables
+  usar \texttt{arrange()} para ordenar el dataframe según alguna de sus variables
 \item
-  usar mutate() para crear una o más columnas nuevas
+  usar \texttt{mutate()} para crear una o más columnas nuevas
 \item
-  usar en combinación group\_by() y summarise() para generar un resumen del dataset, que contenga al menos 3 variables (se pueden usar medias, máximos, conteos, etc)
+  usar en combinación \texttt{group\_by()} y \texttt{summarise()} para generar un resumen del dataset, que contenga al menos 3 variables (se pueden usar medias, máximos, conteos, etc)
 \end{itemize}
 
 \begin{enumerate}
@@ -2131,7 +2132,7 @@ Pero valga el ejemplo para mencionar algo fundamental: por más ciencia de datos
 
 Si hay un tipo de visualización que compite en popularidad con el \emph{scatterplot}, son los gráficos de barras (\emph{bar charts} en inglés). Solemos encontrarlos acompañando artículos en diarios y revistas, sin duda porque son fáciles de leer de un vistazo. Los gráficos de barras se usan mucho para hacer comparaciones: quién tiene más y quién tiene menos de alguna variable continua cómo ingresos, edad, altura o similares.
 
-Comparemos la suma total de registros que alcanza cada barrio. Con \texttt{geom\_bar} podemos agregar una capa de visualizacón con gráficos de barras. Los parámetros a definir dentro de \texttt{aes()} son \texttt{x}, donde va una variable categórica, y en forma opcional \texttt{weight}, que indica la variable a sumar para determinar la altura de cada barra. Si no especificamos un \texttt{weight}, simplemente se cuenta cuantas veces aparece cada categoría en el dataframe, en la práctica un conteo o frecuencia de aparición. En nuestro dataset cada fila incluye un período y un total de contactos recibidos. Nosotros no estamos interesados en cuantas veces aparece cada barrio, sino en la suma de la columna total para cada uno de ellos, así que vamos a usar \texttt{weight\ =\ total}.
+Comparemos la suma total de registros que alcanza cada barrio. Con \texttt{geom\_bar} podemos agregar una capa de visualización con gráficos de barras. Los parámetros a definir dentro de \texttt{aes()} son \texttt{x}, donde va una variable categórica, y en forma opcional \texttt{weight}, que indica la variable a sumar para determinar la altura de cada barra. Si no especificamos un \texttt{weight}, simplemente se cuenta cuantas veces aparece cada categoría en el dataframe, en la práctica un conteo o frecuencia de aparición. En nuestro dataset cada fila incluye un período y un total de contactos recibidos. Nosotros no estamos interesados en cuantas veces aparece cada barrio, sino en la suma de la columna total para cada uno de ellos, así que vamos a usar \texttt{weight\ =\ total}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2142,7 +2143,7 @@ Comparemos la suma total de registros que alcanza cada barrio. Con \texttt{geom\
 
 \includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-98-1.pdf}
 
-Tenemos dos problemas. El primero es que los valores en el eje de las \texttt{y} son grandes, y R nos quiere hacer un favor expresándolos en notación científica. La notación científica es práctica para ahorrar espacio, pero no queda vien en visualizaciones. Para pedirle que no lo haga mas, usamos esta función
+Tenemos dos problemas. El primero es que los valores en el eje de las \texttt{y} son grandes, y R nos quiere hacer un favor expresándolos en notación científica. La notación científica es práctica para ahorrar espacio, pero no queda bien en visualizaciones. Para pedirle que no lo haga mas, usamos esta función
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2152,7 +2153,7 @@ Tenemos dos problemas. El primero es que los valores en el eje de las \texttt{y}
 
 y por el resto de la sesión nos libramos de la notación científica. Listo.
 
-El segundo problema es que los nombres de los barrios resultan del todo ilegibles porque no tienen espacio. En un gráfico, el eje horizonatal es un muy mal lugar para poner muchas categorías con nombre, ya que el solapamiento se vuelve inevitable. Sería mejor tener los nombre en el eje vertical, donde se pueden escribir uno encima del otro sin pisarse ¡La solución es invertir los ejes de de coordenadas! Sólo necesitamos agregar \texttt{coord\_flip}:
+El segundo problema es que los nombres de los barrios resultan del todo ilegibles porque no tienen espacio. En un gráfico, el eje horizontal es un muy mal lugar para poner muchas categorías con nombre, ya que el solapamiento se vuelve inevitable. Sería mejor tener los nombre en el eje vertical, donde se pueden escribir uno encima del otro sin pisarse ¡La solución es invertir los ejes de de coordenadas! Sólo necesitamos agregar \texttt{coord\_flip}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2166,7 +2167,7 @@ El segundo problema es que los nombres de los barrios resultan del todo ilegible
 
 Ahora si podemos interpretar el gráfico. San Nicolás y Monserrat son los barrios a la cabeza, lo cual no sorprende sabiendo que pertenecen a la ya legendaria comuna 1.
 
-Los gráficos de barras, además de comparar, también son buenos para mostrar la composición interna de las cosas: que ``hay dentro'', que componentes contribuye a un determinado total. Vamos a mostrar entonces cuanto contribuye cada tipo de trámite al toal por barrio, usando el parámetro estético \texttt{fill} (relleno). \texttt{geom\_bar} realiza un segmentado automático de cada barra, con la proporción que le corresponde a cada subcategoría:
+Los gráficos de barras, además de comparar, también son buenos para mostrar la composición interna de las cosas: que ``hay dentro'', que componentes contribuye a un determinado total. Vamos a mostrar entonces cuanto contribuye cada tipo de trámite al total por barrio, usando el parámetro estético \texttt{fill} (relleno). \texttt{geom\_bar} realiza un segmentado automático de cada barra, con la proporción que le corresponde a cada subcategoría:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2192,7 +2193,7 @@ En lugar de relleno podríamos haber usado \texttt{color}, tal como hicimos con 
 
 \includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-102-1.pdf}
 
-También podemos cambiar las categorías. Si qusiéramos ver el total de registros por cada tipo de trámite:
+También podemos cambiar las categorías. Si quisiéramos ver el total de registros por cada tipo de trámite:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2237,7 +2238,7 @@ En general, para evitar la confusión asociada a variables con docenas de catego
 
 Los histogramas son usados para mostrar la \emph{distribución} de una variable continua. El histograma permite decir si los valores que toma cada observación se agrupan en torno a un valor ``típico'' o medio -como en el caso de la llamada \emph{distribución normal}-, o en torno a dos valores frecuentes (\emph{distribución bimodal}), o con dispersión sin picos ni valles, donde no hay valores típicos ni atípicos - \emph{distribución uniforme}.
 
-Por ejemplo, analicemos la distribución de resgistros mensuales (la columna PERIODO en nuestro datset representa el lapso de un mes). Tenemos que agrupar por mes, y hacer un resumen (\texttt{summarise()}) que extraiga el gran total:
+Por ejemplo, analicemos la distribución de registros mensuales (la columna PERIODO en nuestro dataset representa el lapso de un mes). Tenemos que agrupar por mes, y hacer un resumen (\texttt{summarise()}) que extraiga el gran total:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2274,9 +2275,9 @@ Hacer un histograma es simple con \texttt{geom\_histogram()}: sólo hay que eleg
 
 \texttt{geom\_histogram()} divide el rango de valores en una cantidad arbitraria de segmentos iguales (``bins'' en inglés) y cuenta cuantas observaciones caen en cada uno, cantidad que se representa con la altura de la columna en el eje de las \texttt{y}.
 
-En nuestro ejemplo, vemos que un mes mes en el que la cantidad de resgitros tiende a agurparse en torno a un valor típico de poco más de 60.000 por mes. En apenas un caso hubo mennos de 40.000 o más de 80.000
+En nuestro ejemplo, vemos que un mes mes en el que la cantidad de registros tiende a agruparse en torno a un valor típico de poco más de 60.000 por mes. En apenas un caso hubo menos de 40.000 o más de 80.000
 
-No sería raro que la agregación qeu hicimos nos oculte patrones en los datos. Que pasa si contamos los registros por mes y por tipo de contacto, y mostramso los histogramas mensuales en facetado por tipo?
+No sería raro que la agregación que hicimos nos oculte patrones en los datos. Que pasa si contamos los registros por mes y por tipo de contacto, y mostramos los histogramas mensuales en facetado por tipo?
 
 Hacemos el agrupado y sumario de rigor
 
@@ -2315,14 +2316,14 @@ y creamos el facetado como ya sabemos:
 
 \includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-109-1.pdf}
 
-Aparecen las diferencias. Los reclamos tienen una dispersión mínima, con casi todas las observaciones apiladas en torno a unos 1000 contactos mensuales; siempre son bajas. La cantidad mensual de denuncias, reclamos y solicitudes muestra una dispersión mayor, pero aún así tendencia a rondar un valor típico. Los trámites son el extremo opuesto a las qeujas, ya que muestran una gran dispersión, pudiendo tomar cualquier valor de menos de 10.000 a más de 40.000 registros de forma bastante pareja.
+Aparecen las diferencias. Los reclamos tienen una dispersión mínima, con casi todas las observaciones apiladas en torno a unos 1000 contactos mensuales; siempre son bajas. La cantidad mensual de denuncias, reclamos y solicitudes muestra una dispersión mayor, pero aún así tendencia a rondar un valor típico. Los trámites son el extremo opuesto a las quejas, ya que muestran una gran dispersión, pudiendo tomar cualquier valor de menos de 10.000 a más de 40.000 registros de forma bastante pareja.
 
 \hypertarget{preparando-una-visualizaciuxf3n-para-compartir}{%
 \section{Preparando una visualización para compartir}\label{preparando-una-visualizaciuxf3n-para-compartir}}
 
-Lo último que nos queda por decir en este capítulo es que los gráficos que hemos producido hasta aquí están pensandos para nuestro propio consumo. Son parte, y parte dundamental, de lo que llamamos análisis exploratorio de datos. En el contexto de la exploración, lo importante es trabajar en forma rápida, probando una u otra técnica de visuzalización y refinando nuestros resultados hasta hallar patrones interesantes, o sacarnos dudas acerca de los datos. No necesitamos ponerle título a las visualizaciones, porque ya sabemos de que tratan (¡acabamos de escribirlas!). No nos preocupa que los nombres de los ejes indiquen en forma clara la variable representan, porque ya lo sabemos de antemano.
+Lo último que nos queda por decir en este capítulo es que los gráficos que hemos producido hasta aquí están pensando para nuestro propio consumo. Son parte, y parte fundamental, de lo que llamamos análisis exploratorio de datos. En el contexto de la exploración, lo importante es trabajar en forma rápida, probando una u otra técnica de visualización y refinando nuestros resultados hasta hallar patrones interesantes, o sacarnos dudas acerca de los datos. No necesitamos ponerle título a las visualizaciones, porque ya sabemos de que tratan (¡acabamos de escribirlas!). No nos preocupa que los nombres de los ejes indiquen en forma clara la variable representan, porque ya lo sabemos de antemano.
 
-Pero cuando queremos guardar un gráfico para compartir con otros, sea publicándola en un paper, o enviándola por mail a un amigo, necesitamos tener más cuidado. Hemos pasado del ámbito de la exploración al de la comunicación. Ahora si debe preocuparnos la claridad, porque no sabemos el grado de familiaridad que tiene con los datos la eventual audiencia.
+Pero cuando queremos guardar un gráfico para compartir con otros, sea publicándola en un paper, o enviándola por email a un amigo, necesitamos tener más cuidado. Hemos pasado del ámbito de la exploración al de la comunicación. Ahora si debe preocuparnos la claridad, porque no sabemos el grado de familiaridad que tiene con los datos la eventual audiencia.
 
 Si bien la comunicación clara es un arte cuyas reglas dependen del contexto, y además cada quien tiene su estilo, podemos decretar al menos tres elementos que no deberían faltar en un gráfico destinado a comunicar algo a los demás:
 
@@ -2343,7 +2344,7 @@ y ya que estamos, dos opcionales:
 \item
   Un subtítulo donde poner detalles importantes que no entran en un título breve
 \item
-  Una nota al pie con infromación adicional: fuente de los datos, cita académica, advertencias, etc.
+  Una nota al pie con información adicional: fuente de los datos, cita académica, advertencias, etc.
 \end{itemize}
 
 Con \texttt{ggplot()} podemos encargarnos de todo dentro de una sola función, \texttt{labs()} (por \emph{labels}, etiquetas)
@@ -2398,12 +2399,12 @@ Y lo más interesante: Para todas y cada una de las visualizaciones se incluye e
 \hypertarget{ejercicios-2}{%
 \section{Ejercicios}\label{ejercicios-2}}
 
-I. Tomemos un dataset, y efectuemos las transformaciones necesarias para luego crear las siguients visualizaciones:
+I. Tomemos un dataset, y efectuemos las transformaciones necesarias para luego crear las siguientes visualizaciones:
 
 \begin{itemize}
 \tightlist
 \item
-  Scatter plot: Mostrar correlación entre 2 variables numéricas.
+  \emph{Scatter plot}, o gráfico de dispersión: Mostrar correlación entre 2 variables numéricas.
 \item
   Gráfico de Barras: Comparar variables categóricas.
 \item
@@ -2490,7 +2491,7 @@ Descarguemos el dataset y echémosle un vistazo como ya sabemos hacer:
 
 Con el poder de \texttt{summary()}, podemos decir unas cuantas cosas acerca de nuestros dataset. Las observaciones son de un país, su continente, un año determinado y su expectativa de vida, población y\ldots{} ¿PBI\_PC?. Esa última es PBI per cápita. Que, según parece, hay 12 observaciones por país. Que el rango de años es de 1952 a 2007. Que a lo largo de esos años, la menor expectativa registrada ha sido de 23 años (¡uf!) y la mayor de 82. Que el país menos poblado en el dataset ha tenido apenas más de 60.000 habitantes, mientras que el más populoso ha alcanzado los 1300 millones.
 
-Notemos también que la variable que representa el año de cada medición aparece nombrada como ``anio''. Esto se debe a la necesidad de evitar que en el nombre de la variable aparezca la ``ñ'', letra que los hispanparlantes apreciamos pero suele traer problemas cuando se cruza con sistemas informáticos.
+Notemos también que la variable que representa el año de cada medición aparece nombrada como ``anio''. Esto se debe a la necesidad de evitar que en el nombre de la variable aparezca la ``ñ'', letra que los hispanohablantes apreciamos pero suele traer problemas cuando se cruza con sistemas informáticos.
 
 \hypertarget{regresiuxf3n-con-una-variable-numuxe9rica}{%
 \subsection{Regresión con una variable numérica}\label{regresiuxf3n-con-una-variable-numuxe9rica}}
@@ -2660,7 +2661,7 @@ Ya que estamos, aprendamos otro truco. \texttt{ggplot()} puede agregar a nuestro
 
 \includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-121-1.pdf}
 
-Hacer una regresión lineal se trata de encontrar la línea que atraviesa nuestra nube de puntos de modo tal que la suma de las distancias de cada punto a la línea sea la menor posible. Es un problema matemático que puede resolverse con distintas técnicas (algebra lineal, geometría, etc) que no vamos a discutir aquí. Confiaremos en R para hacer los cálculos.
+Hacer una regresión lineal se trata de encontrar la línea que atraviesa nuestra nube de puntos de modo tal que la suma de las distancias de cada punto a la línea sea la menor posible. Es un problema matemático que puede resolverse con distintas técnicas (álgebra lineal, geometría, etc) que no vamos a discutir aquí. Confiaremos en R para hacer los cálculos.
 
 En la relación año - expectativa de vida las distancias entre los puntos (las observaciones) y la línea (el modelo) son muy pequeñas. Eso indica que el modelo describe con gran precisión la dinámica de la relación entre las variables analizadas.
 
@@ -2815,7 +2816,7 @@ Ya podemos vislumbrar que el continente incide en la expectativa de vida, con Á
 
 Algún ojo avizor habrá notado que la clasificación por color no es necesaria, ya que el continente ya está señalado por su posición en el eje de las \texttt{x}. El color cumple aquí una función más que nada cosmética, en pos de hacer al gráfico maś atractivo a la vista.
 
-También podemos visualizar la diferencia de distribución de expectactiva de vida de los países, con un histograma facetado por continente:
+También podemos visualizar la diferencia de distribución de expectativa de vida de los países, con un histograma facetado por continente:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2831,7 +2832,7 @@ También podemos visualizar la diferencia de distribución de expectactiva de vi
 
 \includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-130-1.pdf}
 
-Bien, estamos convencidos de que hay una relación entre continente y expectativa de vida, aunque no la hemos cuantificado. Para eso, recurrimos a una regresión lineal con variable expicativa categórica. Se obtiene de la misma manera que antes, no hay cambios en la forma de invocar \texttt{lm()} por el hecho de que la variabe ahora sea categórica en vez de numérica.
+Bien, estamos convencidos de que hay una relación entre continente y expectativa de vida, aunque no la hemos cuantificado. Para eso, recurrimos a una regresión lineal con variable explicativa categórica. Se obtiene de la misma manera que antes, no hay cambios en la forma de invocar \texttt{lm()} por el hecho de que la variable ahora sea categórica en vez de numérica.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2854,7 +2855,7 @@ Bien, estamos convencidos de que hay una relación entre continente y expectativ
 ##              25.91
 \end{verbatim}
 
-¿Qué ocurrió aquí? \texttt{lm()} inspeccionó el contenido de la variable ``continente'' y encontró cinco niveles o categorías. Tomó el primero en orden alfabético, ``Africa'' como línea de base. El primer coeficiente de la regresión (la intersección) es el promedio de la expectativa de vida en África. Para cada una de las categorías restantes, el coeficiente representa la diferencia respecto a África de la expectativa de vida promedio en cada uno de los otros continentes. He allí la cuantificación: para un país en las Américas, podemos esperar -en promedio- una expectativa de vida que supera en 18.8 años la de los paises africanos. Para un país en Asia, son 15.92 los años adicionales, y así.
+¿Qué ocurrió aquí? \texttt{lm()} inspeccionó el contenido de la variable ``continente'' y encontró cinco niveles o categorías. Tomó el primero en orden alfabético, ``Africa'', como línea de base. El primer coeficiente de la regresión (la intersección) es el promedio de la expectativa de vida en África. Para cada una de las categorías restantes, el coeficiente representa la diferencia respecto a África de la expectativa de vida promedio en cada uno de los otros continentes. He allí la cuantificación: para un país en las Américas, podemos esperar -en promedio- una expectativa de vida que supera en 18.8 años la de los países africanos. Para un país en Asia, son 15.92 los años adicionales, y así.
 
 Prestemos atención a los residuos. Agregamos al dataframe una columna con el residuo para cada observación,
 
@@ -2925,7 +2926,7 @@ Se trata de Afganistán. Como explicación, uno piensa de inmediato en las larga
 
 \includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-135-1.pdf}
 
-Vaya sopresa. A pesar de ser en extremo baja comparada con el resto de Asia, la expectativa de vida en Afganistán en el 2007 es la más alta de la historia, y no sólo eso: ha aumentado con rapidez \emph{después} del año de la invasión. ¿A qué podemos atribuir entonces la bajísima expectativa de vida? Teniendo en cuenta que el país ha sufrido conflictos bélicos en forma continua desde fines de los '70, podría tratarse de una tragedia histórica: los años que faltan son los que el país habría alcanzado si las guerras no hubieran alterado su ritmo de progreso.
+Vaya sorpresa. A pesar de ser en extremo baja comparada con el resto de Asia, la expectativa de vida en Afganistán en el 2007 es la más alta de la historia, y no sólo eso: ha aumentado con rapidez \emph{después} del año de la invasión. ¿A qué podemos atribuir entonces la bajísima expectativa de vida? Teniendo en cuenta que el país ha sufrido conflictos bélicos en forma continua desde fines de los '70, podría tratarse de una tragedia histórica: los años que faltan son los que el país habría alcanzado si las guerras no hubieran alterado su ritmo de progreso.
 
 Dependiendo del esfuerzo que requiera determinar la causa de un \emph{outlier}, una alternativa razonable es dejarlo de lado. Es un poco cruel, pero realista: cuando tenemos cientos, miles o millones de observaciones, hacer una ``poda'' de los valores extremos que nuestros modelos no pueden explicar termina siendo la opción más razonable. Dedicar recursos limitados a la caza de una explicación o a complejizar el modelo agregando variables hasta lograr predecir los \emph{outliers} no tiene sentido cuando se trata de casos aislados y fortuitos. Por otra parte, eliminarlos antes de tiempo podría hacernos ignorar los casos más interesantes de un dataset, los que más información podrían revelar. Existen tratados completos dedicados a la cuestión de como manejar los \emph{outliers}, pero el conocimiento de dominio es la principal herramienta para decidir que hacer ante casos inusuales\ldots{} como siempre.
 
@@ -2934,9 +2935,9 @@ Dependiendo del esfuerzo que requiera determinar la causa de un \emph{outlier}, 
 
 Hasta aquí hemos usado la regresión lineal para hacer explícita la relación entre una variable \emph{resultante} \(y\) y una única variable \emph{predictiva} o \emph{explicativa} \(x\). En algunos de nuestros resultados pudimos intuir que el agregado de alguna variable explicativa adicional podría mejorar nuestras predicciones. De eso se trata la regresión lineal múltiple: incorporar una cantidad arbitraria de variables al modelo, buscando representar las múltiples dinámicas que inciden en el fenómeno estudiado.
 
-Una buena noticia es que, en general, agregar variables a nuestro modelo estadístico no requiere mucho esfuerzo adicional. En la época en que los cálculos matemáticos debían hacerse sin la ayuda de una computadora, sumar variables sin ton ni son debía tener poca gracia, debido a la creciente cantidad de cálculos a resolver. Para nosotros que dejamos la tarea en manos de software especializado, el problema es el opuesto. Es tan fácil sumar variables al modelo, que debemos evitar la tentación de arrojar todo dentro de la fórmula de regresión líneal y decidir luego que parece importante y que no.
+Una buena noticia es que, en general, agregar variables a nuestro modelo estadístico no requiere mucho esfuerzo adicional. En la época en que los cálculos matemáticos debían hacerse sin la ayuda de una computadora, sumar variables sin ton ni son debía tener poca gracia, debido a la creciente cantidad de cálculos a resolver. Para nosotros que dejamos la tarea en manos de software especializado, el problema es el opuesto. Es tan fácil sumar variables al modelo, que debemos evitar la tentación de arrojar todo dentro de la fórmula de regresión lineal y decidir luego que parece importante y que no.
 
-Pasemos a la práctica. Vamos a modelar la expectativa como resultante de la población y del PBI per cápita de los países, usando los datos más reciente (tomados en 2007). La única difrerencia respecto a una regresión lineal simple es que usamos \texttt{+} para agregar variables en la fórmula de \texttt{lm()}
+Pasemos a la práctica. Vamos a modelar la expectativa como resultante de la población y del PBI per cápita de los países, usando los datos más reciente (tomados en 2007). La única diferencia respecto a una regresión lineal simple es que usamos \texttt{+} para agregar variables en la fórmula de \texttt{lm()}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3032,7 +3033,7 @@ Recordemos que la intensidad de una correlación es su valor absoluto, que toma 
 
 En resumidas cuentas, aparece porque nosotros le pedimos que aparezca. Es decir, instruimos en forma específica a \texttt{lm()} para que incorpore a la población en el modelo. El caso es que población no es un buen predictor de longevidad (la correlación es bajísima), pero si lo pedimos, lo tenemos: el coeficiente nos indica el valor que minimiza las discrepancias entre valores observado y valores predichos trazando una línea recta. Lo que no indica por si solo es el grado en el cual podemos confiar en esa variable para darnos buenas predicciones o estimados.
 
-Sería muy util que el resultado de \texttt{lm()} indique cuáles variables son buenas predictoras y cuáles no. Y por suerte, lo hace cuando lo interrogamos con \texttt{summary()}, la misma función que hemos estado usando para obtener el resumen de un dataframe. Cuando la usamos con un objeto de R que contiene un modelo estadístico, lo que obtenemos son sus detalles:
+Sería muy útil que el resultado de \texttt{lm()} indique cuáles variables son buenas predictoras y cuáles no. Y por suerte, lo hace cuando lo interrogamos con \texttt{summary()}, la misma función que hemos estado usando para obtener el resumen de un dataframe. Cuando la usamos con un objeto de R que contiene un modelo estadístico, lo que obtenemos son sus detalles:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3073,14 +3074,14 @@ El resumen incluye los parámetros que definieron al modelo, los valores por cua
 \item
   \texttt{**}: Es muy, pero muy probable que esta variable tenga una relación con la que queremos predecir. 99\% seguro.
 \item
-  \texttt{***}: Juramos que las variables estan relacionadas. Más no se puede pedir.
+  \texttt{***}: Juramos que las variables están relacionadas. Más no se puede pedir.
 \end{itemize}
 
 Lo de un asterisco/estrella (\texttt{*}) indicando que los resultados ya alcanzan rigor científico no es broma. El asterisco solitario indica que, a nivel estadístico, se supera el 95\% de confianza en que la relación existe en la realidad y no es producto de una casualidad en los datos. Pasando ese umbral se considera que los datos son ``estadísticamente significativos'', y desde hace muchos años encontrar un \emph{valor p} menor a 0,05 es la meta dorada de los investigadores que emplean análisis estadístico. ¿Porqué un 95\% de confianza alcanza? ¿Porqué no relajar el límite a 90\%, o quizás mejor, exigir al menos un 99 o 99,9\% de seguridad? La verdad es que no hay ninguna razón trascendental. El 95\% de certeza es tan sólo un umbral arbitrario que en algún momento se volvió estándar. Es importante aclarar que en los últimos años ha crecido una reacción de rechazo a esta norma arbitraria, dentro de la propia comunidad científica. Quienes siguen confiando en los \emph{valores p} son llamados ``frecuentistas''; los que proponen cuantificar de otra forma nuestro grado de certeza son llamados ``bayesianos''. Google mediante, quien quiera saber más sobre la apasionante rivalidad tendrá horas de diversión aseguradas.
 
 En lo que a nosotros respecta, por ahora vamos a aceptar el enfoque frecuentista, y cuando veamos una estrella diremos que la variable asociada es un buen predictor. O para ser más precisos, que su relación con la variable dependiente es estadísticamente significativa.
 
-Volvamos a nuestros modelos. Cuando hicimos regresiones simples no sabíamos aún de valores p, y no revisamos la significancia de las variables predictoras. Hagamoslo ahora con el modelo de expectativa de vida en Argentina vs.~PBI :
+Volvamos a nuestros modelos. Cuando hicimos regresiones simples no sabíamos aún de valores p, y no revisamos la significancia de las variables predictoras. Hagámoslo ahora con el modelo de expectativa de vida en Argentina vs.~PBI :
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3109,7 +3110,7 @@ Volvamos a nuestros modelos. Cuando hicimos regresiones simples no sabíamos aú
 ## F-statistic:  2246 on 1 and 10 DF,  p-value: 0.0000000000004216
 \end{verbatim}
 
-Las tres estrellitas, distintión máxima, indican que sin dudas el año está relacionado con la expectativa de vida. Esto no es una sopresa: la linea de la regresión lineal se ajusta con tanta precisión a los valores observados, que no podía ser de otra manera.
+Las tres estrellitas, distinción máxima, indican que sin dudas el año está relacionado con la expectativa de vida. Esto no es una sorpresa: la linea de la regresión lineal se ajusta con tanta precisión a los valores observados, que no podía ser de otra manera.
 
 Continuando con las regresiones múltiples, intentemos un modelo con tres variables predictoras. A población y PBI, las que ya teníamos en cuenta, vamos a agregar una variable categórica: el continente.
 
@@ -3155,7 +3156,7 @@ Continuando con las regresiones múltiples, intentemos un modelo con tres variab
 ## F-statistic:  56.2 on 6 and 135 DF,  p-value: < 0.00000000000000022
 \end{verbatim}
 
-Observamos que la variable categórica es significativa. Con las demas variables fijas -es decir, en paises de similar PBI y población- el continente de origen explica en gran medida las diferencias en expectativa de vida en cada país, y con un efecto estimado enorme - ¡de 12 a 16 años!-. Notemos de todos modos que el coeficiente de la variable continente había sido mayor en el modelo simple, llegando a casi 26 años para Oceanía. ¿Porqué es menor ahora? Porque nuestro modelo es más completo, y tiene en cuenta más variables. Cuando lo único que teníamos para comparar países era su continente, era era la única variable a la que atribuir diferencias. Ahora que consideramos mútiples variables para explicar las diferencias, notamos la parte de la influencia que se lleva el PBI, reduciendo la del contintente.
+Observamos que la variable categórica es significativa. Con las demás variables fijas -es decir, en países de similar PBI y población- el continente de origen explica en gran medida las diferencias en expectativa de vida en cada país, y con un efecto estimado enorme - ¡de 12 a 16 años!-. Notemos de todos modos que el coeficiente de la variable continente había sido mayor en el modelo simple, llegando a casi 26 años para Oceanía. ¿Porqué es menor ahora? Porque nuestro modelo es más completo, y tiene en cuenta más variables. Cuando lo único que teníamos para comparar países era su continente, era era la única variable a la que atribuir diferencias. Ahora que consideramos múltiples variables para explicar las diferencias, notamos la parte de la influencia que se lleva el PBI, reduciendo la del continente.
 
 \hypertarget{ejercicios-3}{%
 \section{Ejercicios}\label{ejercicios-3}}
@@ -3168,7 +3169,7 @@ I. En base a un dataset de nuestra preferencia, mostremos la relación entre dos
 \item
   Realicemos un modelo de regresión lineal para esas dos variables. Describamos los resultados, ofreciendo una interpretación.
 \item
-  Mostremos la relación entre una variables categórica y otra continua/numérica, con un gráfico boxplot (mediante \texttt{geom\_boxplot()}) o un gráfico de puntos ``sacudidos'' (mediante \texttt{geom\_jitter()}). Expliquemos lo que muestra el gráfico.
+  Mostremos la relación entre una variables categórica y otra continua/numérica, con un gráfico \emph{boxplot} (mediante \texttt{geom\_boxplot()}) o un gráfico de puntos ``sacudidos'' (mediante \texttt{geom\_jitter()}). Expliquemos lo que muestra el gráfico.
 \item
   Realicemos un modelo de regresión lineal para esas dos variables, describiendo los resultados sin olvidar interpretarlos.
 \end{enumerate}

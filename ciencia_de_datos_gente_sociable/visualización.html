@@ -24,7 +24,7 @@
 <meta name="author" content="Antonio Vazquez Brust" />
 
 
-<meta name="date" content="2020-02-28" />
+<meta name="date" content="2020-02-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -411,20 +411,20 @@ de <code>aes()</code> podemos ajustas posición, tamaño, color y hasta la forma
 <div id="gráficos-de-barras" class="section level2">
 <h2><span class="header-section-number">4.4</span> Gráficos de barras</h2>
 <p>Si hay un tipo de visualización que compite en popularidad con el <em>scatterplot</em>, son los gráficos de barras (<em>bar charts</em> en inglés). Solemos encontrarlos acompañando artículos en diarios y revistas, sin duda porque son fáciles de leer de un vistazo. Los gráficos de barras se usan mucho para hacer comparaciones: quién tiene más y quién tiene menos de alguna variable continua cómo ingresos, edad, altura o similares.</p>
-<p>Comparemos la suma total de registros que alcanza cada barrio. Con <code>geom_bar</code> podemos agregar una capa de visualizacón con gráficos de barras. Los parámetros a definir dentro de <code>aes()</code> son <code>x</code>, donde va una variable categórica, y en forma opcional <code>weight</code>, que indica la variable a sumar para determinar la altura de cada barra. Si no especificamos un <code>weight</code>, simplemente se cuenta cuantas veces aparece cada categoría en el dataframe, en la práctica un conteo o frecuencia de aparición. En nuestro dataset cada fila incluye un período y un total de contactos recibidos. Nosotros no estamos interesados en cuantas veces aparece cada barrio, sino en la suma de la columna total para cada uno de ellos, así que vamos a usar <code>weight = total</code>.</p>
+<p>Comparemos la suma total de registros que alcanza cada barrio. Con <code>geom_bar</code> podemos agregar una capa de visualización con gráficos de barras. Los parámetros a definir dentro de <code>aes()</code> son <code>x</code>, donde va una variable categórica, y en forma opcional <code>weight</code>, que indica la variable a sumar para determinar la altura de cada barra. Si no especificamos un <code>weight</code>, simplemente se cuenta cuantas veces aparece cada categoría en el dataframe, en la práctica un conteo o frecuencia de aparición. En nuestro dataset cada fila incluye un período y un total de contactos recibidos. Nosotros no estamos interesados en cuantas veces aparece cada barrio, sino en la suma de la columna total para cada uno de ellos, así que vamos a usar <code>weight = total</code>.</p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="kw">ggplot</span>(atencion_ciudadano) <span class="op">+</span></a>
 <a class="sourceLine" id="cb157-2" data-line-number="2"><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> BARRIO, <span class="dt">weight =</span> total))</a></code></pre></div>
 <p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-98-1.png" width="1050" /></p>
-<p>Tenemos dos problemas. El primero es que los valores en el eje de las <code>y</code> son grandes, y R nos quiere hacer un favor expresándolos en notación científica. La notación científica es práctica para ahorrar espacio, pero no queda vien en visualizaciones. Para pedirle que no lo haga mas, usamos esta función</p>
+<p>Tenemos dos problemas. El primero es que los valores en el eje de las <code>y</code> son grandes, y R nos quiere hacer un favor expresándolos en notación científica. La notación científica es práctica para ahorrar espacio, pero no queda bien en visualizaciones. Para pedirle que no lo haga mas, usamos esta función</p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1"><span class="kw">options</span>(<span class="dt">scipen =</span> <span class="dv">999</span>)</a></code></pre></div>
 <p>y por el resto de la sesión nos libramos de la notación científica. Listo.</p>
-<p>El segundo problema es que los nombres de los barrios resultan del todo ilegibles porque no tienen espacio. En un gráfico, el eje horizonatal es un muy mal lugar para poner muchas categorías con nombre, ya que el solapamiento se vuelve inevitable. Sería mejor tener los nombre en el eje vertical, donde se pueden escribir uno encima del otro sin pisarse ¡La solución es invertir los ejes de de coordenadas! Sólo necesitamos agregar <code>coord_flip</code>:</p>
+<p>El segundo problema es que los nombres de los barrios resultan del todo ilegibles porque no tienen espacio. En un gráfico, el eje horizontal es un muy mal lugar para poner muchas categorías con nombre, ya que el solapamiento se vuelve inevitable. Sería mejor tener los nombre en el eje vertical, donde se pueden escribir uno encima del otro sin pisarse ¡La solución es invertir los ejes de de coordenadas! Sólo necesitamos agregar <code>coord_flip</code>:</p>
 <div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1"><span class="kw">ggplot</span>(atencion_ciudadano) <span class="op">+</span></a>
 <a class="sourceLine" id="cb159-2" data-line-number="2"><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> BARRIO, <span class="dt">weight =</span> total)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb159-3" data-line-number="3"><span class="st">    </span><span class="kw">coord_flip</span>()</a></code></pre></div>
 <p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-100-1.png" width="1050" /></p>
 <p>Ahora si podemos interpretar el gráfico. San Nicolás y Monserrat son los barrios a la cabeza, lo cual no sorprende sabiendo que pertenecen a la ya legendaria comuna 1.</p>
-<p>Los gráficos de barras, además de comparar, también son buenos para mostrar la composición interna de las cosas: que “hay dentro”, que componentes contribuye a un determinado total. Vamos a mostrar entonces cuanto contribuye cada tipo de trámite al toal por barrio, usando el parámetro estético <code>fill</code> (relleno). <code>geom_bar</code> realiza un segmentado automático de cada barra, con la proporción que le corresponde a cada subcategoría:</p>
+<p>Los gráficos de barras, además de comparar, también son buenos para mostrar la composición interna de las cosas: que “hay dentro”, que componentes contribuye a un determinado total. Vamos a mostrar entonces cuanto contribuye cada tipo de trámite al total por barrio, usando el parámetro estético <code>fill</code> (relleno). <code>geom_bar</code> realiza un segmentado automático de cada barra, con la proporción que le corresponde a cada subcategoría:</p>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1"><span class="kw">ggplot</span>(atencion_ciudadano) <span class="op">+</span></a>
 <a class="sourceLine" id="cb160-2" data-line-number="2"><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> BARRIO, <span class="dt">weight =</span> total, <span class="dt">fill =</span> TIPO_PRESTACION)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb160-3" data-line-number="3"><span class="st">    </span><span class="kw">coord_flip</span>()</a></code></pre></div>
@@ -435,7 +435,7 @@ de <code>aes()</code> podemos ajustas posición, tamaño, color y hasta la forma
 <a class="sourceLine" id="cb161-2" data-line-number="2"><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> BARRIO, <span class="dt">weight =</span> total, <span class="dt">color =</span> TIPO_PRESTACION)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb161-3" data-line-number="3"><span class="st">    </span><span class="kw">coord_flip</span>()</a></code></pre></div>
 <p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-102-1.png" width="1050" /></p>
-<p>También podemos cambiar las categorías. Si qusiéramos ver el total de registros por cada tipo de trámite:</p>
+<p>También podemos cambiar las categorías. Si quisiéramos ver el total de registros por cada tipo de trámite:</p>
 <div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1"><span class="kw">ggplot</span>(atencion_ciudadano) <span class="op">+</span></a>
 <a class="sourceLine" id="cb162-2" data-line-number="2"><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> TIPO_PRESTACION, <span class="dt">weight =</span> total)) </a></code></pre></div>
 <p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-103-1.png" width="1050" /></p>
@@ -455,7 +455,7 @@ de <code>aes()</code> podemos ajustas posición, tamaño, color y hasta la forma
 <div id="histogramas" class="section level2">
 <h2><span class="header-section-number">4.5</span> Histogramas</h2>
 <p>Los histogramas son usados para mostrar la <em>distribución</em> de una variable continua. El histograma permite decir si los valores que toma cada observación se agrupan en torno a un valor “típico” o medio -como en el caso de la llamada <em>distribución normal</em>-, o en torno a dos valores frecuentes (<em>distribución bimodal</em>), o con dispersión sin picos ni valles, donde no hay valores típicos ni atípicos - <em>distribución uniforme</em>.</p>
-<p>Por ejemplo, analicemos la distribución de resgistros mensuales (la columna PERIODO en nuestro datset representa el lapso de un mes). Tenemos que agrupar por mes, y hacer un resumen (<code>summarise()</code>) que extraiga el gran total:</p>
+<p>Por ejemplo, analicemos la distribución de registros mensuales (la columna PERIODO en nuestro dataset representa el lapso de un mes). Tenemos que agrupar por mes, y hacer un resumen (<code>summarise()</code>) que extraiga el gran total:</p>
 <div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1">contactos_por_mes &lt;-<span class="st"> </span>atencion_ciudadano <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb165-2" data-line-number="2"><span class="st">    </span><span class="kw">group_by</span>(PERIODO) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb165-3" data-line-number="3"><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">gran_total =</span> <span class="kw">sum</span>(total))</a>
@@ -475,8 +475,8 @@ de <code>aes()</code> podemos ajustas posición, tamaño, color y hasta la forma
 <a class="sourceLine" id="cb167-2" data-line-number="2"><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gran_total))</a></code></pre></div>
 <p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-107-1.png" width="1050" /></p>
 <p><code>geom_histogram()</code> divide el rango de valores en una cantidad arbitraria de segmentos iguales (“bins” en inglés) y cuenta cuantas observaciones caen en cada uno, cantidad que se representa con la altura de la columna en el eje de las <code>y</code>.</p>
-<p>En nuestro ejemplo, vemos que un mes mes en el que la cantidad de resgitros tiende a agurparse en torno a un valor típico de poco más de 60.000 por mes. En apenas un caso hubo mennos de 40.000 o más de 80.000</p>
-<p>No sería raro que la agregación qeu hicimos nos oculte patrones en los datos. Que pasa si contamos los registros por mes y por tipo de contacto, y mostramso los histogramas mensuales en facetado por tipo?</p>
+<p>En nuestro ejemplo, vemos que un mes mes en el que la cantidad de registros tiende a agruparse en torno a un valor típico de poco más de 60.000 por mes. En apenas un caso hubo menos de 40.000 o más de 80.000</p>
+<p>No sería raro que la agregación que hicimos nos oculte patrones en los datos. Que pasa si contamos los registros por mes y por tipo de contacto, y mostramos los histogramas mensuales en facetado por tipo?</p>
 <p>Hacemos el agrupado y sumario de rigor</p>
 <div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1">contactos_por_mes_y_tipo &lt;-<span class="st"> </span>atencion_ciudadano <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb168-2" data-line-number="2"><span class="st">    </span><span class="kw">group_by</span>(PERIODO, TIPO_PRESTACION) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -498,12 +498,12 @@ de <code>aes()</code> podemos ajustas posición, tamaño, color y hasta la forma
 <a class="sourceLine" id="cb170-2" data-line-number="2"><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gran_total)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb170-3" data-line-number="3"><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>TIPO_PRESTACION)</a></code></pre></div>
 <p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-109-1.png" width="1050" /></p>
-<p>Aparecen las diferencias. Los reclamos tienen una dispersión mínima, con casi todas las observaciones apiladas en torno a unos 1000 contactos mensuales; siempre son bajas. La cantidad mensual de denuncias, reclamos y solicitudes muestra una dispersión mayor, pero aún así tendencia a rondar un valor típico. Los trámites son el extremo opuesto a las qeujas, ya que muestran una gran dispersión, pudiendo tomar cualquier valor de menos de 10.000 a más de 40.000 registros de forma bastante pareja.</p>
+<p>Aparecen las diferencias. Los reclamos tienen una dispersión mínima, con casi todas las observaciones apiladas en torno a unos 1000 contactos mensuales; siempre son bajas. La cantidad mensual de denuncias, reclamos y solicitudes muestra una dispersión mayor, pero aún así tendencia a rondar un valor típico. Los trámites son el extremo opuesto a las quejas, ya que muestran una gran dispersión, pudiendo tomar cualquier valor de menos de 10.000 a más de 40.000 registros de forma bastante pareja.</p>
 </div>
 <div id="preparando-una-visualización-para-compartir" class="section level2">
 <h2><span class="header-section-number">4.6</span> Preparando una visualización para compartir</h2>
-<p>Lo último que nos queda por decir en este capítulo es que los gráficos que hemos producido hasta aquí están pensandos para nuestro propio consumo. Son parte, y parte dundamental, de lo que llamamos análisis exploratorio de datos. En el contexto de la exploración, lo importante es trabajar en forma rápida, probando una u otra técnica de visuzalización y refinando nuestros resultados hasta hallar patrones interesantes, o sacarnos dudas acerca de los datos. No necesitamos ponerle título a las visualizaciones, porque ya sabemos de que tratan (¡acabamos de escribirlas!). No nos preocupa que los nombres de los ejes indiquen en forma clara la variable representan, porque ya lo sabemos de antemano.</p>
-<p>Pero cuando queremos guardar un gráfico para compartir con otros, sea publicándola en un paper, o enviándola por mail a un amigo, necesitamos tener más cuidado. Hemos pasado del ámbito de la exploración al de la comunicación. Ahora si debe preocuparnos la claridad, porque no sabemos el grado de familiaridad que tiene con los datos la eventual audiencia.</p>
+<p>Lo último que nos queda por decir en este capítulo es que los gráficos que hemos producido hasta aquí están pensando para nuestro propio consumo. Son parte, y parte fundamental, de lo que llamamos análisis exploratorio de datos. En el contexto de la exploración, lo importante es trabajar en forma rápida, probando una u otra técnica de visualización y refinando nuestros resultados hasta hallar patrones interesantes, o sacarnos dudas acerca de los datos. No necesitamos ponerle título a las visualizaciones, porque ya sabemos de que tratan (¡acabamos de escribirlas!). No nos preocupa que los nombres de los ejes indiquen en forma clara la variable representan, porque ya lo sabemos de antemano.</p>
+<p>Pero cuando queremos guardar un gráfico para compartir con otros, sea publicándola en un paper, o enviándola por email a un amigo, necesitamos tener más cuidado. Hemos pasado del ámbito de la exploración al de la comunicación. Ahora si debe preocuparnos la claridad, porque no sabemos el grado de familiaridad que tiene con los datos la eventual audiencia.</p>
 <p>Si bien la comunicación clara es un arte cuyas reglas dependen del contexto, y además cada quien tiene su estilo, podemos decretar al menos tres elementos que no deberían faltar en un gráfico destinado a comunicar algo a los demás:</p>
 <ul>
 <li>Un título descriptivo, pero breve</li>
@@ -513,7 +513,7 @@ de <code>aes()</code> podemos ajustas posición, tamaño, color y hasta la forma
 <p>y ya que estamos, dos opcionales:</p>
 <ul>
 <li>Un subtítulo donde poner detalles importantes que no entran en un título breve</li>
-<li>Una nota al pie con infromación adicional: fuente de los datos, cita académica, advertencias, etc.</li>
+<li>Una nota al pie con información adicional: fuente de los datos, cita académica, advertencias, etc.</li>
 </ul>
 <p>Con <code>ggplot()</code> podemos encargarnos de todo dentro de una sola función, <code>labs()</code> (por <em>labels</em>, etiquetas)</p>
 <p>Tomemos un gráfico de los que hicimos antes para pulirlo un poco y que sirva de ejemplo. El original:</p>
@@ -549,9 +549,9 @@ Figura 4.1: from Data to Viz - www.data-to-viz.com/
 </div>
 <div id="ejercicios-2" class="section level2">
 <h2><span class="header-section-number">4.8</span> Ejercicios</h2>
-<p>I. Tomemos un dataset, y efectuemos las transformaciones necesarias para luego crear las siguients visualizaciones:</p>
+<p>I. Tomemos un dataset, y efectuemos las transformaciones necesarias para luego crear las siguientes visualizaciones:</p>
 <ul>
-<li>Scatter plot: Mostrar correlación entre 2 variables numéricas.</li>
+<li><em>Scatter plot</em>, o gráfico de dispersión: Mostrar correlación entre 2 variables numéricas.</li>
 <li>Gráfico de Barras: Comparar variables categóricas.</li>
 <li>Gráfico de Barras: Comparar variables categóricas mostrando la composición interna de las mismas.<br />
 </li>

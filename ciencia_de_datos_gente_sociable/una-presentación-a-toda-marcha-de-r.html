@@ -24,7 +24,7 @@
 <meta name="author" content="Antonio Vazquez Brust" />
 
 
-<meta name="date" content="2020-02-28" />
+<meta name="date" content="2020-02-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -291,7 +291,7 @@ Figura 2.2: La interfaz de RStudio
 <h3><span class="header-section-number">2.1.4</span> Cargar los datos</h3>
 <p>Vamos a cargar datos de mortalidad infantil, por comuna de la ciudad, en el año 2016, publicados por la <a href="https://www.estadisticaciudad.gob.ar/eyc/">Dirección General de Estadística y Censos</a> de Buenos Aires. El formato original de los datos es “.xls” (planilla de hojas de cálculo). Yo lo he convertido a .csv (“comma separated values”) un formato muy popular en el mundo de la ciencia de datos, ya que es muy fácil de manipular y compartir entre sistemas… es posible abrir un archivo .csv hasta con el <a href="https://es.wikipedia.org/wiki/Bloc_de_notas">humilde block de notas</a>. Al igual que los archivos .xls, los .csv se utilizan para guardar información tabular: un rectángulo con filas y columnas. R incluye una función que lee archivos .csv, que se llama <code>read.csv</code>. La usamos así:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">mortalidad &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://bitsandbricks.github.io/data/mortalidad_infantil_caba_2016.csv&#39;</span>)</a></code></pre></div>
-<p>Obsérvese que los datos están alojados en un servidor de internet (accesibles vía una dirección web). Eso no es problema para la función read.csv, que con la misma soltura lee archivos guardados en nuestra PC o publicados en un sitio <em>online</em>.</p>
+<p>Obsérvese que los datos están alojados en un servidor de internet (accesibles vía una dirección web). Eso no es problema para la función <code>read.csv()</code>, que con la misma soltura lee archivos guardados en nuestra PC o publicados en un sitio <em>online</em>.</p>
 <p>Una vez leído el archivo, para ver el contenido de la variable donde guardamos el resultado -que hemos llamado <code>mortalidad</code>- sólo hace falta escribir su nombre:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">mortalidad</a></code></pre></div>
 <pre><code>##    Comuna Tasa2016
@@ -311,7 +311,7 @@ Figura 2.2: La interfaz de RStudio
 ## 14     14      3.2
 ## 15     15      6.4</code></pre>
 <p>Vemos que la tabla tiene 15 filas (una por <a href="https://es.wikipedia.org/wiki/Comunas_de_la_ciudad_de_Buenos_Aires">cada comuna de la ciudad</a>) y 2 columnas (una que indica la comuna, y otra con el valor de mortalidad infantil para el año 2016).</p>
-<p>En R, las tablas son llamadas <code>dataframes</code>. El dataframe es el objeto por excelencia del análisis de datos. En concepto, es muy similar a una tabla de excel; al fin y al cabo, ambos formatos guardan información en celdas identificadas por fila y columna.</p>
+<p>En R, las tablas son llamadas <code>dataframes</code>. El dataframe es el objeto por excelencia del análisis de datos. En concepto, es muy similar a una tabla de Excel; al fin y al cabo, ambos formatos guardan información en celdas identificadas por fila y columna.</p>
 <p>Algunas funciones útiles para explorar un dataframe que no conocemos son <code>dim()</code>, que nos da las dimensiones del dataframe (cantidad de filas y columnas), <code>names()</code> que nos dice como se llaman sus columnas (que en general representan variables), y <code>head()</code> que nos permite echar un vistazo rápido al contenido, mostrando sólo las seis primeras filas (ésto es útil porque con frecuencia trabajamos con dataframes que contienen miles o millones de filas, con lo que no tiene sentido tratar de volcar todas en pantalla).</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">dim</span>(mortalidad)</a></code></pre></div>
 <pre><code>## [1] 15  2</code></pre>
@@ -353,7 +353,7 @@ Figura 2.2: La interfaz de RStudio
 <p>Nuestro objetivo es obtener un mapa de la ciudad de Buenos Aires con sus comunas.</p>
 <p>Primero, instalamos <code>sf</code> en caso de que aún no lo hayamos hecho.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;sf&quot;</span>)</a></code></pre></div>
-<p>Vale la pena insistir: Sólo es necesario instalar los paquetes una vez. De aquí en más, cada vez que querramos echar mano a las funciones incluidas en <code>sf</code>, sólo necesitamos activarlo pues ya estará listo en nuestro sistema. Pedimos a R que active el paquete así:</p>
+<p>Vale la pena insistir: Sólo es necesario instalar los paquetes una vez. De aquí en más, cada vez que queramos echar mano a las funciones incluidas en <code>sf</code>, sólo necesitamos activarlo pues ya estará listo en nuestro sistema. Pedimos a R que active el paquete así:</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">library</span>(sf)</a></code></pre></div>
 <p>Luego, cargamos un archivo georeferenciado con las comunas de la Ciudad Autónoma de Buenos Aires, disponible online en formato <a href="https://es.wikipedia.org/wiki/GeoJSON"><em>geojson</em></a>, un estándar de representación de datos geográficos que es fácil de usar:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">comunas &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&#39;https://bitsandbricks.github.io/data/CABA_comunas.geojson&#39;</span>)</a></code></pre></div>
@@ -421,9 +421,10 @@ Figura 2.2: La interfaz de RStudio
 <h3><span class="header-section-number">2.2.2</span> Agregando datos</h3>
 <p>En este punto necesitamos una manera de “etiquetar” cada comuna con el punto cardinal que le toca “Norte” o “Sur”. La forma más rápida es crear una lista con los atributos, y agregarla a nuestro dataframe como una nueva columna.</p>
 <p>Podemos armar una sucesión de 15 “etiquetas” según el punto cardinal que le toca a cada comuna. El comando en R que “une” valores en conjunto se llama <code>c()</code> (viene de “combine”, “combinar”), y permite definir una lista de valores. Mejor dicho, un “vector” de valores; en el mundo de la programación, se usa la palabra vector cuando se combinan elementos del mismo tipo, y “lista” cuando se combina una variedad de clases: en el mismo conjunto números, textos, y otros tipos de objeto más complejos. Por ahora, no nos preocupemos por eso.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">nueva_columna &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Sur&quot;</span>, <span class="st">&quot;Norte&quot;</span>, <span class="st">&quot;Sur&quot;</span>, <span class="st">&quot;Sur&quot;</span>, <span class="st">&quot;Sur&quot;</span>, <span class="st">&quot;Norte&quot;</span>, <span class="st">&quot;Sur&quot;</span>, <span class="st">&quot;Sur&quot;</span>, <span class="st">&quot;Sur&quot;</span>, <span class="st">&quot;Norte&quot;</span>, <span class="st">&quot;Norte&quot;</span>, <span class="st">&quot;Norte&quot;</span>, <span class="st">&quot;Norte&quot;</span>, <span class="st">&quot;Norte&quot;</span>, <span class="st">&quot;Norte&quot;</span>)</a>
-<a class="sourceLine" id="cb39-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb39-3" data-line-number="3">nueva_columna</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">nueva_columna &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Sur&quot;</span>, <span class="st">&quot;Norte&quot;</span>, <span class="st">&quot;Sur&quot;</span>, <span class="st">&quot;Sur&quot;</span>, <span class="st">&quot;Sur&quot;</span>, <span class="st">&quot;Norte&quot;</span>, <span class="st">&quot;Sur&quot;</span>, <span class="st">&quot;Sur&quot;</span>, </a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">                   <span class="st">&quot;Sur&quot;</span>, <span class="st">&quot;Norte&quot;</span>, <span class="st">&quot;Norte&quot;</span>, <span class="st">&quot;Norte&quot;</span>, <span class="st">&quot;Norte&quot;</span>, <span class="st">&quot;Norte&quot;</span>, <span class="st">&quot;Norte&quot;</span>)</a>
+<a class="sourceLine" id="cb39-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb39-4" data-line-number="4">nueva_columna</a></code></pre></div>
 <pre><code>##  [1] &quot;Sur&quot;   &quot;Norte&quot; &quot;Sur&quot;   &quot;Sur&quot;   &quot;Sur&quot;   &quot;Norte&quot; &quot;Sur&quot;   &quot;Sur&quot;   &quot;Sur&quot;  
 ## [10] &quot;Norte&quot; &quot;Norte&quot; &quot;Norte&quot; &quot;Norte&quot; &quot;Norte&quot; &quot;Norte&quot;</code></pre>
 <p>Ya podemos agregar nuestra nueva columna usando una función que ya vimos, mutate(). En el dataframe, vamos a ponerle a nuestra nueva columna un nombre descriptivo, “ubicación” :</p>
@@ -517,7 +518,7 @@ Figura 2.2: La interfaz de RStudio
 <p>¡Eso es todo por ahora! Al resolverlo, habremos aprendido dos tareas simples pero fundamentales: cómo acceder nuestros propios datos, y como crear un reporte con nuestros resultados.</p>
 <p>Pistas:
 * aquí hay un tutorial que explica paso a paso <a href="https://rpubs.com/HAVB/importar_datos">cómo abrir un archivo en .csv R, con la ayuda de RStudio</a>
-* las funciones read.csv(), names(), dim() y summary() serán sus amigas</p>
+* las funciones <code>read.csv()</code>, <code>names()</code>, <code>dim()</code> y <code>summary()</code> serán nuestras amigas</p>
 
 </div>
 </div>
