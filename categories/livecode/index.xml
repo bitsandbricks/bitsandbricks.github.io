@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>livecode on Bits &amp; Bricks</title>
+    <link>https://bitsandbricks.github.io/categories/livecode/</link>
+    <description>Recent content in livecode on Bits &amp; Bricks</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
+    <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
+    <lastBuildDate>Mon, 16 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://bitsandbricks.github.io/categories/livecode/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Compartiendo código en vivo con el mundo, desde RStudio.</title>
+      <link>https://bitsandbricks.github.io/post/compartiendo-c%C3%B3digo-en-vivo-con-el-mundo-desde-rstudio/</link>
+      <pubDate>Mon, 16 Mar 2020 00:00:00 +0000</pubDate>
+      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
+      <guid>https://bitsandbricks.github.io/post/compartiendo-c%C3%B3digo-en-vivo-con-el-mundo-desde-rstudio/</guid>
+      <description>El COVID19 ha cambiado planes, generado preocupación, y alterado hábitos a escala planetaria. Entre tantas actividades afectadas por el mandato del aislamiento social, la educación universitaria intenta continuar por medio de la enseñanza a distancia. Con la velocidad de los cambios que vivimos entre febrero y marzo de 2020, la suspensión de clases presenciales y la obligación de buscar métodos alternativos nos ha tomado a muchos por sorpresa.
+A continuación voy a explicar la solución que he encontrado para facilitar la enseñanza de clases de R y Ciencia de Datos a Distancia.</description>
+    </item>
+    
+  </channel>
+</rss>
