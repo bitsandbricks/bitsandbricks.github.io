@@ -60,7 +60,7 @@ A continuación voy a explicar la solución que he encontrado para facilitar la 
   "headline": "Compartiendo código en vivo con el mundo, desde RStudio.",
   "description" : "El COVID19 ha cambiado planes, generado preocupación, y alterado hábitos a escala planetaria. Entre tantas actividades afectadas por el mandato del aislamiento social, la educación universitaria intenta continuar por medio de la enseñanza a distancia. Con la velocidad de los cambios que vivimos entre febrero y marzo de 2020, la suspensión de clases presenciales y la obligación de buscar métodos alternativos nos ha tomado a muchos por sorpresa.\nA continuación voy a explicar la solución que he encontrado para facilitar la enseñanza de clases de R y Ciencia de Datos a Distancia.",
   "inLanguage" : "en",
-  "wordCount":  773 ,
+  "wordCount":  766 ,
   "datePublished" : "2020-03-16T00:00:00",
   "dateModified" : "2020-03-16T00:00:00",
   "image" : "https:\/\/bitsandbricks.github.io\/img\/avatar-icon_bnb.png",
@@ -305,11 +305,10 @@ if (!doNotTrack) {
 <p>Para el alta, podemos utilizar nuestra dirección de correo, o una cuenta ya existente (por ejemplo, en <em>github</em>). Elegimos usuario y contraseña, y una vez habilitados accedemos al panel de control.</p>
 <p><img src="https://bitsandbricks.github.io/post/img/rstudio_livecode/ngrok_setup_install.png" width="800px" /></p>
 <p>En el paso <strong>1</strong>, vemos el link de descarga de la aplicación de ngrok para nuestro sistema (Linux, Windows o Mac). Lo descargamos e instalamos. Si estamos usando Ubuntu, se puede hacer todo en un solo paso, tipeando en una terminal de sistema <code>snap install ngrok</code>.</p>
-<p>En el paso 3, vemos nuestro “token de autorización”, un código que debemos registrar en nuestro sistema una sola vez.</p>
+<p>En el paso <strong>3</strong>, vemos nuestro “token de autorización”, un código que debemos registrar en nuestro sistema una sola vez.</p>
 <p>Se puede copiar y pegar el comando ofrecido en nuestra terminal de comandos. En mi caso, no fue necesario comenzar el comando con <code>./</code>. Fue suficiente:</p>
 <p><code>ngrok authtoken XXXXXXXXXXXXXXX</code></p>
-<p>donde “XXXXXXXXXXX” es el código copiado desde el panel de control, en la sección “Connect your account”.</p>
-<pre class="r"><code>knitr::include_graphics(&quot;https://bitsandbricks.github.io/post/img/rstudio_livecode/ngrok_autorizar.png&quot;)</code></pre>
+<p>donde “XXXXXXXXXXX” es el código de autorización copiado del panel de control.</p>
 <p><img src="https://bitsandbricks.github.io/post/img/rstudio_livecode/ngrok_autorizar.png" width="800px" /></p>
 <p>Listo! Ya debería estar preparado para usar.</p>
 </div>
@@ -320,7 +319,6 @@ if (!doNotTrack) {
 <pre class="r"><code>s &lt;- livecode::serve_file()</code></pre>
 <p>AL hacerlo, veremos abrirse una ventana de navegador con nuestro código, que se actualizará automáticamente ¡mientras escribimos!.</p>
 <p>Por ejemplo, si nuestra sesión de RStudio luce así…</p>
-<pre class="r"><code>knitr::include_graphics(&quot;https://bitsandbricks.github.io/post/img/rstudio_livecode/Rstudio_livecoding.png&quot;)</code></pre>
 <p><img src="https://bitsandbricks.github.io/post/img/rstudio_livecode/Rstudio_livecoding.png" width="800px" /></p>
 <p>en la página web se verá ésto:</p>
 <p><img src="https://bitsandbricks.github.io/post/img/rstudio_livecode/Rstudio_livecoding_red_local.png" width="800px" /></p>
