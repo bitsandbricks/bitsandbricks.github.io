@@ -1,3 +1,6 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[spanish,]{book}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
@@ -6,36 +9,31 @@
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
 \else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
+  \usepackage{unicode-math}
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
 \IfFileExists{microtype.sty}{%
-\usepackage{microtype}
+\usepackage[]{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
 \usepackage{hyperref}
-\hypersetup{unicode=true,
+\hypersetup{
             pdftitle={Ciencia de Datos para Gente Sociable},
             pdfauthor={Antonio Vazquez Brust},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[shorthands=off,main=spanish]{babel}
-\else
-  \usepackage{polyglossia}
-  \setmainlanguage[]{spanish}
-\fi
-\usepackage{natbib}
-\bibliographystyle{apalike}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -77,11 +75,9 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
-\usepackage{graphicx}
-% grffile has become a legacy package: https://ctan.org/pkg/grffile
-\IfFileExists{grffile.sty}{%
-\usepackage{grffile}
-}{}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
+\usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -90,12 +86,6 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -110,34 +100,33 @@
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{Ciencia de Datos para Gente Sociable}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-  \subtitle{Una introducción a la exploración, análisis y visualización de datos}
-  \author{Antonio Vazquez Brust}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-      \predate{\centering\large\emph}
-  \postdate{\par}
-    \date{2020-02-29}
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 
 \usepackage{booktabs}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[shorthands=off,main=spanish]{babel}
+\else
+  % load polyglossia as late as possible as it *could* call bidi if RTL lang (e.g. Hebrew or Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{spanish}
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+
+\title{Ciencia de Datos para Gente Sociable}
+\providecommand{\subtitle}[1]{}
+\subtitle{Una introducción a la exploración, análisis y visualización de datos}
+\author{Antonio Vazquez Brust}
+\date{2020-03-21}
 
 \begin{document}
 \maketitle
@@ -473,7 +462,7 @@ Para realizar una visualización con ésta herramienta, siempre se comienza con 
 
 En nuestro ejemplo, \texttt{geom\_col()} crea columnas cuya posición en el eje de las x depende de la variable ``Comuna'', mientas que la altura (posición en el eje de las y) depende del valor de la variable ``Tasa2016''. Existen muchas funciones de tipo ``geom\_XXX'', que agregan distintas clases de capas al gráfico: geom\_point, geom\_polygon, geom\_text y muchos, muchos más que iremos viendo más adelante.
 
-Cada función ``geom\_'' toma como parámetro un conjunto de definiciones ``estéticas'' que le indican una variable a graficar (``mortalidad'' en nuestro caso), cómo (color, tamaño, etc) y dónde (posición x, posición y del eje). Estos parámetros van siempre dentro de una función auxiliar, \texttt{aes()}. En nuestro ejemplo, ``geom\_line(aes(x = año, y = mortalidad, group = Comuna, color = factor(Comuna)))''.
+Cada función ``geom\_'' toma como parámetro un conjunto de definiciones ``estéticas'' que le indican una variable a graficar (``mortalidad'' en nuestro caso), cómo (color, tamaño, etc) y dónde (posición x, posición y del eje). Estos parámetros van siempre dentro de una función auxiliar, \texttt{aes()}. En nuestro ejemplo, ``geom\_col(aes(x = factor(Comuna), y = Tasa2016))''.
 
 No se preocupen que iremos practicando el uso de ggplot, y su uso se volverá familiar.
 
@@ -3783,7 +3772,7 @@ I. Obtengamos un dataset cuyos registros incluyan datos de ubicación en barrio,
   Elijamos uno de los mapas anteriores e incorporarle una o más geometrías que sean relevantes al análisis. Estas pueden ser: estaciones y recorrido de trenes, recorrido de ciclovías, ubicación de comercios, o cualquier otra que les resulte interesante. Las geometrías pueden descargarse del portal de datos abiertos de la ciudad (\url{https://data.buenosaires.gob.ar/}). Por ejemplo, aquí hay un \href{https://data.buenosaires.gob.ar/dataset/oferta-establecimientos-gastronomicos}{dataset georeferenciado con la ubicación de locales de gastronomía}.
 \end{enumerate}
 
-\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 Con eso cerramos el capítulo, y el libro.
 
@@ -3792,6 +3781,5 @@ Mientras tanto, mi mensaje final es fácil de resumir. Espero que ``Ciencia de D
 ¡Gracias por haber leído hasta aquí!
 
 \bibliography{book.bib,packages.bib}
-
 
 \end{document}
