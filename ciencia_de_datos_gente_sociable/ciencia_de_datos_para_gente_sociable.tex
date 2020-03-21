@@ -34,6 +34,7 @@
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
+\usepackage[left=2cm,right=2cm,top=3cm,bottom=2cm]{geometry}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -2368,7 +2369,30 @@ versus la versión pulida usando \texttt{labs()}:
 
 \includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-111-1.pdf}
 
-Ahora si, a compartir.
+Ya tiene todo el contenido necesario. Ahora si, a compartir.
+
+En cuanto a la presentación (el aspecto), podríamos hacer un ajuste final que dependerá de nuestros gustos. Los gráficos generados por \texttt{ggplot()} llevan ese panel gris neutro como fondo, que es característico: es fácil reconocer un gráfico hecho con ggplot al verlo en una publicación o sitio web. Sin embargo, nada nos obliga a usar el diseño definido por defecto. Podemos cambiar la tipografía, los colores usados para representar datos, el color de fondo\ldots{} ¡todos y cada uno de los componentes! Una forma sencilla de hacer cambios es aprovechar los ``temas'' (combinaciones de colores) que el paquete \texttt{ggplot2} incluye listos para usar. Para elegir un estilo sólo necesitamos agregar una capa de las que comienza con ``theme\_\ldots{}'', por ejemplo \texttt{theme\_minimal()}, \texttt{theme\_dark()}, \texttt{theme\_classic()}.
+
+En mi experiencia, el que mejor luce en la gran mayoria de los casos es \texttt{theme\_minimal}. Vamos a usarlo, repitiendo el código que generó la última visualización que hicimos, y agregando una línea al final para definir el tema.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(atencion_ciudadano) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ BARRIO, }\DataTypeTok{weight =}\NormalTok{ total, }\DataTypeTok{fill =}\NormalTok{ TIPO_PRESTACION)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Contactos realizados al Sistema Único de Atención Ciudadana"}\NormalTok{,}
+         \DataTypeTok{subtitle =} \StringTok{"Ciudad Autónoma de Buenos Aires, 2013 - 2015"}\NormalTok{,}
+         \DataTypeTok{caption =} \StringTok{"Fuente: portal de datos abiertos de la Ciudad - http://data.buenosaires.gob.ar"}\NormalTok{,}
+         \DataTypeTok{x =} \StringTok{"barrio"}\NormalTok{,}
+         \DataTypeTok{y =} \StringTok{"cantidad"}\NormalTok{,}
+         \DataTypeTok{fill =} \StringTok{"Motivo del contacto"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{theme_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-112-1.pdf}
+
+\ldots{} no esta mal, ¿verdad?
 
 \hypertarget{otras-visualizaciones}{%
 \section{Otras visualizaciones}\label{otras-visualizaciones}}
@@ -2380,7 +2404,7 @@ Y aún quedan tantas por discutir, que sería imposible hacerles justicia en un 
 El sitio web \emph{from Data to Viz} (\url{https://www.data-to-viz.com/}) es un recurso excelente para investigar opciones. Contiene un compendio visual e interactivo de técnicas de visualización con sus nombres y características generales. También explica a que familia corresponde cada una, y para qué suele usarse (mostrar relaciones, distribuciones, cambio a través del tiempo, etc).
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{imagenes/data_to_viz} \caption{from Data to Viz - www.data-to-viz.com/}\label{fig:unnamed-chunk-112}
+\includegraphics[width=1\linewidth]{imagenes/data_to_viz} \caption{from Data to Viz - www.data-to-viz.com/}\label{fig:unnamed-chunk-113}
 \end{figure}
 
 Y lo más interesante: Para todas y cada una de las visualizaciones se incluye el código en R que permite reproducirlas. A partir de allí sólo es cuestión de adaptar los ejemplos a nuestros datos para realizar de forma fácil la visualización que nos interesa.
@@ -2526,7 +2550,7 @@ Como dijimos en el capítulo de visualización, los scatterplots son útiles par
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-115-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-116-1.pdf}
 
 Bien, no necesitamos recurrir a la matemática para saber que tiempo y expectativa de vida están correlacionadas en forma positiva. Esto es, el incremento de una unidad de tiempo en general (o siempre, en este caso) resulta en el incremento de la expectativa de vida. Una correlación \emph{negativa} sería lo opuesto: que el incremento de la variable explicativa estuviera asociado a un decremento de la variable explicada. Además del \emph{signo} de una correlación, otra medida importante es su intensidad. La intensidad de una correlación va de -1 (correlación negativa total) a 1 (correlación positiva total). Una correlación de cero significa que las dos variables son por completo independientes. En en ese caso, saber cuánto vale una no nos ayuda a estimar el valor de la otra.
 
@@ -2607,7 +2631,7 @@ Lo podemos visualizar con ayuda de \texttt{ggplot()}, que por supuesto incluye u
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-119-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-120-1.pdf}
 
 Aquí no vemos más que los datos que ya teníamos. Pero proyectemos la línea hacia el futuro. Con \texttt{xlim()} e \texttt{ylim()} podemos definir a mano los límites de nuestro gráfico, haciéndolo ir más allá del rango de los datos que tenemos. La línea sigue siendo la misma, sólo que ahora podemos ver hacia donde va.
 
@@ -2625,7 +2649,7 @@ Aquí no vemos más que los datos que ya teníamos. Pero proyectemos la línea h
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-120-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-121-1.pdf}
 
 Ahí está la predicción. Según nuestro modelo, para el año 2030 la expectativa de vida en la Argentina habrá superado los 80 años.
 
@@ -2648,7 +2672,7 @@ Ya que estamos, aprendamos otro truco. \texttt{ggplot()} puede agregar a nuestro
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-121-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-122-1.pdf}
 
 Hacer una regresión lineal se trata de encontrar la línea que atraviesa nuestra nube de puntos de modo tal que la suma de las distancias de cada punto a la línea sea la menor posible. Es un problema matemático que puede resolverse con distintas técnicas (álgebra lineal, geometría, etc) que no vamos a discutir aquí. Confiaremos en R para hacer los cálculos.
 
@@ -2667,7 +2691,7 @@ En general, es inusual encontrar una correlación tan nítida entre variables ``
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-122-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-123-1.pdf}
 
 Sigue siendo evidente una fuerte tendencia lineal, pero las observaciones ya no se ciñen de forma tan estrecha a la línea idealizada de la regresión.
 
@@ -2736,7 +2760,7 @@ y visualizarlos comparados con una línea que indica el cero, trazada por \textt
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-126-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-127-1.pdf}
 
 Siempre podemos esperar una cierta divergencia entre las predicciones y los valores observados, por lo que los residuos siempre tendrán (en general) un valor distinto a cero. Lo que quisiéramos ver en un gráfico como este es que los residuos se distribuyan al azar, sin indicios de \emph{patrones sistemáticos}. Si así fuere, podemos considerar que nuestro modelo es adecuado.
 
@@ -2764,7 +2788,7 @@ Por lo visto, nuestro modelo cumple con \texttt{1.} pero no con \texttt{2}, ya q
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-127-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-128-1.pdf}
 
 Es claro que el modelo se beneficiaría de poder tener en cuenta la irrupción de las crisis en el país. Esto se lograría agregando una variable categórica para cada año, que indique si se trata de un período de crisis. En ese caso, seria un modelo de regresión lineal múltiple (con más de una variable explicativa), incorporando una variable explicativa numérica y otra categórica. Que lástima que nuestro dataset no incluye la variable de las crisis financieras. Si quisiéramos mejorar nuestro modelo con esa información, no nos quedaría mas remedio que salir a buscar los datos. Con suerte, alguien los habrá recopilado por nosotros, y si no, tendríamos que hacerlo por nuestra cuenta. ¡La investigación es un sacerdocio!
 
@@ -2788,7 +2812,7 @@ Comencemos por explorar los datos tomando las observaciones más recientes, las 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-128-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-129-1.pdf}
 
 Ya podemos vislumbrar que el continente incide en la expectativa de vida, con África sufriendo los números más bajos. La profusión de puntos hace que muchos terminen superpuestos, haciendo imposible determinar cuántos ocupan cada posición (un problema llamado \emph{overplotting} en inglés). Una variante de \texttt{geom\_point()} llamada \texttt{geom\_jitter()} resuelve este problema al ``sacudir'' los puntos, sumando a cada uno un pequeño valor al azar para que se separe de los que comparten su posición. Es un buen ejemplo de la paradoja por la cual reducir la precisión de la información a veces permite entender mejor lo que está ocurriendo. Usamos \texttt{geom\_jitter()} igual que \texttt{geom\_point()}:
 
@@ -2801,7 +2825,7 @@ Ya podemos vislumbrar que el continente incide en la expectativa de vida, con Á
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-129-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-130-1.pdf}
 
 Algún ojo avizor habrá notado que la clasificación por color no es necesaria, ya que el continente ya está señalado por su posición en el eje de las \texttt{x}. El color cumple aquí una función más que nada cosmética, en pos de hacer al gráfico maś atractivo a la vista.
 
@@ -2819,7 +2843,7 @@ También podemos visualizar la diferencia de distribución de expectativa de vid
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-130-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-131-1.pdf}
 
 Bien, estamos convencidos de que hay una relación entre continente y expectativa de vida, aunque no la hemos cuantificado. Para eso, recurrimos a una regresión lineal con variable explicativa categórica. Se obtiene de la misma manera que antes, no hay cambios en la forma de invocar \texttt{lm()} por el hecho de que la variable ahora sea categórica en vez de numérica.
 
@@ -2866,7 +2890,7 @@ y graficamos la dispersión de los residuos en torno a cero, el valor ideal:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-133-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-134-1.pdf}
 
 Notamos que:
 
@@ -2913,7 +2937,7 @@ Se trata de Afganistán. Como explicación, uno piensa de inmediato en las larga
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-135-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-136-1.pdf}
 
 Vaya sorpresa. A pesar de ser en extremo baja comparada con el resto de Asia, la expectativa de vida en Afganistán en el 2007 es la más alta de la historia, y no sólo eso: ha aumentado con rapidez \emph{después} del año de la invasión. ¿A qué podemos atribuir entonces la bajísima expectativa de vida? Teniendo en cuenta que el país ha sufrido conflictos bélicos en forma continua desde fines de los '70, podría tratarse de una tragedia histórica: los años que faltan son los que el país habría alcanzado si las guerras no hubieran alterado su ritmo de progreso.
 
@@ -3188,13 +3212,13 @@ Los CRS son un sistema de números que definen ubicaciones sobre la superficie d
 Las proyecciones cartográficas son instrucciones para traducir a un plano la disposición de puntos ubicados en la esfera terrestre. Algo así como las instrucciones para dibujar en dos dimensiones las disposición de fronteras, accidentes geográficos, calles o cualquier otro objeto que se extiende sobre la superficie curva del planeta. Como en toda traducción, hay algo que se pierde en el proceso. Todo los mapas ``mienten'', en el sentido en que presentan una versión distorsionada de la superficie de terrestre. Esto es inevitable; no existe forma de pasar de la esfera al plano sin distorsionar la forma, la superficie, la distancia o la dirección de los rasgo geográficos. Existen muchísimas proyecciones distintas, cada una pensada para minimizar alguno de los tipos de distorsión, o para encontrar una solución de compromiso que los balancee.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{imagenes/proyecciones} \caption{Distintos sistemas de proyección cartográfica (cortesía Daniel R. Strebe 2011)}\label{fig:unnamed-chunk-143}
+\includegraphics[width=1\linewidth]{imagenes/proyecciones} \caption{Distintos sistemas de proyección cartográfica}\label{fig:unnamed-chunk-144}
 \end{figure}
 
 La proyección más famosa es la Mercator, diseñada para asistir la navegación marítima y en uso desde el siglo XVI. Su fuerte es que no distorsiona las direcciones, por lo que permite fijar el rumbo de navegación consultando el mapa. Su principal problema es que produce una distorsión notable en las áreas cercanas a los polos: Groenlandia aparenta el mismo tamaño que toda África, cuando en realidad tiene sólo un quinceavo de su superficie. Por esa razón perdió la proyección popularidad en el siglo XX cuando comenzaron a preferirse proyecciones que respetan las áreas, como las de la Figura 6.1. Sin embargo, en el siglo XXI la proyección Mercator recuperó protagonismo. Google la eligió para sus mapas en línea, y por razones de compatibilidad otros proveedores de mapas digitales la adoptaron también. Así, y para inconsolable irritación de los geógrafos, Mercator se convirtió en el estándar de facto para aplicaciones geográficas en la web.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{imagenes/Mercator-proj} \caption{La inescapable proyección Mercator (cortesía Jecowa)}\label{fig:unnamed-chunk-144}
+\includegraphics[width=1\linewidth]{imagenes/mapamundi_mercator} \caption{La inescapable proyección Mercator}\label{fig:unnamed-chunk-145}
 \end{figure}
 
 En la práctica, si trabajamos en forma frecuente con archivos georreferenciados vamos a sufrir tarde o temprano de problemas de coordenadas o proyección. El más común de ellos: tener una fuentes de datos geográficos que no podemos comparar con otras, porque desconocemos el sistema de coordenadas que se usó para crearla; es decir, no podemos saber a que posición sobre el planeta corresponde cada observación en los datos.
@@ -3302,7 +3326,7 @@ Nuestro aliado \texttt{ggplot()} se encarga de ello.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-148-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-149-1.pdf}
 
 Ademas de encontrarnos con la reconocible silueta de la ciudad, comprobamos lo que el resumen de la data había sugerido: la mayoría de los radios censales tiene un tamaño similar, pero existe un puñado que es considerablemente más extenso que el promedio. Los ``mega radios'' seguramente corresponden a zonas poco habitadas, por lo que se asume que un censista puede terminar de encuestar a todos los residentes en un día.
 
@@ -3314,7 +3338,7 @@ Podemos analizar eso mismo: ¿cuántas viviendas hay por radio?
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-149-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-150-1.pdf}
 
 EL grosor de la línea que traza las fronteras entre radios hace difícil determinar el color de relleno. Esto suele pasar cuando se grafica información geográfica intrincada como la de los radios censales. Una solución es definir el color de la línea como \texttt{NA}, que para \texttt{ggplot} significa ``ninguno''. Lo hacemos así:
 
@@ -3324,7 +3348,7 @@ EL grosor de la línea que traza las fronteras entre radios hace difícil determ
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-150-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-151-1.pdf}
 
 Así esta mejor. Nótese que definimos el color por fuera de \texttt{aes()}. Cuando queremos asignar un valor fijo a alguno de los atributos estéticos (y no dependiente de una variable) siempre va fuera de la función \texttt{aes()}.
 
@@ -3336,7 +3360,7 @@ En cuanto al gráfico, observamos que los radios censales más grandes tienden a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-151-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-152-1.pdf}
 
 Hemos logrado otro de nuestros gráficos ilegibles, intentando mostrar demasiadas variables categóricas a la vez. Una forma de resolver el dilema es filtrando los datos para aislar los casos de interés. Del menú de visualizaciones que aprendimos en el capítulo 2, podemos elegir el histograma para mostrar la distribución de tamaños de nuestros radios censales.
 
@@ -3346,7 +3370,7 @@ Hemos logrado otro de nuestros gráficos ilegibles, intentando mostrar demasiada
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-152-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-153-1.pdf}
 
 Cómo había anticipado el resumen vía \texttt{summary()}, la gran mayoría de los radios tiene menos de medio km\^{}2. Unos pocos superan los 2 km\^{}2, así que vamos a aislar esos para saber a que barrio corresponden.
 
@@ -3361,7 +3385,7 @@ Cómo había anticipado el resumen vía \texttt{summary()}, la gran mayoría de 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-153-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-154-1.pdf}
 Nuestro gran radio censal al este, con población considerable, corresponde a Puerto Madero.
 
 Llevemos ahora nuestra atención al tema de la cantidad de viviendas superando a la de hogares. Tal situación implica que hay una tasa de vacancia alta en el radio censal. Podemos verla en el mapa graficando la intensidad de la relación entre viviendas y hogares, expresándola como la división de una por otra.
@@ -3372,7 +3396,7 @@ Llevemos ahora nuestra atención al tema de la cantidad de viviendas superando a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-154-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-155-1.pdf}
 
 Hay un radio censal que parece brillar, destacándose entre los demás. ¿Dónde está? Esta vez lo resolvemos en forma analítica en lugar de visual, usando los verbos de transformación de datos. Vamos a definir una variable nueva, con la tasa entre viviendas y hogares que ya usamos para el gráfico. Luego vamos a ordenar el dataframe por orden descendiente de la tasa, y usando \texttt{head()} nos quedamos sólo con los primeros valores, que corresponden a los más altos:
 
@@ -3433,7 +3457,7 @@ Con nuestros datos, podemos visualizar la densidad de la población así:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-156-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-157-1.pdf}
 
 Este último gráfico representa de forma mucho mas precisa la distribución de habitantes en la ciudad, haciendo saltar a la vista los núcleos con mayor densidad de población. De paso, aprendimos un truco nuevo: agregando \texttt{scale\_fill\_viridis\_c()} le pedimos a \texttt{ggplot} que utilice la escala de colores conocida como ``viridis'', diseñada por expertos en visualización para ser fácil de leer\ldots{} y lucir bien.
 
@@ -3504,7 +3528,7 @@ Y esto es lo lindo de trabajar con datos geográficos en forma de tabla: la colu
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-161-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-162-1.pdf}
 
 Como efecto secundario de la operación (que en la jerga del \emph{GIS} se conoce como ``disolver polígonos'') podemos ver algunas líneas internas que han quedado como residuo de la unión de los radios censales. Es un problema muy común al trabajar con datos geográficos, dependiendo de la calidad de la fuente. Por suerte, en este caso el pequeño desperfecto no afecta nuestros planes. En pos de la prolijidad, podríamos realizar un ajuste fino y eliminar esas líneas internas, ya que hay varias técnicas para ello. Pero la complejidad de la tarea haría demasiado larga la explicación, así que vamos a dejarlo así\ldots{} un recordatorio de que al trabajar con datos ``reales'' pasan estas cosas.
 
@@ -3548,7 +3572,7 @@ Ya tenemos las piezas necesarias: dos datasets con una columna en común que los
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-164-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-165-1.pdf}
 
 Tal como habíamos verificado cuando hicimos la exploración del dataset en el capítulo 2, en los barrios céntricos se registra la mayoría de los contactos. Podemos mejorar un poco el mapa, normalizando los datos para mostrar valores per cápita.
 
@@ -3562,7 +3586,7 @@ Tal como habíamos verificado cuando hicimos la exploración del dataset en el c
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-165-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-166-1.pdf}
 
 Normalizar los datos hace evidente que los barrios son parejos en su grado de demanda por habitante, exceptuando los casos salientes que mencionamos antes.
 
@@ -3635,7 +3659,7 @@ Y mostramos el rubro principal por barrio en un mapa
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-168-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-169-1.pdf}
 
 \hypertarget{combinando-capas-geogruxe1ficas}{%
 \section{Combinando capas geográficas}\label{combinando-capas-geogruxe1ficas}}
@@ -3699,7 +3723,7 @@ Combinar capas mostrado distintas geometrías es simple usando \texttt{sf()} y \
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-171-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-172-1.pdf}
 
 ¡Voilà! Podríamos también aprovechar el lienzo en blanco de la superficie de los barrios para hacer un mapa temático que muestre la cantidad de incidentes en la base de atención ciudadana relacionados con el SUBTE.
 
@@ -3740,7 +3764,7 @@ Primero creamos un subconjunto de los datos con la suma, por barrio, de emergenc
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-174-1.pdf}
+\includegraphics{ciencia_de_datos_para_gente_sociable_files/figure-latex/unnamed-chunk-175-1.pdf}
 
 Aquí se cumplen las expectativas: la cantidad de emergencias reportadas sigue en forma clara un patrón relacionado con la cantidad de estaciones ubicadas en cada barrio. Y como era de esperarse, en barrios donde el SUBTE no ofrece cobertura la cantidad de emergencias es nula.
 

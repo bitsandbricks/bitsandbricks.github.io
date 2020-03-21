@@ -532,14 +532,28 @@ de <code>aes()</code> podemos ajustas posición, tamaño, color y hasta la forma
 <a class="sourceLine" id="cb172-8" data-line-number="8">         <span class="dt">y =</span> <span class="st">&quot;cantidad&quot;</span>,</a>
 <a class="sourceLine" id="cb172-9" data-line-number="9">         <span class="dt">fill =</span> <span class="st">&quot;Motivo del contacto&quot;</span>)</a></code></pre></div>
 <p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-111-1.png" width="1200" /></p>
-<p>Ahora si, a compartir.</p>
+<p>Ya tiene todo el contenido necesario. Ahora si, a compartir.</p>
+<p>En cuanto a la presentación (el aspecto), podríamos hacer un ajuste final que dependerá de nuestros gustos. Los gráficos generados por <code>ggplot()</code> llevan ese panel gris neutro como fondo, que es característico: es fácil reconocer un gráfico hecho con ggplot al verlo en una publicación o sitio web. Sin embargo, nada nos obliga a usar el diseño definido por defecto. Podemos cambiar la tipografía, los colores usados para representar datos, el color de fondo… ¡todos y cada uno de los componentes! Una forma sencilla de hacer cambios es aprovechar los “temas” (combinaciones de colores) que el paquete <code>ggplot2</code> incluye listos para usar. Para elegir un estilo sólo necesitamos agregar una capa de las que comienza con “theme_…”, por ejemplo <code>theme_minimal()</code>, <code>theme_dark()</code>, <code>theme_classic()</code>.</p>
+<p>En mi experiencia, el que mejor luce en la gran mayoria de los casos es <code>theme_minimal</code>. Vamos a usarlo, repitiendo el código que generó la última visualización que hicimos, y agregando una línea al final para definir el tema.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="kw">ggplot</span>(atencion_ciudadano) <span class="op">+</span></a>
+<a class="sourceLine" id="cb173-2" data-line-number="2"><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> BARRIO, <span class="dt">weight =</span> total, <span class="dt">fill =</span> TIPO_PRESTACION)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb173-3" data-line-number="3"><span class="st">    </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb173-4" data-line-number="4"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Contactos realizados al Sistema Único de Atención Ciudadana&quot;</span>,</a>
+<a class="sourceLine" id="cb173-5" data-line-number="5">         <span class="dt">subtitle =</span> <span class="st">&quot;Ciudad Autónoma de Buenos Aires, 2013 - 2015&quot;</span>,</a>
+<a class="sourceLine" id="cb173-6" data-line-number="6">         <span class="dt">caption =</span> <span class="st">&quot;Fuente: portal de datos abiertos de la Ciudad - http://data.buenosaires.gob.ar&quot;</span>,</a>
+<a class="sourceLine" id="cb173-7" data-line-number="7">         <span class="dt">x =</span> <span class="st">&quot;barrio&quot;</span>,</a>
+<a class="sourceLine" id="cb173-8" data-line-number="8">         <span class="dt">y =</span> <span class="st">&quot;cantidad&quot;</span>,</a>
+<a class="sourceLine" id="cb173-9" data-line-number="9">         <span class="dt">fill =</span> <span class="st">&quot;Motivo del contacto&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb173-10" data-line-number="10"><span class="st">    </span><span class="kw">theme_minimal</span>()</a></code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-112-1.png" width="1200" /></p>
+<p>… no esta mal, ¿verdad?</p>
 </div>
 <div id="otras-visualizaciones" class="section level2">
 <h2><span class="header-section-number">4.7</span> Otras visualizaciones</h2>
 <p>Por supuesto, las opciones que hemos repasado son apenas una fracción de la enorme variedad de técnicas de visualización que existen. Para empezar, nos falta hablar de los mapas, una categoría tan importante que tiene un capítulo completo dedicado más adelante.</p>
 <p>Y aún quedan tantas por discutir, que sería imposible hacerles justicia en un libro introductorio. Con nombres tan variopintos como <em>waffle charts</em>, <em>violin plots</em>, o <em>tree maps</em>, existen quizás un centenar o más de métodos bien documentados para explorar información en forma visual.</p>
 <p>El sitio web <em>from Data to Viz</em> (<a href="https://www.data-to-viz.com/" class="uri">https://www.data-to-viz.com/</a>) es un recurso excelente para investigar opciones. Contiene un compendio visual e interactivo de técnicas de visualización con sus nombres y características generales. También explica a que familia corresponde cada una, y para qué suele usarse (mostrar relaciones, distribuciones, cambio a través del tiempo, etc).</p>
-<div class="figure"><span id="fig:unnamed-chunk-112"></span>
+<div class="figure"><span id="fig:unnamed-chunk-113"></span>
 <img src="imagenes/data_to_viz.png" alt="from Data to Viz - www.data-to-viz.com/" width="100%" />
 <p class="caption">
 Figura 4.1: from Data to Viz - www.data-to-viz.com/
