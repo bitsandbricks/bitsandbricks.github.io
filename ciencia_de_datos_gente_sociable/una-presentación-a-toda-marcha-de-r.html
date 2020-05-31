@@ -24,7 +24,7 @@
 <meta name="author" content="Antonio Vazquez Brust" />
 
 
-<meta name="date" content="2020-03-21" />
+<meta name="date" content="2020-05-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -362,8 +362,7 @@ Figura 2.2: La interfaz de RStudio
 ## geometry type:  MULTIPOLYGON
 ## dimension:      XY
 ## bbox:           xmin: -58.53152 ymin: -34.70529 xmax: -58.33514 ymax: -34.52754
-## epsg (SRID):    4326
-## proj4string:    +proj=longlat +datum=WGS84 +no_defs</code></pre>
+## CRS:            4326</code></pre>
 <p>Al igual que cuando usamos <code>read.csv()</code> para leer un archivo .csv y cargarlo como un dataframe, el comando <code>st_read()</code> hace lo propio con archivos de información geográfica, conocidos en la jerga como “shapefiles”. El resultado también es un dataframe, por lo cual podemos practicar el uso de las funciones que ya aprendimos, como dim(), names() y head().</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">dim</span>(comunas)</a></code></pre></div>
 <pre><code>## [1] 15  5</code></pre>
@@ -374,8 +373,7 @@ Figura 2.2: La interfaz de RStudio
 ## geometry type:  MULTIPOLYGON
 ## dimension:      XY
 ## bbox:           xmin: -58.4627 ymin: -34.6625 xmax: -58.33514 ymax: -34.56935
-## epsg (SRID):    4326
-## proj4string:    +proj=longlat +datum=WGS84 +no_defs
+## CRS:            4326
 ##                                                                        barrios
 ## 1 CONSTITUCION - MONSERRAT - PUERTO MADERO -  RETIRO - SAN NICOLAS - SAN TELMO
 ## 2                                                                     RECOLETA
@@ -408,8 +406,7 @@ Figura 2.2: La interfaz de RStudio
 ## geometry type:  LINESTRING
 ## dimension:      XY
 ## bbox:           xmin: -58.53014 ymin: -34.63946 xmax: -58.37017 ymax: -34.60711
-## epsg (SRID):    4326
-## proj4string:    +proj=longlat +datum=WGS84 +no_defs</code></pre>
+## CRS:            4326</code></pre>
 <p>Y lo proyectamos sobre el mapa, como una capa adicional del gráfico de ggplot que definimos antes:</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">ggplot</span>(comunas) <span class="op">+</span></a>
 <a class="sourceLine" id="cb38-2" data-line-number="2"><span class="st">    </span><span class="kw">geom_sf</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> comunas)) <span class="op">+</span></a>
@@ -435,8 +432,7 @@ Figura 2.2: La interfaz de RStudio
 ## geometry type:  MULTIPOLYGON
 ## dimension:      XY
 ## bbox:           xmin: -58.4627 ymin: -34.6625 xmax: -58.33514 ymax: -34.56935
-## epsg (SRID):    4326
-## proj4string:    +proj=longlat +datum=WGS84 +no_defs
+## CRS:            4326
 ##                                                                        barrios
 ## 1 CONSTITUCION - MONSERRAT - PUERTO MADERO -  RETIRO - SAN NICOLAS - SAN TELMO
 ## 2                                                                     RECOLETA
