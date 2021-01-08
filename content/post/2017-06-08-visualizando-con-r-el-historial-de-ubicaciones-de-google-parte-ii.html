@@ -1,0 +1,154 @@
+---
+title: Visualizando con R el historial de ubicaciones de Google (parte II)
+author: H. Antonio Vazquez Brust
+date: '2017-06-08'
+slug: visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii
+bigimg: 
+  - {src: "/post/img/midtown.jpg"}
+categories:
+  - Visualización
+tags:
+  - ggplot
+  - maps
+  - R
+subtitle: ''
+---
+
+
+
+<p>En la <a href="https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/">parte I</a>, vimos cómo descargar, limpiar y comenzar a visualizar los datos de nuestra ubicación que Google guarda cuando usamos servicios de la compañía. Hasta aquí nos habíamos concentrado en clasificar los datos según el tiempo y según los países visitados.</p>
+<p>Ahora vamos a poner nuestra atención en el interior de las ciudades, para seguir los rastros que dejamos al recorrer las calles.</p>
+<p>Para reproducir los resultados, recomiendo correr antes el código de la <a href="https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/">parte I</a>, que deja preparados los sets de datos que vamos a utilizar aquí.</p>
+<div id="se-lo-que-hiciste-el-verano-pasado" class="section level2">
+<h2>Se lo que hiciste el verano pasado</h2>
+<p>O al menos, lo se si puedo poner mis garras en tu historial de ubicaciones, lo cual no es tan fácil… a no ser que uno trabaje en Google o para los amigos de la NSA. En todo caso, volvamos al dataset que nos fue amablemente donado.</p>
+<p>Por el análisis que realizamos en la entrega anterior, sabemos que el usuario ha vivido en Buenos Aires y en Boston, y que ha visitado varias ciudades, entre ellas Nueva York. Vamos a empezar por visualizar sus movimientos en una ciudad donde está de visita. Cuando pasa unos días en una ciudad que ya conoce, siempre va a los mismo lugares?</p>
+<p>Vamos a responder esa pregunta aprovechando las funciones de <code>ggmap</code>, que hacen muy pero muy fácil poner en pantalla un mapa de calles de cualquier lugar del mundo.</p>
+<pre class="r"><code>library(tidyverse)
+library(ggmap)
+library(forcats)
+library(hrbrthemes)
+library(RColorBrewer)</code></pre>
+<pre class="r"><code># Cargamos el dataset con el historial de ubicaciones, obtenido en  # https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/
+
+locationdf &lt;- read.csv(&#39;/home/havb/data/Google/Location History/locationdf.csv&#39;, 
+                       stringsAsFactors = F)
+class(locationdf$date) &lt;- &#39;POSIXct&#39;
+
+# Bajamos un mapa centrado en el Central Park de NY
+NY  &lt;- get_map(&quot;Central Park, NY&quot;, source = &quot;stamen&quot;, maptype = &quot;toner-lite&quot;, zoom = 12)
+
+# Proyectamos el mapa
+ggmap(NY) +
+  # y trazamos por encima las coordenadas de cada ubicación del usuario registrada en el área
+  geom_point(data = filter(locationdf, CITY_NAME == &quot;New York&quot;),
+             aes(x = lon, y = lat, color = fct_inorder(paste(month, year))), 
+             alpha = .5) +
+  theme_ipsum() +
+  scale_color_brewer(type = &quot;qual&quot;, palette = &quot;Set2&quot;) +
+  labs(title=&quot;Paradero del usuario&quot;,
+       color = &quot;Fecha&quot;) </code></pre>
+<p><img src="/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-4-1.png" width="720" /></p>
+<p>El mapa es claro, y muestra que en distintas ocasiones el usuario recorrió, en general, zonas diferentes de la ciudad. La mayor parte de su actividad transcurrió en Manhattan (en la visita de enero 2016 no abandonó la isla) con algunas visitas a New Jersey (al oeste del Río Hudson) y Brooklyn (al este del East River). En su última estadía se aventuró más al norte que de costumbre, pasando la mayor parte del tiempo en Harlem. Por la acumulación concentrada de puntos en ciertas parcelas, también es fácil deducir donde se ha alojado en cada ocasión.</p>
+<p>Lo interesante de un dataset con tanta resolución temporal y espacial es que podemos seguir al usuario cuando se mete dentro de los edificios. Por ejemplo, podemos saber si, y cuando, visita cualquiera de los destinos famosos en la ciudad. Por ejemplo, ¿alguna vez visito el Museo de Arte Moderno de Nueva York? Hagamos zoom en el MoMA, esta vez descartando los datos de latitud y longitud, que no hacen falta:</p>
+<pre class="r"><code>MoMA &lt;- get_map(&quot;MOMA, NY&quot;, zoom = 18)
+
+ggmap(MoMA) + 
+  geom_point(data = filter(locationdf, CITY_NAME == &quot;New York&quot;),
+             aes(x = lon, y = lat, color = fct_inorder(paste(month, year))), 
+             alpha = .7, size = 3)  +
+  theme_ipsum() +
+  scale_color_brewer(type = &quot;qual&quot;, palette = &quot;Set2&quot;) +
+  labs(y = &quot;&quot;, x = &quot;&quot;,
+       title=&quot;¿Visitando el Museum of Modern Art?&quot;,
+       color = &quot;Fecha&quot;) +
+  # Eliminamos las etiquetas de latitud y longitud de los ejes 
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank()) +
+  coord_map()</code></pre>
+<p><img src="/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-5-1.png" width="720" /></p>
+<p>Bastante fácil de leer. En enero del 2016, y otra vez en enero año siguiente, se registran visitas al museo. De hecho, sabiendo las fechas y el ala del edificio visitada, hasta podríamos saber que obras fueron apreciadas. Según el calendario del MoMA, en enero del 2017 se exhibió <a href="https://www.moma.org/calendar/exhibitions/1668">“A Revolutionary Impulse: The Rise of the Russian Avant-Garde”</a>. Hasta podemos ver como lucían las obras:</p>
+<div class="figure">
+<img src="/post/img/MoMA.jpg" alt="Exhibición en el MoMA, enero 2017" />
+<p class="caption">Exhibición en el MoMA, enero 2017</p>
+</div>
+<p>Podríamos verificar si el usuario pasó por cualquier otra atracción. O restaurantes en particular. Iglesias, supermercados, monumentos. Si visitó una zona roja o cualquier otra área con fama cuestionable, y cuanto tiempo pasó allí. Todo eso y mucho más está guardado en los servers de Google, y nosotros lo entregamos voluntariamente!</p>
+</div>
+<div id="buscando-un-hogar" class="section level2">
+<h2>Buscando un hogar</h2>
+<p>Pasemos ahora a una ciudad donde el usuario tuvo o tiene su residencia permanente. Cuando uno usa Google Maps, tiene la opción de definir la dirección de su hogar. Lo interesante de asunto es que la empresa no necesita para nada que el usuario se lo diga; en todo caso, es una facilidad de cara al usuario, al que le queda su casa como una especie de <em>bookmark</em> en el mapa. ¿Y porqué Google no necesita que se lo digamos?</p>
+<p>Bueno, primero veamos como lucen todos los registros de ubicación en la ciudad donde vive el usuario, Buenos Aires:</p>
+<pre class="r"><code>BA  &lt;- get_map(&quot;Buenos Aires, Argentina&quot;, source = &quot;stamen&quot;, maptype = &quot;toner-lite&quot;, zoom = 11)
+
+ggmap(BA) + 
+  geom_point(data = filter(locationdf, CITY_NAME == &quot;Buenos Aires&quot;),
+             aes(x = lon, y = lat), 
+             alpha = .1, color = &quot;orange&quot;) +
+  theme_ipsum() +
+  labs(y = &quot;&quot;, x = &quot;&quot;,
+       title=&quot;¿Dónde vive el usuario?&quot;,
+       subtitle = &quot;versión difícil&quot;) +
+  # Eliminamos las etiquetas de latitud y longitud de los ejes 
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank()) +
+  coord_map()</code></pre>
+<p><img src="/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-6-1.png" width="720" /></p>
+<p>Vemos que nuestro querido usuario ha estado por todos lados (salvo el sur-oeste de la ciudad, que parece ser <em>terra incognita</em> para nuestro donante de datos), y que ha recorrido profusamente las arterias que comunican la ciudad con su área metropolitana. Pero no tenemos idea de donde vive, porque hay demasiado puntos sobre el mapa, y se hace imposible “leer” donde pasa la mayor parte de su tiempo.</p>
+<p>Vamos a recurrir a una técnica de visualización que se llama <em>hexagon binning</em>, útil cuando lo que queremos es encontrar los lugares donde la intensidad de una variable se destaca. En éste caso, vamos a dividir el espacio de la cuidad en hexágonos, asignarle a cada uno un valor asociado a la frecuencia de registros realizados desde allí, y buscar los que muestren valores altos.</p>
+<pre class="r"><code>library(hexbin)
+
+myPalette &lt;- colorRampPalette(brewer.pal(7,&#39;Oranges&#39;))
+
+ggmap(BA) + 
+  coord_equal() +
+  stat_binhex(aes(x = lon, y = lat), 
+              binwidth = c(0.0075,0.0075), 
+              alpha = .5, 
+              data = locationdf) + 
+  scale_fill_gradientn(colours=myPalette(7), name = &quot;Cantidad de registros&quot;) + 
+  theme_ipsum() +
+  labs(y = &quot;&quot;, x = &quot;&quot;,
+       title=&quot;¿Dónde vive el usuario?&quot;,
+       subtitle = &quot;versión fácil&quot;,
+       fill = &quot;Cantidad de registros&quot;) +
+  # Eliminamos las etiquetas de latitud y longitud de los ejes 
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank())</code></pre>
+<p><img src="/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-7-1.png" width="720" /></p>
+<p>Bingo. El solitario hexágono de intensidad máxima señala el domicilio del usuario -o al menos, el lugar donde pasa la mayor parte de sus horas. Si hiciéramos zoom sobre el mapa podríamos ver la parcela donde vive, y por lo tanto su dirección exacta, pero nos vamos a abstener.</p>
+</div>
+<div id="descubriendo-habitos" class="section level2">
+<h2>Descubriendo hábitos</h2>
+<p>Podemos continuar usando la técnica de los hexágonos para buscar patrones. Por ejemplo, identificar los lugares donde el usuario es registrado con frecuencia, develando los centro de su actividad cotidiana. Haciendo un facetado por año, podemos incluso visualizar como “la vida cotidiana” cambia a lo largo del tiempo. Vamos a filtrar el dataset para considerar sólo registros de ubicación capturados durante el trajín de la semana: de 9 a 18, de lunes a viernes. Como notamos en la visualización anterior, los alrededores de la casa del usuario dominan el mapa. Para evitarlo en este mapa, vamos a aplicar un transformación logarítmica al conteo de ubicaciones, que tiene como efecto reducir la diferencia entre valores máximos y mínimos.</p>
+<pre class="r"><code>library(lubridate)
+
+ggmap(BA) + 
+  coord_equal() +
+  stat_binhex(data = filter(locationdf, 
+                           CITY_NAME == &quot;Buenos Aires&quot;, 
+                           hour(with_tz(date, &quot;America/Buenos Aires&quot;)) &gt; 9 &amp;
+                             hour(with_tz(date, &quot;America/Buenos Aires&quot;)) &lt; 18,
+                           wday(with_tz(date, &quot;America/Buenos Aires&quot;)) %in% 2:6),
+              aes(x = lon, y = lat), 
+              binwidth = c(0.0075, 0.0075), 
+              alpha = .7) + 
+  # Aplicamos una transformación logarítmica
+  scale_fill_gradientn(colours=myPalette(9), trans = &quot;log10&quot;, name = &quot;Location frequency&quot;) +
+  theme_ipsum() +
+  labs(y = &quot;&quot;, x = &quot;&quot;,
+       title=&quot;Patrones de actividad diurna&quot;) +
+  # Eliminamos las etiquetas de latitud y longitud de los ejes 
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank()) +
+  # y eliminamos la leyenda
+  guides(fill = FALSE) +
+  facet_wrap(~year)  </code></pre>
+<p><img src="/post/2017-06-08-visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-ii_files/figure-html/unnamed-chunk-8-1.png" width="720" /></p>
+<p>Los resultados muestran una diferencia clara entre su actividad en los años 2011 y 2012, con una variedad de sitios visitados más reducida, en comparación con 2014 y 2015 cuando su rutina diaria parece haber sido mucho más variada. Su actividad está claramente concentrada en el área que corresponde al centro económico de la ciudad. Hace incursiones al exterior de la ciudad, hacia el norte, pero rara vez en otra dirección. En lo que va del 2017, sus radio de acción es notablemente más acotado: Su tiempo se reparte en dos regiones nítidamente demarcadas, sin presencia observable en otros sectores. En todo el año 2016 su celular no se reportó ni una sola vez desde los confines de la ciudad. Como ya habíamos notado en la <a href="https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-i/">parte I</a> de ésta serie, estaba viviendo en otro país.</p>
+<p>Cómo planificador urbano, me causa vértigo imaginar todos los estudios que podríamos hacer sobre nuestras ciudades si tuviéramos acceso a la información que acumula Google: matrices origen/ destino de tránsito minuto a minuto, tendencias de actividad económica, recreativa, cultural, efecto en el tránsito peatonal y vehicular de cortes de servicio, cierre de calles y otros percances, estudios de adecuación del código de uso del suelo, e infinidad más. Claro que, aún más vértigo me da pensar todo lo que saben de nosotros, a nivel individual, no sólo Google sino los <a href="http://www.telam.com.ar/notas/201312/44925-las-principales-revelaciones-de-edward-snowden.html">servicios de inteligencia de los gobiernos que acceden a esos datos</a>. En fin.</p>
+<p>En la próxima (y final) entrega, vamos a reproducir los viajes del usuario entre ciudades, mostrando como podemos reconstruir su historial de viajes aéreos en base a sus registros de ubicación. Y con una linda visualización, por supuesto… si vamos a espiar, lo haremos con estilo.</p>
+</div>

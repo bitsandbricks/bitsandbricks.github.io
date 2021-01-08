@@ -1,0 +1,94 @@
+baseurl = "https://bitsandbricks.github.io/"
+DefaultContentLanguage = "en"
+#DefaultContentLanguage = "ja"
+title = "Bits & Bricks"
+theme = "beautifulhugo"
+metaDataFormat = "yaml"
+pygmentsUseClasses = true
+pygmentCodeFences = true
+disqusShortname = "bits-bricks"
+googleAnalytics = "UA-100821706-1"
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+[Params]
+  subtitle = "un blog sobre urbanismo y ciencia de datos"
+  logo = "img/avatar-icon_bnb.png"
+  favicon = "img/favicon_bnb.ico"
+  dateFormat = "January 2, 2006"
+  commit = false
+  rss = true
+  comments = true
+#  gcse = "012345678901234567890:abcdefghijk" # Get your code from google.com/cse. Make sure to go to "Look and Feel" and change Layout to "Full Width" and Theme to "Classic"
+
+#[[Params.bigimg]]
+#  src = "img/triangle.jpg"
+#  desc = "Triangle"
+#[[Params.bigimg]]
+#  src = "img/sphere.jpg"
+#  desc = "Sphere"
+#[[Params.bigimg]]
+#  src = "img/hexagon.jpg"
+#  desc = "Hexagon"
+
+[Author]
+  name = "H. Antonio Vazquez Brust"
+  email = "avazquez@gmail.com"
+  #facebook = "username"
+  #googleplus = "+username" # or xxxxxxxxxxxxxxxxxxxxx
+  #github = "username"
+  twitter = "vazquezbrust"
+  #reddit = "username"
+  linkedin = "avazquez"
+  #xing = "username"
+  stackoverflow = "users/3527951/havb"
+  #snapchat = "username"
+  #instagram = "username"
+  #youtube = "user/username" # or channel/channelname
+  #soundcloud = "username"
+  #spotify = "username"
+  #bandcamp = "username"
+  #itchio = "username"
+
+[[menu.main]]
+    name = "Blog"
+    url = ""
+    weight = 1
+    
+[[menu.main]]
+    name = "Manual de ciencia de datos"
+    url = "https://bitsandbricks.github.io/ciencia_de_datos_gente_sociable/"
+    weight = 2
+
+[[menu.main]]
+    name = "Portfolio"
+    url = "antonio/"
+    weight = 3
+
+#[[menu.main]]
+#    identifier = "samples"
+#    name = "Samples"
+#    weight = 2
+
+#[[menu.main]]
+#    parent = "samples"
+#    name = "Big Image Sample"
+#    url = "post/2017-03-07-bigimg-sample"
+#    weight = 1
+
+#[[menu.main]]
+#    parent = "samples"
+#    name = "Math Sample"
+#    url = "post/2017-03-05-math-sample"
+#    weight = 2
+
+#[[menu.main]]
+#    parent = "samples"
+#    name = "Code Sample"
+#    url = "post/2016-03-08-code-sample"
+#    weight = 3
+
+#[[menu.main]]
+#    name = "Tags"
+#    url = "tags"
+#    weight = 3
+

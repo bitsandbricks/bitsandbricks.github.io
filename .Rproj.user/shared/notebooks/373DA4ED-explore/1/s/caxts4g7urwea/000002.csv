@@ -1,0 +1,52 @@
+"0","```r
+
+barrios <- readOGR('../barrios_caba', 'barrios_caba')
+radios <- readOGR('../radios_caba', 'radios_2010')
+
+get_barrios <- function(lon, lat) {
+    pos <- cbind(lon, lat) %>% SpatialPoints()
+    proj4string(pos) <- CRS(\"+proj=longlat +datum=WGS84\")
+    pos %>%
+        spTransform(proj4string(barrios)) %>%
+        over(barrios) %>% .$BARRIOS
+    
+}
+
+get_radios <- function(lon, lat) {
+    pos <- cbind(lon, lat) %>% SpatialPoints()
+    proj4string(pos) <- CRS(\"+proj=longlat +datum=WGS84\")
+    pos %>%
+        spTransform(proj4string(radios)) %>%
+        over(radios) %>% .$CO_FRAC_RA
+    
+}
+
+
+tweets <- read_csv('../tweets.csv')
+
+tweets <- tweets %>% 
+    mutate(barrio = get_barrios(lon, lat),
+           radio = get_radios(lon, lat))
+
+
+airbnb <- read.csv('../Airbnb_listings_Buenos_Aires_July_2017.csv', stringsAsFactors = F)
+
+airbnb <- airbnb %>% 
+    mutate(barrio = get_barrios(longitude, latitude),
+           radio = get_radios(longitude, latitude))
+
+airbnb_radios <- airbnb %>% 
+    group_by(radio) %>% 
+    summarise(n = n())
+
+tweet_radios <- tweets %>% 
+    group_by(radio) %>% 
+    summarise(n = n())
+
+caba <- st_read('../radios_caba/radios_2010.shp') %>% 
+    left_join(tweet_radios, by = c(\"CO_FRAC_RA\" = \"radio\")) %>% 
+    left_join(airbnb_radios, by = c(\"CO_FRAC_RA\" = \"radio\"))
+
+names(caba)[2:3] <- c(\"tweets\", \"airbnb\")
+
+```"

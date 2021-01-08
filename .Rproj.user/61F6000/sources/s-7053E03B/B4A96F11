@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1584407010670.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B4A96F11",
+    "lastKnownWriteTime" : 1584407044,
+    "last_content_update" : 1584407044763,
+    "path" : "~/Dropbox/blog/content/post/2020-03-16-compartiendo-código-en-vivo-de-rstudio-con-el-mundo.es.Rmd",
+    "project_path" : "content/post/2020-03-16-compartiendo-código-en-vivo-de-rstudio-con-el-mundo.es.Rmd",
+    "properties" : {
+        "cursorPosition" : "65,101",
+        "ignored_words" : "github,img,rstudio,livecode,ngrok,setup,install,png,Windows,Mac,Ubuntu,comandos,Connect,your,account,RMarkdown,save,Rstudio,livecoding,WiFi,x,yyyy,io\n",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

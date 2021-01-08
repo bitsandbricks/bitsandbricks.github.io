@@ -1,0 +1,20 @@
+"0","```r
+library(ggmap)
+map.ba <- qmap(\"Caballito, Buenos Aires\", zoom = 12, source=\"stamen\", 
+                maptype=\"toner-lite\") 
+
+map.ba + 
+    geom_point(data = filter(tweets, lang %in% c(\"en\", \"pt\", \"it\", \"fr\", \"in\")),
+               aes(x = lon, y = lat, color = lang),
+               alpha = .5, size = .3) +
+    guides(colour = guide_legend(override.aes = list(size=10)))
+
+library(hrbrthemes)
+
+library(viridis)
+ggplot(data = caba) + geom_sf(aes(fill = tweets),size = 0) + theme_ipsum() + scale_fill_viridis()
+
+ggplot(data = caba) + geom_sf(aes(fill = airbnb),size = 0) + theme_ipsum() + scale_fill_viridis()
+
+
+```"

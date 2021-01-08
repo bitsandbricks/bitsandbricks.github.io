@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1584388326684.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "4E6711F5",
+    "lastKnownWriteTime" : 1584650158,
+    "last_content_update" : 1584650158839,
+    "path" : "~/Dropbox/blog/content/post/2020-03-16-code-live-from-rstudio-and-share-it-with-the-world-in-real-time.en.Rmd",
+    "project_path" : "content/post/2020-03-16-code-live-from-rstudio-and-share-it-with-the-world-in-real-time.en.Rmd",
+    "properties" : {
+        "cursorPosition" : "70,21",
+        "scrollLine" : "63"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

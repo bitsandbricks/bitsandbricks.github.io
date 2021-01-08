@@ -1,0 +1,88 @@
+library(tidyverse)
+library(osrm)
+
+ciudades <- read.csv("http://bitsandbricks.github.io/data/aglomerados.csv")
+
+interseccion_od <-
+  structure(
+    list(
+      id_grilla = c(729L, 730L, 731L, 732L, 733L, 734L,
+                    741L, 742L, 743L, 744L),
+      id_calle = c(896L, 896L, 896L, 896L,
+                   896L, 896L, 896L, 896L, 896L, 896L),
+      X_grilla = c(
+        -58.435,
+        -58.435,
+        -58.435,
+        -58.435,
+        -58.435,
+        -58.435,
+        -58.434,
+        -58.434,
+        -58.434,
+        -58.434
+      ),
+      Y_grilla = c(
+        -34.553,
+        -34.552,
+        -34.551,
+        -34.55,
+        -34.549,
+        -34.548,
+        -34.552,
+        -34.551,
+        -34.55,
+        -34.549
+      ),
+      X_calle = c(
+        -58.4294550182378,
+        -58.4294550182378,
+        -58.4294550182378,
+        -58.4294550182378,
+        -58.4294550182378,
+        -58.4294550182378,
+        -58.4294550182378,
+        -58.4294550182378,
+        -58.4294550182378,
+        -58.4294550182378
+      ),
+      Y_calle = c(
+        -34.5506852532647,
+        -34.5506852532647,
+        -34.5506852532647,
+        -34.5506852532647,
+        -34.5506852532647,
+        -34.5506852532647,
+        -34.5506852532647,
+        -34.5506852532647,
+        -34.5506852532647,
+        -34.5506852532647
+      )
+    ),
+    row.names = c(NA, 10L),
+    class = "data.frame"
+  )
+
+
+interseccion_od
+
+traer_ruta <- function(id_grilla, id_calle, X_grilla, Y_grilla, X_calle, Y_calle) {
+  
+  osrmRoute(src = c(id_grilla, X_grilla, Y_grilla),
+            dst = c(id_calle, X_calle, Y_calle),
+            overview = FALSE)))
+}
+
+
+interseccion_od
+
+distancias <- pmap_df(interseccion_od,
+                      possibly(function(id_grilla, id_calle, X_grilla, Y_grilla, X_calle, Y_calle)
+                        cbind(id_grilla, 
+                              id_calle, 
+                              as_data_frame(osrmRoute(src = c(id_grilla, X_grilla, Y_grilla),
+                                                            dst = c(id_calle, X_calle, Y_calle),
+                                                            overview = FALSE)),
+                              stringsAsFactors = FALSE), 
+                        NULL)) 
+

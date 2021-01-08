@@ -1,0 +1,213 @@
+---
+title: Analizando data de Airbnb en Buenos Aires
+author: H. Antonio Vazquez Brust
+date: '2017-09-09'
+slug: analizando-data-de-airbnb-en-buenos-aires
+bigimg: 
+  - {src: "/post/img/airbnb_cover.png"}
+categories:
+  - scraping
+tags: []
+subtitle: ''
+---
+
+
+
+<p>¡Airbnb! La plataforma de alquileres temporarios que aflije a <a href="https://www.elconfidencial.com/vivienda/2017-05-14/turistificacion-alquiler-turistico-madrid-barcelona-valencia-airbnb-homeaway-rentalia-gentrificacion_1382367/">autoridades municipales</a> por <a href="https://www.nytimes.com/roomfordebate/2015/06/16/san-francisco-and-new-york-weigh-airbnbs-effect-on-rent/airbnb-is-a-problem-for-cities-like-new-york-and-san-francisco">doquier</a>, formando junto a Uber la bestia de dos cabezas del <a href="https://www.clarin.com/economia/economia/capitalismo-plataforma_0_ByIlCwtv7g.html">capitalismo de platforma</a>. Hasta hace unos años, en aquella era de inocencia, le llamábamos <em>the sharing economy</em>. Pero la ilusión de que al usar la plataforma estamos participando de algún acto sublime de compartir entre pares se ha esfumado, al punto que desde una de esas revistas “para hombres” se anuncia con soltura que cuando uno usa Airbnb en verdad está <a href="http://www.revistagq.com/noticias/articulos/turistificacion-airbnb/25908">matando una ciudad que ama</a>. Debo confesar que me he alojado en múltiples ocasiones mediante Airbnb, así que si tal cosa fuera cierta me corresponde una porción de la culpa.</p>
+<p>¿Cómo llegamos a éste punto? Los detractores de Airbnb acusan a la empresa de convertir los barrios residenciales en centros hoteleros semi-clandestinos, donde las viviendas disponibles desaparecen del mercado -convertidas en rentables alquileres temporarios- y los turistas desplazan a los vecinos de vieja data, quienes ya no encuentran o no pueden costear un alquiler permanente. La industria hotelera tampoco esta contenta, por obvias razones. Y los gobiernos municipales, con su crónica escasez de fondos, se rebelan ante el crecimiento de una actividad económica que aprovecha los bienes públicos de una ciudad (su historia, su estilo, su ambiente, sus servicios) evadiendo retribuir impuestos para mantener esos mismos recursos que explota.</p>
+<p>Airbnb, por su parte, asegura que su presencia es beneficiosa para las ciudades donde opera. En su momento promovía una imagen de conexión entre individuos, alimentando la idea de que las transacciones se llevaban a cabo entre viajeros comprometidos con “vivir la experiencia local” (no meros turistas) y anfitriones que los recibían en su hogar para convivir e intercambiar cultura. Hoy en día ha abandonado esa premisa, y si bien aún menciona lo de vivir la experiencia como un local, ya no pone tanto el foco en la convivencia sino en el destino. ¿Será porque el servicio está acaparado por rentistas que ofrecen propiedades donde no vive nadie excepto los clientes que trae Airbnb?</p>
+<div class="figure">
+<img src="/post/img/airbnb_destino.png" alt="Los destinos resaltados en airbnb.com" />
+<p class="caption">Los destinos resaltados en airbnb.com</p>
+</div>
+<p>Podemos intentar responder a esa pregunta. Vamos a scrapear anuncios de Airbnb en Buenos Aires, y analizar lo hallado en busca de indicios. Recopilar información sobre los alojamientos publicados por la plataforma no es fácil, merced del diseño que hace muy trabajoso barrer en forma sistemática su sitio web. Por suerte tenemos a <a href="http://tomslee.net/">Tom Slee</a>, quien acumula desde hace años información sobre la cantidad total de <a href="http://tomslee.net/airbnb-data-collection-get-the-data">alojamientos ofrecidos por Airbnb en ciudades de todo el mundo</a>. Y no sólo comparte sus resultados, también ofrece el <a href="https://github.com/tomslee/airbnb-data-collection/">código en Python que utiliza para hacer el scraping</a> - ¡Gracias Tom!. Usando sus scripts, pude acceder a un listado a priori completo de la oferta de Airbnb en Buenos Aires a mediados de julio del 2017. Contiene 9923 alojamientos:</p>
+<pre class="r"><code>library(tidyverse)
+airba_df &lt;- read_csv(&#39;/home/havb/data/airbnb/Airbnb_listings_Buenos_Aires_July_2017.csv&#39;)
+
+nrow(airba_df)</code></pre>
+<pre><code>## [1] 9923</code></pre>
+<p>Muy bien! Es hora de interrogar amablemente a nuestra data. Cómo primer paso, vamos extraer un set de datos derivado con indicadores a nivel usuario, para calcular cuantos alojamientos ofrece cada uno, de qué tipo, y -lo más difícil de discernir- cuantos ingresos le ha generado su actividad en la plataforma. Para ésto último me guío, una vez más, por la experiencia de Tom Slee. Basándose en declaraciones que ha hecho aquí y allá la propia empresa, Tom estima que la cantidad de calificaciones que ha recibido un usuario (un dato que conocemos) representa un 55% del total de veces que ha recibido visitantes. Resta estimar cuantas noches y cuantos huéspedes representa, en promedio, cada transacción. Aquí asumo lo siguiente: el promedio de estadía es de cuatro noches, y el promedio de ocupación es la mitad de la capacidad total, redondeando hacia arriba (es decir, si la capacidad máxima es 3 o 4, asumo para ambos casos un promedio de dos huéspedes alojados por transaccción). Para los alojamientos con capacidad de más de 6 personas, asumo que no se cobra extra por los huéspedes arriba de 6.</p>
+<p>Si alguien tiene en mente parametros de estimación de ingresos que podrían ser mas acertados, me avisa y los ponemos en práctica! Mientras tanto:</p>
+<pre class="r"><code># Estimaciones tomadas respetuosamente de aquí: 
+# http://tomslee.net/airbnb-data-collection-methodology-and-accuracy
+usuarios &lt;- airba_df %&gt;%
+  mutate(ingresos_estimados = (reviews / 0.55) * 
+           price * 
+           4 * 
+           ifelse(accommodates &lt; 6, (ceiling(accommodates / 2)), 3)) %&gt;%
+  group_by(host_id) %&gt;%
+  summarise(
+    alojamientos = n(),
+    dormitorios_totales = sum(bedrooms),
+    ingresos_estimados = sum(ingresos_estimados),
+    habitaciones_privadas = sum(room_type == &quot;Private room&quot;),
+    propiedades_completas = sum(room_type == &quot;Entire home/apt&quot;),
+    habitaciones_compartidas = sum(room_type == &quot;Shared room&quot;)    
+  ) %&gt;% 
+  mutate(categoria_ingresos = case_when(percent_rank(ingresos_estimados) &gt; .99 ~ &quot;top 1 %&quot;, 
+                                        percent_rank(ingresos_estimados) &gt; .9 ~ &quot;top 2% a 10%&quot;,
+                                        TRUE ~ &quot;resto&quot;),
+         categoria_alojamientos = case_when(.$alojamientos == 1 ~ &quot;1&quot;,
+                                            .$alojamientos == 2 ~ &quot;2&quot;,
+                                            .$alojamientos == 3 ~ &quot;3&quot;,
+                                            .$alojamientos == 4 ~ &quot;4&quot;,
+                                            .$alojamientos &gt; 10 ~ &quot;Más de 10&quot;,
+                                            .$alojamientos &gt; 4 ~ &quot;5 a 10&quot;))</code></pre>
+<p>Ahora si, veamos los resultados.</p>
+<div id="capacidad-total-y-distribucion-de-las-plazas-ofrecidas" class="section level2">
+<h2>1. Capacidad total y distribución de las plazas ofrecidas</h2>
+<p>Cuanta gente podría dormir en Buenos Aires si todos los alojamientos publicados por Airbnb se colmaran?</p>
+<pre class="r"><code>library(hrbrthemes)
+
+airba_df %&gt;% 
+  count(accommodates) %&gt;% 
+  mutate(pct = n / sum(n)) %&gt;% 
+  ggplot(aes(factor(accommodates), pct)) + 
+  geom_col(fill = &quot;salmon&quot;) + 
+  scale_y_percent() +
+  theme_ipsum(grid = &quot;Y&quot;) +
+  labs(title = &quot;Capacidad&quot;,
+       subtitle= paste(&quot;Alojamientos publicados:&quot;, nrow(airba_df), 
+                       &quot;\nPlazas totales:&quot;, sum(airba_df$accommodates)),
+       y = &quot;alojamientos&quot;,
+       x = &quot;capacidad máxima (huéspedes)&quot;)</code></pre>
+<p><img src="/post/2017-09-09-analizando-data-de-airbnb-en-buenos-aires_files/figure-html/unnamed-chunk-4-1.png" width="720" /></p>
+<p>Según lo capturado en julio del 2017, quienes ofertan por Airbnb ofrecen una capacidad combinada de 27635 plazas. Más del 40$ de los anfitriones ofrecen alojamiento para dos personas. Las 4, 3 y una plaza siguen en popularidad, aunque de lejos. Un porcentaje muy bajo de alojamientos ofrece capacidad para ás de 6 persosnas, aunque hay ejemplos de hasta 16 plazas. Aquí imperan los departamentos, por más que haya en oferta lo que asumo han de ser algunas casonas.</p>
+</div>
+<div id="cantidad-y-tipo-de-alojamientos-ofrecidos-por-anfitrion" class="section level2">
+<h2>2. Cantidad y tipo de alojamientos ofrecidos por anfitrión</h2>
+<p>Cuantos usuarios ofrecen alojamientos en la plataforma? Que tan común es que se ofrezcan múltiples alojamientos desde uns misma cuenta?</p>
+<pre class="r"><code>usuarios %&gt;%
+  mutate(propiedad_compartida = ifelse(( habitaciones_privadas),
+                                       &quot;si&quot;,
+                                       &quot;no&quot;)) %&gt;% 
+  count(categoria_alojamientos, propiedad_compartida) %&gt;% 
+  ungroup() %&gt;% 
+  mutate(pct = n / sum(n)) %&gt;% 
+  ggplot(aes(factor(categoria_alojamientos), pct)) + 
+  geom_col(aes(fill = propiedad_compartida)) + 
+  scale_y_percent() +
+  theme_ipsum(grid = &quot;Y&quot;) +
+  labs(title = &quot;Total de alojamientos ofrecidos por usuario&quot;,
+       fill = &quot;Alguna\npropiedad\ncompartida&quot;,
+       subtitle= paste(&quot;Total de anfitriones:&quot;, nrow(usuarios)),
+       y = &quot;anfitriones&quot;,
+       x = &quot;alojamientos publicados&quot;)</code></pre>
+<p><img src="/post/2017-09-09-analizando-data-de-airbnb-en-buenos-aires_files/figure-html/unnamed-chunk-5-1.png" width="720" /></p>
+<p>Este gráfico es el que muestra porqué Airbnb ya no intenta realzar el romanticismo de compartir el hogar. Sobre un total de 6343 cuentas de anfitriones distintas, la gran mayoría publica un sólo alojamiento, y lo ofrece de forma completa: no se trata de compartir el hogar, son departamentos ofrecidos en alquiler temporario, buscando una renta más alta que la que permite el inquilino local. Y aún los alojamientos compartidos -los que aparecen como “habitación privada”, o “habitación compartida”- pueden representar una propiedad en la que el dueño aloja multiples clientes, repartiéndolos en las habitaciones disponibles. Para más detalles:</p>
+<pre class="r"><code>airba_df %&gt;% 
+  count(room_type) %&gt;% 
+  ungroup() %&gt;% 
+  mutate(pct = n / sum(n)) %&gt;% 
+  ggplot(aes(factor(room_type), pct)) + 
+  geom_col(fill = &quot;salmon&quot;) + 
+  scale_y_percent() +
+  theme_ipsum(grid = &quot;Y&quot;) +
+  labs(title = &quot;Modalidad de los alojamientos ofrecidos&quot;,
+       subtitle= paste(&quot;Total de alojamientos:&quot;, nrow(airba_df)),
+       y = &quot;porcentaje&quot;,
+       x = &quot;tipo&quot;)</code></pre>
+<p><img src="/post/2017-09-09-analizando-data-de-airbnb-en-buenos-aires_files/figure-html/unnamed-chunk-6-1.png" width="720" /></p>
+<p>De los 9923 alojamientos ofrecidos, 7709 (un 77%) son propiedades enteras.</p>
+<p>Otro punto interesante es la categoría “Más de 10 alojamientos publicados”. Hay algunos pocos usuarios que administran más de 10 publicaciones. Pero hasta cuántas llegan? Veamos cuantos alojamientos mantienen los 5 usuarios que más ofertan:</p>
+<pre class="r"><code>airba_df %&gt;% 
+  group_by(host_id) %&gt;% 
+  summarise(&quot;Alojamientos ofrecidos&quot; = n()) %&gt;% 
+  pull(&quot;Alojamientos ofrecidos&quot;) %&gt;% 
+  sort(decreasing = T) %&gt;% 
+  head(n=5)</code></pre>
+<pre><code>## [1] 87 77 73 62 44</code></pre>
+<p>Existen cuentas que administran 73, 77… ¡87! alojamientos distintos, ofrecidos a la vez. No es una operación menor la de mantener semejante número de propiedades en rotación, por lo cual podemos asumir que se trata de empresas (formalizadas como tales, o no) dedicadas a alojar turistas via Airbnb. Lo cual nos lleva a…</p>
+</div>
+<div id="distribucion-de-ingresos" class="section level2">
+<h2>3. Distribución de ingresos</h2>
+<p>Aquí hay que aclarar una vez más que nos basamos en estimados. De todas formas, aún si no sabemos en qué grado nuestra suposición se aproxima a los números reales, aplicar la misma medición a todos los usuarios nos permite comparar que tan bien les está yendo con el negocio. Allá vamos:</p>
+<pre class="r"><code>usuarios %&gt;% 
+  ggplot(aes(ingresos_estimados)) +
+  geom_histogram(fill=&quot;salmon&quot;, bins = 400) + 
+  theme_ipsum(grid = &quot;Y&quot;) +
+  scale_x_comma() +
+  labs(title = &quot;Distribución de ingresos&quot;,
+       subtitle = &quot;valores estimados&quot;,
+       y = &quot;n&quot;,
+       x = &quot;ingresos (ARS)&quot;)</code></pre>
+<p><img src="/post/2017-09-09-analizando-data-de-airbnb-en-buenos-aires_files/figure-html/unnamed-chunk-8-1.png" width="720" /></p>
+<p>OK. Lo que ocurre aquí es que hay un puñado de usuarios que han recaudado de forma cuantiosa de acuerdo a nuestros supuestos, estirando la escala al punto que no podemos diferenciar al pelotón de los no tan afortunados. En otras palabras, una <a href="https://es.wikipedia.org/wiki/Distribuci%C3%B3n_de_Pareto">distribución de pareto</a> peliaguda. Acudimos al viejo aliado de la visualización de ingresos, la escala logarítmica.</p>
+<pre class="r"><code>usuarios %&gt;% 
+  ggplot(aes(ingresos_estimados)) +
+  geom_histogram(fill=&quot;salmon&quot;, bins = 100) + 
+  theme_ipsum(grid = &quot;XY&quot;) +
+  scale_x_log10(breaks = c(1000, 10000, 100000, 1000000, 10000000)) +
+  labs(title = &quot;Distribución de ingresos&quot;,
+       subtitle = &quot;valores estimados&quot;,
+       y = &quot;cantidad de usuarios&quot;,
+       x = &quot;ingresos alcanzados (ARS)&quot;) </code></pre>
+<p><img src="/post/2017-09-09-analizando-data-de-airbnb-en-buenos-aires_files/figure-html/unnamed-chunk-9-1.png" width="720" /></p>
+<pre class="r"><code>summary(usuarios$ingresos_estimados)</code></pre>
+<pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+##        0        0    16669   232754   103160 31654204</code></pre>
+<p>Ahí queda más claro el panorama. Unas tres cuartas partes ha recaudado menos de 100.000 pesos en el tiempo (días, meses, años) que lleva publicando sus propiedades en la plataforma. Pero los del cuartil superior absorben una cantidad desproporcionada de los ingresos totales generados, con un tope de ingresos (otra vez, estimado) de más de 30 millones de pesos.</p>
+<p>¿Qué tan desigual es esta distribución? Hagamos un favorito de la casa, el <a href="https://eagereyes.org/blog/2008/engaging-readers-with-square-pie-waffle-charts">gráfico waffle</a>.</p>
+<pre class="r"><code>library(waffle)
+
+reparto &lt;- usuarios %&gt;% 
+  group_by(categoria_ingresos) %&gt;% 
+  summarise(ingresos_totales = sum(ingresos_estimados)) 
+
+reparto &lt;- structure(reparto[[2]] / 10000000, names = reparto[[1]])
+reparto &lt;- round(reparto[c(2,3,1)])
+
+waffle(reparto,
+       rows = 10,
+       colors=c(&quot;salmon&quot;, &quot;lightsalmon&quot;, &quot;bisque1&quot;),
+       legend_pos = &quot;bottom&quot;,
+       xlab = &quot;1 cuadro == 10 millones de pesos&quot;,
+       title = &quot;Reparto de ingresos&quot;)</code></pre>
+<p><img src="/post/2017-09-09-analizando-data-de-airbnb-en-buenos-aires_files/figure-html/unnamed-chunk-10-1.png" width="720" /></p>
+<pre class="r"><code># En porcentajes:
+round(reparto / sum(reparto), 2)</code></pre>
+<pre><code>##      top 1 % top 2% a 10%        resto 
+##         0.35         0.45         0.20</code></pre>
+<p>El top 1% de los anfitriones con mayores ingresos se lleva más de un tercio de la torta (quiero decir, del waffle). El 10% con mayores ingresos factura un 80% del total. <strong>Es un mercado muy, muy concentrado.</strong></p>
+</div>
+<div id="distribucion-geografica" class="section level2">
+<h2>4. Distribución geográfica</h2>
+<p>¿Dónde se conentran los alojamientos ofrecidos? Y en particular, ¿dónde están los alojamientos que más recaudan?</p>
+<p>A mapear!</p>
+<pre class="r"><code>library(ggmap)</code></pre>
+<pre class="r"><code>map.ba &lt;- qmap(&quot;Caballito, Buenos Aires&quot;, zoom = 12, source=&quot;stamen&quot;, 
+                maptype=&quot;toner-hybrid&quot;)     
+
+map.ba +
+  coord_equal() +
+  stat_bin_hex(data = airba_df, aes(x=longitude, y=latitude), alpha = .7) +
+  #stat_density2d(data=airba_df, aes(x=longitude, y=latitude, color=..density..,
+  #                                  size=ifelse(..density..&lt;=1,0,..density..), 
+  #                                  alpha=..density..), geom=&quot;tile&quot;,contour=F) +
+  scale_fill_gradientn(colours=c(&quot;lightblue&quot;,&quot;red&quot;), na.value=NA) +
+  geom_point(data = usuarios %&gt;% 
+               left_join(airba_df) %&gt;% 
+               filter(categoria_ingresos == &quot;top 1 %&quot;), 
+             aes(x=longitude, y=latitude), alpha = .3, shape = 3) +
+  theme_ipsum(grid = FALSE) +
+  labs(y = &quot;&quot;, x = &quot;&quot;,
+       title=&quot;Concentración geográfica&quot;,
+       subtitle = &quot;Las cruces representan alojamientos publicados por usuarios en el top 1% de ingresos&quot;,
+       fill = &quot;Densidad de\nalojamientos&quot;) +
+  # Eliminamos las etiquetas de latitud y longitud de los ejes 
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank())</code></pre>
+<p><img src="/post/2017-09-09-analizando-data-de-airbnb-en-buenos-aires_files/figure-html/unnamed-chunk-13-1.png" width="720" /></p>
+<p>Lo que hemos graficado es el corredor turístico La Boca - San Telmo - Barrio Norte - Palermo. Ahí es donde se concentran las propiedades ofrecidas, y dónde basan su oferta los usuarios que más ingresos perciben. La distribución de la oferta replica la desigualdad territorial de la ciudad, recordando con bastante fidelidad a la distrución del precio del suelo:</p>
+<div class="figure">
+<img src="/post/img/reporte_inmobiliario.png" alt="vía http://www.reporteinmobiliario.com" />
+<p class="caption">vía <a href="http://www.reporteinmobiliario.com" class="uri">http://www.reporteinmobiliario.com</a></p>
+</div>
+<p>Y también explica el sesgo de <a href="https://www.airbnb.com/things-to-do/buenos-aires">“La guía definitiva de los mejores lugares” en Buenos Aires</a> que publica Airbnb.</p>
+<div class="figure">
+<img src="/post/img/thingsinba.jpg" alt="no puedo evitar irritarme vacada vez que veo esta imagen" />
+<p class="caption">no puedo evitar irritarme vacada vez que veo esta imagen</p>
+</div>
+<p>De acuerdo a la plataforma, todos los mejores lugares se encuentran en el <em>downtown</em> o en los barrios más caros de la ciudad. Ni siquiera La Boca, con su hiperturístico Caminito, logró colar un lugar recomendable en la lista de Airbnb. Puede argumentarse que la seleccion responde a la lógica de recomendar lugares en zonas donde abunda la oferta de alojamientos provistos por Airbnb, para que los visitantes tentados encuentren un lugar que alquilar. Pero en todo caso, no ayuda a disipar los fantasmas de <em>gentrificación</em> que revolotean en torno al accionar de la empresa. En Berlín, las autoridades decidieron <a href="https://www.theguardian.com/technology/2016/may/01/berlin-authorities-taking-stand-against-airbnb-rental-boom">prohibir el alquiler de propiedades enteras a turistas</a> mediante plataformas como Airbnb. La empresa <a href="https://www.airbnb.com/berlin-economic-impact">responde</a> que los visitantes que atrae “apoyan la economía local por toda la ciudad” y que al “alojarse junto a un local” los turistas toman una perspectiva “desde adentro” de la ciudad. Verificar estos postulados para Berlin queda pendiente, pero en lo que respecta a Buenos Aires mi conclusión es que la plataforma, lejos de contribuir a un desarrollo económico parejo de la ciudad, parece más apta para recrudecer su desigualdad preexistente.</p>
+</div>
