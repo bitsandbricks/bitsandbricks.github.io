@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es" xml:lang="es">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="5.2 Regresión con múltiples variables | Ciencia de Datos para Gente Sociable" />
+<meta property="og:type" content="book" />
+
+
+
+<meta name="github-repo" content="bitsandbricks/datos_sociables" />
+
+<meta name="author" content="Antonio Vazquez Brust" />
+
+<meta name="date" content="2021-08-05" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<meta name="description" content="5.2 Regresión con múltiples variables | Ciencia de Datos para Gente Sociable">
+
+<title>5.2 Regresión con múltiples variables | Ciencia de Datos para Gente Sociable</title>
+
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+/* show arrow before summary tag as in bootstrap
+TODO: remove if boostrap in updated in html_document (rmarkdown#1485) */
+details > summary {
+  display: list-item;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#section"></a>
+<ul>
+<li><a href="para-quién-es-esto.html#para-quién-es-esto">¿Para quién es esto?</a></li>
+<li><a href="antes-de-empezar.html#antes-de-empezar">Antes de empezar</a></li>
+</ul></li>
+<li><a href="1-qué-es-la-ciencia-de-datos.html#qué-es-la-ciencia-de-datos"><span class="toc-section-number">1</span> ¿Qué es la ciencia de datos?</a>
+<ul>
+<li><a href="1-1-qué-significa-hacer-ciencia-de-datos.html#qué-significa-hacer-ciencia-de-datos"><span class="toc-section-number">1.1</span> ¿Qué significa hacer ciencia de datos?</a></li>
+</ul></li>
+<li><a href="2-una-presentación-a-toda-marcha-de-r.html#una-presentación-a-toda-marcha-de-r"><span class="toc-section-number">2</span> Una presentación a toda marcha de R</a>
+<ul>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#nuestro-primer-proyecto-en-r"><span class="toc-section-number">2.1</span> Nuestro primer proyecto en R</a>
+<ul>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#a-investigar-cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autónoma-de-buenos-aires"><span class="toc-section-number">2.1.1</span> A investigar: ¿Cual es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#crear-un-proyecto-en-rstudio"><span class="toc-section-number">2.1.2</span> Crear un proyecto en RStudio</a></li>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#escribiendo-un-script"><span class="toc-section-number">2.1.3</span> Escribiendo un script</a></li>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#cargar-los-datos"><span class="toc-section-number">2.1.4</span> Cargar los datos</a></li>
+</ul></li>
+<li><a href="2-2-visualización-la-exploración-gráfica-de-la-información.html#visualización-la-exploración-gráfica-de-la-información"><span class="toc-section-number">2.2</span> Visualización: la exploración gráfica de la información</a>
+<ul>
+<li><a href="2-2-visualización-la-exploración-gráfica-de-la-información.html#haciendo-mapas"><span class="toc-section-number">2.2.1</span> Haciendo mapas</a></li>
+<li><a href="2-2-visualización-la-exploración-gráfica-de-la-información.html#agregando-datos"><span class="toc-section-number">2.2.2</span> Agregando datos</a></li>
+</ul></li>
+<li><a href="2-3-el-veredicto-final.html#el-veredicto-final"><span class="toc-section-number">2.3</span> El veredicto final</a>
+<ul>
+<li><a href="2-3-el-veredicto-final.html#cuál-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autónoma-de-buenos-aires"><span class="toc-section-number">2.3.1</span> ¿Cuál es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
+</ul></li>
+<li><a href="2-4-ejercicios.html#ejercicios"><span class="toc-section-number">2.4</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="3-poniendo-los-datos-en-forma.html#poniendo-los-datos-en-forma"><span class="toc-section-number">3</span> Poniendo los datos en forma</a>
+<ul>
+<li><a href="3-1-primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo.html#primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo"><span class="toc-section-number">3.1</span> Primeros pasos al examinar un conjunto de datos nuevo</a></li>
+<li><a href="3-2-cruzando-variables-la-operación-join.html#cruzando-variables-la-operación-join"><span class="toc-section-number">3.2</span> Cruzando variables: la operación <code>join</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#transformando-los-datos"><span class="toc-section-number">3.3</span> Transformando los datos</a>
+<ul>
+<li><a href="3-3-transformando-los-datos.html#seleccionar-columnas-con-select"><span class="toc-section-number">3.3.1</span> Seleccionar columnas con <code>select()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#filtrar-filas-con-filter"><span class="toc-section-number">3.3.2</span> Filtrar filas con <code>filter()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#ordenar-filas-con-arrange"><span class="toc-section-number">3.3.3</span> Ordenar filas con <code>arrange()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#agregar-nuevas-variables-con-mutate"><span class="toc-section-number">3.3.4</span> Agregar nuevas variables con <code>mutate()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#extraer-sumarios-con-summarise"><span class="toc-section-number">3.3.5</span> Extraer sumarios con <code>summarise()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#bonus-el-operador-pipe"><span class="toc-section-number">3.3.6</span> ¡BONUS! El operador “pipe”: <code>%&gt;%</code></a></li>
+</ul></li>
+<li><a href="3-4-ejercicios-1.html#ejercicios-1"><span class="toc-section-number">3.4</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="4-visualización.html#visualización"><span class="toc-section-number">4</span> Visualización</a>
+<ul>
+<li><a href="4-1-una-buena-visualización-para-empezar-el-scatterplot.html#una-buena-visualización-para-empezar-el-scatterplot"><span class="toc-section-number">4.1</span> Una buena visualización para empezar: el <em>scatterplot</em></a></li>
+<li><a href="4-2-ajustando-color-y-tamaño.html#ajustando-color-y-tamaño"><span class="toc-section-number">4.2</span> Ajustando color y tamaño</a></li>
+<li><a href="4-3-facetado.html#facetado"><span class="toc-section-number">4.3</span> Facetado</a></li>
+<li><a href="4-4-gráficos-de-barras.html#gráficos-de-barras"><span class="toc-section-number">4.4</span> Gráficos de barras</a></li>
+<li><a href="4-5-histogramas.html#histogramas"><span class="toc-section-number">4.5</span> Histogramas</a></li>
+<li><a href="4-6-preparando-una-visualización-para-compartir.html#preparando-una-visualización-para-compartir"><span class="toc-section-number">4.6</span> Preparando una visualización para compartir</a></li>
+<li><a href="4-7-otras-visualizaciones.html#otras-visualizaciones"><span class="toc-section-number">4.7</span> Otras visualizaciones</a></li>
+<li><a href="4-8-ejercicios-2.html#ejercicios-2"><span class="toc-section-number">4.8</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="5-modelado-estadístico.html#modelado-estadístico"><span class="toc-section-number">5</span> Modelado estadístico</a>
+<ul>
+<li><a href="5-1-regresión-lineal-simple.html#regresión-lineal-simple"><span class="toc-section-number">5.1</span> Regresión lineal simple</a>
+<ul>
+<li><a href="5-1-regresión-lineal-simple.html#regresión-con-una-variable-numérica"><span class="toc-section-number">5.1.1</span> Regresión con una variable numérica</a></li>
+<li><a href="5-1-regresión-lineal-simple.html#revolviendo-los-residuos"><span class="toc-section-number">5.1.2</span> Revolviendo los residuos</a></li>
+<li><a href="5-1-regresión-lineal-simple.html#regresión-con-una-variable-categórica"><span class="toc-section-number">5.1.3</span> Regresión con una variable categórica</a></li>
+</ul></li>
+<li><a href="5-2-regresión-con-múltiples-variables.html#regresión-con-múltiples-variables"><span class="toc-section-number">5.2</span> Regresión con múltiples variables</a></li>
+<li><a href="5-3-ejercicios-3.html#ejercicios-3"><span class="toc-section-number">5.3</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="6-información-geográfica-y-mapas.html#información-geográfica-y-mapas"><span class="toc-section-number">6</span> Información geográfica y mapas</a>
+<ul>
+<li><a href="6-1-los-datos-georreferenciados.html#los-datos-georreferenciados"><span class="toc-section-number">6.1</span> Los datos georreferenciados</a></li>
+<li><a href="6-2-formatos-de-archivo.html#formatos-de-archivo"><span class="toc-section-number">6.2</span> Formatos de archivo</a></li>
+<li><a href="6-3-explorando-un-archivo-con-información-geográfica.html#explorando-un-archivo-con-información-geográfica"><span class="toc-section-number">6.3</span> Explorando un archivo con información geográfica</a></li>
+<li><a href="6-4-visualizando-información-geográfica.html#visualizando-información-geográfica"><span class="toc-section-number">6.4</span> Visualizando información geográfica</a></li>
+<li><a href="6-5-volcando-en-el-mapa-información-de-múltiples-fuentes.html#volcando-en-el-mapa-información-de-múltiples-fuentes"><span class="toc-section-number">6.5</span> Volcando en el mapa información de múltiples fuentes</a></li>
+<li><a href="6-6-combinando-capas-geográficas.html#combinando-capas-geográficas"><span class="toc-section-number">6.6</span> Combinando capas geográficas</a></li>
+<li><a href="6-7-ejercicios-4.html#ejercicios-4"><span class="toc-section-number">6.7</span> Ejercicios</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="regresión-con-múltiples-variables" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Regresión con múltiples variables</h2>
+<p>Hasta aquí hemos usado la regresión lineal para hacer explícita la relación entre una variable <em>resultante</em> <span class="math inline">\(y\)</span> y una única variable <em>predictiva</em> o <em>explicativa</em> <span class="math inline">\(x\)</span>. En algunos de nuestros resultados pudimos intuir que el agregado de alguna variable explicativa adicional podría mejorar nuestras predicciones. De eso se trata la regresión lineal múltiple: incorporar una cantidad arbitraria de variables al modelo, buscando representar las múltiples dinámicas que inciden en el fenómeno estudiado.</p>
+<p>Una buena noticia es que, en general, agregar variables a nuestro modelo estadístico no requiere mucho esfuerzo adicional. En la época en que los cálculos matemáticos debían hacerse sin la ayuda de una computadora, sumar variables sin ton ni son debía tener poca gracia, debido a la creciente cantidad de cálculos a resolver. Para nosotros que dejamos la tarea en manos de software especializado, el problema es el opuesto. Es tan fácil sumar variables al modelo, que debemos evitar la tentación de arrojar todo dentro de la fórmula de regresión lineal y decidir luego que parece importante y que no.</p>
+<p>Pasemos a la práctica. Vamos a modelar la expectativa como resultante de la población y del PBI per cápita de los países, usando los datos más reciente (tomados en 2007). La única diferencia respecto a una regresión lineal simple es que usamos <code>+</code> para agregar variables en la fórmula de <code>lm()</code></p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="5-2-regresión-con-múltiples-variables.html#cb231-1"></a>modelo_exp_multiple &lt;-<span class="st"> </span><span class="kw">lm</span>(expVida <span class="op">~</span><span class="st"> </span>pobl <span class="op">+</span><span class="st"> </span>PBI_PC, <span class="dt">data =</span> data_mundial_<span class="dv">2007</span>)</span>
+<span id="cb231-2"><a href="5-2-regresión-con-múltiples-variables.html#cb231-2"></a></span>
+<span id="cb231-3"><a href="5-2-regresión-con-múltiples-variables.html#cb231-3"></a>modelo_exp_multiple</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = expVida ~ pobl + PBI_PC, data = data_mundial_2007)
+## 
+## Coefficients:
+##     (Intercept)             pobl           PBI_PC  
+## 59.205198140717   0.000000007001   0.000641608517</code></pre>
+<p>¿Cómo interpretamos esos resultados? Más o menos de la misma manera que con la regresión simple. Como antes, tenemos un coeficiente para la intersección, al que no prestamos mucha atención porque no nos dice nada de la relación entre las variables. Lo que cambia es que esta vez tenemos dos variables predictoras en lugar a una, cada una con su coeficiente. Los coeficientes positivos indican que la relación de la población con la expectativa de vida es de correlación positiva (cuando una crece la otra tiende a crecer también), y lo mismo ocurre con el PBI. La magnitud de los coeficientes es pequeña (minúscula en el caso de la población), lo cual dificulta “narrar” los resultados, pero podemos hacerlo así:</p>
+<ul>
+<li>Cuando las demás variables se mantienen constantes (es decir, en países con PBI similar) el incremento de una unidad de población -un habitante- está asociado a un incremento de 0,000000007 años en la expectativa de vida del país… unas dos décimas de segundo.</li>
+<li>Cuando las demás variables se mantienen constantes (es decir, en países con población similar) el incremento de una unidad de PBI -un dólar per cápita- está asociado a un incremento de 0,00064 años en la expectativa de vida del país… un poco más de cinco horas y media.</li>
+</ul>
+<p>Pensemos un poco si los resultados tienen sentido. La correlación positiva entre PBI y longevidad es de lo más razonable. No nos extraña que los países de mayores ingresos tiendan a ser aquellos cuyos habitantes viven más tiempo. La correlación con la población es quizás inesperada. Si la longevidad se incrementa junto a la cantidad de habitantes, ¿acaso no deberíamos encontrar a varios de los países más populosos entre los más longevos?</p>
+<p>Veamos el <em>top ten</em> de países más poblados:</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="5-2-regresión-con-múltiples-variables.html#cb233-1"></a>data_mundial_<span class="dv">2007</span> <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb233-2"><a href="5-2-regresión-con-múltiples-variables.html#cb233-2"></a><span class="st">    </span><span class="kw">arrange</span>(<span class="kw">desc</span>(expVida)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb233-3"><a href="5-2-regresión-con-múltiples-variables.html#cb233-3"></a><span class="st">    </span><span class="kw">head</span>(<span class="dt">n =</span> <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##                pais continente anio expVida      pobl   PBI_PC residuo_ml
+## 1             Japan       Asia 2007  82.603 127467972 31656.07   11.87452
+## 2  Hong Kong, China       Asia 2007  82.208   6980412 39724.98   11.47952
+## 3           Iceland     Europe 2007  81.757    301931 36180.79    4.10840
+## 4       Switzerland     Europe 2007  81.701   7554661 37506.42    4.05240
+## 5         Australia    Oceania 2007  81.235  20434176 34435.37    0.51550
+## 6             Spain     Europe 2007  80.941  40448191 28821.06    3.29240
+## 7            Sweden     Europe 2007  80.884   9031088 33859.75    3.23540
+## 8            Israel       Asia 2007  80.745   6426679 25523.28   10.01652
+## 9            France     Europe 2007  80.657  61083916 30470.02    3.00840
+## 10           Canada   Americas 2007  80.653  33390141 36319.24    7.04488</code></pre>
+<p>y el de países con mayor expectativa de vida:</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="5-2-regresión-con-múltiples-variables.html#cb235-1"></a>data_mundial_<span class="dv">2007</span> <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb235-2"><a href="5-2-regresión-con-múltiples-variables.html#cb235-2"></a><span class="st">    </span><span class="kw">arrange</span>(<span class="kw">desc</span>(pobl)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb235-3"><a href="5-2-regresión-con-múltiples-variables.html#cb235-3"></a><span class="st">    </span><span class="kw">head</span>(<span class="dt">n =</span> <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##             pais continente anio expVida       pobl    PBI_PC  residuo_ml
+## 1          China       Asia 2007  72.961 1318683096  4959.115  2.23251515
+## 2          India       Asia 2007  64.698 1110396331  2452.210 -6.03048485
+## 3  United States   Americas 2007  78.242  301139947 42951.653  4.63388000
+## 4      Indonesia       Asia 2007  70.650  223547000  3540.652 -0.07848485
+## 5         Brazil   Americas 2007  72.390  190010647  9065.801 -1.21812000
+## 6       Pakistan       Asia 2007  65.483  169270617  2605.948 -5.24548485
+## 7     Bangladesh       Asia 2007  64.062  150448339  1391.254 -6.66648485
+## 8        Nigeria     Africa 2007  46.859  135031164  2013.977 -7.94703846
+## 9          Japan       Asia 2007  82.603  127467972 31656.068 11.87451515
+## 10        Mexico   Americas 2007  76.195  108700891 11977.575  2.58688000</code></pre>
+<p>El único país presente en ambas listas es Japón. Ni nuestro conocimiento del mundo, ni los datos parecen apoyar la noción de que población y longevidad van juntos. Ya hemos usado <code>cor()</code> para obtener una medida de la intensidad de la correlación entre dos variables. Veamos que pasa con longevidad vs. población:</p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="5-2-regresión-con-múltiples-variables.html#cb237-1"></a><span class="kw">cor</span>(data_mundial_<span class="dv">2007</span><span class="op">$</span>expVida, data_mundial_<span class="dv">2007</span><span class="op">$</span>pobl)</span></code></pre></div>
+<pre><code>## [1] 0.04755312</code></pre>
+<p>Recordemos que la intensidad de una correlación es su valor absoluto, que toma un máximo de 1, mientras que el signo (positivo o negativo) indica si la relación entre variables es directa o inversa. Aquí obtuvimos un valor bien bajo, cercano a cero: la correlación es nula. Entonces ¿Por qué aparece en nuestro modelo de regresión lineal?</p>
+<p>En resumidas cuentas, aparece porque nosotros le pedimos que aparezca. Es decir, instruimos en forma específica a <code>lm()</code> para que incorpore a la población en el modelo. El caso es que población no es un buen predictor de longevidad (la correlación es bajísima), pero si lo pedimos, lo tenemos: el coeficiente nos indica el valor que minimiza las discrepancias entre valores observado y valores predichos trazando una línea recta. Lo que no indica por si solo es el grado en el cual podemos confiar en esa variable para darnos buenas predicciones o estimados.</p>
+<p>Sería muy útil que el resultado de <code>lm()</code> indique cuáles variables son buenas predictoras y cuáles no. Y por suerte, lo hace cuando lo interrogamos con <code>summary()</code>, la misma función que hemos estado usando para obtener el resumen de un dataframe. Cuando la usamos con un objeto de R que contiene un modelo estadístico, lo que obtenemos son sus detalles:</p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="5-2-regresión-con-múltiples-variables.html#cb239-1"></a><span class="kw">summary</span>(modelo_exp_multiple)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = expVida ~ pobl + PBI_PC, data = data_mundial_2007)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -22.496  -6.119   1.899   7.018  13.383 
+## 
+## Coefficients:
+##                    Estimate      Std. Error t value            Pr(&gt;|t|)    
+## (Intercept) 59.205198140717  1.040398672164  56.906 &lt;0.0000000000000002 ***
+## pobl         0.000000007001  0.000000005068   1.381               0.169    
+## PBI_PC       0.000641608517  0.000058176209  11.029 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 8.87 on 139 degrees of freedom
+## Multiple R-squared:  0.4679, Adjusted R-squared:  0.4602 
+## F-statistic: 61.11 on 2 and 139 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>El resumen incluye los parámetros que definieron al modelo, los valores por cuartil de los residuos, y una tabla con variables numéricas. En esa tabla, bajo la columna <code>Estimate</code> tenemos el “efecto” estimado de cada variable explicativa sobre la dependiente. Es decir, los coeficientes que ya conocemos. Luego aparecen tres columnas con atributos estadísticos: <code>Std. Error</code>, <code>t value</code>, y <code>Pr(&gt;|t|)</code>. En castellano las llamaríamos, respectivamente, <em>error estándar</em>, <em>valor t</em> y <em>valor p</em>. Interpretar estos valores cae fuera de nuestros objetivos, pero podemos señalar que el más famoso entre ellos es el <em>valor p</em>, porque se usa como medida: si vale menos de 0,5, se considera que la capacidad de predicción de la variable asociada es significativa. Para interpretar todo esto de manera sencilla, una vez más vamos a confiar en R para guiarnos. He aquí la curiosa forma de determinar si una variable es buena predictora o no: contar estrellitas. Junto a cada fila aparecen, a veces, de uno a tres asteriscos. Son la forma de R de decirnos cuales son las variables explicativas que muestran una relación “estadísticamente significativa” con nuestra variable dependiente. Cuanto más bajo el valor p, más significativa es la relación y más estrellitas aparecen:</p>
+<ul>
+<li><code>.</code> o nada: No se encuentra una relación entre esta variable y la que queremos predecir.</li>
+<li><code>*</code>: Es muy probable que esta variable tenga una relación con la que queremos predecir. Ya podemos publicar estos resultados en un paper científico.</li>
+<li><code>**</code>: Es muy, pero muy probable que esta variable tenga una relación con la que queremos predecir. 99% seguro.</li>
+<li><code>***</code>: Juramos que las variables están relacionadas. Más no se puede pedir.</li>
+</ul>
+<p>Lo de un asterisco/estrella (<code>*</code>) indicando que los resultados ya alcanzan rigor científico no es broma. El asterisco solitario indica que, a nivel estadístico, se supera el 95% de confianza en que la relación existe en la realidad y no es producto de una casualidad en los datos. Pasando ese umbral se considera que los datos son “estadísticamente significativos”, y desde hace muchos años encontrar un <em>valor p</em> menor a 0,05 es la meta dorada de los investigadores que emplean análisis estadístico. ¿Porqué un 95% de confianza alcanza? ¿Porqué no relajar el límite a 90%, o quizás mejor, exigir al menos un 99 o 99,9% de seguridad? La verdad es que no hay ninguna razón trascendental. El 95% de certeza es tan sólo un umbral arbitrario que en algún momento se volvió estándar. Es importante aclarar que en los últimos años ha crecido una reacción de rechazo a esta norma arbitraria, dentro de la propia comunidad científica. Quienes siguen confiando en los <em>valores p</em> son llamados “frecuentistas”; los que proponen cuantificar de otra forma nuestro grado de certeza son llamados “bayesianos”. Google mediante, quien quiera saber más sobre la apasionante rivalidad tendrá horas de diversión aseguradas.</p>
+<p>En lo que a nosotros respecta, por ahora vamos a aceptar el enfoque frecuentista, y cuando veamos una estrella diremos que la variable asociada es un buen predictor. O para ser más precisos, que su relación con la variable dependiente es estadísticamente significativa.</p>
+<p>Volvamos a nuestros modelos. Cuando hicimos regresiones simples no sabíamos aún de valores p, y no revisamos la significancia de las variables predictoras. Hagámoslo ahora con el modelo de expectativa de vida en Argentina vs. PBI :</p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="5-2-regresión-con-múltiples-variables.html#cb241-1"></a><span class="kw">summary</span>(modelo_exp)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = expVida ~ anio, data = data_arg)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.53006 -0.13516 -0.01219  0.14228  0.55202 
+## 
+## Coefficients:
+##                Estimate  Std. Error t value          Pr(&gt;|t|)    
+## (Intercept) -389.606345    9.677730  -40.26 0.000000000002140 ***
+## anio           0.231708    0.004889   47.40 0.000000000000422 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.2923 on 10 degrees of freedom
+## Multiple R-squared:  0.9956, Adjusted R-squared:  0.9951 
+## F-statistic:  2246 on 1 and 10 DF,  p-value: 0.0000000000004216</code></pre>
+<p>Las tres estrellitas, distinción máxima, indican que sin dudas el año está relacionado con la expectativa de vida. Esto no es una sorpresa: la linea de la regresión lineal se ajusta con tanta precisión a los valores observados, que no podía ser de otra manera.</p>
+<p>Continuando con las regresiones múltiples, intentemos un modelo con tres variables predictoras. A población y PBI, las que ya teníamos en cuenta, vamos a agregar una variable categórica: el continente.</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="5-2-regresión-con-múltiples-variables.html#cb243-1"></a>modelo_exp_multiple &lt;-<span class="st"> </span><span class="kw">lm</span>(expVida <span class="op">~</span><span class="st"> </span>pobl <span class="op">+</span><span class="st"> </span>PBI_PC <span class="op">+</span><span class="st"> </span>continente, <span class="dt">data =</span> data_mundial_<span class="dv">2007</span>)</span>
+<span id="cb243-2"><a href="5-2-regresión-con-múltiples-variables.html#cb243-2"></a></span>
+<span id="cb243-3"><a href="5-2-regresión-con-múltiples-variables.html#cb243-3"></a><span class="kw">summary</span>(modelo_exp_multiple)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = expVida ~ pobl + PBI_PC + continente, data = data_mundial_2007)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -22.8199  -2.8905   0.1574   2.9046  20.0585 
+## 
+## Coefficients:
+##                            Estimate       Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)        53.7141900516204  0.9355709763972  57.413 &lt; 0.0000000000000002 ***
+## pobl                0.0000000009586  0.0000000039259   0.244              0.80747    
+## PBI_PC              0.0003479123814  0.0000571704015   6.086     0.00000001127738 ***
+## continenteAmericas 16.0313726693021  1.6713252557392   9.592 &lt; 0.0000000000000002 ***
+## continenteAsia     12.5640427449841  1.6209815371922   7.751     0.00000000000197 ***
+## continenteEurope   15.1989177617593  1.9662500363509   7.730     0.00000000000220 ***
+## continenteOceania  16.6222095573924  4.9925674316223   3.329              0.00112 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.597 on 135 degrees of freedom
+## Multiple R-squared:  0.7141, Adjusted R-squared:  0.7014 
+## F-statistic:  56.2 on 6 and 135 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>Observamos que la variable categórica es significativa. Con las demás variables fijas -es decir, en países de similar PBI y población- el continente de origen explica en gran medida las diferencias en expectativa de vida en cada país, y con un efecto estimado enorme - ¡de 12 a 16 años!-. Notemos de todos modos que el coeficiente de la variable continente había sido mayor en el modelo simple, llegando a casi 26 años para Oceanía. ¿Porqué es menor ahora? Porque nuestro modelo es más completo, y tiene en cuenta más variables. Cuando lo único que teníamos para comparar países era su continente, era era la única variable a la que atribuir diferencias. Ahora que consideramos múltiples variables para explicar las diferencias, notamos la parte de la influencia que se lleva el PBI, reduciendo la del continente.</p>
+</div>
+<p style="text-align: center;">
+<a href="5-1-regresión-lineal-simple.html"><button class="btn btn-default">Previous</button></a>
+<a href="5-3-ejercicios-3.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

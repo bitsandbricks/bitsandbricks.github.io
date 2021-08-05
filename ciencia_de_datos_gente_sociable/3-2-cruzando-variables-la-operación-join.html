@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es" xml:lang="es">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="3.2 Cruzando variables: la operación join | Ciencia de Datos para Gente Sociable" />
+<meta property="og:type" content="book" />
+
+
+
+<meta name="github-repo" content="bitsandbricks/datos_sociables" />
+
+<meta name="author" content="Antonio Vazquez Brust" />
+
+<meta name="date" content="2021-08-05" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<meta name="description" content="3.2 Cruzando variables: la operación join | Ciencia de Datos para Gente Sociable">
+
+<title>3.2 Cruzando variables: la operación join | Ciencia de Datos para Gente Sociable</title>
+
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+/* show arrow before summary tag as in bootstrap
+TODO: remove if boostrap in updated in html_document (rmarkdown#1485) */
+details > summary {
+  display: list-item;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#section"></a>
+<ul>
+<li><a href="para-quién-es-esto.html#para-quién-es-esto">¿Para quién es esto?</a></li>
+<li><a href="antes-de-empezar.html#antes-de-empezar">Antes de empezar</a></li>
+</ul></li>
+<li><a href="1-qué-es-la-ciencia-de-datos.html#qué-es-la-ciencia-de-datos"><span class="toc-section-number">1</span> ¿Qué es la ciencia de datos?</a>
+<ul>
+<li><a href="1-1-qué-significa-hacer-ciencia-de-datos.html#qué-significa-hacer-ciencia-de-datos"><span class="toc-section-number">1.1</span> ¿Qué significa hacer ciencia de datos?</a></li>
+</ul></li>
+<li><a href="2-una-presentación-a-toda-marcha-de-r.html#una-presentación-a-toda-marcha-de-r"><span class="toc-section-number">2</span> Una presentación a toda marcha de R</a>
+<ul>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#nuestro-primer-proyecto-en-r"><span class="toc-section-number">2.1</span> Nuestro primer proyecto en R</a>
+<ul>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#a-investigar-cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autónoma-de-buenos-aires"><span class="toc-section-number">2.1.1</span> A investigar: ¿Cual es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#crear-un-proyecto-en-rstudio"><span class="toc-section-number">2.1.2</span> Crear un proyecto en RStudio</a></li>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#escribiendo-un-script"><span class="toc-section-number">2.1.3</span> Escribiendo un script</a></li>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#cargar-los-datos"><span class="toc-section-number">2.1.4</span> Cargar los datos</a></li>
+</ul></li>
+<li><a href="2-2-visualización-la-exploración-gráfica-de-la-información.html#visualización-la-exploración-gráfica-de-la-información"><span class="toc-section-number">2.2</span> Visualización: la exploración gráfica de la información</a>
+<ul>
+<li><a href="2-2-visualización-la-exploración-gráfica-de-la-información.html#haciendo-mapas"><span class="toc-section-number">2.2.1</span> Haciendo mapas</a></li>
+<li><a href="2-2-visualización-la-exploración-gráfica-de-la-información.html#agregando-datos"><span class="toc-section-number">2.2.2</span> Agregando datos</a></li>
+</ul></li>
+<li><a href="2-3-el-veredicto-final.html#el-veredicto-final"><span class="toc-section-number">2.3</span> El veredicto final</a>
+<ul>
+<li><a href="2-3-el-veredicto-final.html#cuál-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autónoma-de-buenos-aires"><span class="toc-section-number">2.3.1</span> ¿Cuál es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
+</ul></li>
+<li><a href="2-4-ejercicios.html#ejercicios"><span class="toc-section-number">2.4</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="3-poniendo-los-datos-en-forma.html#poniendo-los-datos-en-forma"><span class="toc-section-number">3</span> Poniendo los datos en forma</a>
+<ul>
+<li><a href="3-1-primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo.html#primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo"><span class="toc-section-number">3.1</span> Primeros pasos al examinar un conjunto de datos nuevo</a></li>
+<li><a href="3-2-cruzando-variables-la-operación-join.html#cruzando-variables-la-operación-join"><span class="toc-section-number">3.2</span> Cruzando variables: la operación <code>join</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#transformando-los-datos"><span class="toc-section-number">3.3</span> Transformando los datos</a>
+<ul>
+<li><a href="3-3-transformando-los-datos.html#seleccionar-columnas-con-select"><span class="toc-section-number">3.3.1</span> Seleccionar columnas con <code>select()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#filtrar-filas-con-filter"><span class="toc-section-number">3.3.2</span> Filtrar filas con <code>filter()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#ordenar-filas-con-arrange"><span class="toc-section-number">3.3.3</span> Ordenar filas con <code>arrange()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#agregar-nuevas-variables-con-mutate"><span class="toc-section-number">3.3.4</span> Agregar nuevas variables con <code>mutate()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#extraer-sumarios-con-summarise"><span class="toc-section-number">3.3.5</span> Extraer sumarios con <code>summarise()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#bonus-el-operador-pipe"><span class="toc-section-number">3.3.6</span> ¡BONUS! El operador “pipe”: <code>%&gt;%</code></a></li>
+</ul></li>
+<li><a href="3-4-ejercicios-1.html#ejercicios-1"><span class="toc-section-number">3.4</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="4-visualización.html#visualización"><span class="toc-section-number">4</span> Visualización</a>
+<ul>
+<li><a href="4-1-una-buena-visualización-para-empezar-el-scatterplot.html#una-buena-visualización-para-empezar-el-scatterplot"><span class="toc-section-number">4.1</span> Una buena visualización para empezar: el <em>scatterplot</em></a></li>
+<li><a href="4-2-ajustando-color-y-tamaño.html#ajustando-color-y-tamaño"><span class="toc-section-number">4.2</span> Ajustando color y tamaño</a></li>
+<li><a href="4-3-facetado.html#facetado"><span class="toc-section-number">4.3</span> Facetado</a></li>
+<li><a href="4-4-gráficos-de-barras.html#gráficos-de-barras"><span class="toc-section-number">4.4</span> Gráficos de barras</a></li>
+<li><a href="4-5-histogramas.html#histogramas"><span class="toc-section-number">4.5</span> Histogramas</a></li>
+<li><a href="4-6-preparando-una-visualización-para-compartir.html#preparando-una-visualización-para-compartir"><span class="toc-section-number">4.6</span> Preparando una visualización para compartir</a></li>
+<li><a href="4-7-otras-visualizaciones.html#otras-visualizaciones"><span class="toc-section-number">4.7</span> Otras visualizaciones</a></li>
+<li><a href="4-8-ejercicios-2.html#ejercicios-2"><span class="toc-section-number">4.8</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="5-modelado-estadístico.html#modelado-estadístico"><span class="toc-section-number">5</span> Modelado estadístico</a>
+<ul>
+<li><a href="5-1-regresión-lineal-simple.html#regresión-lineal-simple"><span class="toc-section-number">5.1</span> Regresión lineal simple</a>
+<ul>
+<li><a href="5-1-regresión-lineal-simple.html#regresión-con-una-variable-numérica"><span class="toc-section-number">5.1.1</span> Regresión con una variable numérica</a></li>
+<li><a href="5-1-regresión-lineal-simple.html#revolviendo-los-residuos"><span class="toc-section-number">5.1.2</span> Revolviendo los residuos</a></li>
+<li><a href="5-1-regresión-lineal-simple.html#regresión-con-una-variable-categórica"><span class="toc-section-number">5.1.3</span> Regresión con una variable categórica</a></li>
+</ul></li>
+<li><a href="5-2-regresión-con-múltiples-variables.html#regresión-con-múltiples-variables"><span class="toc-section-number">5.2</span> Regresión con múltiples variables</a></li>
+<li><a href="5-3-ejercicios-3.html#ejercicios-3"><span class="toc-section-number">5.3</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="6-información-geográfica-y-mapas.html#información-geográfica-y-mapas"><span class="toc-section-number">6</span> Información geográfica y mapas</a>
+<ul>
+<li><a href="6-1-los-datos-georreferenciados.html#los-datos-georreferenciados"><span class="toc-section-number">6.1</span> Los datos georreferenciados</a></li>
+<li><a href="6-2-formatos-de-archivo.html#formatos-de-archivo"><span class="toc-section-number">6.2</span> Formatos de archivo</a></li>
+<li><a href="6-3-explorando-un-archivo-con-información-geográfica.html#explorando-un-archivo-con-información-geográfica"><span class="toc-section-number">6.3</span> Explorando un archivo con información geográfica</a></li>
+<li><a href="6-4-visualizando-información-geográfica.html#visualizando-información-geográfica"><span class="toc-section-number">6.4</span> Visualizando información geográfica</a></li>
+<li><a href="6-5-volcando-en-el-mapa-información-de-múltiples-fuentes.html#volcando-en-el-mapa-información-de-múltiples-fuentes"><span class="toc-section-number">6.5</span> Volcando en el mapa información de múltiples fuentes</a></li>
+<li><a href="6-6-combinando-capas-geográficas.html#combinando-capas-geográficas"><span class="toc-section-number">6.6</span> Combinando capas geográficas</a></li>
+<li><a href="6-7-ejercicios-4.html#ejercicios-4"><span class="toc-section-number">6.7</span> Ejercicios</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="cruzando-variables-la-operación-join" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Cruzando variables: la operación <code>join</code></h2>
+<p>Al realizar un análisis “en la vida real”, es decir, usando datos salvajes en lugar de los prolijos datasets de práctica, es muy habitual encontrar que nos falta una variable que necesitamos. Si tenemos suerte, la información que necesitamos también está disponible en forma de tabla, con algún campo en común, y podemos llevar el cabo un cruce de datos para traérnosla.</p>
+<p>Para expresarlo con un ejemplo concreto: hemos visto que los registros de atención al ciudadano incluyen una columna con el barrio, que es la única variable relacionada con la geografía. Si nuestra unidad de análisis fuera la columna en lugar del barrio, necesitaríamos agrega la columna correspondiente. En este caso, estamos de suerte porque una tabla con los barrios de la Ciudad de Buenos Aires y la comuna a la que pertenecen es fácil de conseguir. Con esa tabla en nuestro poder, ya tenemos las piezas necesarias para el cruce de datos. En cada registro en el dataframe de atención al ciudadano, tenemos un barrio; podemos buscarlo en la tabla de barrios y comunas, tomar nota de la comuna asociada, y copiarla en nuestro dataset original. Por supuesto, hacerlo a mano para cada uno de las 57.432 filas en nuestro dataframe tardaría una eternidad, amén de que quizás perderíamos la cordura antes de terminar. ¡Nada de eso! Vamos a resolverlo en meros instantes escribiendo unas pocas líneas de código. Antes de continuar hagamos una pausa para conmiserar a los investigadores de eras pasadas, antes de la popularización de la computadora personal, que realizaban tareas de esta escala con lápiz, papel y paciencia.</p>
+<p>Existe una gran variedad de funciones que permiten combinar tablas relacionadas entre sí por una o varias variables en común. Para nuestro propósito, alcanza con conocer una: <code>left_join()</code>. La función toma como parámetros dos dataframes (que son tablas al fin y al cabo) busca las variables que tengan el mismo nombre y usándolas como referencia completa la primera de ellas, la de la izquierda, con los datos nuevos que aporta la segunda. <code>left_join</code> devuelve un dataframe nuevo con los datos combinados.</p>
+<p>Manos a la obra. Descargamos el dataframe con barrios y comunas,</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="3-2-cruzando-variables-la-operación-join.html#cb57-1"></a>barrios_comunas &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://bitsandbricks.github.io/data/barrios_comunas.csv&quot;</span>)</span></code></pre></div>
+<p>echamos un vistazo, comprobando que existe BARRIOS, una columna en común que lo relaciona con el dataframe de atención al ciudadano,</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="3-2-cruzando-variables-la-operación-join.html#cb58-1"></a>barrios_comunas</span></code></pre></div>
+<pre><code>##               BARRIO COMUNA
+## 1          AGRONOMIA     15
+## 2            ALMAGRO      5
+## 3          BALVANERA      3
+## 4           BARRACAS      4
+## 5           BELGRANO     13
+## 6               BOCA      4
+## 7              BOEDO      5
+## 8          CABALLITO      6
+## 9          CHACARITA     15
+## 10           COGHLAN     12
+## 11        COLEGIALES     13
+## 12      CONSTITUCION      1
+## 13            FLORES      7
+## 14          FLORESTA     10
+## 15           LINIERS      9
+## 16         MATADEROS      9
+## 17         MONSERRAT      1
+## 18      MONTE CASTRO     10
+## 19     NUEVA POMPEYA      4
+## 20             NUÑEZ     13
+## 21           PALERMO     14
+## 22 PARQUE AVELLANEDA      9
+## 23  PARQUE CHACABUCO      7
+## 24       PARQUE CHAS     15
+## 25  PARQUE PATRICIOS      4
+## 26          PATERNAL     15
+## 27     PUERTO MADERO      1
+## 28          RECOLETA      2
+## 29            RETIRO      1
+## 30          SAAVEDRA     12
+## 31     SAN CRISTOBAL      3
+## 32       SAN NICOLAS      1
+## 33         SAN TELMO      1
+## 34   VELEZ SARSFIELD     10
+## 35         VERSALLES     10
+## 36      VILLA CRESPO     15
+## 37  VILLA DEL PARQUE     11
+## 38      VILLA DEVOTO     11
+## 39 VILLA GRAL. MITRE     11
+## 40      VILLA LUGANO      8
+## 41        VILLA LURO     10
+## 42     VILLA ORTUZAR     15
+## 43  VILLA PUEYRREDON     12
+## 44        VILLA REAL     10
+## 45   VILLA RIACHUELO      8
+## 46  VILLA SANTA RITA     11
+## 47     VILLA SOLDATI      8
+## 48     VILLA URQUIZA     12</code></pre>
+<p>y lo unimos (de allí el término “join”, unir en inglés) a nuestra data:</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="3-2-cruzando-variables-la-operación-join.html#cb60-1"></a>atencion_ciudadano &lt;-<span class="st"> </span><span class="kw">left_join</span>(atencion_ciudadano, barrios_comunas)</span></code></pre></div>
+<pre><code>## Joining, by = &quot;BARRIO&quot;</code></pre>
+<p>Admiremos nuestra obra:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="3-2-cruzando-variables-la-operación-join.html#cb62-1"></a><span class="kw">head</span>(atencion_ciudadano)</span></code></pre></div>
+<pre><code>##   PERIODO  RUBRO TIPO_PRESTACION    BARRIO total COMUNA
+## 1  201301 ACERAS         RECLAMO AGRONOMIA     6     15
+## 2  201301 ACERAS         RECLAMO   ALMAGRO   172      5
+## 3  201301 ACERAS         RECLAMO BALVANERA    92      3
+## 4  201301 ACERAS         RECLAMO  BARRACAS    45      4
+## 5  201301 ACERAS         RECLAMO  BELGRANO    79     13
+## 6  201301 ACERAS         RECLAMO      BOCA    10      4</code></pre>
+<p>Es así de fácil. Bueno, no tanto… este fue un caso sencillo, pero hay todo tipo de datos y cruces allí afuera, y a veces se necesitan operaciones más complejas. Por eso hay toda una familia de funciones de <em>join</em> - <code>right_join()</code>, <code>inner_join()</code>, <code>full_join</code>, <code>anti_join()</code>, y alguna más. Pero podemos dejarlas en paz; para nuestras necesidades, con <code>left_join()</code> podemos alegrarnos muy bien.</p>
+<p>Satisfechos con la mejora, si queremos guardar el dataframe “mejorado” para usarlo en otra ocasión, podemos hacerlo con <code>write.csv()</code>, que lo convierte en un archivo de texto que queda en nuestra PC.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="3-2-cruzando-variables-la-operación-join.html#cb64-1"></a><span class="kw">write.csv</span>(atencion_ciudadano, <span class="st">&quot;atencion_ciudadano.csv&quot;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<p>Podemos seguir siempre ese formato para guardar nuestros datos. El primer parámetro es el dataframe que vamos a guardar, el segundo -siempre entre comillas- es el nombre de archivo, y la opción final, <code>row.names = FALSE</code> sirve para evitar que R le agregue una columna al principio con números consecutivos (1, 2, 3, y así), cosa que quizás fue útil alguna vez pero en general no necesitamos.</p>
+<p>Para volver a leer los datos en otra ocasión, usamos <code>read.csv()</code> tal como ya hemos hecho.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="3-2-cruzando-variables-la-operación-join.html#cb65-1"></a>atencion_ciudadano &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;atencion_ciudadano.csv&quot;</span>)</span></code></pre></div>
+<p>Y si queremos saber exactamente dónde ha guardado R nuestros datos, por ejemplo para abrirlos con otro programa, usamos la función <code>getwd</code> (por <em>get working directory</em> )</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="3-2-cruzando-variables-la-operación-join.html#cb66-1"></a><span class="kw">getwd</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;/home/havb/Dropbox/Books/Mios/Ciencia de datos para gente sociable&quot;</code></pre>
+<p>El resultado será la dirección (la ubicación de la la carpeta), donde estamos trabajando y hemos guardado los datos; por ejemplo <code>/home/antonio/Practicando R/</code>.</p>
+</div>
+<p style="text-align: center;">
+<a href="3-1-primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo.html"><button class="btn btn-default">Previous</button></a>
+<a href="3-3-transformando-los-datos.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

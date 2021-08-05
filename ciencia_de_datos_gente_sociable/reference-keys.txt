@@ -1,9 +1,9 @@
+fig:unnamed-chunk-3
 fig:unnamed-chunk-4
 fig:unnamed-chunk-5
-fig:unnamed-chunk-6
-fig:unnamed-chunk-112
+fig:unnamed-chunk-111
+fig:unnamed-chunk-142
 fig:unnamed-chunk-143
-fig:unnamed-chunk-144
 qué-es-la-ciencia-de-datos
 qué-significa-hacer-ciencia-de-datos
 una-presentación-a-toda-marcha-de-r
