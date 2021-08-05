@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<html lang="es" xml:lang="es">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 1 ¿Qué es la ciencia de datos? | Ciencia de Datos para Gente Sociable</title>
-  <meta name="description" content="Capítulo 1 ¿Qué es la ciencia de datos? | Ciencia de Datos para Gente Sociable" />
-  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+  <title>Capítulo 1 ¿Qué es la ciencia de datos? | 01-intro.Rmd</title>
+  <meta name="description" content="Capítulo 1 ¿Qué es la ciencia de datos? | 01-intro.Rmd" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 1 ¿Qué es la ciencia de datos? | Ciencia de Datos para Gente Sociable" />
+  <meta property="og:title" content="Capítulo 1 ¿Qué es la ciencia de datos? | 01-intro.Rmd" />
   <meta property="og:type" content="book" />
   
   
@@ -16,15 +16,15 @@
   <meta name="github-repo" content="bitsandbricks/datos_sociables" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 1 ¿Qué es la ciencia de datos? | Ciencia de Datos para Gente Sociable" />
+  <meta name="twitter:title" content="Capítulo 1 ¿Qué es la ciencia de datos? | 01-intro.Rmd" />
   
   
   
 
-<meta name="author" content="Antonio Vazquez Brust" />
+<meta name="author" content="Antonio Vázquez Brust" />
 
 
-<meta name="date" content="2020-05-31" />
+<meta name="date" content="2018-01-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="una-presentación-a-toda-marcha-de-r.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,28 +51,30 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +83,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -115,6 +118,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -131,33 +135,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Ciencia de Datos para gente sociable</a></li>
 
 <li class="divider"></li>
-<li><a href="index.html#section"></a><ul>
+<li><a href="index.html#section"></a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>¿Para quién es esto?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#antes-de-empezar"><i class="fa fa-check"></i>Antes de empezar</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="qué-es-la-ciencia-de-datos.html"><a href="qué-es-la-ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> ¿Qué es la ciencia de datos?</a><ul>
+<li class="chapter" data-level="1" data-path="qué-es-la-ciencia-de-datos.html"><a href="qué-es-la-ciencia-de-datos.html"><i class="fa fa-check"></i><b>1</b> ¿Qué es la ciencia de datos?</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="qué-es-la-ciencia-de-datos.html"><a href="qué-es-la-ciencia-de-datos.html#qué-significa-hacer-ciencia-de-datos"><i class="fa fa-check"></i><b>1.1</b> ¿Qué significa hacer ciencia de datos?</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html"><i class="fa fa-check"></i><b>2</b> Una presentación a toda marcha de R</a><ul>
-<li class="chapter" data-level="2.1" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#nuestro-primer-proyecto-en-r"><i class="fa fa-check"></i><b>2.1</b> Nuestro primer proyecto en R</a><ul>
+<li class="chapter" data-level="2" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html"><i class="fa fa-check"></i><b>2</b> Una presentación a toda marcha de R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#nuestro-primer-proyecto-en-r"><i class="fa fa-check"></i><b>2.1</b> Nuestro primer proyecto en R</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#a-investigar-cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autónoma-de-buenos-aires"><i class="fa fa-check"></i><b>2.1.1</b> A investigar: ¿Cual es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
 <li class="chapter" data-level="2.1.2" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#crear-un-proyecto-en-rstudio"><i class="fa fa-check"></i><b>2.1.2</b> Crear un proyecto en RStudio</a></li>
 <li class="chapter" data-level="2.1.3" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#escribiendo-un-script"><i class="fa fa-check"></i><b>2.1.3</b> Escribiendo un script</a></li>
 <li class="chapter" data-level="2.1.4" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#cargar-los-datos"><i class="fa fa-check"></i><b>2.1.4</b> Cargar los datos</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#visualización-la-exploración-gráfica-de-la-información"><i class="fa fa-check"></i><b>2.2</b> Visualización: la exploración gráfica de la información</a><ul>
+<li class="chapter" data-level="2.2" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#visualización-la-exploración-gráfica-de-la-información"><i class="fa fa-check"></i><b>2.2</b> Visualización: la exploración gráfica de la información</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#haciendo-mapas"><i class="fa fa-check"></i><b>2.2.1</b> Haciendo mapas</a></li>
 <li class="chapter" data-level="2.2.2" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#agregando-datos"><i class="fa fa-check"></i><b>2.2.2</b> Agregando datos</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#el-veredicto-final"><i class="fa fa-check"></i><b>2.3</b> El veredicto final</a><ul>
+<li class="chapter" data-level="2.3" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#el-veredicto-final"><i class="fa fa-check"></i><b>2.3</b> El veredicto final</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#cuál-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autónoma-de-buenos-aires"><i class="fa fa-check"></i><b>2.3.1</b> ¿Cuál es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#ejercicios"><i class="fa fa-check"></i><b>2.4</b> Ejercicios</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html"><i class="fa fa-check"></i><b>3</b> Poniendo los datos en forma</a><ul>
+<li class="chapter" data-level="3" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html"><i class="fa fa-check"></i><b>3</b> Poniendo los datos en forma</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo"><i class="fa fa-check"></i><b>3.1</b> Primeros pasos al examinar un conjunto de datos nuevo</a></li>
 <li class="chapter" data-level="3.2" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#cruzando-variables-la-operación-join"><i class="fa fa-check"></i><b>3.2</b> Cruzando variables: la operación <code>join</code></a></li>
-<li class="chapter" data-level="3.3" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#transformando-los-datos"><i class="fa fa-check"></i><b>3.3</b> Transformando los datos</a><ul>
+<li class="chapter" data-level="3.3" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#transformando-los-datos"><i class="fa fa-check"></i><b>3.3</b> Transformando los datos</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#seleccionar-columnas-con-select"><i class="fa fa-check"></i><b>3.3.1</b> Seleccionar columnas con <code>select()</code></a></li>
 <li class="chapter" data-level="3.3.2" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#filtrar-filas-con-filter"><i class="fa fa-check"></i><b>3.3.2</b> Filtrar filas con <code>filter()</code></a></li>
 <li class="chapter" data-level="3.3.3" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#ordenar-filas-con-arrange"><i class="fa fa-check"></i><b>3.3.3</b> Ordenar filas con <code>arrange()</code></a></li>
@@ -165,9 +177,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.5" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#extraer-sumarios-con-summarise"><i class="fa fa-check"></i><b>3.3.5</b> Extraer sumarios con <code>summarise()</code></a></li>
 <li class="chapter" data-level="3.3.6" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#bonus-el-operador-pipe"><i class="fa fa-check"></i><b>3.3.6</b> ¡BONUS! El operador “pipe”: <code>%&gt;%</code></a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="poniendo-los-datos-en-forma.html"><a href="poniendo-los-datos-en-forma.html#ejercicios-1"><i class="fa fa-check"></i><b>3.4</b> Ejercicios</a></li>
+<li class="chapter" data-level="3.4" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#ejercicios"><i class="fa fa-check"></i><b>3.4</b> Ejercicios</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="visualización.html"><a href="visualización.html"><i class="fa fa-check"></i><b>4</b> Visualización</a><ul>
+<li class="chapter" data-level="4" data-path="visualización.html"><a href="visualización.html"><i class="fa fa-check"></i><b>4</b> Visualización</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="visualización.html"><a href="visualización.html#una-buena-visualización-para-empezar-el-scatterplot"><i class="fa fa-check"></i><b>4.1</b> Una buena visualización para empezar: el <em>scatterplot</em></a></li>
 <li class="chapter" data-level="4.2" data-path="visualización.html"><a href="visualización.html#ajustando-color-y-tamaño"><i class="fa fa-check"></i><b>4.2</b> Ajustando color y tamaño</a></li>
 <li class="chapter" data-level="4.3" data-path="visualización.html"><a href="visualización.html#facetado"><i class="fa fa-check"></i><b>4.3</b> Facetado</a></li>
@@ -175,25 +188,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5" data-path="visualización.html"><a href="visualización.html#histogramas"><i class="fa fa-check"></i><b>4.5</b> Histogramas</a></li>
 <li class="chapter" data-level="4.6" data-path="visualización.html"><a href="visualización.html#preparando-una-visualización-para-compartir"><i class="fa fa-check"></i><b>4.6</b> Preparando una visualización para compartir</a></li>
 <li class="chapter" data-level="4.7" data-path="visualización.html"><a href="visualización.html#otras-visualizaciones"><i class="fa fa-check"></i><b>4.7</b> Otras visualizaciones</a></li>
-<li class="chapter" data-level="4.8" data-path="visualización.html"><a href="visualización.html#ejercicios-2"><i class="fa fa-check"></i><b>4.8</b> Ejercicios</a></li>
+<li class="chapter" data-level="4.8" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#ejercicios"><i class="fa fa-check"></i><b>4.8</b> Ejercicios</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html"><i class="fa fa-check"></i><b>5</b> Modelado estadístico</a><ul>
-<li class="chapter" data-level="5.1" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html#regresión-lineal-simple"><i class="fa fa-check"></i><b>5.1</b> Regresión lineal simple</a><ul>
+<li class="chapter" data-level="5" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html"><i class="fa fa-check"></i><b>5</b> Modelado estadístico</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html#regresión-lineal-simple"><i class="fa fa-check"></i><b>5.1</b> Regresión lineal simple</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html#regresión-con-una-variable-numérica"><i class="fa fa-check"></i><b>5.1.1</b> Regresión con una variable numérica</a></li>
 <li class="chapter" data-level="5.1.2" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html#revolviendo-los-residuos"><i class="fa fa-check"></i><b>5.1.2</b> Revolviendo los residuos</a></li>
 <li class="chapter" data-level="5.1.3" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html#regresión-con-una-variable-categórica"><i class="fa fa-check"></i><b>5.1.3</b> Regresión con una variable categórica</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html#regresión-con-múltiples-variables"><i class="fa fa-check"></i><b>5.2</b> Regresión con múltiples variables</a></li>
-<li class="chapter" data-level="5.3" data-path="modelado-estadístico.html"><a href="modelado-estadístico.html#ejercicios-3"><i class="fa fa-check"></i><b>5.3</b> Ejercicios</a></li>
+<li class="chapter" data-level="5.3" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#ejercicios"><i class="fa fa-check"></i><b>5.3</b> Ejercicios</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html"><i class="fa fa-check"></i><b>6</b> Información geográfica y mapas</a><ul>
+<li class="chapter" data-level="6" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html"><i class="fa fa-check"></i><b>6</b> Información geográfica y mapas</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html#los-datos-georreferenciados"><i class="fa fa-check"></i><b>6.1</b> Los datos georreferenciados</a></li>
 <li class="chapter" data-level="6.2" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html#formatos-de-archivo"><i class="fa fa-check"></i><b>6.2</b> Formatos de archivo</a></li>
 <li class="chapter" data-level="6.3" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html#explorando-un-archivo-con-información-geográfica"><i class="fa fa-check"></i><b>6.3</b> Explorando un archivo con información geográfica</a></li>
 <li class="chapter" data-level="6.4" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html#visualizando-información-geográfica"><i class="fa fa-check"></i><b>6.4</b> Visualizando información geográfica</a></li>
 <li class="chapter" data-level="6.5" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html#volcando-en-el-mapa-información-de-múltiples-fuentes"><i class="fa fa-check"></i><b>6.5</b> Volcando en el mapa información de múltiples fuentes</a></li>
 <li class="chapter" data-level="6.6" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html#combinando-capas-geográficas"><i class="fa fa-check"></i><b>6.6</b> Combinando capas geográficas</a></li>
-<li class="chapter" data-level="6.7" data-path="información-geográfica-y-mapas.html"><a href="información-geográfica-y-mapas.html#ejercicios-4"><i class="fa fa-check"></i><b>6.7</b> Ejercicios</a></li>
+<li class="chapter" data-level="6.7" data-path="una-presentación-a-toda-marcha-de-r.html"><a href="una-presentación-a-toda-marcha-de-r.html#ejercicios"><i class="fa fa-check"></i><b>6.7</b> Ejercicios</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -207,7 +223,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Ciencia de Datos para Gente Sociable</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">01-intro.Rmd</a>
           </h1>
         </div>
 
@@ -215,14 +231,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="qué-es-la-ciencia-de-datos" class="section level1">
+<div id="qué-es-la-ciencia-de-datos" class="section level1" number="1">
 <h1><span class="header-section-number">Capítulo 
 1</span> ¿Qué es la ciencia de datos?</h1>
 <p>La <em>Big Data</em> ha llegado para quedarse, y asumimos que su efecto en la sociedad será permanente. Así como pasó con la escritura, los medios de comunicación o tantos otros inventos humanos de inmenso impacto cultural, el incremento en la producción y análisis computacional de grandes volúmenes de datos está transformando cada una de nuestras actividades. Algunas profesiones se ven en crisis, otras se benefician, y también se crean algunas nuevas.</p>
 <p>Big data es un término impreciso, que se usa cuando queremos hablar de los datos que nuestra sociedad crea y procesa en forma digital, con cada vez más creciente velocidad, volumen, y variedad.</p>
 <p>En forma acorde, <em>data scientist</em> o “científico de datos” es también una profesión, o una actividad, que aún no está definida con toda claridad. El término, que abarca a quienes en forma cotidiana aplican técnicas de programación para analizar datos, no existía antes del 2008. Sólo cuatro años después la publicación Harvard Business Review agitó las aguas al declarar que quienes se desempeñan como científicos de datos pueden presumir de la profesión “más sexy del siglo XXI” [^1]. Títulos exagerados aparte, lo que es seguro es que la disciplina ofrece un conjunto cada vez más maduro de saberes orientados a explotar datos para extraer conocimiento. Las técnicas y principios que la comunidad de la ciencia de datos ha desarrollado pueden ser aprovechados en muchos ámbitos. Entre ellos, el de las ciencias sociales, que también están en una etapa de transformación e incorporan la programación analítica como un recurso cada vez extendido.</p>
 <p>Avanzar las fronteras de la ciencia de datos, crear los algoritmos y técnicas informáticas que abren nuevas posibilidades de análisis es una tarea compleja, llevada a cabo por especialistas con profundos conocimientos de matemática. Y sin embargo “usar” la ciencia de datos, aplicar sus principios para resolver problemas complejos, es bastante más fácil. Para empezar sólo necesitamos paciencia para aprender algunos conceptos fundamentales de programación y estadística, empleándolos para entender y comunicar con datos. De eso se trata este libro.</p>
-<div id="qué-significa-hacer-ciencia-de-datos" class="section level2">
+<div id="qué-significa-hacer-ciencia-de-datos" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> ¿Qué significa hacer ciencia de datos?</h2>
 <p>Ya dijimos que la ciencia de datos se trata de emplear técnicas de programación para analizar datos. Pero no es sólo eso; la ciencia de datos aplicada requiere el desarrollo de habilidades en cuatro áreas:</p>
 <ul>
