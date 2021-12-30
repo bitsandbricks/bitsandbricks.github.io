@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Predicción de demanda de servicios urbanos con open data &#43; Facebook Prophet - Bits &amp; Bricks</title>
+  <meta name="description" content="De todos los datasets que publica el portal de Open Data de Buenos Aires, mi favorito es sin dudas el que contiene los reclamos registrados por el Sistema Único de Atención Ciudadana (SUACI). El SUACI, también llamado BA 147, equivale a lo que en otras latitudes se conoce como servicio 311. El 311 es el número telefónico, complementado por un servicio web y en general una app también, al que los ciudadanos recurren para realizar reclamos al gobierno de la ciudad.">
+  <meta name="author" content="H. Antonio Vazquez Brust"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Bits \u0026 Bricks",
+    
+    "url": "https:\/\/bitsandbricks.github.io\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/bitsandbricks.github.io\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/bitsandbricks.github.io\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/bitsandbricks.github.io\/post\/prediccion-de-demanda-de-servicios-urbanos-con-prophet\/",
+          "name": "Predicción de demanda de servicios urbanos con open data facebook prophet"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "H. Antonio Vazquez Brust"
+  },
+  "headline": "Predicción de demanda de servicios urbanos con open data \u002b Facebook Prophet",
+  "description" : "De todos los datasets que publica el portal de Open Data de Buenos Aires, mi favorito es sin dudas el que contiene los reclamos registrados por el Sistema Único de Atención Ciudadana (SUACI). El SUACI, también llamado BA 147, equivale a lo que en otras latitudes se conoce como servicio 311. El 311 es el número telefónico, complementado por un servicio web y en general una app también, al que los ciudadanos recurren para realizar reclamos al gobierno de la ciudad.",
+  "inLanguage" : "en",
+  "wordCount":  2153 ,
+  "datePublished" : "2017-06-27T00:00:00",
+  "dateModified" : "2017-06-27T00:00:00",
+  "image" : "https:\/\/bitsandbricks.github.io\/img\/avatar-icon_bnb.png",
+  "keywords" : [ "prophet, R, rvest" ],
+  "mainEntityOfPage" : "https:\/\/bitsandbricks.github.io\/post\/prediccion-de-demanda-de-servicios-urbanos-con-prophet\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/bitsandbricks.github.io\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/bitsandbricks.github.io\/img\/avatar-icon_bnb.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Predicción de demanda de servicios urbanos con open data &#43; Facebook Prophet" />
+<meta property="og:description" content="De todos los datasets que publica el portal de Open Data de Buenos Aires, mi favorito es sin dudas el que contiene los reclamos registrados por el Sistema Único de Atención Ciudadana (SUACI). El SUACI, también llamado BA 147, equivale a lo que en otras latitudes se conoce como servicio 311. El 311 es el número telefónico, complementado por un servicio web y en general una app también, al que los ciudadanos recurren para realizar reclamos al gobierno de la ciudad.">
+<meta property="og:image" content="https://bitsandbricks.github.io/img/avatar-icon_bnb.png" />
+<meta property="og:url" content="https://bitsandbricks.github.io/post/prediccion-de-demanda-de-servicios-urbanos-con-prophet/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Bits &amp; Bricks" />
+
+  <meta name="twitter:title" content="Predicción de demanda de servicios urbanos con open data &#43; Facebook …" />
+  <meta name="twitter:description" content="De todos los datasets que publica el portal de Open Data de Buenos Aires, mi favorito es sin dudas el que contiene los reclamos registrados por el Sistema Único de Atención Ciudadana (SUACI). El …">
+  <meta name="twitter:image" content="https://bitsandbricks.github.io/img/avatar-icon_bnb.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@vazquezbrust" />
+  <meta name="twitter:creator" content="@vazquezbrust" />
+  <link href='https://bitsandbricks.github.io/img/favicon_bnb.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.91.2" />
+  <link rel="alternate" href="https://bitsandbricks.github.io/index.xml" type="application/rss+xml" title="Bits &amp; Bricks"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://bitsandbricks.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://bitsandbricks.github.io/css/syntax.css" /><link rel="stylesheet" href="https://bitsandbricks.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-100821706-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://bitsandbricks.github.io/">Bits &amp; Bricks</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Manual de ciencia de datos" href="/ciencia_de_datos_gente_sociable/">Manual de ciencia de datos</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Portfolio" href="/antonio/">Portfolio</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="Bits &amp; Bricks" href="https://bitsandbricks.github.io/">
+            <img class="avatar-img" src="https://bitsandbricks.github.io/img/avatar-icon_bnb.png" alt="Bits &amp; Bricks" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 
+      
+          
+          data-img-src-1="https://bitsandbricks.github.io/post/img/prophet.jpg" 
+         
+         
+      ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>Predicción de demanda de servicios urbanos con open data &#43; Facebook Prophet</h1>
+                  
+                  
+                    <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;
+  
+  
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;H. Antonio Vazquez Brust
+    
+  
+  
+</span>
+
+
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>Predicción de demanda de servicios urbanos con open data &#43; Facebook Prophet</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;
+  
+  
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;H. Antonio Vazquez Brust
+    
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+
+<p>De todos los datasets que publica el portal de Open Data de Buenos Aires, mi favorito es sin dudas el que contiene los reclamos registrados por el Sistema Único de Atención Ciudadana (SUACI). El SUACI, también llamado <a href="https://gestioncolaborativa.buenosaires.gob.ar/prestaciones">BA 147</a>, equivale a lo que en otras latitudes se conoce como <a href="https://en.wikipedia.org/wiki/3-1-1">servicio 311</a>. El 311 es el número telefónico, complementado por un servicio web y en general una app también, al que los ciudadanos recurren para realizar reclamos al gobierno de la ciudad. En contraste con el servicio 911, el 311 (o 147 en Buenos Aires) se utiliza para reportar problemas que no involucran urgencias de salud o seguridad. Por ejemplo, si la cuadra de uno aparece llena de basura después de un evento multitudinario en las cercanías, se llama al 147 o se usa la app para que la ciudad envíe una cuadrilla de limpieza. En cambio, si una persona sufre un infarto en la vía pública, se llama al 911.</p>
+<p>Si esto les resulta un poco confuso, no se preocupen, nos es culpa nuestra; hay un ligero exceso de nombres distintos para cosas similares. Los nombres SUACI y BA 147 coexisten porque -creo- SUACI registra las solicitudes al 147 pero también reclamos enviados a la ciudad por otros medios. En cuanto a 311 vs. 147, la popularidad de 311 como número para reclamos aún muy lejos del archifamoso 911. Por eso muchas ciudades en el mundo, BA incluida, coinciden en usar el 911 para emergencias pero varían en el número reservado para reclamos cotidianos.</p>
+<p>Lo interesante de los servicios tipo 311 es que, cuando sus registros se comparten con el público, permiten hacer estudios sobre muchas facetas de la ciudad. Por ejemplo, <a href="http://blog.datalook.io/using-data-analytics-to-make-bad-buildings-better-in-new-york-city/">identificar edificios peligrosos por su deterioro</a>, o probar que las “fronteras” entre comunidades distintas dentro de la ciudad <a href="https://nextcity.org/daily/entry/311-calls-neighborhood-study">generan más reclamos que áreas homogéneas</a>.</p>
+<p>Un área que creo de particular interés es la de predecir demanda a futuro de servicios urbanos, para ayudar a planificar la asignación de los siempre limitados recursos públicos. Analizando la cantidad de reclamos que la población realiza a lo largo del tiempo, podemos detectar tendencias y pronosticar demanda futura, así como predecir los momentos y lugares de “tranquilidad” (que requieren menos recursos) así como aquellos que generan picos (donde se van a necesitar refuerzos).</p>
+<p>A todo ésto, el área de I+D de Facebook liberó recientemente sus algoritmos de modelado y predicción para datos seriados en el tiempo, bajo el nombre de <a href="https://facebookincubator.github.io/prophet/">Prophet</a>. La razón por la cual Prophet me resultó llamativo de inmediato es que hace muy fácil incorporar el efecto de días atípicos en un modelo predictivo para procesos que se desarrollan a lo largo del tiempo. En palabras de urbanista: podemos pronosticar la demanda de servicios urbanos usando registros históricos, generando un modelo que toma en cuenta el efecto de los diversos días feriados.</p>
+<p>Allá vamos!</p>
+<div id="obteniendo-los-datos-de-la-ciudad" class="section level2">
+<h2>Obteniendo los datos de la ciudad</h2>
+<p>El primer paso es descargar los datos que necesitamos. Visitamos <a href="https://data.buenosaires.gob.ar/">Buenos Aires Data</a>, buscamos “Sistema Único de Atención Ciudadana”, y llegamos a la página de descarga que nos interesa - <a href="https://data.buenosaires.gob.ar/dataset/sistema-unico-de-atencion-ciudadana">aquí</a>. Tenemos disponible un link para descargar un archivo comprimido que contiene los datos que buscamos. Podemos dejar que R se encargue de acceder al sitio, descargar y descomprimir por nosotros:</p>
+<pre class="r"><code># Donde vive nuestra data?
+url &lt;- &quot;https://data.buenosaires.gob.ar/api/datasets/rJg_9jlR5/download&quot;
+
+# Donde queremos guardarla
+destino &lt;- &#39;/home/havb/data/gcba/suaci&#39;
+
+# Creamos un archivo temporal para dscargar el zip con todos los datasets
+temp &lt;- tempfile()
+
+# Descargamos -puede tomar unos cuantos minutos
+download.file(url, temp)
+
+# Des-zipeamos
+unzip(temp, exdir = destino, junkpaths = TRUE)
+
+# Eliminamos el archivo temporal
+unlink(temp)</code></pre>
+<p>Terminado el trámite, revisamos nuestro botín:</p>
+<pre class="r"><code>list.files(destino)</code></pre>
+<pre><code>## [1] &quot;sistema-unico-de-atencion-ciudadana-2011.csv&quot;
+## [2] &quot;sistema-unico-de-atencion-ciudadana-2012.csv&quot;
+## [3] &quot;sistema-unico-de-atencion-ciudadana-2013.csv&quot;
+## [4] &quot;sistema-unico-de-atencion-ciudadana-2014.csv&quot;
+## [5] &quot;sistema-unico-de-atencion-ciudadana-2015.csv&quot;
+## [6] &quot;sistema-unico-de-atencion-ciudadana-2016.csv&quot;</code></pre>
+<p>He aquí el primer problema. En lugar de darnos un dataset con todo el historial de registros, nos dan una pila archivos que contienen la data separada por año. Cuando uno analiza datos a lo largo del tiempo, lo natural es tenerlos todos juntos, y luego segmentarlos -por año, por mes, o por otro período arbitrario- cuando es necesario. Y desde ya que cuando uno analiza tendencias para predecir, como estamos haciendo ahora, necesita todos los datos juntos. En fin, no es tan grave… solo es cuestión de pegar los datasets uno después del otro.</p>
+<pre class="r"><code>library(tidyverse)
+library(lubridate)
+
+# Obtener la lista de archivos .csv que descargamos 
+
+archivos &lt;- list.files(path = destino, pattern = &quot;\\.csv&quot;, full.names = TRUE)
+
+# A procesar!
+
+suaci &lt;-  archivos %&gt;% 
+  # leer cada archivo, guardar el resultado en un sólo dataframe
+  map_df(read_csv2) %&gt;% 
+  # determinar la fecha a partir unieendo los campos FECHA_INGRESO, HORA_INGRESO, 
+  # interpretando el resultado en formato &quot;día/mes/año hora:min:sec [AM|PM]&quot; 
+  mutate(fecha = parse_date_time(paste(FECHA_INGRESO, HORA_INGRESO), &quot;d/m/Y IMS p&quot;, tz = &quot;America/Argentina/Buenos_Aires&quot;))</code></pre>
+<p>Ahora, exploremos los datos unificados. Rapidito, un top ten de los reclamos más frecuentes:</p>
+<pre class="r"><code>suaci %&gt;% 
+  group_by(CONCEPTO, RUBRO) %&gt;% 
+  summarise(total = n()) %&gt;% 
+  arrange(desc(total)) %&gt;%
+  head(10)</code></pre>
+<pre><code>## # A tibble: 10 x 3
+## # Groups:   CONCEPTO [10]
+##    CONCEPTO                                           RUBRO          total
+##    &lt;chr&gt;                                              &lt;chr&gt;          &lt;int&gt;
+##  1 SOLICITUD DE PARTIDAS                              REGISTRO CIV… 818151
+##  2 SOLICITUD DE PAGO VOLUNTARIO DE INFRACCIONES       TRANSPORTE Y… 358298
+##  3 PERSONAS SIN TECHO EVALUACION                      ATENCION SOC… 138741
+##  4 LUMINARIAS APAGADAS                                ALUMBRADO     115234
+##  5 SOLICITUD DE RETIRO DE RESIDUOS VOLUMINOSOS        SANEAMIENTO …  86978
+##  6 SOLICITUD DE RETIRO DE RESTOS DE OBRAS O DEMOLICI… SANEAMIENTO …  81570
+##  7 RETIRO DE ESCOMBROS (RESIDUOS ARIDOS)              SANEAMIENTO …  75983
+##  8 LUMINARIA: APAGADA                                 ALUMBRADO      63788
+##  9 VEHICULOS ABANDONADOS EN VIA PUBLICA LEY 342       TRANSPORTE Y…  47773
+## 10 SOLICITUD DE REPOSICION O CAMBIO DE UBICACION DE … SANEAMIENTO …  47709</code></pre>
+<p>Hay algunos problemas. Categorías como “LUMINARIAS APAGADAS” y “LUMINARIA: APAGADA” son obvias referencias al mismo reclamo, registradas bajo categorías distintas. Podemos dejarlo pasar, porque no afecta a nuestros fines.</p>
+<p>Lo que vamos a modelar son las solicitudes al departamento de saneamiento urbano: reclamos de la ciudadanía para que la ciudad retire residuos voluminosos, escombros de obra, ramas podadas, etc. Aquí vale la pena insistir en la riqueza del dataset. Entre las categorías que aparecen con solo mirar las principales, aparecen la atención a personas sin techo, y los problemas de iluminación pública. Hay, tantas, tantas cosas que se pueden hacer mediante el análisis espacial y temporal de la data!</p>
+<p>Aislamos los reclamos que nos interesan en este momento:</p>
+<pre class="r"><code>solicitudes_saneamiento &lt;- suaci %&gt;%
+  filter(grepl(&quot;RESIDUOS|RESTOS|ESCOMBROS &quot;, CONCEPTO) == TRUE &amp; 
+           RUBRO == &quot;SANEAMIENTO URBANO&quot;) %&gt;% 
+  group_by(dia = format(fecha, &quot;%Y-%m-%d&quot;)) %&gt;% 
+  summarise(total = n())</code></pre>
+<p>Y ahora los graficamos para ver que pinta tienen:</p>
+<pre class="r"><code>library(hrbrthemes)
+
+ggplot(solicitudes_saneamiento, aes(as.Date(dia), total)) + 
+  geom_line(color = &quot;orange&quot;) +
+  scale_x_date(date_labels = &quot;%Y-%m&quot;) +
+  theme_ipsum() +
+  labs(y = &quot;solicitudes&quot;, x = &quot;fecha&quot;,
+       title=&quot;Demanda diaria de servicios de saneamiento urbano&quot;,
+       subtitle = &quot;Ciudad de Buenos Aires: 2011 - 2016&quot;,
+       caption = &quot;Fuente: https://data.buenosaires.gob.ar/&quot;)</code></pre>
+<p><img src="/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-7-1.png" width="720" /></p>
+<p>A primera vista, es obvio que los datos están sesgados, ya que la explosión en el número de solicitudes a partir de mediados del 2012 es atribuible a la forma en que la ciudad empezó a tomar nota de los reclamos, más que a un furor ciudadano por solicitar limpieza. Cuando hagamos nuestro modelo, vamos a descartar los registros de 2011 y 2012 porque tenemos claro que no son representativos.</p>
+<p>El siguiente ingrediente que necesitamos es una lista de los feriados públicos en la Argentina durante el período analizado.</p>
+</div>
+<div id="cuando-los-datos-estan-dispersos-la-hora-del-scraping" class="section level2">
+<h2>Cuando los datos están dispersos: la hora del scraping</h2>
+<p>Buscar una lista oficial de feriados resultó en frustración. Si bien el gobierno nacional publica una lista de los <a href="https://www.argentina.gob.ar/feriados">feriados vigentes para el año en curso</a>, no existe un archivo para descargar con las fechas exactas de los feriados en años anteriores.</p>
+<p>En los sitios web de varios diarios locales encontramos un historial de feriados, pero dispersos en distintas páginas web, y sin opción para descargarlos en un archivo de texto. Vamos a tener que “scrapear” la data. Cómo nos hacen laburar, che. Si tan solo alguien nos diera una API para toda información de consulta permanente, no tendríamos que hacer estas cosas!</p>
+<div class="figure">
+<img src="/post/img/API.png" alt="ira" />
+<p class="caption">ira</p>
+</div>
+<p>Nuestro proveedor de fechas de feriados será La Nación, que publica un bonito <a href="http://servicios.lanacion.com.ar/feriados/">calendario de feriados oficiales</a>, con la posibilidad de consultar los de años anteriores.</p>
+<pre class="r"><code>library(rvest)
+
+# Una función que hace scraping de todos los feriados publicados en lanacion.com.ar para un año dado
+
+scrape_feriados_del_anio &lt;- function(year) {
+  
+  # Donde está la data de los feriados
+  baseurl &lt;- &quot;http://servicios.lanacion.com.ar/feriados/&quot;
+  
+  get_feriados_mes &lt;- function(month, feriados_page) {
+    
+    # Los feriados aparecen en dos categorías: &quot;inamovible&quot; y &quot;trasladable&quot;
+    
+    inamovibles &lt;- feriados_page %&gt;%
+      map(html_nodes, &quot;li.inamovible&quot;) %&gt;%
+      map(html_text) %&gt;%
+      .[[month]] %&gt;%
+      {if (!is_empty(.)) paste(year, month, ., sep = &quot;/&quot;)}
+  
+    trasladables  &lt;- feriados_page %&gt;%
+      map(html_nodes, &quot;li.trasladable&quot;) %&gt;%
+      map(html_text) %&gt;% 
+      .[[month]] %&gt;%
+      {if (!is_empty(.)) paste(year, month, ., sep = &quot;/&quot;)}
+    
+    todos &lt;- c(inamovibles, trasladables) 
+    
+    if (!is.null(todos)) return(todos)
+    
+    }
+  
+  feriados_page &lt;- read_html(paste0(baseurl, year)) %&gt;% 
+    html_nodes(&quot;.bloque&quot;)
+  
+  feriados_del_anio &lt;- map(1:12, get_feriados_mes, feriados_page) %&gt;% 
+    unlist()
+  
+  return(feriados_del_anio)
+}
+  
+
+# Descargamos los feriados de 2011 a 2016,  
+feriados_2013_2016 &lt;- map(2013:2016, scrape_feriados_del_anio) %&gt;% 
+  #los unimos en un unico vector
+  unlist %&gt;% 
+  # los definimos como fecha
+  ymd %&gt;% 
+  # Los ordenamos cronológicamente (necesario porque el scraper los trae como texto 
+  # en orden alfabetico)
+  sort</code></pre>
+<p>Tenemos nuestra lista de feriados?</p>
+<pre class="r"><code>feriados_2013_2016</code></pre>
+<pre><code>##  [1] &quot;2013-01-01&quot; &quot;2013-01-31&quot; &quot;2013-02-11&quot; &quot;2013-02-12&quot; &quot;2013-02-20&quot;
+##  [6] &quot;2013-03-24&quot; &quot;2013-03-29&quot; &quot;2013-04-01&quot; &quot;2013-04-02&quot; &quot;2013-05-01&quot;
+## [11] &quot;2013-05-25&quot; &quot;2013-06-20&quot; &quot;2013-06-21&quot; &quot;2013-07-09&quot; &quot;2013-08-19&quot;
+## [16] &quot;2013-10-14&quot; &quot;2013-11-25&quot; &quot;2013-12-08&quot; &quot;2013-12-25&quot; &quot;2014-01-01&quot;
+## [21] &quot;2014-03-03&quot; &quot;2014-03-04&quot; &quot;2014-03-24&quot; &quot;2014-04-02&quot; &quot;2014-04-18&quot;
+## [26] &quot;2014-05-01&quot; &quot;2014-05-02&quot; &quot;2014-05-25&quot; &quot;2014-06-20&quot; &quot;2014-07-09&quot;
+## [31] &quot;2014-08-18&quot; &quot;2014-10-13&quot; &quot;2014-11-24&quot; &quot;2014-12-08&quot; &quot;2014-12-25&quot;
+## [36] &quot;2014-12-26&quot; &quot;2015-01-01&quot; &quot;2015-02-16&quot; &quot;2015-02-17&quot; &quot;2015-03-23&quot;
+## [41] &quot;2015-03-24&quot; &quot;2015-04-02&quot; &quot;2015-04-03&quot; &quot;2015-05-01&quot; &quot;2015-05-25&quot;
+## [46] &quot;2015-06-20&quot; &quot;2015-07-09&quot; &quot;2015-08-17&quot; &quot;2015-10-12&quot; &quot;2015-11-27&quot;
+## [51] &quot;2015-12-07&quot; &quot;2015-12-08&quot; &quot;2015-12-25&quot; &quot;2016-01-01&quot; &quot;2016-02-08&quot;
+## [56] &quot;2016-02-09&quot; &quot;2016-03-24&quot; &quot;2016-03-25&quot; &quot;2016-04-02&quot; &quot;2016-05-01&quot;
+## [61] &quot;2016-05-25&quot; &quot;2016-06-17&quot; &quot;2016-06-20&quot; &quot;2016-07-08&quot; &quot;2016-07-09&quot;
+## [66] &quot;2016-08-15&quot; &quot;2016-10-10&quot; &quot;2016-11-28&quot; &quot;2016-12-08&quot; &quot;2016-12-09&quot;
+## [71] &quot;2016-12-25&quot;</code></pre>
+<p>Oh si.</p>
+</div>
+<div id="modelando-y-prediciendo" class="section level2">
+<h2>Modelando y prediciendo</h2>
+<p>Con todos los ingredientes a mano, es hora de hacer vaticinios. Como suele pasar cuando uno trabaja con datos, hacer el modelo es la parte más sencilla… la mayor parte del tiempo la empleamos en reunir y limpiar los datos!</p>
+<p>Creamos un modelo:</p>
+<pre class="r"><code>library(prophet)
+
+modelo &lt;- solicitudes_saneamiento %&gt;% 
+  filter(year(as.Date(dia)) &gt; 2012) %&gt;% 
+  transmute(ds = as.Date(dia), y = total) %&gt;%  
+  prophet(holidays = data.frame(holiday = &quot;feriado&quot;, ds = feriados_2013_2016))</code></pre>
+<pre><code>## Initial log joint probability = -116.558
+## Optimization terminated normally: 
+##   Convergence detected: relative gradient magnitude is below tolerance</code></pre>
+<p>Y predecimos la demanda para el año siguiente (todo el 2017):</p>
+<pre class="r"><code>forecast &lt;- predict(modelo, make_future_dataframe(modelo, periods = 365))</code></pre>
+<p>De paso, hacemos dos preguntas rápidas. Cuantas solicitudes diarias recibe la ciudad, y que efecto tiene un día feriado en el nivel de demanda?</p>
+<p>Durante el período 2013-2016, el área de saneamiento urbano de la ciudad recibió un promedio de 394 reclamos diarios, con un máximo 1075. El día en el que menos reclamos se registraron sólo hubo 3.</p>
+<pre class="r"><code>modelo$history$y %&gt;% summary</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     3.0   121.0   392.0   394.1   603.5  1075.0</code></pre>
+<p>Según nuestro modelo, el efecto de que un feriado caiga en un día particular del mes es una reducción de 401 reclamos. En un día típico, esto haría que prácticamente no haya reclamos.</p>
+<pre class="r"><code>forecast %&gt;% 
+  select(ds, feriado) %&gt;% 
+  filter(abs(feriado) &gt; 0) %&gt;% 
+  head()</code></pre>
+<pre><code>##           ds   feriado
+## 1 2013-01-01 -401.1635
+## 2 2013-01-31 -401.1635
+## 3 2013-02-11 -401.1635
+## 4 2013-02-12 -401.1635
+## 5 2013-02-20 -401.1635
+## 6 2013-03-24 -401.1635</code></pre>
+<p>Visualizando por separado la tendencias general y las periódicas (por día de la semana y día del mes) notamos varios efectos.</p>
+<ul>
+<li><p>La tendencia general fue una baja del nivel de demanda desde el 2014 hasta el 2016, revertida luego. Se evidencia una fuerte suba de allí en más. Valdría la pena discernir si esto se debe a que la data sub-representa los reclamos del 2014-2016, o si efectivamente ocurrió una baja de demanda en esos años. Si ésto último fuera el caso, a que podría deberse?</p></li>
+<li><p>El día de mayor actividad es el Lunes, a continuación de los días más tranquilo, los del fin de semana. Está claro que en Domingo la gente no reclama mucho, pero al día siguiente si. En el resto de los días la demanda es pareja</p></li>
+<li><p>Tal como habíamos comprobado revisando los números, los días feriados generan una caída de unos 400 reclamos</p></li>
+<li><p>Los meses de mayor actividad son los de la segunda mitad del año. Durante las vacaciones de invierno se observa una baja de la demanda, leve en comparación a la de fin de año…. a partir de mediados de Diciembre, la demanda cae en picada, y se mantiene mínima en Enero.</p></li>
+</ul>
+<pre class="r"><code>prophet_plot_components(modelo, forecast) </code></pre>
+<p><img src="/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-14-1.png" width="720" /></p>
+<p>Y por último, trazamos la predicción de nivel de demanda para lo que queda del año:</p>
+<pre class="r"><code>plot(modelo, forecast) + theme_ipsum() +
+  labs(y = &quot;solicitudes&quot;, x = &quot;fecha&quot;,
+       title=&quot;Pronóstico: demanda diaria de servicios de saneamiento urbano&quot;,
+       subtitle = &quot;Ciudad de Buenos Aires: 2013 - 2016, extendido a final del 2017&quot;)</code></pre>
+<p><img src="/post/2017-06-27-prediccion-de-demanda-de-servicios-urbanos-con-prophet_files/figure-html/unnamed-chunk-15-1.png" width="720" /></p>
+<p>Yo diría que, a no ser que esté operando con capacidad de sobra, Saneamiento Urbano va a necesitar más recursos!</p>
+<p>Para la próxima: hacer análisis espacial además del temporal.</p>
+</div>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://bitsandbricks.github.io//tags/prophet/">prophet</a>&nbsp;
+            
+              <a href="https://bitsandbricks.github.io//tags/r/">R</a>&nbsp;
+            
+              <a href="https://bitsandbricks.github.io//tags/rvest/">rvest</a>&nbsp;
+            
+          </div>
+        
+
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://bitsandbricks.github.io/post/visualizando-con-r-el-historial-de-ubicaciones-de-google-parte-iii/" data-toggle="tooltip" data-placement="top" title="Visualizando con R el historial de ubicaciones de Google (parte III)">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://bitsandbricks.github.io/post/analizando-data-de-airbnb-en-buenos-aires/" data-toggle="tooltip" data-placement="top" title="Analizando data de Airbnb en Buenos Aires">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+          
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "bits-bricks" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              H. Antonio Vazquez Brust
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2021
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://bitsandbricks.github.io/">Bits &amp; Bricks</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.91.2</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://bitsandbricks.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://bitsandbricks.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

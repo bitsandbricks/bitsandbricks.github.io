@@ -1,0 +1,72 @@
+---
+title: Compartiendo código en vivo con el mundo, desde RStudio. 
+author: H. Antonio Vazquez Brust
+date: '2020-03-16'
+slug: compartiendo-código-en-vivo-con-el-mundo-desde-rstudio
+categories: ["livecode", "rstudio"]
+tags: []
+type: ''
+subtitle: ''
+image: ''
+---
+
+
+
+<p>El COVID19 ha cambiado planes, generado preocupación, y alterado hábitos a escala planetaria. Entre tantas actividades afectadas por el mandato del aislamiento social, la educación universitaria intenta continuar por medio de la enseñanza a distancia. Con la velocidad de los cambios que vivimos entre febrero y marzo de 2020, la suspensión de clases presenciales y la obligación de buscar métodos alternativos nos ha tomado a muchos por sorpresa.</p>
+<p>A continuación voy a explicar la solución que he encontrado para facilitar la enseñanza de clases de R y Ciencia de Datos a Distancia. En particular, como compartir con cualquier persona, donde quiera que esté, el script que el o la docente está escribiendo en su RStudio. Así es posible que la audiencia, en tiempo real, pueda ver en su propia pantalla la actividad de la/el docente, copiar y pegar el código en su propia sesión, y observar “en vivo” como el código explicado se va desplegando.</p>
+<p>Necesitaremos tres ingredientes:</p>
+<ul>
+<li><a href="https://rstudio.com/">RStudio</a>, que asumimos ya instalado</li>
+<li>El paquete <code>livecode</code>: <a href="https://github.com/rundel/livecode" class="uri">https://github.com/rundel/livecode</a></li>
+<li>Una cuenta en el servicio ngrok.com (<a href="https://ngrok.com/" class="uri">https://ngrok.com/</a>), el programa ngrok instalado.</li>
+</ul>
+<p>Allá vamos:</p>
+<div id="instalar-los-requisitos" class="section level2">
+<h2>Instalar los requisitos</h2>
+<div id="livecode" class="section level3">
+<h3><code>livecode</code></h3>
+<p>Podemos instalar <code>livecode</code> directo desde el repositorio de su autor, <a href="https://twitter.com/rundel">Colin Rundel</a>.</p>
+<p>En una sesión de R, ejecutamos:</p>
+<pre class="r"><code>install.packages(&quot;remotes&quot;)</code></pre>
+<p>y luego</p>
+<pre class="r"><code>remotes::install_github(&quot;rundel/livecode&quot;)</code></pre>
+<p>Eso es todo.</p>
+</div>
+<div id="ngrok" class="section level3">
+<h3><code>ngrok</code></h3>
+<p>Primero ingresamos en el sitio web ngrok.com, y cliqueamos en “SIGN UP” para dar de alta una cuenta.</p>
+<p><img src="https://bitsandbricks.github.io/post/img/rstudio_livecode/ngrok_login.png" width="800px" /></p>
+<p>Para el alta, podemos utilizar nuestra dirección de correo, o una cuenta ya existente (por ejemplo, en <em>github</em>). Elegimos usuario y contraseña, y una vez habilitados accedemos al panel de control.</p>
+<p><img src="https://bitsandbricks.github.io/post/img/rstudio_livecode/ngrok_setup_install.png" width="800px" /></p>
+<p>En el paso <strong>1</strong>, vemos el link de descarga de la aplicación de ngrok para nuestro sistema (Linux, Windows o Mac). Lo descargamos e instalamos. Si estamos usando Ubuntu, se puede hacer todo en un solo paso, tipeando en una terminal de sistema <code>snap install ngrok</code>.</p>
+<p>En el paso <strong>3</strong>, vemos nuestro “token de autorización”, un código que debemos registrar en nuestro sistema una sola vez.</p>
+<p>Se puede copiar y pegar el comando listo para usar. En mi caso, no fue necesario comenzar con <code>./</code>. Fue suficiente:</p>
+<p><code>ngrok authtoken XXXXXXXXXXXXXXX</code></p>
+<p>donde “XXXXXXXXXXX” es el código de autorización copiado del panel de control.</p>
+<p><img src="https://bitsandbricks.github.io/post/img/rstudio_livecode/ngrok_autorizar.png" width="800px" /></p>
+<p>Listo! Ya debería estar preparado para usar.</p>
+</div>
+</div>
+<div id="compartiendo-el-código-en-vivo-con-livecode" class="section level2">
+<h2>Compartiendo el código en vivo con <code>livecode</code></h2>
+<p>La cosa es así: abrimos RStudio, y abrimos o creamos el archivo que vamos a compartir (que puede ser un simple script o un documento RMarkdown, da igual). Si es nuevo lo guardamos en disco, (“save”) y listos para compartir. Sólo es cuestión de correr una línea:</p>
+<pre class="r"><code>s &lt;- livecode::serve_file()</code></pre>
+<p>AL hacerlo, veremos abrirse una ventana de navegador con nuestro código, que se actualizará automáticamente ¡mientras escribimos!.</p>
+<p>Por ejemplo, si nuestra sesión de RStudio luce así…</p>
+<p><img src="https://bitsandbricks.github.io/post/img/rstudio_livecode/Rstudio_livecoding.png" width="800px" /></p>
+<p>en la página web se verá ésto:</p>
+<p><img src="https://bitsandbricks.github.io/post/img/rstudio_livecode/Rstudio_livecoding_red_local.png" width="800px" /></p>
+<p>El sitio con el código en vivo se comparte en la red local de nuestra computadora. O sea, las personas en la misma red -por ejemplo, en la misma aula y conectadas a la misma red WiFi- ya pueden acceder, abriendo la dirección que se ve en el navegador. En mi ejemplo es <em>192.168.1.3:14806</em>, pero variará según el caso. Lo importante es que con esa dirección ya podemos compartir nuestro código… a las personas en la misma habitación. Eso es muy útil en situaciones típicas de clase, pero ¿Qué pasa cuando cada persona esta en su casa, accediendo de forma remota?</p>
+<p>Ahí es donde <code>ngrok</code> entra en acción.</p>
+</div>
+<div id="publicando-a-internet-con-ngrok" class="section level2">
+<h2>Publicando a internet con <code>ngrok</code></h2>
+<p>Tomamos nota de la dirección en la que aparece publicado nuestro código, resaltada en rojo en la captura de pantalla anterior. En nuestro caso es <em>192.168.1.3:14806</em>, y eso es lo que pedimos a ngrok que publique online. Sólo necesitamos ejecutar, en la línea de comandos de nuestro sistema:</p>
+<p><code>ngrok http http://x.x.x.x:yyyy</code> donde “x.x.x.x:yyyy” es la dirección que mencionamos.</p>
+<p><img src="https://bitsandbricks.github.io/post/img/rstudio_livecode/ngrok_publicar.png" width="800px" /></p>
+<p>Al ejecutar esa línea, deberíamos ver una pantalla como la siguiente, que indica que <code>ngrok</code> ha tomado la página web generada por <code>livecode</code> y la ha publicado en internet:</p>
+<p><img src="https://bitsandbricks.github.io/post/img/rstudio_livecode/ngrok_activado.png" width="800px" /></p>
+<p>Último paso: tomar nota de la dirección que termina en “ngrok.io”, resaltada en rojo en el ejemplo. En cada ocasión se genera una distinta al azar, a no ser que tengamos una cuenta paga de <code>ngrok</code>, que permite publicar con direcciones permanentes. Por el momento eso no nos preocupa. Sólo compartimos la dirección… y voilà! Desde cualquier parte del mundo, cualquier persona con una conexión a internet puede vernos programando en acción.</p>
+<p><img src="https://bitsandbricks.github.io/post/img/rstudio_livecode/Rstudio_livecoding_internet.png" width="800px" /></p>
+<p>Combinando el código con cualquier plataforma de conferencia, que nos permita hablar a la audiencia, tenemos un sistema bastante completo de enseñanza de programación a distancia. ¡Suerte, y a seguir enseñando!</p>
+</div>

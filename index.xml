@@ -1,0 +1,33 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bits &amp; Bricks</title>
+    <link>https://bitsandbricks.github.io/</link>
+    <description>Recent content on Bits &amp; Bricks</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
+    <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
+    <lastBuildDate>Thu, 30 Dec 2021 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://bitsandbricks.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Posts</title>
+      <link>https://bitsandbricks.github.io/post/</link>
+      <pubDate>Thu, 30 Dec 2021 00:00:00 +0000</pubDate>
+      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
+      <guid>https://bitsandbricks.github.io/post/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pages</title>
+      <link>https://bitsandbricks.github.io/page/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
+      <guid>https://bitsandbricks.github.io/page/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

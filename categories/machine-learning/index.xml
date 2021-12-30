@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>machine learning on Bits &amp; Bricks</title>
+    <link>https://bitsandbricks.github.io/categories/machine-learning/</link>
+    <description>Recent content in machine learning on Bits &amp; Bricks</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
+    <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
+    <lastBuildDate>Fri, 05 Jul 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://bitsandbricks.github.io/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DBSCAN: Machine Learning para detectar centros de actividad urbana</title>
+      <link>https://bitsandbricks.github.io/post/dbscan-machine-learning-para-detectar-centros-de-actividad-urbana/</link>
+      <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
+      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
+      <guid>https://bitsandbricks.github.io/post/dbscan-machine-learning-para-detectar-centros-de-actividad-urbana/</guid>
+      <description>DBSCAN es un algoritmo de machine learning diseñado para detectar en forma automática “clusters”, es decir elementos próximos entre si de acuerdo a sus atributos en varias dimensiones.
+A diferencia de otros algoritmos de clustering como KMeans, DBSCAN resulta muy adecuado para buscar patrones de agrupación en el espacio físico. Por ejemplo, en la distribución espacial de actividades humanas.
+Como se ilustra debajo, entre varias alternativas DBSCAN es la única cuyos resultados aproximan los de un analista humano que estuviera clasificando puntos aglomerados en un mapa:</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>machinelearning on Bits &amp; Bricks</title>
+    <link>https://bitsandbricks.github.io/tags/machinelearning/</link>
+    <description>Recent content in machinelearning on Bits &amp; Bricks</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
+    <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
+    <lastBuildDate>Thu, 30 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://bitsandbricks.github.io/tags/machinelearning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introducción al Machine Learning</title>
+      <link>https://bitsandbricks.github.io/post/introduccion-al-machine-learning/</link>
+      <pubDate>Thu, 30 Dec 2021 00:00:00 +0000</pubDate>
+      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
+      <guid>https://bitsandbricks.github.io/post/introduccion-al-machine-learning/</guid>
+      <description>¡Machine Learning!. En resumidas cuentas, es el uso de estadística en forma automatizada para identificar patrones en grandes volúmenes de datos.
+Dicho así suena poco emocionante, pero en la práctica el machine learning (de aquí en más ML) ha revolucionado unos cuantos campos debido a su creciente facilidad de uso y a su capacidad -en ciertos contextos- para predecir resultados con alta precisión.
+Aquí mostraremos un ejemplo paso a paso de aplicación a un problema relativamente simple, un caso de clasificación binaria: sabiendo que los elementos de un grupo pertenecen a una u otra de dos categorías posibles, encontrar un método para identificar el grupo que les corresponde.</description>
+    </item>
+    
+  </channel>
+</rss>

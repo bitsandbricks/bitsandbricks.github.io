@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>transporte on Bits &amp; Bricks</title>
+    <link>https://bitsandbricks.github.io/categories/transporte/</link>
+    <description>Recent content in transporte on Bits &amp; Bricks</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>avazquez@gmail.com (H. Antonio Vazquez Brust)</managingEditor>
+    <webMaster>avazquez@gmail.com (H. Antonio Vazquez Brust)</webMaster>
+    <lastBuildDate>Sat, 13 Jan 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://bitsandbricks.github.io/categories/transporte/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Taxis en Buenos Aires: mapas claros y negocios turbios</title>
+      <link>https://bitsandbricks.github.io/post/taxis-en-buenos-aires-mapas-claros-y-negocios-turbios/</link>
+      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
+      <author>avazquez@gmail.com (H. Antonio Vazquez Brust)</author>
+      <guid>https://bitsandbricks.github.io/post/taxis-en-buenos-aires-mapas-claros-y-negocios-turbios/</guid>
+      <description>Hace unos meses, durante la Smart City Expo en Buenos Aires se organizó un Datatón bajo el título de “Un día en las ciudades a través de sus datos”. El evento fue organizado por los equipos de datos abiertos de la Nación, y la Ciudad y Provincia1 de Buenos Aires.
+Con motivo del evento se hicieron públicos varios datasets con información urbana.</description>
+    </item>
+    
+  </channel>
+</rss>
