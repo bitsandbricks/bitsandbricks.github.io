@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es" xml:lang="es">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="2.1 Nuestro primer proyecto en R | Ciencia de Datos para Gente Sociable" />
+<meta property="og:type" content="book" />
+
+
+
+<meta name="github-repo" content="bitsandbricks/datos_sociables" />
+
+<meta name="author" content="Antonio Vazquez Brust" />
+
+<meta name="date" content="2021-08-05" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<meta name="description" content="2.1 Nuestro primer proyecto en R | Ciencia de Datos para Gente Sociable">
+
+<title>2.1 Nuestro primer proyecto en R | Ciencia de Datos para Gente Sociable</title>
+
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+/* show arrow before summary tag as in bootstrap
+TODO: remove if boostrap in updated in html_document (rmarkdown#1485) */
+details > summary {
+  display: list-item;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#section"></a>
+<ul>
+<li><a href="para-quién-es-esto.html#para-quién-es-esto">¿Para quién es esto?</a></li>
+<li><a href="antes-de-empezar.html#antes-de-empezar">Antes de empezar</a></li>
+</ul></li>
+<li><a href="1-qué-es-la-ciencia-de-datos.html#qué-es-la-ciencia-de-datos"><span class="toc-section-number">1</span> ¿Qué es la ciencia de datos?</a>
+<ul>
+<li><a href="1-1-qué-significa-hacer-ciencia-de-datos.html#qué-significa-hacer-ciencia-de-datos"><span class="toc-section-number">1.1</span> ¿Qué significa hacer ciencia de datos?</a></li>
+</ul></li>
+<li><a href="2-una-presentación-a-toda-marcha-de-r.html#una-presentación-a-toda-marcha-de-r"><span class="toc-section-number">2</span> Una presentación a toda marcha de R</a>
+<ul>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#nuestro-primer-proyecto-en-r"><span class="toc-section-number">2.1</span> Nuestro primer proyecto en R</a>
+<ul>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#a-investigar-cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autónoma-de-buenos-aires"><span class="toc-section-number">2.1.1</span> A investigar: ¿Cual es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#crear-un-proyecto-en-rstudio"><span class="toc-section-number">2.1.2</span> Crear un proyecto en RStudio</a></li>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#escribiendo-un-script"><span class="toc-section-number">2.1.3</span> Escribiendo un script</a></li>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#cargar-los-datos"><span class="toc-section-number">2.1.4</span> Cargar los datos</a></li>
+</ul></li>
+<li><a href="2-2-visualización-la-exploración-gráfica-de-la-información.html#visualización-la-exploración-gráfica-de-la-información"><span class="toc-section-number">2.2</span> Visualización: la exploración gráfica de la información</a>
+<ul>
+<li><a href="2-2-visualización-la-exploración-gráfica-de-la-información.html#haciendo-mapas"><span class="toc-section-number">2.2.1</span> Haciendo mapas</a></li>
+<li><a href="2-2-visualización-la-exploración-gráfica-de-la-información.html#agregando-datos"><span class="toc-section-number">2.2.2</span> Agregando datos</a></li>
+</ul></li>
+<li><a href="2-3-el-veredicto-final.html#el-veredicto-final"><span class="toc-section-number">2.3</span> El veredicto final</a>
+<ul>
+<li><a href="2-3-el-veredicto-final.html#cuál-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autónoma-de-buenos-aires"><span class="toc-section-number">2.3.1</span> ¿Cuál es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
+</ul></li>
+<li><a href="2-4-ejercicios.html#ejercicios"><span class="toc-section-number">2.4</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="3-poniendo-los-datos-en-forma.html#poniendo-los-datos-en-forma"><span class="toc-section-number">3</span> Poniendo los datos en forma</a>
+<ul>
+<li><a href="3-1-primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo.html#primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo"><span class="toc-section-number">3.1</span> Primeros pasos al examinar un conjunto de datos nuevo</a></li>
+<li><a href="3-2-cruzando-variables-la-operación-join.html#cruzando-variables-la-operación-join"><span class="toc-section-number">3.2</span> Cruzando variables: la operación <code>join</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#transformando-los-datos"><span class="toc-section-number">3.3</span> Transformando los datos</a>
+<ul>
+<li><a href="3-3-transformando-los-datos.html#seleccionar-columnas-con-select"><span class="toc-section-number">3.3.1</span> Seleccionar columnas con <code>select()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#filtrar-filas-con-filter"><span class="toc-section-number">3.3.2</span> Filtrar filas con <code>filter()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#ordenar-filas-con-arrange"><span class="toc-section-number">3.3.3</span> Ordenar filas con <code>arrange()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#agregar-nuevas-variables-con-mutate"><span class="toc-section-number">3.3.4</span> Agregar nuevas variables con <code>mutate()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#extraer-sumarios-con-summarise"><span class="toc-section-number">3.3.5</span> Extraer sumarios con <code>summarise()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#bonus-el-operador-pipe"><span class="toc-section-number">3.3.6</span> ¡BONUS! El operador “pipe”: <code>%&gt;%</code></a></li>
+</ul></li>
+<li><a href="3-4-ejercicios-1.html#ejercicios-1"><span class="toc-section-number">3.4</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="4-visualización.html#visualización"><span class="toc-section-number">4</span> Visualización</a>
+<ul>
+<li><a href="4-1-una-buena-visualización-para-empezar-el-scatterplot.html#una-buena-visualización-para-empezar-el-scatterplot"><span class="toc-section-number">4.1</span> Una buena visualización para empezar: el <em>scatterplot</em></a></li>
+<li><a href="4-2-ajustando-color-y-tamaño.html#ajustando-color-y-tamaño"><span class="toc-section-number">4.2</span> Ajustando color y tamaño</a></li>
+<li><a href="4-3-facetado.html#facetado"><span class="toc-section-number">4.3</span> Facetado</a></li>
+<li><a href="4-4-gráficos-de-barras.html#gráficos-de-barras"><span class="toc-section-number">4.4</span> Gráficos de barras</a></li>
+<li><a href="4-5-histogramas.html#histogramas"><span class="toc-section-number">4.5</span> Histogramas</a></li>
+<li><a href="4-6-preparando-una-visualización-para-compartir.html#preparando-una-visualización-para-compartir"><span class="toc-section-number">4.6</span> Preparando una visualización para compartir</a></li>
+<li><a href="4-7-otras-visualizaciones.html#otras-visualizaciones"><span class="toc-section-number">4.7</span> Otras visualizaciones</a></li>
+<li><a href="4-8-ejercicios-2.html#ejercicios-2"><span class="toc-section-number">4.8</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="5-modelado-estadístico.html#modelado-estadístico"><span class="toc-section-number">5</span> Modelado estadístico</a>
+<ul>
+<li><a href="5-1-regresión-lineal-simple.html#regresión-lineal-simple"><span class="toc-section-number">5.1</span> Regresión lineal simple</a>
+<ul>
+<li><a href="5-1-regresión-lineal-simple.html#regresión-con-una-variable-numérica"><span class="toc-section-number">5.1.1</span> Regresión con una variable numérica</a></li>
+<li><a href="5-1-regresión-lineal-simple.html#revolviendo-los-residuos"><span class="toc-section-number">5.1.2</span> Revolviendo los residuos</a></li>
+<li><a href="5-1-regresión-lineal-simple.html#regresión-con-una-variable-categórica"><span class="toc-section-number">5.1.3</span> Regresión con una variable categórica</a></li>
+</ul></li>
+<li><a href="5-2-regresión-con-múltiples-variables.html#regresión-con-múltiples-variables"><span class="toc-section-number">5.2</span> Regresión con múltiples variables</a></li>
+<li><a href="5-3-ejercicios-3.html#ejercicios-3"><span class="toc-section-number">5.3</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="6-información-geográfica-y-mapas.html#información-geográfica-y-mapas"><span class="toc-section-number">6</span> Información geográfica y mapas</a>
+<ul>
+<li><a href="6-1-los-datos-georreferenciados.html#los-datos-georreferenciados"><span class="toc-section-number">6.1</span> Los datos georreferenciados</a></li>
+<li><a href="6-2-formatos-de-archivo.html#formatos-de-archivo"><span class="toc-section-number">6.2</span> Formatos de archivo</a></li>
+<li><a href="6-3-explorando-un-archivo-con-información-geográfica.html#explorando-un-archivo-con-información-geográfica"><span class="toc-section-number">6.3</span> Explorando un archivo con información geográfica</a></li>
+<li><a href="6-4-visualizando-información-geográfica.html#visualizando-información-geográfica"><span class="toc-section-number">6.4</span> Visualizando información geográfica</a></li>
+<li><a href="6-5-volcando-en-el-mapa-información-de-múltiples-fuentes.html#volcando-en-el-mapa-información-de-múltiples-fuentes"><span class="toc-section-number">6.5</span> Volcando en el mapa información de múltiples fuentes</a></li>
+<li><a href="6-6-combinando-capas-geográficas.html#combinando-capas-geográficas"><span class="toc-section-number">6.6</span> Combinando capas geográficas</a></li>
+<li><a href="6-7-ejercicios-4.html#ejercicios-4"><span class="toc-section-number">6.7</span> Ejercicios</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="nuestro-primer-proyecto-en-r" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Nuestro primer proyecto en R</h2>
+<p>A continuación reproduciremos un ejercicio paso a paso, para ilustrar la potencia de una herramienta de análisis como R. Que nadie se preocupe si algunas de las operaciones parecen no tener sentido, o resultan arbitrarias. ¡Es normal! Nadie aprende un lenguaje en 10 minutos, sea R o esperanto. La idea es tener exposición temprana a un caso de uso interesante, usando datos reales. Y que nos sirva como motivación para practicar luego ejercicios básicos que son muy necesarios pero, a veces, no tan emocionantes.</p>
+<div id="a-investigar-cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autónoma-de-buenos-aires" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> A investigar: ¿Cual es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</h3>
+<p>Buenos Aires es una ciudad que desde hace décadas presenta una <a href="https://elpais.com/internacional/2016/10/16/argentina/1476629610_416732.html">marcada polarización</a> entre sus barrios del sur, relativamente menos desarrollados, y los del norte donde el nivel socioeconómico y la calidad de vida son mayores.</p>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="imagenes/noticia_caba.jpg" alt="Artículo en la edición online de El País" width="100%" />
+<p class="caption">
+Figura 2.1: Artículo en la edición online de El País
+</p>
+</div>
+<p>Uno de los aspectos más lamentables de la disparidad norte-sur, y sin duda de los que más polémica y acusaciones cruzadas ha generado, es la diferencia en la tasa de mortalidad infantil de acuerdo a la región de la ciudad.</p>
+<p>¿Qué tan grande es esa diferencia? ¿Cómo se distribuye geográficamente?</p>
+<p>Vamos a utilizar R para responder esas preguntas y visualizar los resultados de nuestro análisis, utilizando como fuente cifras oficiales publicada por la ciudad.</p>
+</div>
+<div id="crear-un-proyecto-en-rstudio" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Crear un proyecto en RStudio</h3>
+<p>El primer paso es ejecutar RStudio, que ya deberíamos tener disponible en nuestro sistema.</p>
+<p>Una vez abierta la interfaz gráfica, creamos un proyecto nuevo, cliqueando en <code>File -&gt; New Project... -&gt; New Directory -&gt;  New Project</code>. En la ventana que surge, elegir un nombre para el proyecto (por ejemplo, “Practicando R”) y finalizar la operación cliqueando en <code>Create project</code>.</p>
+<p>Utilizar proyectos nos permite continuar otro día desde donde dejamos la tarea al terminar una sesión. Es sólo cuestión de recuperar el proyecto deseado la próxima vez que abrimos RStudio, cliqueando en <code>File -&gt; Recent Projects -&gt; "nombre de mi proyecto"</code>.</p>
+<p>Por ahora, sigamos trabajando. Vamos a crear un “script”. Un script, como su nombre en inglés lo indica, es un guión; una serie de pasos que escribimos para que nuestra computadora ejecute en secuencia. Cliqueamos en <code>File -&gt; New File -&gt; R Script</code>. De inmediato se abre una ventana con un editor de texto. ¡Ahora empieza la acción!</p>
+</div>
+<div id="escribiendo-un-script" class="section level3" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Escribiendo un script</h3>
+<p>Aprovechemos para dar un nombre a los áreas que vemos en RStudio:</p>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="imagenes/Interfaz_RStudio.jpg" alt="La interfaz de RStudio" width="100%" />
+<p class="caption">
+Figura 2.2: La interfaz de RStudio
+</p>
+</div>
+<p>Vamos a escribir nuestro código (las instrucciones que <code>R</code> entiende) en el panel de edición. Los resultados van a aparecer en la consola (cuando se trate de texto) o en el panel de salida (cuando produzcamos gráficos)</p>
+<p>Por ejemplo, podemos escribir el panel de edición la instrucción para mostrar el resultado de una operación matemático:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb1-1"></a><span class="kw">sqrt</span>(<span class="dv">144</span>)</span></code></pre></div>
+<p><code>sqrt()</code> es una <em>función</em>. En el mundo de la programación, las funciones son secuencias de código ya listas para usar, que realizan tareas útiles. Por ejemplo, mostrar algo en pantalla. En nuestro caso, completamos la función con algo más: un <em>parámetro</em>, pues así se le llama a los valores que una función espera de parte del usuario para saber que hacer. La función <code>sqrt()</code> espera que le demos un número para el cual calcular su raíz cuadrada (<em>square root</em> en inglés), y eso hicimos: le pasamos cómo parámetro <code>144</code>, un número. Los parámetros siempre se escriben entre paréntesis, a continuación del nombre de la función.</p>
+<p>Ahora vamos a aprender la combinación de teclas más importante al usar RStudio: <code>Ctrl</code> + <code>Enter</code>. Presionar <code>Ctrl</code> + <code>Enter</code> al terminar de escribir una instrucción hace que RStudio la ejecute de inmediato, y espere en la siguiente instrucción, si la hubiera.</p>
+<p>También podemos buscar una línea que deseemos ejecutar, posicionando el cursor de texto (que luce como una barra vertical que titila, en el panel de edición) sobre ella. Si a continuación pulsamos <code>Ctrl</code> + <code>Enter</code>, la línea será ejecutada y el cursor se moverá sólo hasta la siguiente línea, listo para repetir el proceso.</p>
+<p>La modalidad de ejecución línea por línea es muy útil para lo que se llama “análisis interactivo”. Uno ejecuta un comando, observa el resultado, y en base a eso decide su próxima acción: cambiar parámetros e intentarlo de nuevo, dar por buenos los resultados y usarlos para una tarea subsiguiente… etc.</p>
+<p>Por ejemplo, si escribimos las siguientes líneas:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb2-1"></a><span class="kw">sqrt</span>(<span class="dv">144</span>)</span>
+<span id="cb2-2"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb2-2"></a></span>
+<span id="cb2-3"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb2-3"></a>mensaje &lt;-<span class="st"> &quot;Hola mundo&quot;</span></span>
+<span id="cb2-4"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb2-4"></a></span>
+<span id="cb2-5"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb2-5"></a>mensaje</span></code></pre></div>
+<p>…y posicionamos el cursor en cualquier posición de la primera línea, para luego pulsar <code>Ctrl</code> + <code>Enter</code> tres veces, veremos que las instrucciones son ejecutadas línea a línea.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb3-1"></a><span class="kw">sqrt</span>(<span class="dv">144</span>)</span></code></pre></div>
+<pre><code>## [1] 12</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb5-1"></a>mensaje &lt;-<span class="st"> &quot;Hola mundo&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb6-1"></a>mensaje</span></code></pre></div>
+<pre><code>## [1] &quot;Hola mundo&quot;</code></pre>
+<p>Dos de ellas (la primera y la última) mostraron una salida en pantalla, y la del medio, no. Esto es porque algunas funciones entregan algo como resultado algo -un número, un texto, un gráfico, u otros tipos de salida que ya veremos- mientras que otras hacen su tarea silenciosamente sin expresar nada. En este caso, la función silenciosa fue la de asignación: <code>mensaje &lt;- "Hola mundo"</code> es una instrucción que le pide a R que cree una variable llamada “mensaje” (o que la encuentre si ya existe) y que le asigne como valor el texto “Hola mundo”. ¿Cómo sabemos que la instrucción se llevó a cabo, a pesar de no producir una salida? En general, es un tema de confianza. Si una instrucción no genera un mensaje de error, si es silenciosa, se asume que pudo cumplir su cometido. En este caso, además lo hemos verificado. La línea final, <code>mensaje</code> pide a R que busque la variable, y muestre en pantalla su contenido (esa es una característica muy práctica del lenguaje: para saber el contenido de una variable, basta con escribirla y ejecutar la línea). Y al hacerlo, comprobamos que la variable contiene precisamente lo que hemos tipeado.</p>
+<p>De paso, hay que mencionar que la creación y manipulación de variables es un concepto clave en programación. Trabajar con variables nos permite almacenar valores para usarlos después, además de hacer nuestro código más fácil de leer y compartir con otros, en especial cuando usamos nombre de variable auto-explicativos. Como ejemplo de ésto ultimo comparemos</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb8-1"></a>x &lt;-<span class="st"> </span><span class="dv">8</span> <span class="op">*</span><span class="st"> </span><span class="dv">6</span></span>
+<span id="cb8-2"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb8-2"></a>x</span></code></pre></div>
+<pre><code>## [1] 48</code></pre>
+<p>… con</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb10-1"></a>ancho_habitacion_m &lt;-<span class="st"> </span><span class="dv">8</span></span>
+<span id="cb10-2"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb10-2"></a>profundiad_habitacion_m &lt;-<span class="st"> </span><span class="dv">6</span></span>
+<span id="cb10-3"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb10-3"></a>superficie_habitacion_m2 &lt;-<span class="st"> </span>ancho_habitacion_m <span class="op">*</span><span class="st"> </span>profundiad_habitacion_m</span>
+<span id="cb10-4"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb10-4"></a></span>
+<span id="cb10-5"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb10-5"></a>superficie_habitacion_m2</span></code></pre></div>
+<pre><code>## [1] 48</code></pre>
+<p>En su resultado ambas expresiones son iguales, dado que producen lo mismo. Pero la segunda esta escrita de una forma mucho más clara para un ser humano, que hace más fácil interpretar su lógica… ¡está calculando la superficie en metros cuadrados de una habitación!. Es muy importante escribir nuestro código de la forma más explícita posible, aunque requiera tipear un poco más. Con ello, le hacemos la vida más fácil a otras personas que interpreten nuestros programas. Y también a nosotros mismos en el futuro, cuando debamos lidiar con un programa que escribimos tiempo atrás y del que a duras penas recordamos su lógica.</p>
+<p>A todo esto… ¿no se suponía que íbamos a investigar la mortalidad infantil en la Ciudad de Buenos Aires?. Suficiente introducción… ¡allá vamos!</p>
+</div>
+<div id="cargar-los-datos" class="section level3" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Cargar los datos</h3>
+<p>Vamos a cargar datos de mortalidad infantil, por comuna de la ciudad, en el año 2016, publicados por la <a href="https://www.estadisticaciudad.gob.ar/eyc/">Dirección General de Estadística y Censos</a> de Buenos Aires. El formato original de los datos es “.xls” (planilla de hojas de cálculo). Yo lo he convertido a .csv (“comma separated values”) un formato muy popular en el mundo de la ciencia de datos, ya que es muy fácil de manipular y compartir entre sistemas… es posible abrir un archivo .csv hasta con el <a href="https://es.wikipedia.org/wiki/Bloc_de_notas">humilde block de notas</a>. Al igual que los archivos .xls, los .csv se utilizan para guardar información tabular: un rectángulo con filas y columnas. R incluye una función que lee archivos .csv, que se llama <code>read.csv</code>. La usamos así:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb12-1"></a>mortalidad &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://bitsandbricks.github.io/data/mortalidad_infantil_caba_2016.csv&#39;</span>)</span></code></pre></div>
+<p>Obsérvese que los datos están alojados en un servidor de internet (accesibles vía una dirección web). Eso no es problema para la función <code>read.csv()</code>, que con la misma soltura lee archivos guardados en nuestra PC o publicados en un sitio <em>online</em>.</p>
+<p>Una vez leído el archivo, para ver el contenido de la variable donde guardamos el resultado -que hemos llamado <code>mortalidad</code>- sólo hace falta escribir su nombre:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb13-1"></a>mortalidad</span></code></pre></div>
+<pre><code>##    Comuna Tasa2016
+## 1       1      9.5
+## 2       2      3.6
+## 3       3      8.0
+## 4       4     11.9
+## 5       5      8.5
+## 6       6      2.4
+## 7       7      8.5
+## 8       8      9.7
+## 9       9     10.1
+## 10     10      3.6
+## 11     11      6.2
+## 12     12      7.1
+## 13     13      4.5
+## 14     14      3.2
+## 15     15      6.4</code></pre>
+<p>Vemos que la tabla tiene 15 filas (una por <a href="https://es.wikipedia.org/wiki/Comunas_de_la_ciudad_de_Buenos_Aires">cada comuna de la ciudad</a>) y 2 columnas (una que indica la comuna, y otra con el valor de mortalidad infantil para el año 2016).</p>
+<p>En R, las tablas son llamadas <code>dataframes</code>. El dataframe es el objeto por excelencia del análisis de datos. En concepto, es muy similar a una tabla de Excel; al fin y al cabo, ambos formatos guardan información en celdas identificadas por fila y columna.</p>
+<p>Algunas funciones útiles para explorar un dataframe que no conocemos son <code>dim()</code>, que nos da las dimensiones del dataframe (cantidad de filas y columnas), <code>names()</code> que nos dice como se llaman sus columnas (que en general representan variables), y <code>head()</code> que nos permite echar un vistazo rápido al contenido, mostrando sólo las seis primeras filas (ésto es útil porque con frecuencia trabajamos con dataframes que contienen miles o millones de filas, con lo que no tiene sentido tratar de volcar todas en pantalla).</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb15-1"></a><span class="kw">dim</span>(mortalidad)</span></code></pre></div>
+<pre><code>## [1] 15  2</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb17-1"></a><span class="kw">names</span>(mortalidad)</span></code></pre></div>
+<pre><code>## [1] &quot;Comuna&quot;   &quot;Tasa2016&quot;</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="2-1-nuestro-primer-proyecto-en-r.html#cb19-1"></a><span class="kw">head</span>(mortalidad)</span></code></pre></div>
+<pre><code>##   Comuna Tasa2016
+## 1      1      9.5
+## 2      2      3.6
+## 3      3      8.0
+## 4      4     11.9
+## 5      5      8.5
+## 6      6      2.4</code></pre>
+</div>
+</div>
+<p style="text-align: center;">
+<a href="2-una-presentación-a-toda-marcha-de-r.html"><button class="btn btn-default">Previous</button></a>
+<a href="2-2-visualización-la-exploración-gráfica-de-la-información.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

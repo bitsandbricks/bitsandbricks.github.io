@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es" xml:lang="es">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="6.4 Visualizando información geográfica | Ciencia de Datos para Gente Sociable" />
+<meta property="og:type" content="book" />
+
+
+
+<meta name="github-repo" content="bitsandbricks/datos_sociables" />
+
+<meta name="author" content="Antonio Vazquez Brust" />
+
+<meta name="date" content="2021-08-05" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<meta name="description" content="6.4 Visualizando información geográfica | Ciencia de Datos para Gente Sociable">
+
+<title>6.4 Visualizando información geográfica | Ciencia de Datos para Gente Sociable</title>
+
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+/* show arrow before summary tag as in bootstrap
+TODO: remove if boostrap in updated in html_document (rmarkdown#1485) */
+details > summary {
+  display: list-item;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#section"></a>
+<ul>
+<li><a href="para-quién-es-esto.html#para-quién-es-esto">¿Para quién es esto?</a></li>
+<li><a href="antes-de-empezar.html#antes-de-empezar">Antes de empezar</a></li>
+</ul></li>
+<li><a href="1-qué-es-la-ciencia-de-datos.html#qué-es-la-ciencia-de-datos"><span class="toc-section-number">1</span> ¿Qué es la ciencia de datos?</a>
+<ul>
+<li><a href="1-1-qué-significa-hacer-ciencia-de-datos.html#qué-significa-hacer-ciencia-de-datos"><span class="toc-section-number">1.1</span> ¿Qué significa hacer ciencia de datos?</a></li>
+</ul></li>
+<li><a href="2-una-presentación-a-toda-marcha-de-r.html#una-presentación-a-toda-marcha-de-r"><span class="toc-section-number">2</span> Una presentación a toda marcha de R</a>
+<ul>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#nuestro-primer-proyecto-en-r"><span class="toc-section-number">2.1</span> Nuestro primer proyecto en R</a>
+<ul>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#a-investigar-cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autónoma-de-buenos-aires"><span class="toc-section-number">2.1.1</span> A investigar: ¿Cual es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#crear-un-proyecto-en-rstudio"><span class="toc-section-number">2.1.2</span> Crear un proyecto en RStudio</a></li>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#escribiendo-un-script"><span class="toc-section-number">2.1.3</span> Escribiendo un script</a></li>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#cargar-los-datos"><span class="toc-section-number">2.1.4</span> Cargar los datos</a></li>
+</ul></li>
+<li><a href="2-2-visualización-la-exploración-gráfica-de-la-información.html#visualización-la-exploración-gráfica-de-la-información"><span class="toc-section-number">2.2</span> Visualización: la exploración gráfica de la información</a>
+<ul>
+<li><a href="2-2-visualización-la-exploración-gráfica-de-la-información.html#haciendo-mapas"><span class="toc-section-number">2.2.1</span> Haciendo mapas</a></li>
+<li><a href="2-2-visualización-la-exploración-gráfica-de-la-información.html#agregando-datos"><span class="toc-section-number">2.2.2</span> Agregando datos</a></li>
+</ul></li>
+<li><a href="2-3-el-veredicto-final.html#el-veredicto-final"><span class="toc-section-number">2.3</span> El veredicto final</a>
+<ul>
+<li><a href="2-3-el-veredicto-final.html#cuál-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autónoma-de-buenos-aires"><span class="toc-section-number">2.3.1</span> ¿Cuál es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
+</ul></li>
+<li><a href="2-4-ejercicios.html#ejercicios"><span class="toc-section-number">2.4</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="3-poniendo-los-datos-en-forma.html#poniendo-los-datos-en-forma"><span class="toc-section-number">3</span> Poniendo los datos en forma</a>
+<ul>
+<li><a href="3-1-primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo.html#primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo"><span class="toc-section-number">3.1</span> Primeros pasos al examinar un conjunto de datos nuevo</a></li>
+<li><a href="3-2-cruzando-variables-la-operación-join.html#cruzando-variables-la-operación-join"><span class="toc-section-number">3.2</span> Cruzando variables: la operación <code>join</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#transformando-los-datos"><span class="toc-section-number">3.3</span> Transformando los datos</a>
+<ul>
+<li><a href="3-3-transformando-los-datos.html#seleccionar-columnas-con-select"><span class="toc-section-number">3.3.1</span> Seleccionar columnas con <code>select()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#filtrar-filas-con-filter"><span class="toc-section-number">3.3.2</span> Filtrar filas con <code>filter()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#ordenar-filas-con-arrange"><span class="toc-section-number">3.3.3</span> Ordenar filas con <code>arrange()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#agregar-nuevas-variables-con-mutate"><span class="toc-section-number">3.3.4</span> Agregar nuevas variables con <code>mutate()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#extraer-sumarios-con-summarise"><span class="toc-section-number">3.3.5</span> Extraer sumarios con <code>summarise()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#bonus-el-operador-pipe"><span class="toc-section-number">3.3.6</span> ¡BONUS! El operador “pipe”: <code>%&gt;%</code></a></li>
+</ul></li>
+<li><a href="3-4-ejercicios-1.html#ejercicios-1"><span class="toc-section-number">3.4</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="4-visualización.html#visualización"><span class="toc-section-number">4</span> Visualización</a>
+<ul>
+<li><a href="4-1-una-buena-visualización-para-empezar-el-scatterplot.html#una-buena-visualización-para-empezar-el-scatterplot"><span class="toc-section-number">4.1</span> Una buena visualización para empezar: el <em>scatterplot</em></a></li>
+<li><a href="4-2-ajustando-color-y-tamaño.html#ajustando-color-y-tamaño"><span class="toc-section-number">4.2</span> Ajustando color y tamaño</a></li>
+<li><a href="4-3-facetado.html#facetado"><span class="toc-section-number">4.3</span> Facetado</a></li>
+<li><a href="4-4-gráficos-de-barras.html#gráficos-de-barras"><span class="toc-section-number">4.4</span> Gráficos de barras</a></li>
+<li><a href="4-5-histogramas.html#histogramas"><span class="toc-section-number">4.5</span> Histogramas</a></li>
+<li><a href="4-6-preparando-una-visualización-para-compartir.html#preparando-una-visualización-para-compartir"><span class="toc-section-number">4.6</span> Preparando una visualización para compartir</a></li>
+<li><a href="4-7-otras-visualizaciones.html#otras-visualizaciones"><span class="toc-section-number">4.7</span> Otras visualizaciones</a></li>
+<li><a href="4-8-ejercicios-2.html#ejercicios-2"><span class="toc-section-number">4.8</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="5-modelado-estadístico.html#modelado-estadístico"><span class="toc-section-number">5</span> Modelado estadístico</a>
+<ul>
+<li><a href="5-1-regresión-lineal-simple.html#regresión-lineal-simple"><span class="toc-section-number">5.1</span> Regresión lineal simple</a>
+<ul>
+<li><a href="5-1-regresión-lineal-simple.html#regresión-con-una-variable-numérica"><span class="toc-section-number">5.1.1</span> Regresión con una variable numérica</a></li>
+<li><a href="5-1-regresión-lineal-simple.html#revolviendo-los-residuos"><span class="toc-section-number">5.1.2</span> Revolviendo los residuos</a></li>
+<li><a href="5-1-regresión-lineal-simple.html#regresión-con-una-variable-categórica"><span class="toc-section-number">5.1.3</span> Regresión con una variable categórica</a></li>
+</ul></li>
+<li><a href="5-2-regresión-con-múltiples-variables.html#regresión-con-múltiples-variables"><span class="toc-section-number">5.2</span> Regresión con múltiples variables</a></li>
+<li><a href="5-3-ejercicios-3.html#ejercicios-3"><span class="toc-section-number">5.3</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="6-información-geográfica-y-mapas.html#información-geográfica-y-mapas"><span class="toc-section-number">6</span> Información geográfica y mapas</a>
+<ul>
+<li><a href="6-1-los-datos-georreferenciados.html#los-datos-georreferenciados"><span class="toc-section-number">6.1</span> Los datos georreferenciados</a></li>
+<li><a href="6-2-formatos-de-archivo.html#formatos-de-archivo"><span class="toc-section-number">6.2</span> Formatos de archivo</a></li>
+<li><a href="6-3-explorando-un-archivo-con-información-geográfica.html#explorando-un-archivo-con-información-geográfica"><span class="toc-section-number">6.3</span> Explorando un archivo con información geográfica</a></li>
+<li><a href="6-4-visualizando-información-geográfica.html#visualizando-información-geográfica"><span class="toc-section-number">6.4</span> Visualizando información geográfica</a></li>
+<li><a href="6-5-volcando-en-el-mapa-información-de-múltiples-fuentes.html#volcando-en-el-mapa-información-de-múltiples-fuentes"><span class="toc-section-number">6.5</span> Volcando en el mapa información de múltiples fuentes</a></li>
+<li><a href="6-6-combinando-capas-geográficas.html#combinando-capas-geográficas"><span class="toc-section-number">6.6</span> Combinando capas geográficas</a></li>
+<li><a href="6-7-ejercicios-4.html#ejercicios-4"><span class="toc-section-number">6.7</span> Ejercicios</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="visualizando-información-geográfica" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Visualizando información geográfica</h2>
+<p>La visualización de información geográfica por excelencia es el mapa, ¡por supuesto!</p>
+<p>Nuestro aliado <code>ggplot()</code> se encarga de ello.</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="6-4-visualizando-información-geográfica.html#cb250-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> radios)</span></code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-147-1.png" width="672" /></p>
+<p>Ademas de encontrarnos con la reconocible silueta de la ciudad, comprobamos lo que el resumen de la data había sugerido: la mayoría de los radios censales tiene un tamaño similar, pero existe un puñado que es considerablemente más extenso que el promedio. Los “mega radios” seguramente corresponden a zonas poco habitadas, por lo que se asume que un censista puede terminar de encuestar a todos los residentes en un día.</p>
+<p>Podemos analizar eso mismo: ¿cuántas viviendas hay por radio?</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="6-4-visualizando-información-geográfica.html#cb251-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> radios, <span class="kw">aes</span>(<span class="dt">fill =</span> VIVIENDAS)) </span></code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-148-1.png" width="672" /></p>
+<p>EL grosor de la línea que traza las fronteras entre radios hace difícil determinar el color de relleno. Esto suele pasar cuando se grafica información geográfica intrincada como la de los radios censales. Una solución es definir el color de la línea como <code>NA</code>, que para <code>ggplot</code> significa “ninguno”. Lo hacemos así:</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="6-4-visualizando-información-geográfica.html#cb252-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> radios, <span class="kw">aes</span>(<span class="dt">fill =</span> POBLACION), <span class="dt">color =</span> <span class="ot">NA</span>)</span></code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-149-1.png" width="672" /></p>
+<p>Así esta mejor. Nótese que definimos el color por fuera de <code>aes()</code>. Cuando queremos asignar un valor fijo a alguno de los atributos estéticos (y no dependiente de una variable) siempre va fuera de la función <code>aes()</code>.</p>
+<p>En cuanto al gráfico, observamos que los radios censales más grandes tienden a ser poco poblados, con algunas excepciones, en particular el gran radio censal al oeste. ¿A qué barrio corresponde?</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="6-4-visualizando-información-geográfica.html#cb253-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> radios, <span class="kw">aes</span>(<span class="dt">fill =</span> BARRIO), <span class="dt">color =</span> <span class="ot">NA</span>)</span></code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-150-1.png" width="672" /></p>
+<p>Hemos logrado otro de nuestros gráficos ilegibles, intentando mostrar demasiadas variables categóricas a la vez. Una forma de resolver el dilema es filtrando los datos para aislar los casos de interés. Del menú de visualizaciones que aprendimos en el capítulo 2, podemos elegir el histograma para mostrar la distribución de tamaños de nuestros radios censales.</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="6-4-visualizando-información-geográfica.html#cb254-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">data =</span> radios, <span class="kw">aes</span>(<span class="dt">x =</span> AREA_KM2))</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-151-1.png" width="672" /></p>
+<p>Cómo había anticipado el resumen vía <code>summary()</code>, la gran mayoría de los radios tiene menos de medio km^2. Unos pocos superan los 2 km^2, así que vamos a aislar esos para saber a que barrio corresponden.</p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="6-4-visualizando-información-geográfica.html#cb256-1"></a>filtrados &lt;-<span class="st"> </span>radios <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb256-2"><a href="6-4-visualizando-información-geográfica.html#cb256-2"></a><span class="st">    </span><span class="kw">filter</span>(AREA_KM2 <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>) </span>
+<span id="cb256-3"><a href="6-4-visualizando-información-geográfica.html#cb256-3"></a></span>
+<span id="cb256-4"><a href="6-4-visualizando-información-geográfica.html#cb256-4"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb256-5"><a href="6-4-visualizando-información-geográfica.html#cb256-5"></a><span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> filtrados, <span class="kw">aes</span>(<span class="dt">fill =</span> BARRIO)) <span class="op">+</span></span>
+<span id="cb256-6"><a href="6-4-visualizando-información-geográfica.html#cb256-6"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Radios censales de mayo tamaño&quot;</span>)</span></code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-152-1.png" width="672" />
+Nuestro gran radio censal al este, con población considerable, corresponde a Puerto Madero.</p>
+<p>Llevemos ahora nuestra atención al tema de la cantidad de viviendas superando a la de hogares. Tal situación implica que hay una tasa de vacancia alta en el radio censal. Podemos verla en el mapa graficando la intensidad de la relación entre viviendas y hogares, expresándola como la división de una por otra.</p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="6-4-visualizando-información-geográfica.html#cb257-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> radios, <span class="kw">aes</span>(<span class="dt">fill =</span> VIVIENDAS<span class="op">/</span>HOGARES), <span class="dt">color =</span> <span class="ot">NA</span>)</span></code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-153-1.png" width="672" /></p>
+<p>Hay un radio censal que parece brillar, destacándose entre los demás. ¿Dónde está? Esta vez lo resolvemos en forma analítica en lugar de visual, usando los verbos de transformación de datos. Vamos a definir una variable nueva, con la tasa entre viviendas y hogares que ya usamos para el gráfico. Luego vamos a ordenar el dataframe por orden descendiente de la tasa, y usando <code>head()</code> nos quedamos sólo con los primeros valores, que corresponden a los más altos:</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="6-4-visualizando-información-geográfica.html#cb258-1"></a>radios <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb258-2"><a href="6-4-visualizando-información-geográfica.html#cb258-2"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">viv_vs_hogares =</span> VIVIENDAS <span class="op">/</span><span class="st"> </span>HOGARES) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb258-3"><a href="6-4-visualizando-información-geográfica.html#cb258-3"></a><span class="st">    </span><span class="kw">arrange</span>(<span class="kw">desc</span>(viv_vs_hogares)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb258-4"><a href="6-4-visualizando-información-geográfica.html#cb258-4"></a><span class="st">    </span><span class="kw">head</span>()</span></code></pre></div>
+<pre><code>## Simple feature collection with 6 features and 9 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -58.38038 ymin: -34.62205 xmax: -58.35869 ymax: -34.60085
+## geographic CRS: WGS 84
+##   RADIO_ID        BARRIO COMUNA POBLACION VIVIENDAS HOGARES HOGARES_NBI   AREA_KM2 viv_vs_hogares
+## 1  1_13_15 PUERTO MADERO      1         0         6       0           0 0.07899011            Inf
+## 2   1_13_3 PUERTO MADERO      1        45       473      20           0 0.05698617      23.650000
+## 3   1_9_19   SAN NICOLAS      1       119       405      61           6 0.06236044       6.639344
+## 4  1_12_10   SAN NICOLAS      1       296       629     101           1 0.04438025       6.227723
+## 5  1_12_12   SAN NICOLAS      1       499       471      90          17 0.03108456       5.233333
+## 6   1_9_15   SAN NICOLAS      1       238       608     118          13 0.03287564       5.152542
+##                         geometry
+## 1 MULTIPOLYGON (((-58.36131 -...
+## 2 MULTIPOLYGON (((-58.36094 -...
+## 3 MULTIPOLYGON (((-58.37606 -...
+## 4 MULTIPOLYGON (((-58.37879 -...
+## 5 MULTIPOLYGON (((-58.37879 -...
+## 6 MULTIPOLYGON (((-58.37473 -...</code></pre>
+<p>Otra vez Puerto Madero, que contiene un radio censal con una vacancia notable, el segundo de la lista: con 473 viviendas disponibles, se asentaron allí sólo 20 hogares. El que se llevó el primer puesto, también en Puerto Madero, obtuvo una tasa de “Inf”, o infinito. Esto ocurre porque allí tenemos 0 hogares, y al dividir por esa cantidad no se obtiene un número. Conociendo al barrio, podemos sospechar que la especulación inmobiliaria es la causa de las viviendas vacías. El resto de los radios censales del ranking corresponde a San Nicolás, el barrio más céntrico de la ciudad, donde la gran cantidad de departamentos dedicados a uso comercial o profesional explicaría la baja cantidad de hogares.</p>
+<p>Algo importante que no hemos mencionado aún es la importancia de “normalizar” las variables antes de mostrarlas en un mapa. Con esto me refiero a que, en general, no interesan tanto los valores absolutos sino puestos en contexto. Ejemplos típicos:</p>
+<ul>
+<li>En lugar de mostrar “número de crímenes por barrio” es más instructivo mostrar el número de crímenes per cápita; de lo contrario es de esperar que los lugares más poblados siempre estén a la cabeza, lo cual no agrega demasiada información.<br />
+</li>
+<li>En lugar de mostrar “cantidad de habitantes por radio censal”, suele preferirse mostrar la densidad de población, es decir la cantidad de habitantes dividida por la extensión del área. Los mapas de densidad muestran mucho mejor la distribución espacial de la población.</li>
+</ul>
+<p>Con nuestros datos, podemos visualizar la densidad de la población así:</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="6-4-visualizando-información-geográfica.html#cb260-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb260-2"><a href="6-4-visualizando-información-geográfica.html#cb260-2"></a><span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> radios, <span class="kw">aes</span>(<span class="dt">fill =</span> POBLACION<span class="op">/</span>AREA_KM2), <span class="dt">color =</span> <span class="ot">NA</span>) <span class="op">+</span></span>
+<span id="cb260-3"><a href="6-4-visualizando-información-geográfica.html#cb260-3"></a><span class="st">    </span><span class="kw">scale_fill_viridis_c</span>() <span class="op">+</span></span>
+<span id="cb260-4"><a href="6-4-visualizando-información-geográfica.html#cb260-4"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Densidad de población&quot;</span>,</span>
+<span id="cb260-5"><a href="6-4-visualizando-información-geográfica.html#cb260-5"></a>         <span class="dt">subtitle =</span> <span class="st">&quot;Ciudad Autónoma de Buenos Aires&quot;</span>,</span>
+<span id="cb260-6"><a href="6-4-visualizando-información-geográfica.html#cb260-6"></a>         <span class="dt">fill =</span> <span class="st">&quot;hab/km2&quot;</span>)</span></code></pre></div>
+<p><img src="ciencia_de_datos_para_gente_sociable_files/figure-html/unnamed-chunk-155-1.png" width="672" /></p>
+<p>Este último gráfico representa de forma mucho mas precisa la distribución de habitantes en la ciudad, haciendo saltar a la vista los núcleos con mayor densidad de población. De paso, aprendimos un truco nuevo: agregando <code>scale_fill_viridis_c()</code> le pedimos a <code>ggplot</code> que utilice la escala de colores conocida como “viridis”, diseñada por expertos en visualización para ser fácil de leer… y lucir bien.</p>
+</div>
+<p style="text-align: center;">
+<a href="6-3-explorando-un-archivo-con-información-geográfica.html"><button class="btn btn-default">Previous</button></a>
+<a href="6-5-volcando-en-el-mapa-información-de-múltiples-fuentes.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es" xml:lang="es">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="6.3 Explorando un archivo con información geográfica | Ciencia de Datos para Gente Sociable" />
+<meta property="og:type" content="book" />
+
+
+
+<meta name="github-repo" content="bitsandbricks/datos_sociables" />
+
+<meta name="author" content="Antonio Vazquez Brust" />
+
+<meta name="date" content="2021-08-05" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<meta name="description" content="6.3 Explorando un archivo con información geográfica | Ciencia de Datos para Gente Sociable">
+
+<title>6.3 Explorando un archivo con información geográfica | Ciencia de Datos para Gente Sociable</title>
+
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+/* show arrow before summary tag as in bootstrap
+TODO: remove if boostrap in updated in html_document (rmarkdown#1485) */
+details > summary {
+  display: list-item;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#section"></a>
+<ul>
+<li><a href="para-quién-es-esto.html#para-quién-es-esto">¿Para quién es esto?</a></li>
+<li><a href="antes-de-empezar.html#antes-de-empezar">Antes de empezar</a></li>
+</ul></li>
+<li><a href="1-qué-es-la-ciencia-de-datos.html#qué-es-la-ciencia-de-datos"><span class="toc-section-number">1</span> ¿Qué es la ciencia de datos?</a>
+<ul>
+<li><a href="1-1-qué-significa-hacer-ciencia-de-datos.html#qué-significa-hacer-ciencia-de-datos"><span class="toc-section-number">1.1</span> ¿Qué significa hacer ciencia de datos?</a></li>
+</ul></li>
+<li><a href="2-una-presentación-a-toda-marcha-de-r.html#una-presentación-a-toda-marcha-de-r"><span class="toc-section-number">2</span> Una presentación a toda marcha de R</a>
+<ul>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#nuestro-primer-proyecto-en-r"><span class="toc-section-number">2.1</span> Nuestro primer proyecto en R</a>
+<ul>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#a-investigar-cual-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autónoma-de-buenos-aires"><span class="toc-section-number">2.1.1</span> A investigar: ¿Cual es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#crear-un-proyecto-en-rstudio"><span class="toc-section-number">2.1.2</span> Crear un proyecto en RStudio</a></li>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#escribiendo-un-script"><span class="toc-section-number">2.1.3</span> Escribiendo un script</a></li>
+<li><a href="2-1-nuestro-primer-proyecto-en-r.html#cargar-los-datos"><span class="toc-section-number">2.1.4</span> Cargar los datos</a></li>
+</ul></li>
+<li><a href="2-2-visualización-la-exploración-gráfica-de-la-información.html#visualización-la-exploración-gráfica-de-la-información"><span class="toc-section-number">2.2</span> Visualización: la exploración gráfica de la información</a>
+<ul>
+<li><a href="2-2-visualización-la-exploración-gráfica-de-la-información.html#haciendo-mapas"><span class="toc-section-number">2.2.1</span> Haciendo mapas</a></li>
+<li><a href="2-2-visualización-la-exploración-gráfica-de-la-información.html#agregando-datos"><span class="toc-section-number">2.2.2</span> Agregando datos</a></li>
+</ul></li>
+<li><a href="2-3-el-veredicto-final.html#el-veredicto-final"><span class="toc-section-number">2.3</span> El veredicto final</a>
+<ul>
+<li><a href="2-3-el-veredicto-final.html#cuál-es-la-diferencia-en-mortalidad-infantil-entre-el-sur-y-el-norte-de-la-ciudad-autónoma-de-buenos-aires"><span class="toc-section-number">2.3.1</span> ¿Cuál es la diferencia en mortalidad infantil entre el sur y el norte de la Ciudad Autónoma de Buenos Aires?</a></li>
+</ul></li>
+<li><a href="2-4-ejercicios.html#ejercicios"><span class="toc-section-number">2.4</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="3-poniendo-los-datos-en-forma.html#poniendo-los-datos-en-forma"><span class="toc-section-number">3</span> Poniendo los datos en forma</a>
+<ul>
+<li><a href="3-1-primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo.html#primeros-pasos-al-examinar-un-conjunto-de-datos-nuevo"><span class="toc-section-number">3.1</span> Primeros pasos al examinar un conjunto de datos nuevo</a></li>
+<li><a href="3-2-cruzando-variables-la-operación-join.html#cruzando-variables-la-operación-join"><span class="toc-section-number">3.2</span> Cruzando variables: la operación <code>join</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#transformando-los-datos"><span class="toc-section-number">3.3</span> Transformando los datos</a>
+<ul>
+<li><a href="3-3-transformando-los-datos.html#seleccionar-columnas-con-select"><span class="toc-section-number">3.3.1</span> Seleccionar columnas con <code>select()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#filtrar-filas-con-filter"><span class="toc-section-number">3.3.2</span> Filtrar filas con <code>filter()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#ordenar-filas-con-arrange"><span class="toc-section-number">3.3.3</span> Ordenar filas con <code>arrange()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#agregar-nuevas-variables-con-mutate"><span class="toc-section-number">3.3.4</span> Agregar nuevas variables con <code>mutate()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#extraer-sumarios-con-summarise"><span class="toc-section-number">3.3.5</span> Extraer sumarios con <code>summarise()</code></a></li>
+<li><a href="3-3-transformando-los-datos.html#bonus-el-operador-pipe"><span class="toc-section-number">3.3.6</span> ¡BONUS! El operador “pipe”: <code>%&gt;%</code></a></li>
+</ul></li>
+<li><a href="3-4-ejercicios-1.html#ejercicios-1"><span class="toc-section-number">3.4</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="4-visualización.html#visualización"><span class="toc-section-number">4</span> Visualización</a>
+<ul>
+<li><a href="4-1-una-buena-visualización-para-empezar-el-scatterplot.html#una-buena-visualización-para-empezar-el-scatterplot"><span class="toc-section-number">4.1</span> Una buena visualización para empezar: el <em>scatterplot</em></a></li>
+<li><a href="4-2-ajustando-color-y-tamaño.html#ajustando-color-y-tamaño"><span class="toc-section-number">4.2</span> Ajustando color y tamaño</a></li>
+<li><a href="4-3-facetado.html#facetado"><span class="toc-section-number">4.3</span> Facetado</a></li>
+<li><a href="4-4-gráficos-de-barras.html#gráficos-de-barras"><span class="toc-section-number">4.4</span> Gráficos de barras</a></li>
+<li><a href="4-5-histogramas.html#histogramas"><span class="toc-section-number">4.5</span> Histogramas</a></li>
+<li><a href="4-6-preparando-una-visualización-para-compartir.html#preparando-una-visualización-para-compartir"><span class="toc-section-number">4.6</span> Preparando una visualización para compartir</a></li>
+<li><a href="4-7-otras-visualizaciones.html#otras-visualizaciones"><span class="toc-section-number">4.7</span> Otras visualizaciones</a></li>
+<li><a href="4-8-ejercicios-2.html#ejercicios-2"><span class="toc-section-number">4.8</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="5-modelado-estadístico.html#modelado-estadístico"><span class="toc-section-number">5</span> Modelado estadístico</a>
+<ul>
+<li><a href="5-1-regresión-lineal-simple.html#regresión-lineal-simple"><span class="toc-section-number">5.1</span> Regresión lineal simple</a>
+<ul>
+<li><a href="5-1-regresión-lineal-simple.html#regresión-con-una-variable-numérica"><span class="toc-section-number">5.1.1</span> Regresión con una variable numérica</a></li>
+<li><a href="5-1-regresión-lineal-simple.html#revolviendo-los-residuos"><span class="toc-section-number">5.1.2</span> Revolviendo los residuos</a></li>
+<li><a href="5-1-regresión-lineal-simple.html#regresión-con-una-variable-categórica"><span class="toc-section-number">5.1.3</span> Regresión con una variable categórica</a></li>
+</ul></li>
+<li><a href="5-2-regresión-con-múltiples-variables.html#regresión-con-múltiples-variables"><span class="toc-section-number">5.2</span> Regresión con múltiples variables</a></li>
+<li><a href="5-3-ejercicios-3.html#ejercicios-3"><span class="toc-section-number">5.3</span> Ejercicios</a></li>
+</ul></li>
+<li><a href="6-información-geográfica-y-mapas.html#información-geográfica-y-mapas"><span class="toc-section-number">6</span> Información geográfica y mapas</a>
+<ul>
+<li><a href="6-1-los-datos-georreferenciados.html#los-datos-georreferenciados"><span class="toc-section-number">6.1</span> Los datos georreferenciados</a></li>
+<li><a href="6-2-formatos-de-archivo.html#formatos-de-archivo"><span class="toc-section-number">6.2</span> Formatos de archivo</a></li>
+<li><a href="6-3-explorando-un-archivo-con-información-geográfica.html#explorando-un-archivo-con-información-geográfica"><span class="toc-section-number">6.3</span> Explorando un archivo con información geográfica</a></li>
+<li><a href="6-4-visualizando-información-geográfica.html#visualizando-información-geográfica"><span class="toc-section-number">6.4</span> Visualizando información geográfica</a></li>
+<li><a href="6-5-volcando-en-el-mapa-información-de-múltiples-fuentes.html#volcando-en-el-mapa-información-de-múltiples-fuentes"><span class="toc-section-number">6.5</span> Volcando en el mapa información de múltiples fuentes</a></li>
+<li><a href="6-6-combinando-capas-geográficas.html#combinando-capas-geográficas"><span class="toc-section-number">6.6</span> Combinando capas geográficas</a></li>
+<li><a href="6-7-ejercicios-4.html#ejercicios-4"><span class="toc-section-number">6.7</span> Ejercicios</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="explorando-un-archivo-con-información-geográfica" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Explorando un archivo con información geográfica</h2>
+<p>Como hemos hecho antes, practicaremos con datos tomados del portal de datos abiertos de la Ciudad de Buenos Aires. En esta ocasión se trata de los radios censales de la ciudad. Los radios censales son particiones de la superficie de la ciudad que contienen una cantidad similar de hogares. Fueron definidos por el Instituto Nacional de Estadística y Censos (INDEC) para facilitar la labor durante la jornada del Censo Nacional de Población que se realiza cada diez años. La idea es asignar a cada censista un radio censal, estimando que puede recorrer todos los hogares incluidos durante el día. Los radios censales son la unidad de análisis espacial por excelencia, debido a que combinan alta granularidad con abundante información asociada de acceso público, producida como resultado del Censo.</p>
+<p>A trabajar entonces. Si no lo hicimos aún, carguemos las librerías <code>sf</code> y <code>tidyverse</code></p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="6-3-explorando-un-archivo-con-información-geográfica.html#cb245-1"></a><span class="kw">library</span>(sf)</span>
+<span id="cb245-2"><a href="6-3-explorando-un-archivo-con-información-geográfica.html#cb245-2"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<p>Y leemos los datos directo desde internet:</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="6-3-explorando-un-archivo-con-información-geográfica.html#cb246-1"></a>radios &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;https://bitsandbricks.github.io/data/CABA_rc.geojson&quot;</span>)</span></code></pre></div>
+<pre><code>## Reading layer `CABA_rc&#39; from data source `https://bitsandbricks.github.io/data/CABA_rc.geojson&#39; using driver `GeoJSON&#39;
+## Simple feature collection with 3554 features and 8 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -58.53092 ymin: -34.70574 xmax: -58.33455 ymax: -34.528
+## geographic CRS: WGS 84</code></pre>
+<p>Dediquemos un momento para describir la información que apareció al leer el archivo.</p>
+<ul>
+<li><code>Simple feature collection with 3554 features and 8 fields</code>: Cargamos una colección de “simple features” (entidades geométricas en la jerga de la cartografía digital), compuesta por 3554 rasgos y 8 campos, que se traduce como 3554 observaciones/filas con 8 variables/columnas.</li>
+<li><code>geometry type:  MULTIPOLYGON</code>: los archivos con información geográfica contienen colecciones de puntos, de líneas, o de polígonos. En éste caso son polígonos; tiene sentido para la información que esperamos, que es la de la superficie de Buenos Aires dividida en sus radios censales.</li>
+<li><code>dimension:      XY</code>: la información es “plana”, en dos dimensiones X e Y. No incluye información de alturas, que estaría en la dimensión Z. Es lo típico, rara vez trabajaremos con archivos tridimensionales.</li>
+<li><code>bbox:           xmin: -58.53092 ymin: -34.70574 xmax: -58.33455 ymax: -34.528</code>: nos da cuatro valores que forman una “caja” (<em>bounding box</em>), el rectángulo que contiene todos los datos. Estos valores son la latitud mínima, la longitud mínima, la latitud máxima y la longitud máxima del conjunto de datos. Sólo es útil cuando tenemos mucha práctica y ya reconocemos lugares por sus coordenadas.</li>
+<li><code>epsg (SRID):    4326</code> y <code>proj4string:    +proj=longlat +datum=WGS84 +no_defs</code> significan lo mismo, que nuestros datos usan el sistema de coordenadas WGS84, también conocido por su código EPSG 4326 . Es el mismo que usan los sistemas GPS, Google Maps, y las aplicaciones de internet en general. Es importante prestar atención al sistemas de coordenadas, o CRS, ya que para comparar datos geográficos de distintas fuentes todas deben usar el mismo.</li>
+</ul>
+<p>Como con cualquier otro dataset, comenzamos nuestra exploración pidiendo su resumen:</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="6-3-explorando-un-archivo-con-información-geográfica.html#cb248-1"></a><span class="kw">summary</span>(radios)</span></code></pre></div>
+<pre><code>##    RADIO_ID            BARRIO             COMUNA            POBLACION        VIVIENDAS         HOGARES      
+##  Length:3554        Length:3554        Length:3554        Min.   :   0.0   Min.   :   0.0   Min.   :   0.0  
+##  Class :character   Class :character   Class :character   1st Qu.: 646.2   1st Qu.: 311.2   1st Qu.: 259.0  
+##  Mode  :character   Mode  :character   Mode  :character   Median : 786.0   Median : 377.0   Median : 310.0  
+##                                                           Mean   : 813.2   Mean   : 401.4   Mean   : 323.6  
+##                                                           3rd Qu.: 928.0   3rd Qu.: 462.0   3rd Qu.: 371.0  
+##                                                           Max.   :3945.0   Max.   :1405.0   Max.   :1093.0  
+##   HOGARES_NBI        AREA_KM2                 geometry   
+##  Min.   :  0.00   Min.   :0.004468   MULTIPOLYGON :3554  
+##  1st Qu.:  2.00   1st Qu.:0.018626   epsg:4326    :   0  
+##  Median :  6.00   Median :0.035548   +proj=long...:   0  
+##  Mean   : 19.35   Mean   :0.057350                       
+##  3rd Qu.: 23.00   3rd Qu.:0.062847                       
+##  Max.   :403.00   Max.   :3.804422</code></pre>
+<p>Podemos sacar en limpio varias cosas. RADIO_ID, por su nombre, debe ser el código que identifica cada radio censal. Tenemos columnas representando barrio y comuna de cada radio. Tenemos una columna para la población, y vemos que así como algún radio está deshabitado, el más poblado alcanza los 3945 habitantes. En cantidad de viviendas, el máximo es de 1405, y el de hogares 1093: eso significa que existe al menos un radio censal donde hay viviendas desocupadas; tomamos nota para revisarlo luego. “HOGARES_NBI” representa la cantidad de hogares donde se registró que al menos una de las necesidades básicas no estaba satisfecha, con mínimo de 0 por radio, y máximo nada menos que de 403. También tenemos una columna con el área en km^2, que muestra que en general los radios censales abarcan alrededor de medio kilómetro cuadrado, pero existe alguno que es casi 8 veces mayor al promedio. Por último queda la columna <code>geometry</code>, que contiene una serie de puntos que permiten trazar la silueta de cada radio (sus polígonos). Nosotros no vamos a prestarle atención, pero para R es fundamental, ya que le permite proyectar mapas y hacer cálculos geométricos cuando se lo pidamos.</p>
+</div>
+<p style="text-align: center;">
+<a href="6-2-formatos-de-archivo.html"><button class="btn btn-default">Previous</button></a>
+<a href="6-4-visualizando-información-geográfica.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>
